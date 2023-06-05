@@ -1,9 +1,7 @@
 import { Route, Routes } from "react-router-dom"
-import { Landing } from "./pages/Landing.js"
-
 import Home from "./pages/Home.tsx"
-import Register from "./pages/Register"
-import Login from "./pages/Login"
+import LoginPage from "./pages/LoginPage.tsx"
+import RegisterPage from "./pages/RegisterPage.tsx"
 
 
 function App() {
@@ -11,9 +9,8 @@ function App() {
    <>
     <Routes>
       <Route path="/home" element={<Home/>} />
-      <Route path="/" element={<Landing />} />
-      <Route path="/register" element={<Register/>} />
-      <Route path="/login" element={<Login/>} />
+      <Route path="/register" element={<RegisterPage/>} />
+      <Route path="/login" element={<LoginPage/>} />
     </Routes>
    </>
   )

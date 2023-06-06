@@ -1,6 +1,6 @@
 import React from 'react';
-import BackgroundImg from '../../assets/playagreed.png';
-import BackgroundWhite from '../../assets/withegrid.png';
+import BackgroundImg from '../../assets/playagreed.png'
+import BackgroundWhite from '../../assets/whitegrid.png'
 
 interface Props {
   children: React.ReactNode;

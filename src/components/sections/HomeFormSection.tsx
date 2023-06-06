@@ -8,22 +8,17 @@ interface Props {
 
 const HomeFormSection: React.FC<Props> = ({ children }) => {
   return (
-    <div className="flex h-screen">
-      <section className="w- flex justify-center items-center relative z-10"
-      style={{ 
-        backgroundImage: `url(${BackgroundWhite})`, 
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center' 
-        }}
-      >
-        <div id='form' className="shadow-lg" >
+    <div className="grid grid-cols-2">
+      <section className="col-span-1 flex justify-center left-2">
+        <img src={BackgroundWhite} className=' bg-center bg-cover w-[25vw] items-center relative z-10 left-2/4 k' />
+        <div id="form" className=" absolute w-full">
           {children}
         </div>
       </section>
-      
-      <section className="w-1/3 relative">
-        <div className="h-full w-full z-0 bg-cover bg-center bg-no-repeat">
-          <img className="h-full" src={BackgroundImg} alt="Background Image" />
+
+      <section className="col-span-1 relative">
+        <div className="w-full left-4">
+          <img src={BackgroundImg} className='bg-center w-full bg-cover bg-no-repeat -z-10' />
         </div>
       </section>
     </div>

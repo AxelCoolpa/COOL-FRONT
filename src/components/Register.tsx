@@ -31,7 +31,7 @@ const Register = () => {
     const startAnimation = async () => {
       await headingControls.start({
         x: 0,
-        transition: { duration: 1, delay: 0.5 },
+        transition: { duration: 1.8, delay: 0.5 },
       });
     };
 
@@ -39,14 +39,14 @@ const Register = () => {
   }, [headingControls]);
 
   return (
-    <div className="lex flex-col items-center justify-center h-screen m-8">
-      <img src={logo} alt="Cool-LOGO" className="w-32 ml-40" />
+    <div className="flex flex-col items-center justify-center h-screen m-8">
+      <img src={logo} alt="Cool-LOGO" className=" flex w-[17vw]  ml-36" />
       <form className="w-full max-w-md  p-6 ml-20" onSubmit={handleSubmit}>
         <div className="text-2xl mb-6">
           <motion.h1
-            initial={{ x: "-100%" }}
+            initial={{ x: "-200%" }}
             animate={headingControls}
-            className="font-poppy text-8xl"
+            className="font-poppy text-6xl"
           >
             Hello!
           </motion.h1>
@@ -114,7 +114,7 @@ const Register = () => {
         <div className="flex flex-col items-center">
           <button
             type="submit"
-            className="bg-orange-700 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
+            className="bg-orange-700 w-[10vw] hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
           >
             Register
           </button>

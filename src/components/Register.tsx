@@ -39,8 +39,8 @@ const Register = () => {
   }, [headingControls]);
 
   return (
-    <div className="lex flex-col items-center justify-center h-screen m-8">
-      <img src={logo} alt="Cool-LOGO" className="w-32 ml-40" />
+    <div className="flex flex-col items-center justify-center h-screen m-8">
+      <img src={logo} alt="Cool-LOGO" className=" flex w-32 ml-40" />
       <form className="w-full max-w-md  p-6 ml-20" onSubmit={handleSubmit}>
         <div className="text-2xl mb-6">
           <motion.h1

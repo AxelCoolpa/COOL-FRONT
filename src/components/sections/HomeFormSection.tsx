@@ -8,8 +8,8 @@ interface Props {
 
 const HomeFormSection: React.FC<Props> = ({ children }) => {
   return (
-    <div className="flex h-screen l-20">
-      <section className="w-2/3 flex content-end items-center relative z-10"
+    <div className="flex h-screen">
+      <section className="w-2/3 flex justify-center items-center relative z-10"
       style={{ 
         backgroundImage: `url(${BackgroundWhite})`, 
         backgroundSize: 'cover', 

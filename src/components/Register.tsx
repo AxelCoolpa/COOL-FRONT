@@ -29,10 +29,7 @@ const Register = (): JSX.Element => {
     password: "",
     confirmPassword: "",
   });
-
-  const { isLoading, error } = useSelector(
-    (state: RootState) => state.register
-  );
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -91,7 +88,6 @@ const Register = (): JSX.Element => {
     startAnimation();
   }, [headingControls]);
 
-  
   return (
     <div className="flex flex-col items-center justify-center h-screen m-8">
       <img src={logo} alt="Cool-LOGO" className="flex w-[17vw] ml-36" />

@@ -8,10 +8,10 @@ import { GoHome } from 'react-icons/go'
 import { GrSafariOption } from 'react-icons/gr'
 import { RiCarFill } from 'react-icons/ri'
 
-import Cool from '../assets/cool.png'
-import avatar from '../assets/background-Cool.jpeg'
-import withNotifications from '../assets/withNotifications.svg'
-import withoutNotifications from '../assets/withoutNotifications.svg'
+import Cool from '../../assets/cool.png'
+import avatar from '../../assets/background-Cool.jpeg'
+import withNotifications from '../../assets/withNotifications.svg'
+import withoutNotifications from '../../assets/withoutNotifications.svg'
 
 const user = {
 	userName: 'john03',
@@ -24,7 +24,7 @@ const user = {
 const Sidebar: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-	const notifications = false
+	const notifications = true
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen)

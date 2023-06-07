@@ -2,15 +2,29 @@ import React from 'react'
 import HeaderImg from '../../assets/headerImg.svg'
 import Input from '../inputs/Input'
 
-const HeaderSection = () => {
+interface HeaderSectioonProps {
+	title?: string
+	subtitle?: string
+	name?: string
+	rate?: number
+}
+
+const HeaderSection: React.FC<HeaderSectioonProps> = ({
+	title,
+	subtitle,
+	name,
+	rate,
+}) => {
 	return (
 		<div className='relative flex items-center justify-center'>
 			<img src={HeaderImg} className='-z-10' />
 			<div className='absolute flex flex-col items-center gap-5 text-white'>
-				<h1 className='text-6xl font-bold'>Where do you want to go ?</h1>
-				<h3 className='text-xl font-medium'>
-					Explore the best destinations in the world
-				</h3>
+				<h1 className='text-6xl font-bold'>{title}</h1>
+				<h3 className='text-xl font-medium'>{subtitle}</h3>
+			</div>
+			<div className='absolute flex flex-col items-start gap-5 text-white'>
+				<h2 className='text-3xl font-bold'>{name}</h2>
+				<span className='text-xl font-medium'>{rate}</span>
 			</div>
 			<div className='absolute flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-11 rounded-lg px-10'>
 				<div className='flex flex-col  justify-center gap-2'>

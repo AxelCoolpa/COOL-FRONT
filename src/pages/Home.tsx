@@ -6,7 +6,9 @@ const Home = () => {
 	return (
 		<div>
 			<SideBar />
-			<HeaderSection />
+			<div className='flex flex-col items-end w-full pt-5 xl:px-6 2xl:pr-40 gap-20'>
+				<HeaderSection />
+			</div>
 		</div>
 	)
 }

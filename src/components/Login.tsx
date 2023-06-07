@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const headingControls = useAnimation();
-  const subtitleControls = useAnimation();
+
 
   const [formData, setFormData] = useState({
     username: "",

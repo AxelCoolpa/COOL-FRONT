@@ -45,49 +45,49 @@ const Sidebar: React.FC = () => {
 					<ul className='space-y-2'>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a]'>
 							<GoHome />
-							<a href='#' className='font-semibold'>
+							<a href='/' className='font-semibold'>
 								Home
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a]'>
 							<GrSafariOption />
-							<a href='#' className='font-semibold'>
+							<a href='/adventure' className='font-semibold'>
 								Adventure
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<CgInfinity />
-							<a href='#' className='font-semibold'>
+							<a href='/package' className='font-semibold'>
 								Package
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<RiCarFill />
-							<a href='#' className='font-semibold'>
+							<a href='/transport' className='font-semibold'>
 								Transport
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<FaBed />
-							<a href='#' className='font-semibold'>
+							<a href='/accommodation' className='font-semibold'>
 								Accommodation
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<BsTicketPerforated />
-							<a href='#' className='font-semibold'>
+							<a href='/tickets' className='font-semibold'>
 								Tickets
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<FaMapMarkerAlt />
-							<a href='#' className='font-semibold'>
+							<a href='/maps' className='font-semibold'>
 								Maps
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<GiWavyItinerary />
-							<a href='#' className='font-semibold'>
+							<a href='/itinarary' className='font-semibold'>
 								Itinarary
 							</a>
 						</li>

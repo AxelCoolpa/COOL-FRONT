@@ -4,7 +4,7 @@ import Input from '../inputs/Input'
 
 const HeaderSection = () => {
 	return (
-		<div className='relative flex items-center justify-center 2xl:w-9/12'>
+		<div className='relative flex items-center justify-center'>
 			<img src={HeaderImg} className='-z-10' />
 			<div className='absolute flex flex-col items-center gap-5 text-white'>
 				<h1 className='text-6xl font-bold'>Where do you want to go ?</h1>
@@ -12,7 +12,7 @@ const HeaderSection = () => {
 					Explore the best destinations in the world
 				</h3>
 			</div>
-			<div className='absolute flex justify-between items-center w-11/12 xl:h-[17vh] 2xl:w-9/12 2xl:h-[15vh] bg-white shadow-black/30 shadow-lg -bottom-11 rounded-lg px-10'>
+			<div className='absolute flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-11 rounded-lg px-10'>
 				<div className='flex flex-col  justify-center gap-2'>
 					<span className='font-bold'>Location</span>
 					<Input id='location' label='Location' />

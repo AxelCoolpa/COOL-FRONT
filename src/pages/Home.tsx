@@ -6,8 +6,9 @@ const Home = () => {
 	return (
 		<div>
 			<SideBar />
-			<div className='flex flex-col items-end w-full pt-5 xl:px-6 2xl:pr-40 gap-20'>
+			<div className='flex flex-col items-end xl:items-center w-full p-5 md:pl-[220px] xl:pl-[270px] gap-20'>
 				<HeaderSection />
+				<div className='w-full bg-black h-[200px]'></div>
 			</div>
 		</div>
 	)

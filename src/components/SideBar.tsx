@@ -32,16 +32,16 @@ const Sidebar: React.FC = () => {
 	return (
 		<div className='relative'>
 			{/* Mobile Menu */}
-			<div className='sm:hidden flex items-center justify-end p-4'>
+			<div className='md:hidden flex items-center justify-end p-4'>
 				<BiMenu className='text-2xl cursor-pointer' onClick={toggleMenu} />
 			</div>
 
 			{/* Desktop Sidebar */}
-			<div className='fixed hidden sm:flex sm:flex-col md:flex md:flex-col h-full border rounded-tr-lg border-gray-300 shadow-2xl w-1/5  lg:w-1/6'>
-				<div className='sm:w-1/4 md:w-[15vw] flex items-center justify-center'>
+			<div className='fixed hidden  md:flex md:flex-col h-full border rounded-tr-lg border-gray-300 shadow-2xl w-[200px] xl:w-[250px]'>
+				<div className='flex items-center justify-center'>
 					<img src={Cool} alt='Cool-LOGO' className='w-20 mt-12' />
 				</div>
-				<nav className='flex-grow ml-4 sm:mt-4 md:mt-0'>
+				<nav className='flex-grow ml-2 xl:ml-4 sm:mt-4 md:mt-0'>
 					<ul className='space-y-2'>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a]'>
 							<GoHome />
@@ -87,19 +87,19 @@ const Sidebar: React.FC = () => {
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<GiWavyItinerary />
-							<a href='/itinerary' className='font-semibold'>
+							<a href='#' className='font-semibold'>
 								Itinarary
 							</a>
 						</li>
 					</ul>
 				</nav>
-				<div className='p-4 mb-6 flex items-center justify-around'>
+				<div className='ml-2 xl:ml-6 mb-6 flex items-center justify-start gap-6'>
 					{/* Avatar */}
 					<div className='flex items-center justify-start'>
 						<img
 							src={user.avatar}
 							alt='User Avatar'
-							className='w-12 h-12 rounded-full mr-3 cursor-pointer'
+							className='w-8 h-8 xl:w-12 xl:h-12  rounded-full mr-3 cursor-pointer'
 						/>
 						<div className='ml-2'>
 							<p className='text-sm font-medium'>{`${user.name} ${user.lastName}`}</p>

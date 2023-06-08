@@ -14,7 +14,7 @@ export const listings = [
 		starterPack: '1 starter drink',
 		startTime: '20:00',
 		endTime: '03:00',
-		rate: '5',
+		rating: [5, 4.3, 4],
 		price: '70',
 		galleryPhoto: [
 			// Aqui arear imagenes para mostrar en la aleria de los paquetes
@@ -36,7 +36,7 @@ export const listings = [
 		starterPack: 'A pair of fins',
 		startTime: '14:00',
 		endTime: '18:00',
-		rate: '4.6',
+		rating: [4.6],
 		price: '150',
 		galleryPhoto: [
 			// Aqui arear imagenes para mostrar en la aleria de los paquetes
@@ -58,7 +58,7 @@ export const listings = [
 		starterPack: 'A map and bottle of water',
 		startTime: '09:00',
 		endTime: '17:00',
-		rate: '4.7',
+		rating: [4.7],
 		price: '120',
 		galleryPhoto: [
 			// Aqui arear imagenes para mostrar en la aleria de los paquetes
@@ -80,7 +80,7 @@ export const listings = [
 		starterPack: '1 sandboard',
 		startTime: '08:00',
 		endTime: '13:00',
-		rate: '4.5',
+		rating: [4.5],
 		price: '170',
 		galleryPhoto: [
 			// Aqui arear imagenes para mostrar en la aleria de los paquetes

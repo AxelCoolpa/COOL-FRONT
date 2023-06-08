@@ -15,7 +15,7 @@ interface EnumData {
 	starterPack: string
 	startTime: string
 	endTime: string
-	rate: string
+	rating: Array<number>
 	price: string
 }
 
@@ -24,10 +24,15 @@ interface ListingCardProps {
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
+	const averageRating = data.rating
+		.reduce((a, b) => a + b / data.rating.length, 0)
+		.toString()
+		.slice(0, 3)
+
 	return (
 		<div
-			onClick={() => console.log(`/listings/${data.id}`)}
-			className='bg-[#f7f8f9] col-span-1 cursor-pointer group rounded-xl pb-4'
+			onClick={() => alert('Detail')}
+			className='bg-[#f7f8f9] col-span-1 cursor-pointer group rounded-xl pb-4 drop-shadow'
 		>
 			<div className='relative'>
 				<img
@@ -42,7 +47,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 				<h4 className='text-base font-semibold'>{data.name}</h4>
 				<div className='flex items-center gap-1'>
 					<AiFillStar size={18} color='#faaf00' />
-					<span className='text-sm font-medium'>{data.rate}</span>
+					<span className='text-sm font-medium'>{averageRating}</span>
 				</div>
 			</div>
 			<ul className='flex flex-col justify-center px-3 py-4 text-xs gap-1 text-[#00000080]'>
@@ -66,7 +71,12 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 				</li>
 			</ul>
 			<div className='flex justify-center text-white font-bold text-lg py-2'>
-				<button className='bg-[#109460] w-full mx-4 rounded-lg'>{data.price}$</button>
+				<button
+					onClick={() => alert('Call to Action Aquí')}
+					className='bg-[#109460] w-full mx-6 rounded-lg py-1 hover:bg-opacity-90'
+				>
+					{data.price}$
+				</button>
 			</div>
 		</div>
 	)

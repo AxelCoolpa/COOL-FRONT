@@ -1,12 +1,18 @@
 import React from 'react'
 import HeaderImg from '../../assets/headerImg.svg'
 import Input from '../inputs/Input'
+import { Box, Rating } from '@mui/material'
+import { StayPrimaryLandscapeOutlined } from '@mui/icons-material'
+import HeartButton from '../HeartButton'
 
 interface HeaderSectioonProps {
 	title?: string
 	subtitle?: string
 	name?: string
 	rate?: number
+	image?: string
+	favorite?: boolean
+	price?: number
 }
 
 const HeaderSection: React.FC<HeaderSectioonProps> = ({
@@ -14,19 +20,56 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 	subtitle,
 	name,
 	rate,
+	image,
+	favorite,
+	price,
 }) => {
 	return (
 		<div className='relative flex items-center justify-center'>
-			<img src={HeaderImg} className='-z-10' />
-			<div className='absolute flex flex-col items-center gap-5 text-white'>
-				<h1 className='text-6xl font-bold'>{title}</h1>
-				<h3 className='text-xl font-medium'>{subtitle}</h3>
+			<img src={image || HeaderImg} className='-z-10' />
+			{title && subtitle ? (
+				<div className='absolute flex flex-col items-center gap-5 text-white'>
+					<h1 className='text-6xl font-bold'>{title}</h1>
+					<h3 className='text-xl font-medium'>{subtitle}</h3>
+				</div>
+			) : null}
+			<div className='absolute flex flex-col left-11 top-60 gap-5 text-white'>
+				{name && <h2 className='text-4xl font-bold'>{name}</h2>}
+
+				{rate && favorite ? (
+					<div className='flex items-center'>
+						<Rating
+							name='text-feedback'
+							value={rate}
+							readOnly
+							precision={0.5}
+							emptyIcon={
+								<StayPrimaryLandscapeOutlined
+									style={{ opacity: 0.55 }}
+									fontSize='inherit'
+								/>
+							}
+						/>
+						<Box sx={{ ml: 2 }}>{rate}</Box>
+					</div>
+				) : null}
 			</div>
-			<div className='absolute flex flex-col items-start gap-5 text-white'>
-				<h2 className='text-3xl font-bold'>{name}</h2>
-				<span className='text-xl font-medium'>{rate}</span>
+
+			<div className='absolute flex flex-col items-center right-20 top-10 gap-[172px] text-white'>
+				{rate && favorite ? (
+					<div className=''>
+						<HeartButton />
+					</div>
+				) : null}
+
+				{price && (
+					<button className='bg-[#109460] w-[140px] h-[59px] rounded-[10px] text-[40px] font-semibold'>
+						{price}$
+					</button>
+				)}
 			</div>
-			<div className='absolute flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-11 rounded-lg px-10'>
+
+			<div className='absolute flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-24 rounded-lg px-10'>
 				<div className='flex flex-col  justify-center gap-2'>
 					<span className='font-bold'>Location</span>
 					<Input id='location' label='Location' />

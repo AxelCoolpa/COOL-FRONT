@@ -2,8 +2,8 @@ import React from 'react'
 import HeaderImg from '../../assets/headerImg.svg'
 import Input from '../inputs/Input'
 import { Box, Rating } from '@mui/material'
-import { StayPrimaryLandscapeOutlined } from '@mui/icons-material'
 import HeartButton from '../HeartButton'
+import { AiFillStar } from 'react-icons/ai'
 
 interface HeaderSectioonProps {
 	title?: string
@@ -46,12 +46,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 							value={rate}
 							readOnly
 							precision={0.5}
-							emptyIcon={
-								<StayPrimaryLandscapeOutlined
-									style={{ opacity: 0.55 }}
-									fontSize='inherit'
-								/>
-							}
+							emptyIcon={<AiFillStar style={{ opacity: 0.55 }} fontSize='inherit' />}
 						/>
 						<Box sx={{ ml: 2 }}>{rate}</Box>
 					</div>

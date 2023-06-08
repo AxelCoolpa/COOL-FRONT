@@ -20,7 +20,7 @@ const Home = () => {
 				/>
 				<div className='p-5'>
 					<h2 className='text-2xl font-semibold'>Trending adventure</h2>
-					<div className='py-10 px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-11'>
+					<div className='py-10 px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-11'>
 						{listings.map((listing) => {
 							return <ListingCard key={listing.id} data={listing} />
 						})}

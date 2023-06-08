@@ -1,30 +1,29 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import logo from "../assets/cool.png";
 
+import { updateFormData, resetFormData } from "../features/LoginSlice";
+
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const headingControls = useAnimation();
-  const subtitleControls = useAnimation();
 
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+  const formData = useSelector((state) => state.login.formData);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    dispatch(updateFormData({ [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar los datos del formulario al servidor para el inicio de sesión
-    console.log(formData);
+    console.log(formData); // Puedes acceder a los datos del formulario desde el estado de Redux
+    dispatch(resetFormData()); // Restablecer el formulario después del envío
   };
-
   useEffect(() => {
     const startAnimation = async () => {
       await headingControls.start({

@@ -33,10 +33,10 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 					<h3 className='text-xl font-medium'>{subtitle}</h3>
 				</div>
 			) : null}
-			{name && rate ? (
-				<div className='absolute flex flex-col left-11 top-60 gap-5 text-white'>
-					<h2 className='text-4xl font-bold'>{name}</h2>
+			<div className='absolute flex flex-col left-11 top-60 gap-5 text-white'>
+				{name && <h2 className='text-4xl font-bold'>{name}</h2>}
 
+				{rate && favorite ? (
 					<div className='flex items-center'>
 						<Rating
 							name='text-feedback'
@@ -52,19 +52,23 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 						/>
 						<Box sx={{ ml: 2 }}>{rate}</Box>
 					</div>
-				</div>
-			) : null}
-			{favorite && price ? (
-				<div className='absolute flex flex-col items-center right-16 gap-5 text-white'>
-					<div className='absolute flex -top-40'>
+				) : null}
+			</div>
+
+			<div className='absolute flex flex-col items-center right-20 top-10 gap-[172px] text-white'>
+				{rate && favorite ? (
+					<div className=''>
 						<HeartButton />
 					</div>
+				) : null}
 
+				{price && (
 					<button className='bg-[#109460] w-[140px] h-[59px] rounded-[10px] text-[40px] font-semibold'>
 						{price}$
 					</button>
-				</div>
-			) : null}
+				)}
+			</div>
+
 			<div className='absolute flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-24 rounded-lg px-10'>
 				<div className='flex flex-col  justify-center gap-2'>
 					<span className='font-bold'>Location</span>

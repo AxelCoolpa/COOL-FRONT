@@ -12,6 +12,7 @@ export const listings = [
 		starterPack: '1 starter drink',
 		startTime: '20:00',
 		endTime: '03:00',
+		rate: '5',
 	},
 	{
 		id: '2',
@@ -26,6 +27,7 @@ export const listings = [
 		starterPack: 'A pair of fins',
 		startTime: '14:00',
 		endTime: '18:00',
+		rate: '4.6',
 	},
 	{
 		id: '3',
@@ -40,6 +42,7 @@ export const listings = [
 		starterPack: 'A map and bottle of water',
 		startTime: '09:00',
 		endTime: '17:00',
+		rate: '4.7',
 	},
 	{
 		id: '4',
@@ -54,5 +57,6 @@ export const listings = [
 		starterPack: '1 sandboard',
 		startTime: '08:00',
 		endTime: '13:00',
+		rate: '4.5',
 	},
 ]

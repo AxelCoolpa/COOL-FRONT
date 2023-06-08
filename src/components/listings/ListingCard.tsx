@@ -7,7 +7,7 @@ interface EnumData {
 	id: string
 	name: string
 	description: string
-	imageSrc: string
+	imageSrc: Array<string>
 	categories: Array<string>
 	locationValue: string
 	usserId: string
@@ -30,7 +30,10 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 			className='bg-[#f7f8f9] col-span-1 cursor-pointer group rounded-xl pb-4'
 		>
 			<div className='relative'>
-				<img src={data.imageSrc} className='object-cover w-full h-[200px] rounded-t-xl' />
+				<img
+					src={data.imageSrc[0]}
+					className='object-cover w-full h-[200px] rounded-t-xl'
+				/>
 				<div className='absolute top-3 right-3'>
 					<HeartButton size={25} />
 				</div>

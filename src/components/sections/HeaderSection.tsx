@@ -25,8 +25,11 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 	price,
 }) => {
 	return (
-		<div className='relative flex items-center justify-center'>
-			<img src={image || HeaderImg} className='-z-10' />
+		<div className='relative flex items-center justify-center max-h-[475px]'>
+			<img
+				src={image || HeaderImg}
+				className='-z-10 w-screen h-[475px] object-cover rounded-[20px]'
+			/>
 			{title && subtitle ? (
 				<div className='absolute flex flex-col items-center gap-5 text-white'>
 					<h1 className='text-6xl font-bold'>{title}</h1>

@@ -1,6 +1,7 @@
 import React from 'react'
 import SideBar from '../components/sidebar/SideBar'
 import HeaderSection from '../components/sections/HeaderSection'
+import headerImg from '../assets/headerImg.jpg'
 
 const Home = () => {
 	return (
@@ -10,6 +11,7 @@ const Home = () => {
 				<HeaderSection
 					title='Where do you want to go ?'
 					subtitle='Explore the best destinations in the world'
+					image={headerImg}
 				/>
 				<div className='bg-[#E8ECF4] w-full h-screen rounded-2xl'></div>
 			</div>

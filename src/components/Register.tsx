@@ -1,30 +1,80 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { motion, useAnimation } from "framer-motion";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import logo from "../assets/cool.png";
+import { useNavigate } from "react-router";
+import {
+  registerUser,
+  registerStart,
+  registerSuccess,
+  registerFailure,
+} from "../features/RegisterSlice";
+import { RootState } from "../store/Store";
 
-const Register = () => {
+interface RegisterFormData {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const Register = (): JSX.Element => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const headingControls = useAnimation();
-  const subtitleControls = useAnimation();
-
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegisterFormData>({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar los datos del formulario al servidor
-    console.log(formData);
+
+    const { username, email, password, confirmPassword } = formData;
+
+    // Validar los campos del formulario antes de enviarlos al servidor
+    if (!username || !email || !password || !confirmPassword) {
+      console.log("Por favor, complete todos los campos");
+      console.log({
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      console.log("Las contraseñas no coinciden");
+      console.log({
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
+      return;
+    }
+
+    // Enviar los datos del formulario al servidor
+    dispatch(registerUser(formData));
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
   };
 
   useEffect(() => {
@@ -40,8 +90,8 @@ const Register = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen m-8">
-      <img src={logo} alt="Cool-LOGO" className=" flex w-[17vw]  ml-36" />
-      <form className="w-full max-w-md  p-6 ml-20" onSubmit={handleSubmit}>
+      <img src={logo} alt="Cool-LOGO" className="flex w-[17vw] ml-36" />
+      <form className="w-full max-w-md p-6 ml-20" onSubmit={handleSubmit}>
         <div className="text-2xl mb-6">
           <motion.h1
             initial={{ x: "-200%" }}
@@ -50,13 +100,12 @@ const Register = () => {
           >
             Hello!
           </motion.h1>
-          <motion.h3 className="font-poppy text-3xl ">
+          <motion.h3 className="font-poppy text-3xl">
             Register to get started!
           </motion.h3>
         </div>
 
         <div className="mb-4">
-         
           <input
             type="text"
             id="username"
@@ -70,12 +119,11 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-          
           <input
             type="email"
             id="email"
             name="email"
-             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-200 placeholder-gray-500 placeholder-opacity-75 font-poppy"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-200 placeholder-gray-500 placeholder-opacity-75 font-poppy"
             value={formData.email}
             onChange={handleChange}
             required
@@ -84,7 +132,6 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-         
           <input
             type="password"
             id="password"
@@ -98,7 +145,6 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-         
           <input
             type="password"
             id="confirmPassword"
@@ -152,4 +198,5 @@ const Register = () => {
     </div>
   );
 };
+
 export default Register;

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import registerReducer, { registerStart, registerSuccess, registerFailure, registerUser } from '../features/RegisterSlice';
@@ -31,7 +32,7 @@ describe('registerSlice', () => {
 describe('registerUser', () => {
   it('should dispatch registerStart and registerSuccess', async () => {
     const store = mockStore({});
-    const formData = { /* fill in with test data */ };
+    const formData = { username: 'testuser', email: 'test@example.com', password: 'password', confirmPassword: 'password' };
 
     // Mock the registerUserAPI function if necessary
 
@@ -44,7 +45,7 @@ describe('registerUser', () => {
 
   it('should dispatch registerStart and registerFailure', async () => {
     const store = mockStore({});
-    const formData = { /* fill in with test data */ };
+    const formData = { username: 'testuser', email: 'test@example.com', password: 'password', confirmPassword: 'password' };
 
     // Mock the registerUserAPI function to throw an error
 
@@ -56,3 +57,4 @@ describe('registerUser', () => {
     expect(actions[1].payload).toBe(/* expected error message */);
   });
 });
+

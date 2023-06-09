@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "../store/Store";
-// import { registerUserAPI } from "../api/registerAPI";
+import { registerUserAPI } from "../api/registerAPI";
 
-interface RegisterFormData {
+export interface RegisterFormData {
   username: string;
   email: string;
   password: string;
@@ -46,13 +46,13 @@ export const registerUser = (formData: RegisterFormData): AppThunk => async (
   dispatch
 ) => {
   try {
-    // dispatch(registerStart());
+    dispatch(registerStart());
 
-    // //Simulate an asynchronous API call
-    // await registerUserAPI(formData);
+    // Simulate an asynchronous API call
+    await registerUserAPI(formData);
 
-    // dispatch(registerSuccess());
-  } catch (error) {
-    // dispatch(registerFailure(error.message));
+    dispatch(registerSuccess());
+  } catch (error:any) {
+    dispatch(registerFailure(error.message));
   }
 };

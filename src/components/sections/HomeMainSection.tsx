@@ -1,4 +1,3 @@
-import React from 'react'
 
 import { listings } from '../../mocks/listingsCards'
 import HeaderSection from './HeaderSection'

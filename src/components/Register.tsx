@@ -88,6 +88,8 @@ const Register = (): JSX.Element => {
     startAnimation();
   }, [headingControls]);
 
+  const { isLoading, error } = useSelector((state: RootState) => state.register);
+
   return (
     <div className="flex flex-col items-center justify-center h-screen m-8">
       <img src={logo} alt="Cool-LOGO" className="flex w-[17vw] ml-36" />
@@ -104,6 +106,8 @@ const Register = (): JSX.Element => {
             Register to get started!
           </motion.h3>
         </div>
+
+        {error && <p className="text-red-500 mb-4">{error}</p>}
 
         <div className="mb-4">
           <input
@@ -161,8 +165,9 @@ const Register = (): JSX.Element => {
           <button
             type="submit"
             className="bg-orange-700 w-[10vw] hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
+            disabled={isLoading}
           >
-            Register
+            {isLoading ? "Registering..." : "Register"}
           </button>
 
           <span className="border-t border-gray-300 w-full text-center my-2">

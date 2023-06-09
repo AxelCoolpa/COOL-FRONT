@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/sections/HeaderSection.tsx</title>
+    <title>Code coverage report for mocks/listingsCards.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/sections</a> HeaderSection.tsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">mocks</a> listingsCards.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>10/18</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
                 <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
@@ -153,17 +153,7 @@
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L91'></a><a href='#L91'>91</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,7 +165,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -184,7 +173,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -252,102 +240,99 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
-import HeaderImg from '../../assets/headerImg.svg'
-import Input from '../inputs/Input'
-import { Box, Rating } from '@mui/material'
-import HeartButton from '../HeartButton'
-import { AiFillStar } from 'react-icons/ai'
-&nbsp;
-interface HeaderSectioonProps {
-	title?: string
-	subtitle?: string
-	name?: string
-	rate?: number
-	image?: string
-	favorite?: boolean
-	price?: number
-}
-&nbsp;
-const HeaderSection: React.FC&lt;HeaderSectioonProps&gt; = ({
-	title,
-	subtitle,
-	name,
-	rate,
-	image,
-	favorite,
-	price,
-}) =&gt; {
-	return (
-		&lt;div className='relative flex items-center justify-center max-h-[475px]'&gt;
-			&lt;img
-				src={image || <span class="branch-1 cbranch-no" title="branch not covered" >HeaderImg}</span>
-				className='-z-10 w-screen h-[475px] object-cover rounded-[20px]'
-			/&gt;
-			{title &amp;&amp; subtitle ? (
-				&lt;div className='absolute flex flex-col items-center gap-5 text-white'&gt;
-					&lt;h1 className='text-6xl font-bold'&gt;{title}&lt;/h1&gt;
-					&lt;h3 className='text-xl font-medium'&gt;{subtitle}&lt;/h3&gt;
-				&lt;/div&gt;
-			) : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span>
-			&lt;div className='absolute flex flex-col left-11 top-60 gap-5 text-white'&gt;
-				{name &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;h2 className='text-4xl font-bold'&gt;{name}&lt;/h2&gt;}</span>
-&nbsp;
-				{rate &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >favorite </span>? (
-<span class="branch-0 cbranch-no" title="branch not covered" >					&lt;div className='flex items-center'&gt;</span>
-						&lt;Rating
-							name='text-feedback'
-							value={rate}
-							readOnly
-							precision={0.5}
-							emptyIcon={&lt;AiFillStar style={{ opacity: 0.55 }} fontSize='inherit' /&gt;}
-						/&gt;
-						&lt;Box sx={{ ml: 2 }}&gt;{rate}&lt;/Box&gt;
-					&lt;/div&gt;
-				) : null}
-			&lt;/div&gt;
-&nbsp;
-			&lt;div className='absolute flex flex-col items-center right-20 top-10 gap-[172px] text-white'&gt;
-				{rate &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >favorite </span>? (
-<span class="branch-0 cbranch-no" title="branch not covered" >					&lt;div className=''&gt;</span>
-						&lt;HeartButton /&gt;
-					&lt;/div&gt;
-				) : null}
-&nbsp;
-				{price &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >					&lt;button className='bg-[#109460] w-[140px] h-[59px] rounded-[10px] text-[40px] font-semibold'&gt;</span>
-						{price}$
-					&lt;/button&gt;
-				)}
-			&lt;/div&gt;
-&nbsp;
-			&lt;div className='absolute flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-24 rounded-lg px-10'&gt;
-				&lt;div className='flex flex-col  justify-center gap-2'&gt;
-					&lt;span className='font-bold'&gt;Location&lt;/span&gt;
-					&lt;Input id='location' label='Location' /&gt;
-				&lt;/div&gt;
-				&lt;div className='flex flex-col  justify-center gap-2'&gt;
-					&lt;span className='font-bold'&gt;Start date&lt;/span&gt;
-					&lt;Input id='starDate' label='---/-----/--' /&gt;
-				&lt;/div&gt;
-				&lt;div className='flex flex-col  justify-center gap-2'&gt;
-					&lt;span className='font-bold'&gt;Ending date&lt;/span&gt;
-					&lt;Input id='endDate' label='---/-----/--' /&gt;
-				&lt;/div&gt;
-				&lt;div className='flex flex-col  justify-center  gap-2'&gt;
-					&lt;span className='font-bold'&gt;Peoples&lt;/span&gt;
-					&lt;Input id='peoples' label='1 adult' /&gt;
-				&lt;/div&gt;
-				&lt;div className='bg-[#CE452A] w-[147px] h-[41px] gap-2 text-white rounded-lg text-center cursor-pointer'&gt;
-					&lt;button className='font-bold p-2'&gt;Search&lt;/button&gt;
-				&lt;/div&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-	)
-}
-&nbsp;
-export default HeaderSection
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const listings = [
+	{
+		id: '1',
+		name: 'Canal of panama',
+		description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+		imageSrc: [
+			// Agregar 3 imagenes una principal para mostar en el header y las otras 2 para que vayan rotando en el detail de cada destino
+			'https://res.cloudinary.com/dhfrzje8b/image/upload/v1685733561/vbff7ck5tzvssegdzuga.jpg',
+		],
+		categories: ['ciudad'],
+		locationValue: 'PA',
+		usserId: '1',
+		activities: ['4 disco tour'],
+		starterPack: '1 starter drink',
+		startTime: '20:00',
+		endTime: '03:00',
+		rating: [5, 4.3, 4],
+		price: '70',
+		galleryPhoto: [
+			// Aqui arear imagenes para mostrar en la aleria de los paquetes
+			'',
+		],
+	},
+	{
+		id: '2',
+		name: 'Cancún',
+		description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+		imageSrc: [
+			// Agregar 3 imagenes una principal para mostar en el header y las otras 2 para que vayan rotando en el detail de cada destino
+			'https://res.cloudinary.com/dhfrzje8b/image/upload/v1685711691/l4anbxuvkuvsgbakya0u.webp',
+		],
+		categories: ['playa'],
+		locationValue: 'MX',
+		usserId: '1',
+		activities: ['Diving'],
+		starterPack: 'A pair of fins',
+		startTime: '14:00',
+		endTime: '18:00',
+		rating: [4.6],
+		price: '150',
+		galleryPhoto: [
+			// Aqui arear imagenes para mostrar en la aleria de los paquetes
+			'',
+		],
+	},
+	{
+		id: '3',
+		name: 'Machu Picchu',
+		description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+		imageSrc: [
+			// Agregar 3 imagenes una principal para mostar en el header y las otras 2 para que vayan rotando en el detail de cada destino
+			'https://res.cloudinary.com/dhfrzje8b/image/upload/v1685734732/oymu6yvrhbvcntu51thj.jpg',
+		],
+		categories: ['montaña'],
+		locationValue: 'PE',
+		usserId: '1',
+		activities: ['Hiking'],
+		starterPack: 'A map and bottle of water',
+		startTime: '09:00',
+		endTime: '17:00',
+		rating: [4.7],
+		price: '120',
+		galleryPhoto: [
+			// Aqui arear imagenes para mostrar en la aleria de los paquetes
+			'',
+		],
+	},
+	{
+		id: '4',
+		name: 'Dubai',
+		description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+		imageSrc: [
+			// Agregar 3 imagenes una principal para mostar en el header y las otras 2 para que vayan rotando en el detail de cada destino
+			'https://res.cloudinary.com/dhfrzje8b/image/upload/v1685734410/aundzma8lmkdxexavem6.webp',
+		],
+		categories: ['desierto'],
+		locationValue: 'AE',
+		usserId: '1',
+		activities: ['Sandboarding'],
+		starterPack: '1 sandboard',
+		startTime: '08:00',
+		endTime: '13:00',
+		rating: [4.5],
+		price: '170',
+		galleryPhoto: [
+			// Aqui arear imagenes para mostrar en la aleria de los paquetes
+			'',
+		],
+	},
+]
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -357,14 +342,14 @@ export default HeaderSection
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2023-06-09T09:22:27.009Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     

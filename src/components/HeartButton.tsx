@@ -15,8 +15,6 @@ const HeartButton: React.FC<Props> = ({ size }) => {
 	const toggleFavorite = () => {
 		setIsFavorite(!isFavorite)
 	}
-	console.log(isFavorite)
-
 	return (
 		<div
 			onClick={toggleFavorite}

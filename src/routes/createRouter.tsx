@@ -6,8 +6,8 @@ import { Admin } from '../layouts/Admin'
 import Settings from '../pages/Admin/Settings'
 import Dashboard from '../pages/Admin/Dashboard'
 import { User } from '../layouts/User'
-import Acomodation from '../pages/User/Acomodation'
-import Discover from '../pages/User/Discover'
+import Accomodation from '../pages/User/Accomodation'
+import Adventure from '../pages/User/Adventure'
 import Transport from '../pages/User/Transport'
 import { Maps } from '../pages/User/Maps'
 import Packages from '../pages/User/Packages'
@@ -39,12 +39,12 @@ export const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: 'acomodation',
-				element: <Acomodation />,
+				path: 'accomodation',
+				element: <Accomodation />,
 			},
 			{
-				path: 'discover',
-				element: <Discover />,
+				path: 'adventure',
+				element: <Adventure />,
 			},
 			{
 				path: 'transport',

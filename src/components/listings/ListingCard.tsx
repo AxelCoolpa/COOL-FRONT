@@ -32,10 +32,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 		.slice(0, 3)
 
 	return (
-		<div
-			onClick={() => navigate(`/details/${data.id}`)}
-			className='bg-[#f7f8f9] col-span-1 cursor-pointer group rounded-xl pb-4 drop-shadow'
-		>
+		<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
 			<div className='relative'>
 				<img
 					src={data.imageSrc[0]}
@@ -45,7 +42,10 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 					<HeartButton size={25} />
 				</div>
 			</div>
-			<div className='flex items-center justify-between px-3 pt-4'>
+			<div
+				onClick={() => navigate(`/details/${data.id}`)}
+				className='flex items-center justify-between px-3 pt-4 cursor-pointer'
+			>
 				<h4 className='text-base font-semibold'>{data.name}</h4>
 				<div className='flex items-center gap-1'>
 					<AiFillStar size={18} color='#faaf00' />

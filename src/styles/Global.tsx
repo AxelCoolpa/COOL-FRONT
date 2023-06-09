@@ -5,7 +5,7 @@ const styles = {
 		'md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto',
 
 	dashContainerOut: 'relative md:ml-48 xl:ml-64',
-	dashContainerIn: 'px-4 md:px-10 mx-auto w-full',
+	dashContainerIn: 'px-4 pt-5 md:px-10 mx-auto w-full',
 }
 
 export default styles

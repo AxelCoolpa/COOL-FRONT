@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
 			</div>
 
 			{/* Desktop Sidebar */}
-			<div className='fixed hidden  md:flex md:flex-col h-full border rounded-tr-lg border-gray-300 shadow-2xl w-[200px] xl:w-[250px]'>
+			<div className='fixed hidden md:flex md:flex-col h-full border rounded-tr-lg border-gray-300 shadow-2xl w-[200px] xl:w-[250px] transition'>
 				<div className='flex items-center justify-center'>
 					<img src={Cool} alt='Cool-LOGO' className='w-20 mt-12' />
 				</div>

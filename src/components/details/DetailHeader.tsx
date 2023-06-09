@@ -8,8 +8,6 @@ interface DetailHeaderProps {
 }
 
 const DetailHeader: React.FC<DetailHeaderProps> = ({ listing }) => {
-	console.log(listing)
-
 	return (
 		<div className='w-full max-h-[400px]'>
 			<div className='flex gap-5'>

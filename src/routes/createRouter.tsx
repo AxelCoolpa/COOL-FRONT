@@ -12,6 +12,7 @@ import Transport from "../pages/User/Transport";
 import { Maps } from "../pages/User/Maps";
 import Packages from "../pages/User/Packages";
 import Tickets from "../pages/User/Tickets";
+/* import Detail from "../pages/User/Detail" */
 
 export const router = createBrowserRouter ([
     {
@@ -31,41 +32,47 @@ export const router = createBrowserRouter ([
     {
         path: "/",
         element: <User />,
+
         children: [
+            {
+            path: "",
+            element: <Home />
+            },
             {
                 path: "dashboard",
                 element: <Dashboard />
             },
             {
-                path: "settings",
+                path: "acomodation",
                 element: <Acomodation />
             },
             {
-                path: "settings",
+                path: "discover",
                 element: <Discover />
             },
             {
-                path: "settings",
+                path: "transport",
                 element: <Transport />
             },
             {
-                path: "settings",
+                path: "maps",
                 element: <Maps/>
             },
             {
-                path: "settings",
+                path: "packages",
                 element: <Packages />
             },
             {
-                path: "settings",
+                path: "tickets",
                 element: <Tickets />
             },
+            /* {
+                path: "details/:id",
+                element: <Detail />
+            }, */
         ]
     },
-    {
-        path: "/home",
-        element: <Home />
-    },
+    
     {
         path: "/login",
         element: <LoginPage />

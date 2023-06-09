@@ -7,7 +7,7 @@ import headerImg from '../../assets/headerImg.jpg'
 
 const HomeMainSection = () => {
 	return (
-		<div className='flex flex-col w-full p-5 md:pl-[220px] xl:pl-[270px] gap-36'>
+		<div className='flex flex-col w-full p-5 gap-36'>
 			<HeaderSection
 				title='Where do you want to go ?'
 				subtitle='Explore the best destinations in the world'

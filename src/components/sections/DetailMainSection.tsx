@@ -1,7 +1,8 @@
 import React from 'react'
+import DetailHeader from '../details/DetailHeader'
 
 const DetailMainSection = () => {
-	return <div>DetailMainSection</div>
+	return <DetailHeader />
 }
 
 export default DetailMainSection

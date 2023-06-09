@@ -6,7 +6,7 @@ import Dashboard from '../pages/Admin/Dashboard'
 import Settings from '../pages/Admin/Settings'
 import DashContainer from '../components/sections/dashContainer'
 
-export const Admin = () => {
+export const User = () => {
 	return (
 		<>
 			<SideBar />

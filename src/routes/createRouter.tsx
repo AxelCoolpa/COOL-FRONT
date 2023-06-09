@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home";
+import Home from "../pages/User/Home";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import { Admin } from "../layouts/Admin";
@@ -13,6 +13,7 @@ import { Maps } from "../pages/User/Maps";
 import Packages from "../pages/User/Packages";
 import Tickets from "../pages/User/Tickets";
 /* import Detail from "../pages/User/Detail" */
+
 
 export const router = createBrowserRouter ([
     {
@@ -37,10 +38,6 @@ export const router = createBrowserRouter ([
             {
             path: "",
             element: <Home />
-            },
-            {
-                path: "dashboard",
-                element: <Dashboard />
             },
             {
                 path: "acomodation",

@@ -1,4 +1,3 @@
-import React from 'react'
 
 import SideBar from '../components/sidebar/SideBar'
 import HomeMainSection from '../components/sections/HomeMainSection'

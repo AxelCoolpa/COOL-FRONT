@@ -10,7 +10,7 @@ const HeartButton: React.FC<Props> = ({ size }) => {
 	const [isFavorite, setIsFavorite] = useState(false)
 
 	const iconSize = size
-	const iconSecondarySize = size - 4
+	const iconSecondarySize = size = - 4
 
 	const toggleFavorite = () => {
 		setIsFavorite(!isFavorite)

@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import logo from "../assets/cool.png";
 
-import { updateFormData, resetFormData } from "../features/LoginSlice";
+import {
+  updateFormData,
+  resetFormData,
+  loginUser,
+} from "../features/LoginSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -14,6 +18,8 @@ const Login = () => {
   const headingControls = useAnimation();
 
   const formData = useSelector((state) => state.login.formData);
+  const isLoading = useSelector((state) => state.login.isLoading);
+  const error = useSelector((state) => state.login.error);
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     dispatch(updateFormData({ [e.target.name]: e.target.value }));
@@ -21,9 +27,10 @@ const Login = () => {
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    console.log(formData); // Puedes acceder a los datos del formulario desde el estado de Redux
-    dispatch(resetFormData()); // Restablecer el formulario después del envío
+
+    dispatch(loginUser(formData));
   };
+
   useEffect(() => {
     const startAnimation = async () => {
       await headingControls.start({
@@ -78,32 +85,39 @@ const Login = () => {
           />
         </div>
 
-        <div className="flex flex-col items-center">
-          <button
-            type="submit"
-            className="bg-orange-700 w-[10vw] hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
-          >
-            Login
-          </button>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {error && <p>Error: {error}</p>}
+            <div className="flex flex-col items-center">
+              <button
+                type="submit"
+                className="bg-orange-700 w-[10vw] hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
+              >
+                Login
+              </button>
 
-          <span className="border-t border-gray-300 w-full text-center my-2">
-            {" "}
-            Or Login with
-          </span>
+              <span className="border-t border-gray-300 w-full text-center my-2">
+                {" "}
+                Or Login with
+              </span>
 
-          <div className="flex">
-            <button className="flex items-center justify-center text-blue-600 hover:text-blue-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
-              <span className="border border-gray-300 rounded-md bg-white p-3">
-                <FaFacebook className="text-xl" />
-              </span>
-            </button>
-            <button className="flex items-center justify-center text-red-600 hover:text-red-700 font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-              <span className="border border-gray-300 rounded-md bg-white p-3">
-                <FaGoogle className="text-xl" />
-              </span>
-            </button>
-          </div>
-        </div>
+              <div className="flex">
+                <button className="flex items-center justify-center text-blue-600 hover:text-blue-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
+                  <span className="border border-gray-300 rounded-md bg-white p-3">
+                    <FaFacebook className="text-xl" />
+                  </span>
+                </button>
+                <button className="flex items-center justify-center text-red-600 hover:text-red-700 font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                  <span className="border border-gray-300 rounded-md bg-white p-3">
+                    <FaGoogle className="text-xl" />
+                  </span>
+                </button>
+              </div>
+            </div>
+          </>
+        )}
         <div className="flex flex-col items-center mt-4">
           <p>
             Don't have an account?{" "}

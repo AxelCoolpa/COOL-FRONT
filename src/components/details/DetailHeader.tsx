@@ -1,10 +1,8 @@
 import React from 'react'
+import { EnumData } from '../../types'
 
-interface EnumListing {
-	imageSrc: Array<string>
-}
 interface DetailHeaderProps {
-	listing: EnumListing
+	listing: EnumData | undefined
 }
 
 const DetailHeader: React.FC<DetailHeaderProps> = ({ listing }) => {
@@ -12,7 +10,7 @@ const DetailHeader: React.FC<DetailHeaderProps> = ({ listing }) => {
 		<div className='w-full max-h-[400px]'>
 			<div className='flex gap-5'>
 				<img
-					src={listing.imageSrc[0]}
+					src={listing?.imageSrc[0]}
 					className='object-cover w-full h-[400px] rounded-[20px]'
 				/>
 				<div className='flex flex-col object-cover gap-5'>

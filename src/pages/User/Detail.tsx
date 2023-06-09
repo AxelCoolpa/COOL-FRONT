@@ -1,7 +1,8 @@
 import React from 'react'
+import DetailMainSection from '../../components/sections/DetailMainSection'
 
 const Detail = () => {
-	return <div>Detail</div>
+	return <DetailMainSection />
 }
 
 export default Detail

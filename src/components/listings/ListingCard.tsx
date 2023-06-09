@@ -2,6 +2,7 @@ import React from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { BsDot } from 'react-icons/bs'
 import HeartButton from '../HeartButton'
+import { useNavigate } from 'react-router'
 
 interface EnumData {
 	id: string
@@ -24,6 +25,7 @@ interface ListingCardProps {
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
+	const navigate = useNavigate()
 	const averageRating = data.rating
 		.reduce((a, b) => a + b / data.rating.length, 0)
 		.toString()
@@ -31,7 +33,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 
 	return (
 		<div
-			onClick={() => alert('Detail')}
+			onClick={() => navigate(`/details/${data.id}`)}
 			className='bg-[#f7f8f9] col-span-1 cursor-pointer group rounded-xl pb-4 drop-shadow'
 		>
 			<div className='relative'>

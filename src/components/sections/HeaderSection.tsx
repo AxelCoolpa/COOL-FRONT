@@ -25,7 +25,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 	price,
 }) => {
 	return (
-		<div className='relative flex items-center justify-center max-h-[475px]'>
+		<div className='relative flex items-center justify-center max-h-[475px] transition'>
 			<img
 				src={image || HeaderImg}
 				className='-z-10 w-screen h-[475px] object-cover rounded-[20px]'
@@ -55,7 +55,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 
 			<div className='absolute flex flex-col items-center right-20 top-10 gap-[172px] text-white'>
 				{rate && favorite ? (
-					<div className=''>
+					<div className='z-10'>
 						<HeartButton />
 					</div>
 				) : null}

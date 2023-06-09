@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
 			</div>
 
 			{/* Desktop Sidebar */}
-			<div className='fixed hidden  md:flex md:flex-col h-full border rounded-tr-lg border-gray-300 shadow-2xl w-[200px] xl:w-[250px]'>
+			<div className='fixed hidden md:flex md:flex-col h-full border rounded-tr-lg border-gray-300 shadow-2xl w-[200px] xl:w-[250px] transition'>
 				<div className='flex items-center justify-center'>
 					<img src={Cool} alt='Cool-LOGO' className='w-20 mt-12' />
 				</div>
@@ -126,45 +126,58 @@ const Sidebar: React.FC = () => {
 
 			{/* Mobile Menu Overlay */}
 			{isMenuOpen && (
-				<div className='fixed inset-0 bg-black bg-opacity-50 z-10'>
+				<div className='fixed inset-0 bg-black bg-opacity-60 z-10'>
 					<div className='absolute top-0 right-0 p-4'>
 						<BiMenu className='text-2xl text-white cursor-pointer' onClick={toggleMenu} />
 					</div>
 					<nav className='flex flex-col items-center justify-center h-screen'>
 						<ul className='space-y-4'>
-							<li className='p-4'>
-								<a href='#' className='text-white hover:text-gray-400'>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<GoHome />
+								<a href='/' className='font-semibold'>
 									Home
 								</a>
 							</li>
-							<li className='p-4'>
-								<a href='#' className='text-white hover:text-gray-400'>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<GrSafariOption />
+								<a href='/adventure' className='font-semibold'>
 									Adventure
 								</a>
 							</li>
-							<li className='p-4'>
-								<a href='#' className='text-white hover:text-gray-400'>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<CgInfinity />
+								<a href='/package' className='font-semibold'>
 									Package
 								</a>
 							</li>
-							<li className='p-4'>
-								<a href='#' className='text-white hover:text-gray-400'>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<RiCarFill />
+								<a href='/transport' className='font-semibold'>
 									Transport
 								</a>
 							</li>
-							<li className='p-4'>
-								<a href='#' className='text-white hover:text-gray-400'>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<FaBed />
+								<a href='/accommodation' className='font-semibold'>
 									Accommodation
 								</a>
 							</li>
-							<li className='p-4'>
-								<a href='#' className='text-white hover:text-gray-400'>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<BsTicketPerforated />
+								<a href='/tickets' className='font-semibold'>
 									Tickets
 								</a>
 							</li>
-							<li className='p-4'>
-								<a href='#' className='text-white hover:text-gray-400'>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<FaMapMarkerAlt />
+								<a href='/maps' className='font-semibold'>
 									Maps
+								</a>
+							</li>
+							<li className='flex items-center w-fit p-4 gap-2 text-white hover:text-gray-400'>
+								<GiWavyItinerary />
+								<a href='/itinarary' className='font-semibold'>
+									Itinerary
 								</a>
 							</li>
 						</ul>

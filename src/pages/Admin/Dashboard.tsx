@@ -1,8 +1,7 @@
 import React from 'react'
-import HeaderSection from '../../components/sections/HeaderSection'
 
 const Dashboard = () => {
-	return <HeaderSection name='canal of panama' rate={4.3} favorite price={70} />
+	return <div>Dashboard</div>
 }
 
 export default Dashboard

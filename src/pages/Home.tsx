@@ -5,7 +5,6 @@ import HomeMainSection from '../components/sections/HomeMainSection'
 const Home = () => {
 	return (
 		<div>
-			<SideBar />
 			<HomeMainSection />
 		</div>
 	)

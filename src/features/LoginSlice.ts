@@ -1,14 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginUserAPI } from "../api/loginAPI";
+import { AppThunk } from "../store/Store";
 
-// Definir el slice
+export interface LoginFormData {
+  username: string;
+  password: string;
+}
+
+interface LoginState {
+  formData: LoginFormData;
+  isLoading: boolean;
+  error: string | null;
+}
+
+const initialState: LoginState = {
+  formData: {
+    username: "",
+    password: "",
+  },
+  isLoading: false,
+  error: null,
+};
+
 const loginSlice = createSlice({
   name: "login",
-  initialState: {
-    formData: {
-      username: "",
-      password: "",
-    },
-  },
+  initialState,
   reducers: {
     updateFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
@@ -16,12 +32,41 @@ const loginSlice = createSlice({
     resetFormData: (state) => {
       state.formData = { username: "", password: "" };
     },
-    // Aquí puedes agregar más acciones relacionadas con el inicio de sesión, como acciones para manejar el éxito o el fallo del inicio de sesión.
+    loginStart: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    loginSuccess: (state) => {
+      state.isLoading = false;
+    },
+    loginFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-// Exportar las acciones
-export const { updateFormData, resetFormData } = loginSlice.actions;
+export const {
+  updateFormData,
+  resetFormData,
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} = loginSlice.actions;
 
-// Exportar el reducer
 export default loginSlice.reducer;
+
+export const loginUser = (formData: LoginFormData): AppThunk => async (
+  dispatch
+) => {
+  try {
+    dispatch(loginStart());
+
+    // Simulate an asynchronous API call
+    await loginUserAPI(formData);
+
+    dispatch(loginSuccess());
+  } catch (error: any) {
+    dispatch(loginFailure(error.message));
+  }
+};

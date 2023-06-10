@@ -9,7 +9,7 @@ interface DestailInfoProps {
 }
 
 const DetailInfo: React.FC<DestailInfoProps> = ({ name, rating, description }) => {
-	const averageRating: number = rating
+	const averageRating = rating
 		?.reduce((a, b) => a + b / rating.length, 0)
 		.toString()
 		.slice(0, 3)

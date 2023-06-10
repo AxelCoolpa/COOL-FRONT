@@ -7,7 +7,7 @@ interface DetailHeaderProps {
 
 const DetailHeader: React.FC<DetailHeaderProps> = ({ listing }) => {
 	return (
-		<div className='w-full max-h-[300px] lg:max-h-[400px] bg-black'>
+		<div className='w-full max-h-[300px] lg:max-h-[400px]'>
 			<div className='flex gap-5 lg:justify-center'>
 				<img
 					src={listing?.imageSrc[0]}

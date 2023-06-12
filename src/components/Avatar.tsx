@@ -16,8 +16,8 @@ const Avatar: React.FC<AvatarProps> = ({ avatar, alt, wh }) => {
 			className={`
         object-cover 
         rounded-full
-        ${wh ? `w-${wh}` : 'w-12'}
-        ${wh ? `h-${wh}` : 'h-12'}
+        ${wh ? `w-${wh}` : 'w-24'}
+        ${wh ? `h-${wh}` : 'h-24'}
         `}
 		/>
 	)

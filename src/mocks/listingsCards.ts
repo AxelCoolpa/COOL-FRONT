@@ -20,7 +20,9 @@ export const listings = [
 		price: '70',
 		galleryPhoto: [
 			// Aqui arear imagenes para mostrar en la aleria de los paquetes
-			'',
+			'https://res.cloudinary.com/dhfrzje8b/image/upload/v1685733561/vbff7ck5tzvssegdzuga.jpg',
+			'https://res.cloudinary.com/dhfrzje8b/image/upload/v1685736141/f36aegaxijkgtfgapthg.jpg',
+			'https://res.cloudinary.com/dhfrzje8b/image/upload/v1685735285/zextqdclkhcqi9v18jus.jpg',
 		],
 	},
 	{

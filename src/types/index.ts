@@ -12,4 +12,5 @@ export interface EnumData {
 	endTime: string
 	rating: Array<number>
 	price: string
+	galleryPhoto: Array<string>
 }

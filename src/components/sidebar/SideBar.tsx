@@ -8,18 +8,12 @@ import { GoHome } from 'react-icons/go'
 import { GrSafariOption } from 'react-icons/gr'
 import { RiCarFill } from 'react-icons/ri'
 
+import { user1 } from '../../mocks/listingsUser'
+
 import Cool from '../../assets/cool.png'
-import avatar from '../../assets/background-Cool.jpeg'
 import withNotifications from '../../assets/withNotifications.svg'
 import withoutNotifications from '../../assets/withoutNotifications.svg'
-
-const user = {
-	userName: 'john03',
-	name: 'John',
-	lastName: 'Doe',
-	mail: 'john.doe@example.com',
-	avatar: avatar,
-}
+import Avatar from '../Avatar'
 
 const Sidebar: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -96,14 +90,12 @@ const Sidebar: React.FC = () => {
 				<div className='ml-2 xl:ml-6 mb-6 flex items-center justify-start gap-6'>
 					{/* Avatar */}
 					<div className='flex items-center justify-start'>
-						<img
-							src={user.avatar}
-							alt='User Avatar'
-							className='w-8 h-8 xl:w-12 xl:h-12  rounded-full mr-3 cursor-pointer'
-						/>
+						<div className='object-cover rounded-full mr-3 cursor-pointer'>
+							<Avatar avatar={user1.avatar} alt={user1.name} wh={12} />
+						</div>
 						<div className='ml-2'>
-							<p className='text-sm font-medium'>{`${user.name} ${user.lastName}`}</p>
-							<p className='text-xs'>{`@${user.userName}`}</p>
+							<p className='text-sm font-medium'>{`${user1.name} ${user1.lastName}`}</p>
+							<p className='text-xs'>{`@${user1.userName}`}</p>
 						</div>
 					</div>
 					<div>

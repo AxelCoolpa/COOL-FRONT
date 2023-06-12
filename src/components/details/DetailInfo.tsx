@@ -33,6 +33,16 @@ const DetailInfo: React.FC<DestailInfoProps> = ({ name, rating, description }) =
 				</div>
 			</div>
 			<hr className='mx-2' />
+
+			{/* 
+				CONDITIONAL REDER
+				<div>
+					//! Tour detail
+					//* TOUR SECTION HERE 
+					<TourDetail />
+				</div> 
+			*/}
+
 			<div className='flex flex-col gap-6'>
 				<h3 className='font-medium text-3xl'>What will you do</h3>
 				<p className='text-xl font-medium text-black/50'>{description}</p>

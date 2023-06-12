@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { BsDot } from 'react-icons/bs'
-import HeartButton from '../HeartButton'
+import HeartButton from '../buttons/HeartButton'
 import { useNavigate } from 'react-router'
 
 import { EnumData } from '../../types'

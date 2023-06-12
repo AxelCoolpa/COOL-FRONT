@@ -2,7 +2,7 @@ import React from 'react'
 import HeaderImg from '../../assets/headerImg.svg'
 import Input from '../inputs/Input'
 import { Box, Rating } from '@mui/material'
-import HeartButton from '../HeartButton'
+import HeartButton from '../buttons/HeartButton'
 import { AiFillStar } from 'react-icons/ai'
 
 interface HeaderSectioonProps {
@@ -67,7 +67,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 				)}
 			</div>
 
-			<div className='absolute flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-24 rounded-lg px-10'>
+			<div className='absolute hidden xl:flex justify-between items-center w-11/12 p-10 bg-white shadow-black/30 shadow-lg -bottom-24 rounded-lg px-10'>
 				<div className='flex flex-col  justify-center gap-2'>
 					<span className='font-bold'>Location</span>
 					<Input id='location' label='Location' />

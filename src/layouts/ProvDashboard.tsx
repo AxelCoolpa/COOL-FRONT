@@ -10,7 +10,7 @@ import DashContainer from '../components/sections/dashContainer'
 export const ProvDashboard = () => {
 	return (
 		<>
-		<SidebarProv />
+		<SidebarProv	 />
 			<DashContainer>
 				<Outlet />
 			</DashContainer>

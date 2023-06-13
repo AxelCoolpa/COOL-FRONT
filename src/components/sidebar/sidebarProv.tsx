@@ -1,6 +1,8 @@
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import { useState } from "react"
 import { Link } from "react-router-dom";
+import Dropdown from "../dropdown/Dropdown";
+import UserDropdown from "../dropdown/UserDropdown";
 
 
 const SidebarProv: React.FC = () => {
@@ -20,9 +22,18 @@ const SidebarProv: React.FC = () => {
 
                 <Link
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            to="/"
+            to="/proveedor-admin/show-discover"
           >Go Home</Link>
 
+
+<ul className="md:hidden items-center flex flex-wrap list-none">
+            <li className=" relative">
+              <Dropdown />
+            </li>
+            <li className=" relative">
+              <UserDropdown />
+            </li>
+          </ul>
           {/* <issue_comment>username_1: @username_0 I'm not sure what you're asking. Can you */}
             </div>
             </nav>

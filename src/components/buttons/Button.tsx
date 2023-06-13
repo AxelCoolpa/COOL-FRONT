@@ -34,8 +34,8 @@ const Button: React.FC<ButtonProps> = ({
 				py-4
 				mt-5
 				xl:text-lg
-        ${outline ? 'bg-white' : 'bg-BtnCooL'}
-        ${outline ? 'border-black' : 'bg-BtnCooL'}
+        ${outline ? 'bg-white' : 'bg-OrangeCooL'}
+        ${outline ? 'border-black' : 'bg-OrangeCooL'}
         ${outline ? 'text-black' : 'text-white'}
         ${small ? 'py-1' : 'py-3'}
         ${small ? 'text-sm' : 'text-md'}

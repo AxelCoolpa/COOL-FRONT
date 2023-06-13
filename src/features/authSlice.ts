@@ -1,5 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface AuthState {
+  email: string
+  password: string
+  isAuthenticated: boolean;
+  logout: boolean;
+  error: string | null;
+}
+
+
+/* 
 interface AuthState {
     isAuthenticated: boolean;
     logout: boolean;
@@ -31,4 +41,4 @@ const authSlice = createSlice({
 export const {
     isAuthenticated,
     logout
-} = authSlice.actions
+} = authSlice.actions */

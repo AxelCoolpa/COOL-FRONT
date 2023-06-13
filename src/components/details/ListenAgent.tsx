@@ -24,7 +24,7 @@ const ListenAgent = () => {
 				</div>
 				<div
 					onClick={() => alert('llamame')}
-					className='flex items-center justify-center bg-sky-100 rounded-full w-16 h-16 ml-28 text-[#5ece2a] drop-shadow-md rotate-12 cursor-pointer hover:animate-ping'
+					className='flex items-center justify-center bg-sky-100 rounded-full w-16 h-16 ml-28 text-[#5ece2a] drop-shadow-md rotate-12 cursor-pointer hover:scale-110'
 				>
 					<MdPhone size={30} />
 				</div>

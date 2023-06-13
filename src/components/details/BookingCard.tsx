@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../buttons/Button'
 
 interface BookingCardProps {
 	price?: string
@@ -15,26 +16,21 @@ const BookingCard: React.FC<BookingCardProps> = ({ price }) => {
 					<div className='w-full border-[#717171] border rounded-xl'>
 						<div className='flex justify-around items-center'>
 							<div className='w-full border-r border-[#717171] p-3'>
-								<p>CHECK-IN</p>
-								<span>2/6/2023</span>
+								<p className='text-[10px] xl:text-xs font-medium'>CHECK-IN</p>
+								<span className='text-sm xl:text-base'>2/6/2023</span>
 							</div>
 							<div className='w-full p-3'>
-								<p>CHECK-OUT</p>
-								<span>2/11/2023</span>
+								<p className='text-[10px] xl:text-xs font-medium'>CHECK-OUT</p>
+								<span className='text-sm xl:text-base'>2/11/2023</span>
 							</div>
 						</div>
 						<div className='w-full border-t border-[#717171] p-3'>
-							<p>GUESTS</p>
-							<span>1 guest</span>
+							<p className='text-[10px] xl:text-xs font-medium'>GUESTS</p>
+							<span className='text-sm xl:text-base'>1 guest</span>
 						</div>
 					</div>
 					<div className='flex justify-center items-center'>
-						<button
-							onClick={() => alert('Booking now')}
-							className='w-full bg-[#ce452a] text-white font-bold p-5 rounded-lg mt-5'
-						>
-							Booking now
-						</button>
+						<Button label='Booking now' onClick={() => alert('Booking now')} />
 					</div>
 				</div>
 			</div>

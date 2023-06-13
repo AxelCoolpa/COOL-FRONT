@@ -1,0 +1,40 @@
+.product-images-slider {
+	.swiper-slider {
+		padding-top: 100%;
+		overflow: hidden;
+		position: relative;
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+	}
+
+	.swiper-button-prev {
+		background-color: #ffffff59;
+		width: 60px;
+		height: 60px;
+		border-radius: 100%;
+		left: 10;
+		color: #000;
+	}
+
+	.swiper-button-prev:hover {
+		background-color: #ffffffc2;
+	}
+
+	.swiper-button-next {
+		background-color: #ffffff59;
+		width: 60px;
+		height: 60px;
+		border-radius: 100%;
+		right: 10;
+		color: #000;
+	}
+
+	.swiper-button-next:hover {
+		background-color: #ffffffc2;
+	}
+}

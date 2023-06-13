@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 import { EnumData } from '../../types'
-import Button from '../buttons/Button'
+
+import GalleryModal from '../modals/GalleryModal'
+import useGalleryModal from '../../hooks/useGalleryModal'
+
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
 interface GalleryProps {
 	listing: EnumData | undefined
 }
 
 const Gallery: React.FC<GalleryProps> = ({ listing }) => {
+	const galleryModal = useGalleryModal()
+
 	return (
 		<div className='flex flex-col gap-10'>
 			<h3 className='text-3xl font-bold'>Gallery Photo</h3>
@@ -21,10 +31,7 @@ const Gallery: React.FC<GalleryProps> = ({ listing }) => {
 						className='rounded-[20px] object-cover w-44 h-44'
 					/>
 				</div>
-				<div
-					onClick={() => alert('Galeria')}
-					className='relative w-56 h-44 cursor-pointer'
-				>
+				<div onClick={galleryModal.onOpen} className='relative w-56 h-44 cursor-pointer'>
 					<img
 						src={listing?.galleryPhoto[2]}
 						className='rounded-[20px] object-cover w-56 h-44'
@@ -35,6 +42,7 @@ const Gallery: React.FC<GalleryProps> = ({ listing }) => {
 						</span>
 					</div>
 				</div>
+				<GalleryModal gallery={listing?.galleryPhoto} />
 			</div>
 		</div>
 	)

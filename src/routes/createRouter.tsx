@@ -13,6 +13,10 @@ import { Maps } from '../pages/User/Maps'
 import Packages from '../pages/User/Packages'
 import Tickets from '../pages/User/Tickets'
 import Detail from '../pages/User/Detail'
+import CreateDiscover from '../pages/ProvUser/createDiscover'
+import ShowDiscover from '../pages/ProvUser/showDiscover'
+import { ProvDashboard } from '../layouts/ProvDashboard'
+import { ProvRegister } from '../layouts/ProvRegister'
 
 export const router = createBrowserRouter([
 	{
@@ -65,6 +69,36 @@ export const router = createBrowserRouter([
 			{
 				path: 'details/:id',
 				element: <Detail />,
+			},
+		],
+	},
+	{
+		path: '/proveedor-admin',
+		element: <ProvDashboard />,
+
+		children: [
+			{
+				path: '',
+				element: <CreateDiscover />,
+			},
+			{
+				path: 'show-discover',
+				element: <ShowDiscover />,
+			},
+			{
+				path: 'adventure',
+				element: <Adventure />,
+			},
+		],
+	},
+	{
+		path: '/proveedor-registro',
+		element: <ProvRegister />,
+
+		children: [
+			{
+				path: '',
+				element: <CreateDiscover />, // cambiar element x el correspondiente archivo de ./pages/provUser/..
 			},
 		],
 	},

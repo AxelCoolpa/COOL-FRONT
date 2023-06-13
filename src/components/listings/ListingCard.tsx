@@ -61,7 +61,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 			<div className='flex justify-center text-white font-bold text-lg py-2'>
 				<button
 					onClick={() => alert('Call to Action Aquí')}
-					className='bg-[#109460] w-full mx-6 rounded-lg py-1 hover:bg-opacity-90'
+					className='bg-GreenCooL w-full mx-6 rounded-lg py-1 hover:bg-opacity-90'
 				>
 					{data?.price}$
 				</button>

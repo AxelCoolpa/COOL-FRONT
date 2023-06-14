@@ -45,19 +45,19 @@ const ProviderCard = () => {
 					<div className='w-12 h-12 text-OrangeCooL border border-OrangeCooL rounded-full flex items-center justify-center'>
 						<HiOutlinePhone size={25} />
 					</div>
-					<span>{user1.phone}</span>
+					<span>{provider1.phone}</span>
 				</div>
 				<div className='flex gap-4 items-center'>
 					<div className='w-12 h-12 text-OrangeCooL border border-OrangeCooL rounded-full flex items-center justify-center'>
 						<FiMail size={25} />
 					</div>
-					<span>{user1.mail}</span>
+					<span>{provider1.mail}</span>
 				</div>
 				<div className='flex gap-4 items-center'>
 					<div className='w-12 h-12 text-OrangeCooL border border-OrangeCooL rounded-full flex items-center justify-center'>
 						<HiOutlineLocationMarker size={25} />
 					</div>
-					<span className='w-2/5'>{user1.address}</span>
+					<span className='w-2/5'>{provider1.address}</span>
 				</div>
 			</div>
 		</div>

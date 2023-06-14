@@ -12,7 +12,7 @@ import {
 } from '../features/RegisterSlice'
 import { RootState } from '../store/Store'
 
-interface RegisterFormData {
+export interface RegisterFormData {
 	username: string
 	email: string
 	password: string

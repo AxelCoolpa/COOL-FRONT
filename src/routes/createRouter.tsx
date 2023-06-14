@@ -80,11 +80,11 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-				element: <CreateDiscover />,
+				element: <ShowDiscover />,
 			},
 			{
-				path: 'show-discover',
-				element: <ShowDiscover />,
+				path: 'create',
+				element: <CreateDiscover />,
 			},
 			{
 				path: 'adventure',

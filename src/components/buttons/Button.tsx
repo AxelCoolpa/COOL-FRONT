@@ -4,11 +4,13 @@ import { IconType } from 'react-icons'
 
 interface ButtonProps {
 	label: string
-	onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 	disabled?: boolean
 	outline?: boolean
+	card?: boolean
 	small?: boolean
 	icon?: IconType
+	w?: number
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,8 +18,10 @@ const Button: React.FC<ButtonProps> = ({
 	onClick,
 	disabled,
 	outline,
+	card,
 	small,
 	icon: Icon,
+	w,
 }) => {
 	return (
 		<button
@@ -27,17 +31,17 @@ const Button: React.FC<ButtonProps> = ({
         relative
         disabled:opacity-70
         disabled:cursor-not-allowed
-        rounded-lg
         hover:opacity-90
         transition
-        w-full
-				py-4
+				p-4
 				mt-5
 				xl:text-lg
-        ${outline ? 'bg-white' : 'bg-BtnCooL'}
-        ${outline ? 'border-black' : 'bg-BtnCooL'}
+        ${w ? `w-${w}` : 'w-full'}
+        ${card ? 'rounded-3xl' : 'rounded-lg'}
+        ${outline ? 'bg-[#EFEFEF]' : 'bg-OrangeCooL'}
+        ${outline ? 'border-none' : 'bg-OrangeCooL'}
         ${outline ? 'text-black' : 'text-white'}
-        ${small ? 'py-1' : 'py-3'}
+        ${small ? 'py-1' : 'py-4'}
         ${small ? 'text-sm' : 'text-md'}
         ${small ? 'font-light' : 'font-bold'}
         ${small ? 'border-[1px]' : 'border-2'}

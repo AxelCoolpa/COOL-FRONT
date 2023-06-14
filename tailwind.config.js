@@ -4,10 +4,14 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				BtnCooL: '#ce452a',
+				OrangeCooL: '#ce452a',
+				GreenCooL: '#109460',
 			},
 			boxShadow: {
 				CooL: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+			},
+			backgroundImage: {
+				OrangeToGreen: 'linear-gradient(205.37deg, #CE452A 6.36%, #109460 100.07%)',
 			},
 		},
 	},

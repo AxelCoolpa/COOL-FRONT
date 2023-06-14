@@ -1,14 +1,10 @@
-
-
 //   MrTban !
 
-
 import React from 'react'
+import AddAdventure from '../../components/sections/AddAdventure'
 
 const CreateDiscover = () => {
-  return (
-    <div>createDiscover</div>
-  )
+	return <AddAdventure />
 }
 
 export default CreateDiscover

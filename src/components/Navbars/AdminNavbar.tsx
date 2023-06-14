@@ -2,7 +2,7 @@ import React from "react";
 
 import UserDropdown from "../dropdown/UserDropdown";
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   return (
     <>
       {/* Navbar */}
@@ -39,3 +39,5 @@ export default function Navbar() {
     </>
   );
 }
+
+export default Navbar;

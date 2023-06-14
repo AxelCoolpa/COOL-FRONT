@@ -17,6 +17,7 @@ import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import { ProvDashboard } from '../layouts/ProvDashboard'
 import { ProvRegister } from '../layouts/ProvRegister'
+import Registerprovideer from '../pages/ProvUser/Register-provideer'
 
 export const router = createBrowserRouter([
 	{
@@ -98,7 +99,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-				element: <CreateDiscover />, // cambiar element x el correspondiente archivo de ./pages/provUser/..
+				element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
 			},
 		],
 	},

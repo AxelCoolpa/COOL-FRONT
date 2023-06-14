@@ -19,12 +19,12 @@ const DetailMainSection = () => {
 			<DetailHeader listing={listing} />
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 py-16'>
 				<DetailInfo
-					name={listing?.name}
+					name={listing?.title}
 					rating={listing?.rating}
 					description={listing?.description}
 				/>
 				<div className='order-first xl:order-last lg:col-span-3'>
-					<BookingCard price={listing?.price} />
+					<BookingCard individualPrice={listing?.individualPrice} />
 				</div>
 			</div>
 			<div className='grid grid-cols-1 xl:grid-cols-9 md:gap-10 py-0 xl:py-10'>
@@ -33,16 +33,14 @@ const DetailMainSection = () => {
 				</div>
 			</div>
 			<hr className='w-full xl:w-4/6 2xl:w-3/6  mx-2 m-10' />
-			{listing?.galleryPhoto?.length > 2 && (
+			{listing?.gallery.length > 2 && (
 				<div className='grid grid-cols-1 xl:grid-cols-9 md:gap-10 py-0 xl:py-10'>
 					<div className='xl:col-span-7'>
 						<Gallery listing={listing} />
 					</div>
 				</div>
 			)}
-			{listing?.galleryPhoto.length > 2 && (
-				<hr className='w-full xl:w-4/6 2xl:w-3/6 mx-2 m-10' />
-			)}
+			{listing?.gallery > 2 && <hr className='w-full xl:w-4/6 2xl:w-3/6 mx-2 m-10' />}
 			<div className='flex flex-col py-10 gap-10'>
 				<h3 className='text-3xl font-bold'>Maps</h3>
 				<iframe

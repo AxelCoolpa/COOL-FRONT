@@ -7,10 +7,8 @@ interface Props {
 
 const DashContainer: React.FC<Props> = ({ children }) => {
     return (
-        <div className={`${styles.dashContainerOut}`}>
-            <div className={`${styles.dashContainerIn}`}>
+        <div className={`${styles.dashContainerOut2}`}>
                 { children }
-            </div>
         </div>
     )
 }

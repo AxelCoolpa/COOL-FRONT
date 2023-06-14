@@ -1,13 +1,23 @@
 import React from "react";
 
+import Cool from '../../assets/cool.png'
 import UserDropdown from "../dropdown/UserDropdown";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
+      <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-3">
         <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
+        {/* <Link
+            className="md:relative text-left text-blueGray-600 whitespace-nowrap text-sm uppercase font-bold px-0"
+            to="/proveedor-admin/show-discover"
+          >
+            <div className='flex items-left justify-left'>
+              <img src={Cool} alt='Cool-LOGO' className='w-20' />
+            </div>
+          </Link> */}
           {/* Brand */}
           <a
             className="text-white text-sm uppercase hidden lg:inline-block font-semibold"

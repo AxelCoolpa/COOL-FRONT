@@ -12,10 +12,10 @@ import Navbar from '../components/Navbars/AdminNavbar'
 export const ProvDashboard = () => {
 	return (
 		<>
-		<SidebarB />
+			<SidebarB />
 			<DashContainer>
 				<Navbar />
-				<div className='px-4 md:px-10 mx-auto w-full -m-24'>
+				<div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
 					<Outlet />
 				</div>
 			</DashContainer>

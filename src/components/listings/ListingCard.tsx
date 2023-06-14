@@ -17,11 +17,13 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 		.toString()
 		.slice(0, 3)
 
+	console.log(data?.extras.activities)
+
 	return (
 		<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
 			<div className='relative'>
 				<img
-					src={data?.imageSrc[0]}
+					src={data?.gallery[0]}
 					className='object-cover w-full h-[200px] rounded-t-xl'
 				/>
 				<div className='absolute top-3 right-3'>
@@ -32,7 +34,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 				onClick={() => navigate(`/details/${data?.id}`)}
 				className='flex items-center justify-between px-3 pt-4 cursor-pointer'
 			>
-				<h4 className='text-base font-semibold'>{data?.name}</h4>
+				<h4 className='text-base font-semibold'>{data?.title}</h4>
 				<div className='flex items-center gap-1'>
 					<AiFillStar size={18} color='#faaf00' />
 					<span className='text-sm font-medium'>{averageRating}</span>
@@ -42,19 +44,19 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 				<li>
 					<div className='flex items-center gap-1'>
 						<BsDot size={20} />
-						{data?.activities}
+						{data?.extras?.activities}
 					</div>
 				</li>
 				<li>
 					<div className='flex items-center gap-1'>
 						<BsDot size={20} />
-						{data?.starterPack}
+						{data?.extras?.starterPack}
 					</div>
 				</li>
 				<li>
 					<div className='flex items-center gap-1'>
 						<BsDot size={20} />
-						{data?.startTime} to {data?.endTime}
+						{data?.extras?.startTime} to {data?.extras?.endTime}
 					</div>
 				</li>
 			</ul>
@@ -63,7 +65,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 					onClick={() => alert('Call to Action Aquí')}
 					className='bg-GreenCooL w-full mx-6 rounded-lg py-1 hover:bg-opacity-90'
 				>
-					{data?.price}$
+					{data?.individualPrice}$
 				</button>
 			</div>
 		</div>

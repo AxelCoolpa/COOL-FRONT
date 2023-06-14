@@ -23,26 +23,26 @@ const Gallery: React.FC<GalleryProps> = ({ listing }) => {
 			<div className='flex flex-col items-center lg:flex-row gap-10 lg:gap-24'>
 				<div className='flex gap-10'>
 					<img
-						src={listing?.galleryPhoto[0]}
+						src={listing?.gallery[0]}
 						className='rounded-[20px] object-cover w-44 h-44'
 					/>
 					<img
-						src={listing?.galleryPhoto[1]}
+						src={listing?.gallery[1]}
 						className='rounded-[20px] object-cover w-44 h-44'
 					/>
 				</div>
 				<div onClick={galleryModal.onOpen} className='relative w-56 h-44 cursor-pointer'>
 					<img
-						src={listing?.galleryPhoto[2]}
+						src={listing?.gallery[2]}
 						className='rounded-[20px] object-cover w-56 h-44'
 					/>
 					<div className='absolute top-0 flex items-center justify-center w-full bg-black/40 rounded-[20px] h-full'>
 						<span className='text-white font-bold text-3xl'>
-							+{listing?.galleryPhoto.length}
+							+{listing?.gallery.length}
 						</span>
 					</div>
 				</div>
-				<GalleryModal gallery={listing?.galleryPhoto} />
+				<GalleryModal gallery={listing?.gallery} />
 			</div>
 		</div>
 	)

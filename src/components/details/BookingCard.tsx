@@ -2,16 +2,16 @@ import React from 'react'
 import Button from '../buttons/Button'
 
 interface BookingCardProps {
-	price?: string
+	individualPrice?: string
 }
 
-const BookingCard: React.FC<BookingCardProps> = ({ price }) => {
+const BookingCard: React.FC<BookingCardProps> = ({ individualPrice }) => {
 	return (
 		<div className='mx-auto w-4/5 md:w-full lg:w-3/5 xl:w-full min-[1440px]:w-5/6 h-[350px]'>
 			<div className='mx-10 rounded-xl h-full shadow-CooL'>
 				<div className='flex flex-col justify-center w-full h-full p-5 gap-4'>
 					<h4 className='text-[22px] font-medium'>
-						${price} <span className='font-normal text-base'>night</span>
+						${individualPrice} <span className='font-normal text-base'>night</span>
 					</h4>
 					<div className='w-full border-[#717171] border rounded-xl'>
 						<div className='flex justify-around items-center'>

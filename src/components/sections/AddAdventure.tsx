@@ -1,7 +1,7 @@
 import AddAdventureForm from '../AddAdventureForm'
 import Map from '../Map'
 import Button from '../buttons/Button'
-import CategoryInput from '../categories/CategoryInput'
+import CategoryInput from '../inputs/CategoryInput'
 import { categories } from '../categories/categories'
 import ImageUpload from '../inputs/ImageUpload'
 import ProviderCard from '../listings/ProviderCard'

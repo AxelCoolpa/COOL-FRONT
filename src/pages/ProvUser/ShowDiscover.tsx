@@ -4,14 +4,19 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/buttons/Button'
+import GridColumns from '../../components/sections/GridColumns'
+import BookingCard from '../../components/details/BookingCard'
 
 const ShowDiscover = () => {
 	const navigate = useNavigate()
 
 	return (
-		<div>
+		<>
 			<Button label='Add adventure' onClick={() => navigate('/proveedor-admin/create')} />
-		</div>
+			<GridColumns>
+				<BookingCard />
+			</GridColumns>
+		</>
 	)
 }
 

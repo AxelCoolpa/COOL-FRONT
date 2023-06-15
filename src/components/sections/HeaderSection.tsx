@@ -9,7 +9,7 @@ interface HeaderSectioonProps {
 	title?: string
 	subtitle?: string
 	name?: string
-	rate?: number
+	rate?: Array<number>
 	image?: string
 	favorite?: boolean
 	price?: number
@@ -24,6 +24,11 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 	favorite,
 	price,
 }) => {
+	const averageRating = rate
+		?.reduce((a, b) => a + b / rate.length, 0)
+		.toString()
+		.slice(0, 3)
+
 	return (
 		<div className='relative flex items-center justify-center max-h-[475px] transition'>
 			<img
@@ -43,12 +48,12 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 					<div className='flex items-center'>
 						<Rating
 							name='text-feedback'
-							value={rate}
+							value={Number(averageRating)}
 							readOnly
 							precision={0.5}
 							emptyIcon={<AiFillStar style={{ opacity: 0.55 }} fontSize='inherit' />}
 						/>
-						<Box sx={{ ml: 2 }}>{rate}</Box>
+						<Box sx={{ ml: 2 }}>{averageRating}</Box>
 					</div>
 				) : null}
 			</div>

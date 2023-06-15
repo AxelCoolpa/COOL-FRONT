@@ -9,7 +9,7 @@ interface CategoryBoxProps {
 	selected?: boolean
 }
 
-const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }) => {
+const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label }) => {
 	return (
 		<div
 			onClick={() => alert(label)}

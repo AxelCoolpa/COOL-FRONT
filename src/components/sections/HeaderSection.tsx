@@ -35,6 +35,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 				src={image || HeaderImg}
 				className='-z-10 w-screen h-[475px] object-cover rounded-[20px]'
 			/>
+			<div className='absolute top-0 flex w-full bg-black/50 rounded-[20px] h-full'></div>
 			{title && subtitle ? (
 				<div className='absolute flex flex-col items-center gap-5 text-white'>
 					<h1 className='text-6xl font-bold'>{title}</h1>

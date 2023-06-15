@@ -5,8 +5,6 @@ import { listings } from '../../mocks/listingsCards'
 const DiscoverMainSection = () => {
 	const discover = listings[Math.floor(Math.random() * listings.length)]
 
-	console.log(discover)
-
 	return (
 		<div>
 			<HeaderSection name={discover.title} rate={discover.rating} favorite price={70} />

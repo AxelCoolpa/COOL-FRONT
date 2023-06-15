@@ -11,7 +11,11 @@ const DiscoverMainSection = () => {
 	const discover = listings[Math.floor(Math.random() * listings.length)]
 
 	return (
-		<div className='flex flex-col w-full '>
+		<div className='flex flex-col w-full'>
+			<div className='flex flex-col gap-4 items-center pb-8'>
+				<h2 className='text-6xl font-bold'>Discover</h2>
+				<h3 className='text-3xl'>Choose your favorite eperience</h3>
+			</div>
 			<HeaderSection
 				name={discover.title}
 				rate={discover.rating}

@@ -1,6 +1,6 @@
 import avatar from '../assets/background-Cool.jpeg'
 
-export const user1 = {
+export const provider1 = {
 	id: 'GS-2234',
 	userName: 'john03',
 	name: 'John',

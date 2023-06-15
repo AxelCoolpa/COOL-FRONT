@@ -1,8 +1,8 @@
 import React from 'react'
-import HeaderSection from '../../components/sections/HeaderSection'
+import DiscoverMainSection from '../../components/sections/DiscoverMainSection'
 
 const Discover = () => {
-	return <HeaderSection name='canal of panama' rate={4.3} favorite price={70} />
+	return <DiscoverMainSection />
 }
 
 export default Discover

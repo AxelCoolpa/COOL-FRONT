@@ -15,7 +15,7 @@ export type listinAdventure = {
 		endTime?: string
 	]
 
-	rating?: Array<string>
+	rating?: Array<number>
 	reviews?: Array<string>
 
 	//! relaciones

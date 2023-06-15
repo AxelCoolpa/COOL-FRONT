@@ -51,7 +51,7 @@ const Sidebar: React.FC = () => {
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<CgInfinity />
-							<a href='/package' className='font-semibold'>
+							<a href='/packages' className='font-semibold'>
 								Package
 							</a>
 						</li>
@@ -63,8 +63,8 @@ const Sidebar: React.FC = () => {
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<FaBed />
-							<a href='/accommodation' className='font-semibold'>
-								Accommodation
+							<a href='/accomodation' className='font-semibold'>
+								Accomodation
 							</a>
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
@@ -81,8 +81,8 @@ const Sidebar: React.FC = () => {
 						</li>
 						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
 							<GiWavyItinerary />
-							<a href='/itinarary' className='font-semibold'>
-								Itinarary
+							<a href='/proveedor-admin' className='font-semibold'>
+								Dash Provider
 							</a>
 						</li>
 					</ul>

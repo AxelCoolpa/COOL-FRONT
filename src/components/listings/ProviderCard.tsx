@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { user1 } from '../../mocks/listingsProvider'
+import { provider1 } from '../../mocks/listingsProvider'
 
 import { CgCloseO } from 'react-icons/cg'
 import { FiMail } from 'react-icons/fi'
@@ -13,11 +13,11 @@ const ProviderCard = () => {
 	return (
 		<div className='flex flex-col gap-10 p-5'>
 			<div className='flex gap-6'>
-				<Avatar avatar={user1.avatar} wh={28} borderR={'3xl'} />
+				<Avatar avatar={provider1.avatar} wh={28} borderR={'3xl'} />
 				<div className='flex flex-col items-center justify-center gap-2'>
-					<span className='text-OrangeCooL'>#{user1.id}</span>
+					<span className='text-OrangeCooL'>#{provider1.id}</span>
 					<p className='text-lg font-semibold'>
-						{user1.name} {user1.lastName}
+						{provider1.name} {provider1.lastName}
 					</p>
 				</div>
 			</div>
@@ -45,19 +45,19 @@ const ProviderCard = () => {
 					<div className='w-12 h-12 text-OrangeCooL border border-OrangeCooL rounded-full flex items-center justify-center'>
 						<HiOutlinePhone size={25} />
 					</div>
-					<span>{user1.phone}</span>
+					<span>{provider1.phone}</span>
 				</div>
 				<div className='flex gap-4 items-center'>
 					<div className='w-12 h-12 text-OrangeCooL border border-OrangeCooL rounded-full flex items-center justify-center'>
 						<FiMail size={25} />
 					</div>
-					<span>{user1.mail}</span>
+					<span>{provider1.mail}</span>
 				</div>
 				<div className='flex gap-4 items-center'>
 					<div className='w-12 h-12 text-OrangeCooL border border-OrangeCooL rounded-full flex items-center justify-center'>
 						<HiOutlineLocationMarker size={25} />
 					</div>
-					<span className='w-2/5'>{user1.address}</span>
+					<span className='w-2/5'>{provider1.address}</span>
 				</div>
 			</div>
 		</div>

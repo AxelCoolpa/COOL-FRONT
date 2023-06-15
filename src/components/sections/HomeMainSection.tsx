@@ -1,8 +1,7 @@
 import { listings } from '../../mocks/listingsCards'
+
 import HeaderSection from './HeaderSection'
 import ListingCard from '../listings/ListingCard'
-
-import headerImg from '../../assets/headerImg.jpg'
 
 const HomeMainSection = () => {
 	const filterRating = listings?.filter(
@@ -13,12 +12,14 @@ const HomeMainSection = () => {
 				.slice(0, 3) >= '4.5'
 	)
 
+	const discover = listings[Math.floor(Math.random() * listings.length)]
+
 	return (
 		<div className='flex flex-col w-full gap-12 xl:gap-28 transition'>
 			<HeaderSection
 				title='Where do you want to go ?'
 				subtitle='Explore the best destinations in the world'
-				image={headerImg}
+				image={discover.gallery[0]}
 			/>
 			<div className='px-5'>
 				<h2 className='text-2xl font-semibold'>Trending adventure</h2>

@@ -24,6 +24,9 @@ import Tickets from '../pages/User/Tickets'
 import Detail from '../pages/User/Detail'
 import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
+import { ProvDashboard } from '../layouts/ProvDashboard'
+import { ProvRegister } from '../layouts/ProvRegister'
+import Registerprovideer from '../pages/ProvUser/Register-provideer'
 
 interface Props {
 	validationUser: boolean;
@@ -121,7 +124,8 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-				element: <CreateDiscover />,
+        element: <CreateDiscover />,
+        element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
 			},
 		],
 	},

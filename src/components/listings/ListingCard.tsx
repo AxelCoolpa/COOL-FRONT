@@ -17,8 +17,6 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 		.toString()
 		.slice(0, 3)
 
-	console.log(data?.extras.activities)
-
 	return (
 		<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
 			<div className='relative'>

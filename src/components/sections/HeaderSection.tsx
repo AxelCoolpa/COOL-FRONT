@@ -12,7 +12,7 @@ interface HeaderSectioonProps {
 	rate?: Array<number>
 	image?: string
 	favorite?: boolean
-	price?: number
+	price?: string
 }
 
 const HeaderSection: React.FC<HeaderSectioonProps> = ({

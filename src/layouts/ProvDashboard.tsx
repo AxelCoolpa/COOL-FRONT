@@ -7,6 +7,7 @@ import SidebarProv from '../components/sidebar/sidebarProv'
 import SidebarB from '../components/sidebar/SidebarProveedor'
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import DashContainer2 from '../components/sections/dashContainer2'
+import DashContainer from '../components/sections/dashContainer'
 import Navbar from '../components/Navbars/AdminNavbar'
 
 export const ProvDashboard = () => {

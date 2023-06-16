@@ -7,15 +7,12 @@ export interface AuthFormData {
   password: string
 }
 
-
-
 interface AuthState {
     formData: AuthFormData;
     isAuthenticated: boolean;
     isLoading: boolean
     error: string | null;
   }
-
 
 const initialState: AuthState = {
   formData: {

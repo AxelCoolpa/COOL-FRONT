@@ -1,4 +1,6 @@
 import React from 'react';
+import styles from '../../styles/Global' 
+
 
 interface Props {
     children: React.ReactNode;
@@ -6,7 +8,7 @@ interface Props {
 
 const GridColumns: React.FC<Props> = ({ children }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div className={`${styles.columnsOne}`}>
         {children}
     </div>
   );

@@ -14,8 +14,9 @@ const ShowDiscover = () => {
 		<>
 			<Button label='Add adventure' onClick={() => navigate('/proveedor-admin/create')} />
 			<GridColumns>
-				<BookingCard />
+				Li
 			</GridColumns>
+				<BookingCard />
 		</>
 	)
 }

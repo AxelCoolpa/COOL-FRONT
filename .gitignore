@@ -16,6 +16,9 @@ coverage
 /coverage.data
 /coverage/
 
+# Environment variables
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

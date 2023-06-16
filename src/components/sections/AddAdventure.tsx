@@ -1,12 +1,77 @@
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { categories } from '../categories/categories'
+import {
+	createAdventure,
+	createAdventureFormData,
+} from '../../features/createAdventureSlice'
+
 import AddAdventureForm from '../AddAdventureForm'
 import Map from '../Map'
 import Button from '../buttons/Button'
 import CategoryInput from '../inputs/CategoryInput'
-import { categories } from '../categories/categories'
 import ImageUpload from '../inputs/ImageUpload'
 import ProviderCard from '../listings/ProviderCard'
 
 const AddAdventure = () => {
+	const dispatch = useDispatch()
+
+	const [formData, setFormData] = useState<createAdventureFormData>({
+		title: ' ',
+		description: ' ',
+		individualPrice: ' ',
+		groupPrice: ' ',
+		gallery: [' '],
+		categories: [' '],
+		location: ' ',
+		extras: {
+			activities: ' ',
+			starterPack: ' ',
+			startTime: ' ',
+			endTime: ' ',
+		},
+		rating: [0],
+		reviews: [' '],
+	})
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value,
+		}))
+	}
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault()
+
+		const { title, description, individualPrice, groupPrice } = formData
+
+		// Validar los campos del formulario antes de enviarlos al servidor
+		if (!title || !description || !individualPrice || !groupPrice) {
+			console.log('Por favor, complete todos los campos')
+			console.log({
+				title,
+				description,
+				individualPrice,
+				groupPrice,
+			})
+			return
+		}
+
+		// Enviar los datos del formulario al servidor
+		dispatch(createAdventure(formData))
+		setFormData({
+			title: '',
+			description: '',
+			individualPrice: '',
+			groupPrice: '',
+		})
+
+		console.log(formData)
+	}
+
 	return (
 		<div>
 			<h2 className='text-[32px] font-medium'>Add adventure</h2>
@@ -14,7 +79,7 @@ const AddAdventure = () => {
 				<ImageUpload value='' />
 			</div>
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
-				<AddAdventureForm />
+				<AddAdventureForm handleChange={handleChange} form={formData} />
 				<div className='xl:col-span-2'>
 					<ProviderCard />
 				</div>
@@ -38,7 +103,7 @@ const AddAdventure = () => {
 						<Map w={400} h={260} />
 					</div>
 					<div className='mx-auto w-full lg:w-2/5 xl:w-full'>
-						<Button label='Ready' card onClick={() => alert('Ready')} />
+						<Button label='Ready' card onClick={handleSubmit} />
 					</div>
 				</div>
 			</div>

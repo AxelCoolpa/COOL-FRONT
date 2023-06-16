@@ -120,7 +120,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-        element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
+				element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
 			},
 		],
 	},

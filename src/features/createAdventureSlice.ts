@@ -5,18 +5,18 @@ import { ceateAdventureAPI } from '../api/createAdventureAPI'
 export interface createAdventureFormData {
 	title: string
 	description: string
-	categories: string[]
-	location: string
+	categories?: string[]
+	location?: string
 	groupPrice: string
-	gallery: string[]
-	rating: number[]
+	gallery?: string[]
+	rating?: number[]
 	individualPrice: string
-	reviews: string[]
-	extras: {
-		activities: string
-		starterPack: string
-		startTime: string
-		endTime: string
+	reviews?: string[]
+	extras?: {
+		activities?: string
+		starterPack?: string
+		startTime?: string
+		endTime?: string
 	}
 }
 

@@ -7,18 +7,40 @@ import { LuCalendarCheck } from 'react-icons/lu'
 import Input from './inputs/Input'
 import { FaRegUser } from 'react-icons/fa'
 
-const AddAdventureForm = () => {
+interface AddAdventureFormProps {
+	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	form: {
+		title: string
+		description: string
+		individualPrice: string
+		groupPrice: string
+	}
+}
+
+const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) => {
 	return (
 		<div className='col-span-5 flex flex-col gap-12'>
 			<div className='flex flex-row gap-8 2xl:gap-32'>
 				<div className='flex items-center gap-2'>
 					<div className='w-80 2xl:w-96'>
-						<Input label='Price adventure indivial' id='individualPrice' />
+						<Input
+							label='Price adventure indivial'
+							id='individualPrice'
+							name='individualPrice'
+							handleChange={handleChange}
+							value={form?.individualPrice}
+						/>
 					</div>
 					<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />
 				</div>
 				<div className='w-80 2xl:w-96'>
-					<Input label='Price adventure groups' id='groupPrice' />
+					<Input
+						label='Price adventure groups'
+						id='groupPrice'
+						name='groupPrice'
+						handleChange={handleChange}
+						value={form?.groupPrice}
+					/>
 				</div>
 			</div>
 			<div className='flex flex-col 2xl:flex-row gap-10'>
@@ -30,7 +52,13 @@ const AddAdventureForm = () => {
 				<div className='flex gap-8'>
 					<div className='flex flex-col gap-10 2xl:w-64'>
 						<label className='text-OrangeCooL'>Adventure ID #0052466623</label>
-						<Input label='Title adventure' />
+						<Input
+							label='Title adventure'
+							id='title'
+							name='title'
+							handleChange={handleChange}
+							value={form?.title}
+						/>
 					</div>
 					<div className='flex flex-col gap-10 w-56 text-[#898989]'>
 						<div className='flex items-center gap-5 text-[#686868]'>
@@ -62,7 +90,14 @@ const AddAdventureForm = () => {
 				</div>
 			</div>
 			<div className='w-full min-[1920px]:w-[86%]'>
-				<Input label='Adventure description' sizeH={36} />
+				<Input
+					label='Adventure description'
+					id='description'
+					name='description'
+					sizeH={36}
+					handleChange={handleChange}
+					value={form?.description}
+				/>
 			</div>
 		</div>
 	)

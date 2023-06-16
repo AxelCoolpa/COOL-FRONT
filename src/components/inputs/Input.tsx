@@ -1,22 +1,28 @@
 interface InputProps {
 	id?: string
 	label?: string
+	name?: string
 	placeholder?: string
 	type?: string
 	disabled?: boolean
 	required?: boolean
 	errors?: boolean
 	sizeH?: number
+	handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+	value?: string
 }
 
 const Input: React.FC<InputProps> = ({
 	id,
 	label,
+	name,
 	placeholder,
 	type,
 	disabled,
 	errors,
 	sizeH,
+	handleChange,
+	value,
 }) => {
 	return (
 		<div className='w-full relative'>
@@ -25,6 +31,8 @@ const Input: React.FC<InputProps> = ({
 				disabled={disabled}
 				placeholder={placeholder || ' '}
 				type={type}
+				name={name}
+				value={value}
 				className={`
           peer
           w-full
@@ -42,6 +50,7 @@ const Input: React.FC<InputProps> = ({
           ${errors ? 'border-red-700' : 'border-neutral-300'}
           ${errors ? 'focus:border-red-700' : 'focus:border-black'}
         `}
+				onChange={handleChange}
 			/>
 			{label && (
 				<label

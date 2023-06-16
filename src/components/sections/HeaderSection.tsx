@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderImg from '../../assets/headerImg.svg'
+import headerImg from '../../assets/headerImg.jpg'
 import Input from '../inputs/Input'
 import { Box, Rating } from '@mui/material'
 import HeartButton from '../buttons/HeartButton'
@@ -12,7 +12,7 @@ interface HeaderSectioonProps {
 	rate?: Array<number>
 	image?: string
 	favorite?: boolean
-	price?: number
+	price?: string
 }
 
 const HeaderSection: React.FC<HeaderSectioonProps> = ({
@@ -32,9 +32,10 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 	return (
 		<div className='relative flex items-center justify-center max-h-[475px] transition'>
 			<img
-				src={image || HeaderImg}
+				src={image || headerImg}
 				className='-z-10 w-screen h-[475px] object-cover rounded-[20px]'
 			/>
+			<div className='absolute top-0 flex w-full bg-black/50 rounded-[20px] h-full'></div>
 			{title && subtitle ? (
 				<div className='absolute flex flex-col items-center gap-5 text-white'>
 					<h1 className='text-6xl font-bold'>{title}</h1>

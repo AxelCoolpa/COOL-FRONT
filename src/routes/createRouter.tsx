@@ -24,11 +24,9 @@ import Tickets from '../pages/User/Tickets'
 import Detail from '../pages/User/Detail'
 import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
-import { ProvDashboard } from '../layouts/ProvDashboard'
-import { ProvRegister } from '../layouts/ProvRegister'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 
-interface Props {
+/* interface Props {
 	validationUser: boolean;
 }
 
@@ -36,10 +34,6 @@ const privateValidationUser = [
 	{
 		path: 'accomodation',
 		element: <Accomodation />,
-	},
-	{
-		path: 'adventure',
-		element: <Adventure />,
 	},
 	{
 		path: 'transport',
@@ -61,8 +55,12 @@ const privateValidationUser = [
 		path: 'details/:id',
 		element: <Detail />,
 	},
-];
+] */
 const publicValidationUser = [
+	{
+		path: 'adventure',
+		element: <Adventure />,
+	},
 	{
 		path: '',
 		element: <Home />,
@@ -70,10 +68,10 @@ const publicValidationUser = [
 ]
 
 
- export const authValidationUser = ({ validationUser }: Props) => {
+/* const authValidationUser = ({ validationUser }: Props) => {
 	const userState = useSelector((store: RootState) => store.auth)
-	return userState.isAuthenticated ? validationUser ? privateValidationUser : publicValidationUser : <Home />
-}
+	return userState.isAuthenticated ? validationUser ? privateValidationUser : publicValidationUser : <LoginPage />
+} */
 
 export const router = createBrowserRouter([
 	{
@@ -94,9 +92,7 @@ export const router = createBrowserRouter([
 		path: '/',
 		element: <User />,
 
-		children: [{ 
-			
-		}]
+		children: publicValidationUser
 	},
 	{
 		path: '/proveedor-admin',
@@ -124,8 +120,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-        element: <CreateDiscover />,
-        element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
+				element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
 			},
 		],
 	},

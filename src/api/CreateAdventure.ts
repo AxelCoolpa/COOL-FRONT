@@ -1,5 +1,5 @@
 import axios from 'axios'
-import ceateAdventureFormData from '../features/ceateAdventureSlice'
+import ceateAdventureFormData from '../features/createAdventureSlice'
 
 import { getUsersAPI } from './getUsers'
 

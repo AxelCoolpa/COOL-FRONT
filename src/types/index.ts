@@ -8,7 +8,7 @@ export interface EnumData {
 	categories: Array<string>
 	location: string
 	extras: EnumExtras
-	rating: Array<string>
+	rating: Array<number>
 	reviews: Array<string>
 }
 

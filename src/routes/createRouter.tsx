@@ -26,7 +26,7 @@ import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 
-/* interface Props {
+interface Props {
 	validationUser: boolean;
 }
 
@@ -51,12 +51,12 @@ const privateValidationUser = [
 		path: 'tickets',
 		element: <Tickets />,
 	},
+]
+const publicValidationUser = [
 	{
 		path: 'details/:id',
 		element: <Detail />,
 	},
-] */
-const publicValidationUser = [
 	{
 		path: 'adventure',
 		element: <Adventure />,

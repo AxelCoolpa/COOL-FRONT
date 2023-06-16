@@ -20,15 +20,12 @@ import Adventure from '../pages/User/Adventure'
 import Transport from '../pages/User/Transport'
 import { Maps } from '../pages/User/Maps'
 import Packages from '../pages/User/Packages'
+import TableUser from '../pages/ProvUser/TableUser'
 import Tickets from '../pages/User/Tickets'
 import Detail from '../pages/User/Detail'
 import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
-
-interface Props {
-	validationUser: boolean;
-}
 
 const privateValidationUser = [
 	{
@@ -67,12 +64,6 @@ const publicValidationUser = [
 	},
 ]
 
-
-/* const authValidationUser = ({ validationUser }: Props) => {
-	const userState = useSelector((store: RootState) => store.auth)
-	return userState.isAuthenticated ? validationUser ? privateValidationUser : publicValidationUser : <LoginPage />
-} */
-
 export const router = createBrowserRouter([
 	{
 		path: '/admin',
@@ -110,6 +101,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'adventure',
 				element: <Adventure />,
+			},
+			{
+				path: 'tableuser',
+				element: <TableUser />,
 			},
 		],
 	},

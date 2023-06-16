@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../store/Store'
-import { ceateAdventureAPI } from '../api/CreateAdventure'
+import { ceateAdventureAPI } from '../api/createAdventureAPI'
 
 export interface createAdventureFormData {
 	title: string

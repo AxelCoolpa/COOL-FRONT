@@ -14,6 +14,7 @@ import { RiCarFill } from "react-icons/ri";
 import { FaBed, FaMapMarkerAlt } from "react-icons/fa";
 import { BsTicketPerforated } from "react-icons/bs";
 import { GiWavyItinerary } from "react-icons/gi";
+import { FiSearch } from "react-icons/fi";
 
 export default function SidebarProveedor() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -91,13 +92,16 @@ export default function SidebarProveedor() {
 
             {/* Form */}
             <form className="mt-6 mb-4 md:hidden">
-              <div className="mb-3 pt-0">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                />
-              </div>
+            <div className="relative flex w-full flex-wrap items-stretch">
+              <span className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+                <FiSearch className="text-blueGray-300 text-xl" />
+              </span>
+              <input
+                type="text"
+                placeholder="Search..."
+                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
+              />
+            </div>
             </form>
 
 

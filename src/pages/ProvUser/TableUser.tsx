@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../../components/buttons/Button";
 import TableCard from "../../components/tables/TableCard";
+import HeaderStats from "../../components/headers/HeaderStats";
 
 const rows = [
   { id: 1, name: "John Doe", age: 30 },
@@ -16,6 +17,7 @@ const ShowDiscover = () => {
 
   return (
     <>
+      <HeaderStats />
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 px-4">
           <TableCard rows={rows} />

@@ -44,7 +44,7 @@ const Dropdown: React.FC = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Action
+          Profile
         </a>
         <a
           href="#"
@@ -62,7 +62,7 @@ const Dropdown: React.FC = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Something else here
+          Settings
         </a>
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
         <a
@@ -72,7 +72,7 @@ const Dropdown: React.FC = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Seprated link
+          Logout
         </a>
       </div>            
         </>

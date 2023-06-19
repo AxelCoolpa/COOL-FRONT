@@ -14,17 +14,22 @@ import CategoryInput from '../inputs/CategoryInput'
 import ImageUpload from '../inputs/ImageUpload'
 import ProviderCard from '../listings/ProviderCard'
 
-import { useForm } from 'react-hook-form'
-
 const AddAdventure = () => {
 	const dispatch = useDispatch()
 
-	const { setValue, watch } = useForm()
+	const [checkboxValues, setCheckboxValues] = useState([])
 
-	const category: string = watch('categories')
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
 
-	const setCustomValue = (id: string, value: string) => {
-		setValue(id, value)
+		if (isChecked) {
+			// Si el checkbox se ha marcado, añadir el valor al array
+			setCheckboxValues([...checkboxValues, value])
+		} else {
+			// Si el checkbox se ha desmarcado, quitar el valor del array
+			setCheckboxValues(checkboxValues.filter((val) => val !== value))
+		}
 	}
 
 	const [formData, setFormData] = useState<createAdventureFormData>({
@@ -33,7 +38,7 @@ const AddAdventure = () => {
 		individualPrice: '',
 		groupPrice: '',
 		gallery: [''],
-		categories: [category],
+		categories: [''],
 		location: '',
 		extras: {
 			activities: '',
@@ -45,6 +50,8 @@ const AddAdventure = () => {
 		reviews: [''],
 	})
 
+	formData.categories = checkboxValues
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
 		setFormData((prevFormData) => ({
@@ -52,8 +59,6 @@ const AddAdventure = () => {
 			[name]: value,
 		}))
 	}
-
-	formData.categories = [category]
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -80,9 +85,6 @@ const AddAdventure = () => {
 			groupPrice: '',
 			categories: [''],
 		})
-		setTimeout(() => {
-			location.reload()
-		}, 2000)
 		console.log(formData)
 	}
 
@@ -98,19 +100,22 @@ const AddAdventure = () => {
 					<ProviderCard />
 				</div>
 			</div>
+
 			<h3 className='text-2xl font-semibold py-8'>Category adventure</h3>
+
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pb-14'>
 				<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20'>
 					{categories.map((item) => (
-						<div key={item.label}>
+						<ul key={item.label}>
 							<CategoryInput
-								handleChange={handleChange}
-								onSelect={(category) => setCustomValue('categories', category)}
-								selected={category === item.label}
+								handleChange={handleCheckboxChange}
 								label={item.label}
 								icon={item.icon}
+								id={item.label}
+								name={item.label}
+								value={item.label}
 							/>
-						</div>
+						</ul>
 					))}
 				</div>
 				<div className='xl:col-span-2'>

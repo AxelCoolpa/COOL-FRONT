@@ -1,14 +1,13 @@
 //   Marto !
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDestinations } from "../../state/actions/destinationActions";
-import { selectDestinations } from "../../state/selectors/destinationSelectors";
+import { fetchDestinations, selectDestinations, selectError, selectLoading } from "../../features/destinationSlice";
+
 
 import Button from "../../components/buttons/Button";
 import GridColumns from "../../components/sections/GridColumns";
 import ListingCard from "../../components/listings/ListingCard";
-import { listings } from "../../mocks/listingsCards";
 import { EnumData } from "../../types";
 
 
@@ -17,11 +16,22 @@ import { EnumData } from "../../types";
 const ShowDiscover: React.FC = () => {
   const dispatch = useDispatch();
   const destinations = useSelector(selectDestinations)
+  const loading = useSelector(selectLoading)
+  const error = useSelector(selectError)
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchDestinations());
   }, [dispatch]);
+
+  if (loading) {
+    return <div>Cargando destinos...</div>
+  }
+  if (error) {
+    return <div>Error al cargar destinos: {error} </div>
+  }
+
+  const validDestinations = destinations.filter(destination => destination !== undefined && destination !== null);
 
   return (
     <>
@@ -31,8 +41,8 @@ const ShowDiscover: React.FC = () => {
             onClick={() => navigate("/proveedor-admin/create")}
           />
           <GridColumns>
-          {destinations.map((destination: EnumData) => {
-						<ListingCard key={destination.id} data={destination} />
+          {validDestinations.map((destination) => {
+						<ListingCard key={destination.id} data={destination.title} />
 					})}
           </GridColumns>
       </div>

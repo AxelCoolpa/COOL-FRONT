@@ -4,7 +4,7 @@ import counterSlice from '../features/CreatedSlice'
 import LoginSlice from '../features/LoginSlice'
 import authSlice from '../features/authSlice'
 import createAdventureSlice from '../features/createAdventureSlice'
-import destinationReducer from '../features/destinationSlice'
+import destinationSlice from '../features/destinationSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -13,7 +13,7 @@ export const store = configureStore({
 		login: LoginSlice,
 		auth: authSlice,
 		createAdventure: createAdventureSlice,
-		destination: destinationReducer,
+		destination: destinationSlice,
 	},
 })
 

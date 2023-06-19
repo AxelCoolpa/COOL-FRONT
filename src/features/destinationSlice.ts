@@ -4,7 +4,7 @@ import { AppDispatch, AppThunk, RootState } from "../store/Store";
 
 interface Destination {
     id: number;
-    name: string;
+    title: string;
     description: string;
 }
 

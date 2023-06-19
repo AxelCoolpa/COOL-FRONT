@@ -13,6 +13,7 @@ import Button from '../buttons/Button'
 import CategoryInput from '../inputs/CategoryInput'
 import ImageUpload from '../inputs/ImageUpload'
 import ProviderCard from '../listings/ProviderCard'
+import DropZone from '../inputs/DropZone'
 
 const AddAdventure = () => {
 	const dispatch = useDispatch()
@@ -60,6 +61,11 @@ const AddAdventure = () => {
 		}))
 	}
 
+	const handleFilesSelected = (files: File[]) => {
+		console.log('Archivos seleccionados:', files)
+		// Aquí puedes realizar acciones adicionales con los archivos seleccionados
+	}
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
@@ -92,7 +98,7 @@ const AddAdventure = () => {
 		<div>
 			<h2 className='text-[32px] font-medium'>Add adventure</h2>
 			<div className='py-5'>
-				<ImageUpload value='' />
+				<DropZone onFilesSelected={handleFilesSelected} />
 			</div>
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
 				<AddAdventureForm handleChange={handleChange} form={formData} />

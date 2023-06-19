@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { categories } from '../categories/categories'
@@ -7,13 +7,12 @@ import {
 	createAdventureFormData,
 } from '../../features/createAdventureSlice'
 
+import DropZone from '../inputs/DropZone'
 import AddAdventureForm from '../AddAdventureForm'
+import ProviderCard from '../listings/ProviderCard'
+import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
-import CategoryInput from '../inputs/CategoryInput'
-import ImageUpload from '../inputs/ImageUpload'
-import ProviderCard from '../listings/ProviderCard'
-import DropZone from '../inputs/DropZone'
 
 const AddAdventure = () => {
 	const dispatch = useDispatch()
@@ -63,8 +62,11 @@ const AddAdventure = () => {
 
 	const handleFilesSelected = (files: File[]) => {
 		console.log('Archivos seleccionados:', files)
-		// Aquí puedes realizar acciones adicionales con los archivos seleccionados
 	}
+
+	//TODO Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
+
+	console.log(formData)
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()

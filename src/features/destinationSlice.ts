@@ -2,6 +2,26 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getDestinations } from "../api/getDestinations";
 import { AppDispatch, AppThunk } from "../store/Store";
 
+interface Destination {
+    id: number;
+    name: string;
+    description: string;
+}
+
+interface DestinationState {
+    destinations: Destination[];
+    loading: boolean;
+    error: string | null;
+}
+
+const initialState: DestinationState = {
+    destinations: [],
+    loading: false,
+    error: null,
+}
+
+
+
 
 export const fecthDestinationsAsync = createAsyncThunk(
     'destination/fetchDestinations',

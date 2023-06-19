@@ -1,6 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getDestinations } from "../api/getDestinations";
-import { AppDispatch, AppThunk } from "../store/Store";
+import { AppDispatch, AppThunk, RootState } from "../store/Store";
 
 interface Destination {
     id: number;
@@ -20,32 +20,49 @@ const initialState: DestinationState = {
     error: null,
 }
 
+const destinationSlice = createSlice({
+    name: 'destination',
+    initialState,
+    reducers: {
+      fetchDestinationsStart(state) {
+        state.loading = true;
+        state.error = null;
+      },
+      fetchDestinationsSuccess(state, action: PayloadAction<Destination[]>) {
+        state.destinations = action.payload;
+        state.loading = false;
+        state.error = null;
+      },
+      fetchDestinationsFailure(state, action: PayloadAction<string>) {
+        state.loading = false;
+        state.error = action.payload;
+      },
+    },
+  });
 
-
-
-export const fecthDestinationsAsync = createAsyncThunk(
-    'destination/fetchDestinations',
-    async (_, { dispatch, getState }) => {
+  export const {
+    fetchDestinationsStart,
+    fetchDestinationsSuccess,
+    fetchDestinationsFailure,
+  } = destinationSlice.actions;
+  
+  
+  export const fetchDestinations = () => {
+    return async (dispatch: AppDispatch) => {
         try {
-            dispatch(fetchDestinationsStart());
-            const response = await getDestinations();
-            dispatch(fetchDestinationsSuccess(response.data))
-        } catch (error) {
+        dispatch(fetchDestinationsStart());
+        const destinations = await getDestinations();
+        dispatch(fetchDestinationsSuccess(destinations));
+      } catch (error) {
+        if (error instanceof Error) {
             dispatch(fetchDestinationsFailure(error.message));
-          }
-    }
-)
+        }
+      }
+    };
+};
 
-export const fetchDestinationsStart = () => ({ type: 'destination/fetchDestinationsStart' });
-export const fetchDestinationsSuccess = (destinations: Destination[]) => ({ type: 'destination/fetchDestinationsSuccess', payload: destinations });
-export const fetchDestinationsFailure = (error: string) => ({ type: 'destination/fetchDestinationsFailure', payload: error });
+export const selectDestinations = (state: RootState) => state.destination.destinations;
+export const selectLoading = (state: RootState) => state.destination.loading;
+export const selectError = (state: RootState) => state.destination.error;
 
-export const fetchDestinations = (): AppThunk => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(fetchDestinationsStart());
-      const response = await getDestinations();
-      dispatch(fetchDestinationsSuccess(response.data));
-    } catch (error) {
-      dispatch(fetchDestinationsFailure(error.message));
-    }
-  };
+export default destinationSlice.reducer;

@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { CgInfo } from 'react-icons/cg'
 import { BiKey } from 'react-icons/bi'
-import { LuCalendarCheck } from 'react-icons/lu'
+import { CgInfo } from 'react-icons/cg'
+import { FiPackage } from 'react-icons/fi'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
+import { LuCalendarCheck } from 'react-icons/lu'
 import { RxActivityLog } from 'react-icons/rx'
 
 import Input from './inputs/Input'
-import { FiPackage } from 'react-icons/fi'
 
 interface EnumExtras {
 	activities: string

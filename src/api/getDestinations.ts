@@ -1,11 +1,10 @@
 import axios from 'axios'
 
-export const getDestinationsAPI = async () => {
+const baseURL = 'http://localhost:3000/api'
+
+export const getDestinations = async () => {
 	try {
-		const response = await axios('http://localhost:3000/api/destinations')
-		// Aquí puedes realizar el manejo de la respuesta de la API
-		// por ejemplo, validar la respuesta o extraer datos relevantes
-		// y retornar cualquier resultado necesario
+		const response = await axios.get(`${baseURL}/destinations`)
 		return response.data // Puedes ajustar esto según la estructura de la respuesta de la API
 	} catch (error: any) {
 		throw new Error(error.message)

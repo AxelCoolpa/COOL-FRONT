@@ -54,13 +54,13 @@ export const { createAdventureStart, createAdventureSuccess, createAdventureFail
 export default createAdventureSlice.reducer
 
 export const createAdventure =
-	(formData: createAdventureFormData): AppThunk =>
+	(formData: createAdventureFormData, userID: string): AppThunk =>
 	async (dispatch) => {
 		try {
 			dispatch(createAdventureStart())
 
 			// Simulate an asynchronous API call
-			await createAdventureAPI(formData)
+			await createAdventureAPI(formData, userID)
 
 			dispatch(createAdventureSuccess())
 		} catch (error: any) {

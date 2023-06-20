@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const getUsersAPI = async () => {
 	try {
-		const response = await axios('http://localhost:3000/api/users')
+		const response = await axios('https://cool-backend-production.up.railway.app/api/users')
 		// Aquí puedes realizar el manejo de la respuesta de la API
 		// por ejemplo, validar la respuesta o extraer datos relevantes
 		// y retornar cualquier resultado necesario

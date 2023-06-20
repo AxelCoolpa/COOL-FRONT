@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { baseURL } from '../baseURL'
 
 export const getUsersAPI = async () => {
 	try {
-		const response = await axios('http://localhost:3000/api/users')
+		const response = await axios(`${baseURL}/users`)
 		// Aquí puedes realizar el manejo de la respuesta de la API
 		// por ejemplo, validar la respuesta o extraer datos relevantes
 		// y retornar cualquier resultado necesario

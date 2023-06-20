@@ -31,7 +31,7 @@ interface AddAdventureFormProps {
 
 const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) => {
 	return (
-		<div className='col-span-5 flex flex-col items-center xl:items-start gap-12'>
+		<div className='col-span-5 flex flex-col items-center  gap-12'>
 			<div className='flex flex-col md:flex-row gap-8 2xl:gap-32'>
 				<div className='flex items-center gap-2'>
 					<div className='w-80 2xl:w-96'>
@@ -55,13 +55,13 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 					/>
 				</div>
 			</div>
-			<div className='flex flex-col items-center xl:items-start 2xl:flex-row gap-10'>
+			<div className='flex flex-col items-center 2xl:flex-row gap-10'>
 				<div className='flex flex-col md:flex-row items-center justify-center bg-OrangeToGreen rounded-full w-36 h-36'>
 					<div className='-scale-x-100'>
 						<BiKey size={60} color='white' />
 					</div>
 				</div>
-				<div className='flex flex-col gap-10 w-full'>
+				<div className='flex flex-col gap-10'>
 					<div className='flex flex-col md:flex-row gap-8'>
 						<div className='flex flex-col gap-10 2xl:w-64'>
 							<label className='text-OrangeCooL'>Adventure ID #0052466623</label>
@@ -93,10 +93,10 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							</div>
 							<Input
 								label='Activities'
-								id={form?.extras.activities}
-								name={form?.extras.activities}
+								id='activities'
+								name='extras.activities'
 								handleChange={handleChange}
-								value={form?.extras.activities}
+								value={form.extras.activities}
 							/>
 						</div>
 					</div>
@@ -143,7 +143,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 					</div>
 				</div>
 			</div>
-			<div className='w-full xl:w-10/12'>
+			<div className='w-full 2xl:w-10/12'>
 				<Input
 					label='Adventure description'
 					id='description'

@@ -7,11 +7,13 @@ import Navbar from '../components/Navbars/AdminNavbar'
 import { useEffect } from 'react'
 import { fetchDestinations } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'
+import { fetchUsers } from '../features/usersSlice'
 
 export const ProvDashboard = () => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(fetchDestinations())
+		dispatch(fetchUsers())
 	}, [dispatch])
 	return (
 		<>

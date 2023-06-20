@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { categories } from '../categories/categories'
 import {
@@ -13,9 +13,13 @@ import ProviderCard from '../listings/ProviderCard'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
+import { selectUsers } from '../../features/usersSlice'
 
 const AddAdventure = () => {
 	const dispatch = useDispatch()
+
+	const users = useSelector(selectUsers)
+	const userID = users[1]?._id
 
 	const [checkboxValues, setCheckboxValues] = useState([])
 
@@ -64,8 +68,6 @@ const AddAdventure = () => {
 
 	//TODO: Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
 
-	console.log(formData)
-
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
@@ -84,7 +86,7 @@ const AddAdventure = () => {
 			return
 		}
 
-		dispatch(createAdventure(formData))
+		dispatch(createAdventure(formData, userID))
 		setFormData({
 			title: '',
 			description: '',

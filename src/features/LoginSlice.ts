@@ -59,7 +59,7 @@ export const loginUser =
 
 			// Simulate an asynchronous API call
 			await loginUserAPI(formData)
-
+			console.log(formData)
 			dispatch(loginSuccess())
 		} catch (error: any) {
 			dispatch(loginFailure(error.message))

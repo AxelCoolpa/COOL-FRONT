@@ -1,13 +1,14 @@
 import axios from 'axios'
-import ceateAdventureFormData from '../features/createAdventureSlice'
+import createAdventureFormData from '../features/createAdventureSlice'
 
 import { getUsersAPI } from './getUsers'
+import { baseURL } from '../baseURL'
 
-export const ceateAdventureAPI = async (formData: typeof ceateAdventureFormData) => {
+export const createAdventureAPI = async (formData: typeof createAdventureFormData) => {
 	const user = await getUsersAPI()
 	const userID = user[1]._id
 
-	const URL = `https://cool-backend-production.up.railway.app/api/destination/${userID}/create`
+	const URL = `${baseURL}/destination/${userID}/create`
 
 	try {
 		const response = await axios.post(URL, formData)

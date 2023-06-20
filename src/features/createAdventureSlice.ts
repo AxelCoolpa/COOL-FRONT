@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../store/Store'
-import { ceateAdventureAPI } from '../api/createAdventureAPI'
+import { createAdventureAPI } from '../api/createAdventureAPI'
 
 export interface createAdventureFormData {
 	title: string
 	description: string
-	categories?: string[]
-	location?: string
-	groupPrice: string
-	gallery?: string[]
-	rating?: number[]
+	categories: string[]
+	location: string
 	individualPrice: string
-	reviews?: string[]
-	extras?: {
-		activities?: string
-		starterPack?: string
-		startTime?: string
-		endTime?: string
+	groupPrice: string
+	gallery: string[]
+	extras: {
+		activities: string
+		starterPack: string
+		startTime: string
+		endTime: string
 	}
+	rating?: number[]
+	reviews?: string[]
 }
 
 interface createAdventureState {
@@ -60,7 +60,7 @@ export const createAdventure =
 			dispatch(createAdventureStart())
 
 			// Simulate an asynchronous API call
-			await ceateAdventureAPI(formData)
+			await createAdventureAPI(formData)
 
 			dispatch(createAdventureSuccess())
 		} catch (error: any) {

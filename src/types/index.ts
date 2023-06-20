@@ -4,10 +4,10 @@ export interface EnumData {
 	description: string
 	gallery: Array<string>
 	individualPrice: string
-	groupPrice?: string
+	groupPrice: string
 	categories: Array<string>
 	location: string
-	extras: EnumExtras
+	extras?: EnumExtras
 	rating: Array<number>
 	reviews: Array<string>
 }

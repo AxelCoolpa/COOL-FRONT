@@ -7,33 +7,48 @@ import {
 	createAdventureFormData,
 } from '../../features/createAdventureSlice'
 
+import DropZone from '../inputs/DropZone'
 import AddAdventureForm from '../AddAdventureForm'
+import ProviderCard from '../listings/ProviderCard'
+import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
-import CategoryInput from '../inputs/CategoryInput'
-import ImageUpload from '../inputs/ImageUpload'
-import ProviderCard from '../listings/ProviderCard'
 
 const AddAdventure = () => {
 	const dispatch = useDispatch()
 
+	const [checkboxValues, setCheckboxValues] = useState([])
+
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
+
+		if (isChecked) {
+			// Si el checkbox se ha marcado, añadir el valor al array
+			setCheckboxValues([...checkboxValues, value])
+		} else {
+			// Si el checkbox se ha desmarcado, quitar el valor del array
+			setCheckboxValues(checkboxValues.filter((val) => val !== value))
+		}
+	}
+
 	const [formData, setFormData] = useState<createAdventureFormData>({
-		title: ' ',
-		description: ' ',
-		individualPrice: ' ',
-		groupPrice: ' ',
-		gallery: [' '],
-		categories: [' '],
-		location: ' ',
+		title: '',
+		description: '',
+		individualPrice: '',
+		groupPrice: '',
+		gallery: [''],
+		categories: [''],
+		location: '',
 		extras: {
-			activities: ' ',
-			starterPack: ' ',
-			startTime: ' ',
-			endTime: ' ',
+			activities: '',
+			starterPack: '',
+			startTime: '',
+			endTime: '',
 		},
-		rating: [0],
-		reviews: [' '],
 	})
+
+	formData.categories = checkboxValues
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
@@ -43,40 +58,56 @@ const AddAdventure = () => {
 		}))
 	}
 
+	const handleFilesSelected = (files: File[]) => {
+		console.log('Archivos seleccionados:', files)
+	}
+
+	//TODO: Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
+
+	console.log(formData)
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
 		const { title, description, individualPrice, groupPrice } = formData
 
 		// Validar los campos del formulario antes de enviarlos al servidor
-		if (!title || !description || !individualPrice || !groupPrice) {
+		if (!title || !description || !individualPrice || !groupPrice || !location) {
 			console.log('Por favor, complete todos los campos')
 			console.log({
 				title,
 				description,
 				individualPrice,
 				groupPrice,
+				location,
 			})
 			return
 		}
 
-		// Enviar los datos del formulario al servidor
 		dispatch(createAdventure(formData))
 		setFormData({
 			title: '',
 			description: '',
 			individualPrice: '',
 			groupPrice: '',
+			gallery: [''],
+			categories: [''],
+			location: '',
+			extras: {
+				activities: '',
+				starterPack: '',
+				startTime: '',
+				endTime: '',
+			},
 		})
-
 		console.log(formData)
 	}
 
 	return (
-		<div>
+		<div className='flex flex-col md:items-center xl:items-start'>
 			<h2 className='text-[32px] font-medium'>Add adventure</h2>
-			<div className='py-5'>
-				<ImageUpload value='' />
+			<div className='py-5 w-full'>
+				<DropZone onFilesSelected={handleFilesSelected} />
 			</div>
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
 				<AddAdventureForm handleChange={handleChange} form={formData} />
@@ -84,17 +115,22 @@ const AddAdventure = () => {
 					<ProviderCard />
 				</div>
 			</div>
+
 			<h3 className='text-2xl font-semibold py-8'>Category adventure</h3>
+
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pb-14'>
 				<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20'>
 					{categories.map((item) => (
-						<div key={item.label} className=''>
+						<ul key={item.label}>
 							<CategoryInput
-								onClick={() => alert(item.label)}
+								handleChange={handleCheckboxChange}
 								label={item.label}
 								icon={item.icon}
+								id={item.label}
+								name={item.label}
+								value={item.label}
 							/>
-						</div>
+						</ul>
 					))}
 				</div>
 				<div className='xl:col-span-2'>

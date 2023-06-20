@@ -8,8 +8,6 @@ export const createAdventureAPI = async (formData: typeof createAdventureFormDat
 	const user = await getUsersAPI()
 	const userID = user[1]._id
 
-	console.log(user)
-
 	const URL = `${baseURL}/destination/${userID}/create`
 
 	try {

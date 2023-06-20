@@ -46,8 +46,6 @@ const AddAdventure = () => {
 			startTime: '',
 			endTime: '',
 		},
-		rating: [0],
-		reviews: [''],
 	})
 
 	formData.categories = checkboxValues
@@ -64,7 +62,7 @@ const AddAdventure = () => {
 		console.log('Archivos seleccionados:', files)
 	}
 
-	//TODO Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
+	//TODO: Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
 
 	console.log(formData)
 
@@ -74,13 +72,14 @@ const AddAdventure = () => {
 		const { title, description, individualPrice, groupPrice } = formData
 
 		// Validar los campos del formulario antes de enviarlos al servidor
-		if (!title || !description || !individualPrice || !groupPrice) {
+		if (!title || !description || !individualPrice || !groupPrice || !location) {
 			console.log('Por favor, complete todos los campos')
 			console.log({
 				title,
 				description,
 				individualPrice,
 				groupPrice,
+				location,
 			})
 			return
 		}
@@ -91,15 +90,23 @@ const AddAdventure = () => {
 			description: '',
 			individualPrice: '',
 			groupPrice: '',
+			gallery: [''],
 			categories: [''],
+			location: '',
+			extras: {
+				activities: '',
+				starterPack: '',
+				startTime: '',
+				endTime: '',
+			},
 		})
 		console.log(formData)
 	}
 
 	return (
-		<div>
+		<div className='flex flex-col md:items-center xl:items-start'>
 			<h2 className='text-[32px] font-medium'>Add adventure</h2>
-			<div className='py-5'>
+			<div className='py-5 w-full'>
 				<DropZone onFilesSelected={handleFilesSelected} />
 			</div>
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>

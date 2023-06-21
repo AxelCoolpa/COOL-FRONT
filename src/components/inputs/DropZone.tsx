@@ -23,7 +23,7 @@ const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected }) => {
 	return (
 		<div
 			{...getRootProps()}
-			className='relative flex flex-col justify-center items-center cursor-pointer hover:opacity-70 transition border-dashed border-2 p-24 border-neutral-400 gap-4 text-neutral-600 rounded-lg font-bold text-lg'
+			className='relative flex flex-col justify-center items-center cursor-pointer hover:opacity-70 transition border-dashed border-2 px-24 py-10 min-[1440px]:py-24 border-neutral-400 gap-4 text-neutral-600 rounded-lg font-bold text-lg'
 		>
 			<input {...getInputProps()} />
 			{isDragActive ? (
@@ -31,7 +31,9 @@ const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected }) => {
 			) : (
 				<>
 					<TbPhotoPlus size={54} />
-					<p>Arrastra y suelta archivos aquí, o haz clic para seleccionar archivos</p>
+					<p className='text-xs min-[1440px]:text-base'>
+						Arrastra y suelta archivos aquí, o haz clic para seleccionar archivos
+					</p>
 				</>
 			)}
 

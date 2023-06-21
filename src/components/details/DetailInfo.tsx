@@ -4,7 +4,7 @@ import { AiFillStar } from 'react-icons/ai'
 
 interface DestailInfoProps {
 	name?: string
-	rating?: Array<string>
+	rating?: Array<number> | undefined
 	description?: string
 }
 

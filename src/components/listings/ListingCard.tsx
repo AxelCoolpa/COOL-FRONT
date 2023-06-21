@@ -29,7 +29,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 				</div>
 			</div>
 			<div
-				onClick={() => navigate(`/details/${data?.id}`)}
+				onClick={() => navigate(`/details/${data?._id}`)}
 				className='flex items-center justify-between px-3 pt-4 cursor-pointer'
 			>
 				<h4 className='text-base font-semibold'>{data?.title}</h4>

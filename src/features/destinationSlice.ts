@@ -5,7 +5,7 @@ import { AppDispatch, AppThunk, RootState } from '../store/Store'
 import { EnumExtras } from '../types'
 
 interface Destination {
-	id: string
+	_id: string
 	title: string
 	description: string
 	gallery: Array<string>

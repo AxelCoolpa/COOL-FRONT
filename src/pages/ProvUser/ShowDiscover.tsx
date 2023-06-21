@@ -1,6 +1,5 @@
 //   Marto !
 import React from "react";
-import Slider from 'react-slick'
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -8,8 +7,9 @@ import {
   selectError,
   selectLoading,
 } from "../../features/destinationSlice";
-import "../../styles/slick/slick.css"
-import "../../styles/slick/slick-theme.css"
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Thumbs } from "swiper";
 
 import GridColumns from "../../components/sections/GridColumns";
 import ListingCard from "../../components/listings/ListingCard";
@@ -49,23 +49,13 @@ const ShowDiscover: React.FC = () => {
 
           <div className="flex-auto px-3 lg:px-0 py-10 pt-0">
             <GridColumns>
-			<Slider
-              dots={true}
-              infinite={true}
-              slidesToShow={3}
-              slidesToScroll={1}
-              autoplay={true}
-              autoplaySpeed={3000}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-            >
-
               {validDestinations.map((destination) => (
-				  <ListingCard key={destination._id} data={destination} />
-				  ))}
-				  </Slider>
+                <ListingCard key={destination._id} data={destination} />
+              ))}
             </GridColumns>
           </div>
         </div>
+
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between pt-3 mt-3 mb-3 pb-3">
             <h6 className="text-gray-600 text-md uppercase font-bold">
@@ -75,9 +65,20 @@ const ShowDiscover: React.FC = () => {
 
           <div className="flex-auto px-3 lg:px-0 py-10 pt-0">
             <GridColumns>
-              {validDestinations.map((destination) => (
-                <ListingCard key={destination._id} data={destination} />
-              ))}
+            {/* <Swiper
+              loop={true}
+              spaceBetween={1}
+              navigation={true}
+              modules={[Navigation, Thumbs]}
+              grabCursor={true}
+              className="product-images-slider"
+			  > */}
+				{/* <SwiperSlide key={destination._id}> */}
+                {validDestinations.map((destination) => (
+						<ListingCard key={destination._id} data={destination} />
+						))}
+						{/* </SwiperSlide> */}
+            {/* </Swiper> */}
             </GridColumns>
           </div>
         </div>

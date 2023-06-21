@@ -19,8 +19,10 @@ const BookingBar = () => {
 				<span className='font-bold'>Peoples</span>
 				<Input id='peoples' placeholder='1 adult' />
 			</div>
-			<div className='bg-[#CE452A] w-[147px] h-[41px] gap-2 text-white rounded-lg text-center cursor-pointer'>
-				<button className='font-bold p-2'>Search</button>
+			<div className='bg-[#CE452A] w-[147px] gap-2 text-white rounded-lg text-center cursor-pointer'>
+				<button className='font-bold p-4' onClick={() => alert('Search')}>
+					Search
+				</button>
 			</div>
 		</div>
 	)

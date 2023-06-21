@@ -14,9 +14,10 @@ const styles = {
 	dashContainerIn: 'px-4 pt-5 md:px-10 mx-auto w-full',
 	dashContainerIn2: 'px-4 pt-12 md:px-10 mx-auto w-full',
 
-	columnsOne: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4",
-	
-	nav: 'md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-12 md:hover:w-40 z-10 py-4 px-0 transition-width duration-300',
+	columnsOne:
+		'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4',
+
+	nav: 'md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-14 md:hover:w-48 z-10 py-10 px-1 transition-width duration-300',
 }
 
 export default styles

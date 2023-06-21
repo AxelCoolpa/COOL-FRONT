@@ -39,7 +39,6 @@ const Input: React.FC<InputProps> = ({
 					xl:w-4/5
 					2xl:w-full
           p-4
-					xl:p-2
 					min-[1440px]:p-4
           font-light
           bg-white
@@ -63,7 +62,7 @@ const Input: React.FC<InputProps> = ({
           text-md
           duration-150
           transform
-          -translate-y-3
+          -translate-y-5
           top-5
           z-10
           origin-[0]

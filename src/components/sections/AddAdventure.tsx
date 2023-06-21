@@ -123,7 +123,7 @@ const AddAdventure = () => {
 				<h3 className='text-2xl font-semibold py-8'>Category adventure</h3>
 
 				<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pb-14'>
-					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20'>
+					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center'>
 						{categories.map((item) => (
 							<ul key={item.label}>
 								<CategoryInput

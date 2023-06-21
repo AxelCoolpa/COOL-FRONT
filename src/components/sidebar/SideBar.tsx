@@ -79,12 +79,6 @@ const Sidebar: React.FC = () => {
 								Maps
 							</a>
 						</li>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
-							<GiWavyItinerary />
-							<a href='/proveedor-admin' className='font-semibold'>
-								Dash Provider
-							</a>
-						</li>
 					</ul>
 				</nav>
 				<div className='ml-2 xl:ml-6 mb-6 flex items-center justify-start gap-6'>

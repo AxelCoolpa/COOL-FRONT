@@ -1,5 +1,6 @@
 //   Marto !
 import React from "react";
+import Slider from 'react-slick'
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -7,8 +8,9 @@ import {
   selectError,
   selectLoading,
 } from "../../features/destinationSlice";
+import "../../styles/slick/slick.css"
+import "../../styles/slick/slick-theme.css"
 
-import Button from "../../components/buttons/Button";
 import GridColumns from "../../components/sections/GridColumns";
 import ListingCard from "../../components/listings/ListingCard";
 
@@ -47,9 +49,20 @@ const ShowDiscover: React.FC = () => {
 
           <div className="flex-auto px-3 lg:px-0 py-10 pt-0">
             <GridColumns>
+			<Slider
+              dots={true}
+              infinite={true}
+              slidesToShow={3}
+              slidesToScroll={1}
+              autoplay={true}
+              autoplaySpeed={3000}
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+            >
+
               {validDestinations.map((destination) => (
-                <ListingCard key={destination._id} data={destination} />
-              ))}
+				  <ListingCard key={destination._id} data={destination} />
+				  ))}
+				  </Slider>
             </GridColumns>
           </div>
         </div>

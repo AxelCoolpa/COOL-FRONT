@@ -1,3 +1,5 @@
+import { IconType } from 'react-icons'
+
 interface InputProps {
 	id?: string
 	label?: string
@@ -10,6 +12,7 @@ interface InputProps {
 	sizeH?: number
 	handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 	value?: string
+	icon?: IconType
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,6 +26,7 @@ const Input: React.FC<InputProps> = ({
 	sizeH,
 	handleChange,
 	value,
+	icon: Icon,
 }) => {
 	return (
 		<div className='w-full relative'>
@@ -43,7 +47,7 @@ const Input: React.FC<InputProps> = ({
           font-light
           bg-white
           border-2
-          rounded-md
+					rounded-lg
           outline-none
           transition
           disabled:opacity-70
@@ -52,14 +56,21 @@ const Input: React.FC<InputProps> = ({
           ${label ? 'pt-6' : 'pt-4'}
           ${errors ? 'border-red-700' : 'border-neutral-300'}
           ${errors ? 'focus:border-red-700' : 'focus:border-black'}
+					${Icon ? 'pl-14' : ''}
         `}
 				onChange={handleChange}
 			/>
+			{Icon && (
+				<Icon
+					size={28}
+					className='absolute left-4 top-5 flex items-center justify-center text-OrangeCooL'
+				/>
+			)}
+
 			{label && (
 				<label
 					className={`
           absolute
-          text-md
           duration-150
           transform
           -translate-y-5
@@ -72,6 +83,7 @@ const Input: React.FC<InputProps> = ({
           peer-focus:scale-75
           peer-focus:-translate-y-4
           ${errors ? 'text-red-700' : 'text-zinc-400'}
+					${Icon ? 'pl-10' : ''}
         `}
 				>
 					{label}

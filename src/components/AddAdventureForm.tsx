@@ -36,7 +36,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 				<div className='flex items-center gap-2'>
 					<div className='relative w-80 xl:w-[278px] 2xl:w-96'>
 						<Input
-							label='Price adventure indivial'
+							placeholder='Price adventure indivial'
 							id='individualPrice'
 							name='individualPrice'
 							handleChange={handleChange}
@@ -49,7 +49,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 				</div>
 				<div className='w-80 xl:w-[278px] 2xl:w-96'>
 					<Input
-						label='Price adventure groups'
+						placeholder='Price adventure groups'
 						id='groupPrice'
 						name='groupPrice'
 						handleChange={handleChange}
@@ -68,7 +68,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
 							<label className='text-OrangeCooL'>Adventure ID #0052466623</label>
 							<Input
-								label='Title adventure'
+								placeholder='Title adventure'
 								id='title'
 								name='title'
 								handleChange={handleChange}
@@ -81,7 +81,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 								<label className=''>Which is the location?</label>
 							</div>
 							<Input
-								label='Location'
+								placeholder='Location'
 								id='location'
 								name='location'
 								handleChange={handleChange}
@@ -94,7 +94,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 								<label className='text-[#686868]'>Activities</label>
 							</div>
 							<Input
-								label='Activities'
+								placeholder='Activities'
 								id='activities'
 								name='extras.activities'
 								handleChange={handleChange}
@@ -109,7 +109,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 								<label className='text-[#686868]'>Starter Pack</label>
 							</div>
 							<Input
-								label='Starter Pack'
+								placeholder='Starter Pack'
 								id='extras.starterPack'
 								name='extras.starterPack'
 								handleChange={handleChange}
@@ -122,7 +122,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 								<label className=''>Start Time</label>
 							</div>
 							<Input
-								label='Start Time'
+								placeholder='Start Time'
 								id='extras.startTime'
 								name='extras.startTime'
 								handleChange={handleChange}
@@ -135,7 +135,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 								<label>End Time</label>
 							</div>
 							<Input
-								label='End Time'
+								placeholder='End Time'
 								id='extras.endTime'
 								name='extras.endTime'
 								handleChange={handleChange}

@@ -93,40 +93,55 @@ export default function SidebarProveedor() {
 						</form>
 
 						{/* Divider */}
-						<hr className='mt-8 mb-4 md:min-w-full' />
+						<hr className='mt-8 md:min-w-full' />
 
 						{/* Heading */}
-						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4 md:mt-0'>
+						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
 							<ul className='space-y-4'>
-								<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a href='/proveedor-admin' className='flex font-semibold gap-2'>
-										<BsFillGrid1X2Fill size={22} className='font-bold text-OrangeCooL' />
+								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
+									<a
+										href='/proveedor-admin'
+										className='flex items-center font-semibold gap-2'
+									>
+										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Adventures
 										</p>
 									</a>
 								</li>
-								<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a href='/proveedor-admin/create' className='flex font-semibold gap-2'>
-										<FaUser size={22} className='font-bold text-OrangeCooL' />
+								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
+									<a
+										href='/proveedor-admin/create'
+										className='flex items-center font-semibold gap-2'
+									>
+										<FaUser size={20} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Create</p>
 									</a>
 								</li>
-								<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/proveedor-admin' className='flex font-semibold gap-2'>
+								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
+									<a
+										href='/proveedor-admin'
+										className='flex items-center font-semibold gap-2'
+									>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>
-								<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/proveedor-admin' className='flex font-semibold gap-2'>
-										<MdLocationCity size={22} className='font-bold text-OrangeCooL' />
+								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
+									<a
+										href='/proveedor-admin'
+										className='flex items-center font-semibold gap-2'
+									>
+										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>
-								<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/proveedor-admin' className='flex font-semibold gap-2'>
-										<IoMdSettings size={22} className='font-bold text-OrangeCooL' />
+								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
+									<a
+										href='/proveedor-admin'
+										className='flex items-center font-semibold gap-2'
+									>
+										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>

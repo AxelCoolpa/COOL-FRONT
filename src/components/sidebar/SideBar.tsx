@@ -32,49 +32,49 @@ const Sidebar: React.FC = () => {
 
 			{/* Desktop Sidebar */}
 			<div className='fixed hidden md:flex md:flex-col h-full border rounded-tr-lg border-gray-300 shadow-2xl w-[200px] xl:w-[250px] transition'>
-				<div className='flex items-center justify-center'>
-					<img src={Cool} alt='Cool-LOGO' className='w-20 mt-12' />
+				<div className='flex items-center'>
+					<img src={Cool} alt='Cool-LOGO' className='w-24 mt-12 ml-12 xl:ml-16' />
 				</div>
-				<nav className='flex-grow ml-2 xl:ml-4 sm:mt-4 md:mt-0'>
-					<ul className='space-y-2'>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a]'>
-							<GoHome />
+				<nav className='flex-grow ml-2 xl:ml-4 sm:mt-6'>
+					<ul className='space-y-3'>
+						<li className='flex items-center w-fit pt-6 pl-4 gap-4 text-[#808080] hover:text-[#ce452a]'>
+							<GoHome size={18} />
 							<a href='/' className='font-semibold'>
 								Home
 							</a>
 						</li>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a]'>
-							<GrSafariOption />
+						<li className='flex items-center w-fit pt-6 pl-4 gap-4 text-[#808080] hover:text-[#ce452a]'>
+							<GrSafariOption size={18} />
 							<a href='/adventure' className='font-semibold'>
 								Adventure
 							</a>
 						</li>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
-							<CgInfinity />
+						<li className='flex items-center w-fit pt-6 pl-4 gap-4 text-[#808080] hover:text-[#ce452a] '>
+							<CgInfinity size={18} />
 							<a href='/packages' className='font-semibold'>
 								Package
 							</a>
 						</li>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6  gap-2 text-[#808080] hover:text-[#ce452a] '>
-							<RiCarFill />
+						<li className='flex items-center w-fit pt-6 pl-4 gap-4 text-[#808080] hover:text-[#ce452a] '>
+							<RiCarFill size={18} />
 							<a href='/transport' className='font-semibold'>
 								Transport
 							</a>
 						</li>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
-							<FaBed />
+						<li className='flex items-center w-fit pt-6 pl-4 gap-4 text-[#808080] hover:text-[#ce452a] '>
+							<FaBed size={18} />
 							<a href='/accomodation' className='font-semibold'>
 								Accomodation
 							</a>
 						</li>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
-							<BsTicketPerforated />
+						<li className='flex items-center w-fit pt-6 pl-4 gap-4 text-[#808080] hover:text-[#ce452a] '>
+							<BsTicketPerforated size={18} />
 							<a href='/tickets' className='font-semibold'>
 								Tickets
 							</a>
 						</li>
-						<li className='flex items-center w-fit pt-4 pl-4 2xl:pt-6 gap-2 text-[#808080] hover:text-[#ce452a] '>
-							<FaMapMarkerAlt />
+						<li className='flex items-center w-fit pt-6 pl-4 gap-4 text-[#808080] hover:text-[#ce452a] '>
+							<FaMapMarkerAlt size={18} />
 							<a href='/maps' className='font-semibold'>
 								Maps
 							</a>

@@ -108,7 +108,7 @@ const AddAdventure = () => {
 
 	return (
 		<Container>
-			<div className='flex flex-col md:items-center xl:items-start'>
+			<div className='flex flex-col md:items-center xl:items-start pt-14'>
 				<h2 className='text-[32px] font-medium'>Add adventure</h2>
 				<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
 					<DropZone onFilesSelected={handleFilesSelected} />

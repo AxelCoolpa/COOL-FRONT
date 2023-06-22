@@ -24,6 +24,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginUser(formData));
+    console.log(formData)
+    navigate('/')
   };
 
   useEffect(() => {
@@ -37,12 +39,6 @@ const Login = () => {
     startAnimation();
   }, [headingControls]);
 
-  useEffect(() => {
-    if (error) {
-      console.log('Error:', error);
-    }
-    navigate('/')
-  }, [error]);
 
   return (
     <div className='flex flex-col items-center justify-center h-screen m-8'>

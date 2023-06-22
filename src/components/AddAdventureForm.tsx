@@ -15,10 +15,10 @@ interface EnumForm {
 	individualPrice: string
 	groupPrice: string
 	location: string
-	activities: string
-	starterPack: string
-	startTime: string
-	endTime: string
+	activities?: string[]
+	starterPack?: string[]
+	startTime?: string[]
+	endTime?: string[]
 }
 interface AddAdventureFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void

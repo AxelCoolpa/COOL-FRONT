@@ -5,11 +5,23 @@ import { categories } from '../categories/categories'
 import HeaderSection from './HeaderSection'
 import CategoryBox from '../categories/CategoryBox'
 import ListingCard from '../listings/ListingCard'
+import { useState } from 'react'
+
 
 const DiscoverMainSection = () => {
 	const destinations = useSelector(selectDestinations)
 	const discover = destinations[Math.floor(Math.random() * destinations.length)]
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+	
+	const handleCategorySelect = (label: string) => {
+		setSelectedCategories((prevSelectedCategories) => {
+			if (prevSelectedCategories.includes(label)) {
+				return prevSelectedCategories.filter((category) => category != label);
+			} else {
+				return [...prevSelectedCategories, label];
+			}
+		})
+	};
 	
 	return (
 		<div className='flex flex-col w-full'>

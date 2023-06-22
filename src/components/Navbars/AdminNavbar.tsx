@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { selectUsers } from '../../features/usersSlice'
 
@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
 	return (
 		<>
 			{/* Navbar */}
-			<nav className='absolute hidden md:fixed top-0 left-0 w-full z-10 md:flex-row md:flex-nowrap md:justify-start md:flex items-center p-5 bg-white'>
+			<nav className='absolute hidden w-full md:fixed top-0 left-0 z-40 md:flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-5 backdrop-blur-xl'>
 				<div className='w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4'>
 					<div className='hidden md:flex justify-between items-center gap-36'>
 						<div className='flex items-center'>
@@ -38,7 +38,13 @@ const Navbar: React.FC = () => {
 						</div>
 						{/* Actual Page */}
 						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							{location.pathname.split('/').slice(-1)}
+							<a className='text-sm text-navy-700 hover:underline' href=' '>
+								Pages
+								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
+							</a>
+							<Link className='text-sm capitalize text-navy-700 hover:underline' to='#'>
+								{location.pathname.split('/').slice(-1)}
+							</Link>
 						</span>
 					</div>
 					{/* Form */}

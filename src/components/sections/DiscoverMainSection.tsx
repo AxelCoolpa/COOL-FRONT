@@ -7,23 +7,27 @@ import CategoryBox from '../categories/CategoryBox'
 import ListingCard from '../listings/ListingCard'
 import { useState } from 'react'
 import { GiRetroController } from 'react-icons/gi'
+import CategoryInput from '../inputs/CategoryInput'
 
 
 const DiscoverMainSection = () => {
 	const destinations = useSelector(selectDestinations)
 	const discover = destinations[Math.floor(Math.random() * destinations.length)]
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+	const [checkboxValues, setCheckboxValues] = useState([])
 	
-	const handleCategorySelect = (label: string) => {
-		setSelectedCategories((prevSelectedCategories) => {
-			if (prevSelectedCategories.includes(label)) {
-				return prevSelectedCategories.filter((category) => category != label && console.log());
-			} else {
-				return [...prevSelectedCategories, label];
-			}
-		})
-	};
-
+	
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
+		if (isChecked) {
+			setCheckboxValues([...checkboxValues, value])
+		} else {
+			setCheckboxValues(checkboxValues.filter((val) => val !== value))
+		}
+	}
+	console.log(checkboxValues)
+	
 	const filteredDestinations = destinations.filter((destination) => {
 		if (selectedCategories.length === 0) {
 			return true;
@@ -31,6 +35,17 @@ const DiscoverMainSection = () => {
 			return selectedCategories.includes(destination.categories)
 		}
 	})
+
+	/* const handleCategorySelect = (label: string) => {
+		setSelectedCategories((prevSelectedCategories) => {
+			if (prevSelectedCategories.includes(label)) {
+				return prevSelectedCategories.filter((category) => category != label && console.log());
+			} else {
+				return [...prevSelectedCategories, label];
+			}
+		})
+	}; */
+
 
 	return (
 		<div className='flex flex-col w-full'>
@@ -50,13 +65,16 @@ const DiscoverMainSection = () => {
 				<h3 className='text-2xl font-semibold'>Categories</h3>
 				<div className='flex flex-row items-center justify-between pt-5'>
 					{categories.map((item) => (
-						<CategoryBox
-							key={item.label}
+						<ul key={item.label}>
+						<CategoryInput 
+							handleChange={handleCheckboxChange}
+							id={item.label}
+							name={item.label}
+							value={item.label}
 							label={item.label}
-							selected={selectedCategories.includes(item.label)}
 							icon={item.icon}
-							onSelect={handleCategorySelect.length}
-						/>
+							/>
+							</ul>
 					))}
 				</div>
 			</div>

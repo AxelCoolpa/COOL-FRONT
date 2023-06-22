@@ -6,6 +6,7 @@ import HeaderSection from './HeaderSection'
 import CategoryBox from '../categories/CategoryBox'
 import ListingCard from '../listings/ListingCard'
 import { useState } from 'react'
+import { GiRetroController } from 'react-icons/gi'
 
 
 const DiscoverMainSection = () => {
@@ -22,6 +23,14 @@ const DiscoverMainSection = () => {
 			}
 		})
 	};
+
+	const filteredDestinations = destinations.filter((destination) => {
+		if (selectedCategories.length === 0) {
+			return true;
+		} else {
+			return selectedCategories.includes(destination.categories)
+		}
+	})
 
 	return (
 		<div className='flex flex-col w-full'>
@@ -55,7 +64,7 @@ const DiscoverMainSection = () => {
 			<div className='px-5 pt-10'>
 				<h2 className='text-2xl font-semibold'>Trending adventure</h2>
 				<div className='pt-10 px-8 grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 gap-11'>
-					{destinations.map((listing) => {
+					{filteredDestinations.map((listing) => {
 						return <ListingCard key={listing?._id} data={listing} />
 					})}
 				</div>

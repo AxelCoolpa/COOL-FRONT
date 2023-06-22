@@ -1,7 +1,7 @@
-import React from 'react'
 import { useParams } from 'react-router-dom'
 
-import { listings } from '../../mocks/listingsCards'
+import { useSelector } from 'react-redux'
+import { selectDestinations } from '../../features/destinationSlice'
 
 import DetailHeader from '../details/DetailHeader'
 import DetailInfo from '../details/DetailInfo'
@@ -12,8 +12,9 @@ import Map from '../Map'
 
 const DetailMainSection = () => {
 	const { id } = useParams()
+	const destinations = useSelector(selectDestinations)
 
-	const listing = listings.find((item) => item.id === id)
+	const listing = destinations.find((item) => item._id === id)
 
 	return (
 		<div className='max-w-screen-2xl mx-auto'>
@@ -34,7 +35,7 @@ const DetailMainSection = () => {
 				</div>
 			</div>
 			<hr className='w-full xl:w-4/6 2xl:w-3/6  mx-2 m-10' />
-			{listing?.gallery.length > 2 && (
+			{listing?.gallery?.length > 2 && (
 				<div className='grid grid-cols-1 xl:grid-cols-9 md:gap-10 py-0 xl:py-10'>
 					<div className='xl:col-span-7'>
 						<Gallery listing={listing} />

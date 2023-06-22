@@ -1,13 +1,12 @@
 import axios from 'axios'
 import createAdventureFormData from '../features/createAdventureSlice'
 
-import { getUsersAPI } from './getUsers'
 import { baseURL } from '../baseURL'
 
-export const createAdventureAPI = async (formData: typeof createAdventureFormData) => {
-	const user = await getUsersAPI()
-	const userID = user[1]._id
-
+export const createAdventureAPI = async (
+	formData: typeof createAdventureFormData,
+	userID: string
+) => {
 	const URL = `${baseURL}/destination/${userID}/create`
 
 	try {

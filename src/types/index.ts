@@ -1,5 +1,5 @@
 export interface EnumData {
-	id: string
+	_id?: string
 	title: string
 	description: string
 	gallery: Array<string>

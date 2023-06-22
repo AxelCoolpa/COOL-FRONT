@@ -9,4 +9,5 @@ export const provider1 = {
 	phone: '+12 3456 678',
 	avatar: avatar,
 	address: 'New Avenue Street Corner South London 224151',
+	role: 'Superadmin',
 }

@@ -5,6 +5,7 @@ import LoginSlice from '../features/LoginSlice'
 import authSlice from '../features/authSlice'
 import createAdventureSlice from '../features/createAdventureSlice'
 import destinationSlice from '../features/destinationSlice'
+import usersSlice from '../features/usersSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -14,11 +15,12 @@ export const store = configureStore({
 		auth: authSlice,
 		createAdventure: createAdventureSlice,
 		destination: destinationSlice,
+		user: usersSlice,
 	},
 })
 
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = typeof store.dispatch
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,
 	RootState,

@@ -9,7 +9,8 @@ import ListingCard from '../listings/ListingCard'
 const DiscoverMainSection = () => {
 	const destinations = useSelector(selectDestinations)
 	const discover = destinations[Math.floor(Math.random() * destinations.length)]
-
+	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+	
 	return (
 		<div className='flex flex-col w-full'>
 			<div className='flex flex-col gap-4 items-center pb-8'>

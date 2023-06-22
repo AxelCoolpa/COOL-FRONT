@@ -17,7 +17,7 @@ const DiscoverMainSection = () => {
 	const handleCategorySelect = (label: string) => {
 		setSelectedCategories((prevSelectedCategories) => {
 			if (prevSelectedCategories.includes(label)) {
-				return prevSelectedCategories.filter((category) => category != label);
+				return prevSelectedCategories.filter((category) => category != label && console.log());
 			} else {
 				return [...prevSelectedCategories, label];
 			}
@@ -55,7 +55,7 @@ const DiscoverMainSection = () => {
 							label={item.label}
 							selected={selectedCategories.includes(item.label)}
 							icon={item.icon}
-							onSelect={handleCategorySelect.arguments}
+							onSelect={handleCategorySelect.length}
 						/>
 					))}
 				</div>

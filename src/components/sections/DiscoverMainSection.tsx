@@ -22,7 +22,7 @@ const DiscoverMainSection = () => {
 			}
 		})
 	};
-	
+
 	return (
 		<div className='flex flex-col w-full'>
 			<div className='flex flex-col gap-4 items-center pb-8'>
@@ -44,8 +44,9 @@ const DiscoverMainSection = () => {
 						<CategoryBox
 							key={item.label}
 							label={item.label}
-							selected={true}
+							selected={selectedCategories.includes(item.label)}
 							icon={item.icon}
+							onSelect={handleCategorySelect.arguments}
 						/>
 					))}
 				</div>

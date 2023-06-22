@@ -84,8 +84,8 @@ const Navbar: React.FC = () => {
 								}
 								animation='origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out'
 								children={
-									<div className='flex w-[360px] flex-col gap-3 rounded-[20px] bg-white p-4 shadow-CooL sm:w-[460px]'>
-										<div className='flex items-center justify-between'>
+									<div className='flex w-[360px] flex-col gap-3 rounded-[20px] bg-white p-4 shadow-CooL'>
+										<div className='flex items-center justify-between py-4'>
 											<p className='text-base font-bold'>Notification</p>
 											<p className='text-sm font-bold'>Mark all read</p>
 										</div>
@@ -119,7 +119,7 @@ const Navbar: React.FC = () => {
 										</button>
 									</div>
 								}
-								classNames={'py-2 top-4 -left-[230px] md:-left-[440px] w-max'}
+								classNames={'py-2 top-6 -left-[250px] md:-left-[330px] w-max'}
 							/>
 
 							<Dropdown
@@ -220,16 +220,19 @@ const Navbar: React.FC = () => {
 						</div>
 						<hr className='w-12 rotate-90' />
 						{/* User */}
-						<ul className='flex-col md:flex-row list-none items-center hidden md:flex'>
+						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
 							<div className='flex items-center gap-6'>
 								<Dropdown
 									button={<Avatar avatar={AvatarImg} wh={12} />}
 									children={
 										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>
-												<div className='flex items-center gap-2'>
+												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
 														👋 Hey, {userProvider?.username}
+													</p>
+													<p className='text-sm pl-6 cursor-default'>
+														{userProvider?.role?.roleName}
 													</p>
 												</div>
 											</div>
@@ -268,17 +271,17 @@ const Navbar: React.FC = () => {
 									}
 									classNames={'py-2 top-8 -left-[180px] w-max'}
 								/>
-								<div className='flex flex-col justify-center'>
+								{/* <div className='flex flex-col justify-center'>
 									<label className='2xl:text-lg font-semibold'>
 										{userProvider?.username}
 									</label>
 									<span className='text-xs'>{userProvider?.role?.roleName}</span>
-								</div>
+								</div> */}
 								<div className=''>
 									<select
 										name='languaje'
 										id='languaje'
-										className='pr-4 shadow-CooL rounded-xl h-fit p-2 ml-5'
+										className='pr-4 shadow-CooL rounded-xl h-fit p-2'
 									>
 										<option value='EN'>EN</option>
 										<option value='ES'>ES</option>

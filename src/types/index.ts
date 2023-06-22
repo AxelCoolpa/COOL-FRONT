@@ -7,14 +7,12 @@ export interface EnumData {
 	groupPrice: string
 	categories: Array<string>
 	location: string
-	extras?: EnumExtras
+
+	activities?: Array<string>
+	starterPack?: Array<string>
+	startTime?: Array<string>
+	endTime?: Array<string>
+
 	rating: Array<number>
 	reviews: Array<string>
-}
-
-export interface EnumExtras {
-	activities?: string
-	starterPack?: string
-	startTime?: string
-	endTime?: string
 }

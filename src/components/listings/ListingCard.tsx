@@ -1,10 +1,14 @@
 import React from 'react'
+
+import { useLocation, useNavigate } from 'react-router'
+
 import { AiFillStar } from 'react-icons/ai'
 import { BsDot } from 'react-icons/bs'
+
 import HeartButton from '../buttons/HeartButton'
-import { useNavigate } from 'react-router'
 
 import { EnumData } from '../../types'
+import EditButon from '../buttons/EditButton'
 
 interface ListingCardProps {
 	data: EnumData | undefined
@@ -12,6 +16,8 @@ interface ListingCardProps {
 
 const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 	const navigate = useNavigate()
+	const location = useLocation()
+
 	const averageRating = data?.rating
 		.reduce((a, b) => a + b / data?.rating.length, 0)
 		.toString()
@@ -25,7 +31,11 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 					className='object-cover w-full h-[200px] rounded-t-xl'
 				/>
 				<div className='absolute top-3 right-3'>
-					<HeartButton size={25} />
+					{location.pathname === '/provider' ? (
+						<EditButon onClick={() => navigate(`/provider/update/${data?._id}`)} />
+					) : (
+						<HeartButton size={25} />
+					)}
 				</div>
 			</div>
 			<div
@@ -38,26 +48,37 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 					<span className='text-sm font-medium'>{averageRating}</span>
 				</div>
 			</div>
-			<ul className='flex flex-col justify-center px-3 py-4 text-xs gap-1 text-[#00000080]'>
-				<li>
-					<div className='flex items-center gap-1'>
-						<BsDot size={20} />
-						{data?.extras?.activities}
-					</div>
-				</li>
-				<li>
-					<div className='flex items-center gap-1'>
-						<BsDot size={20} />
-						{data?.extras?.starterPack}
-					</div>
-				</li>
-				<li>
-					<div className='flex items-center gap-1'>
-						<BsDot size={20} />
-						{data?.extras?.startTime} to {data?.extras?.endTime}
-					</div>
-				</li>
-			</ul>
+			{data?.activities ||
+				data?.starterPack ||
+				data?.startTime ||
+				(data?.endTime && (
+					<ul className='flex flex-col justify-center px-3 py-4 text-xs gap-1 text-[#00000080]'>
+						{data?.activities && (
+							<li>
+								<div className='flex items-center gap-1'>
+									<BsDot size={20} />
+									{data?.activities}
+								</div>
+							</li>
+						)}
+						{data?.starterPack && (
+							<li>
+								<div className='flex items-center gap-1'>
+									<BsDot size={20} />
+									{data?.starterPack}
+								</div>
+							</li>
+						)}
+						{data?.startTime && data?.endTime && (
+							<li>
+								<div className='flex items-center gap-1'>
+									<BsDot size={20} />
+									{data?.startTime} to {data?.endTime}
+								</div>
+							</li>
+						)}
+					</ul>
+				))}
 			<div className='flex justify-center text-white font-bold text-lg py-2'>
 				<button
 					onClick={() => alert('Call to Action Aquí')}

@@ -26,6 +26,7 @@ import Detail from '../pages/User/Detail'
 import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
+import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
 
 const privateValidationUser = [
 	{
@@ -51,16 +52,16 @@ const privateValidationUser = [
 ]
 const publicValidationUser = [
 	{
-		path: 'details/:id',
-		element: <Detail />,
+		path: '',
+		element: <Home />,
 	},
 	{
 		path: 'adventure',
 		element: <Adventure />,
 	},
 	{
-		path: '',
-		element: <Home />,
+		path: 'details/:id',
+		element: <Detail />,
 	},
 ]
 
@@ -83,10 +84,10 @@ export const router = createBrowserRouter([
 		path: '/',
 		element: <User />,
 
-		children: publicValidationUser
+		children: publicValidationUser,
 	},
 	{
-		path: '/proveedor-admin',
+		path: '/provider',
 		element: <ProvDashboard />,
 
 		children: [
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'create',
 				element: <CreateDiscover />,
+			},
+			{
+				path: 'update/:id',
+				element: <UpdateAdventure />,
 			},
 			{
 				path: 'adventure',

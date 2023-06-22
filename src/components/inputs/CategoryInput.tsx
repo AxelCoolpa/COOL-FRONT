@@ -29,7 +29,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 					className='hidden peer'
 				/>
 				<label
-					for={id}
+					htmlFor={id}
 					className='flex flex-col items-center justify-center gap-3 w-44 h-44 p-5 border border-[#F3F3F3] hover:border-[#28B446] hover:border-4 rounded-[20px] cursor-pointer peer-checked:border-[#28B446] peer-checked:border-[4px] peer-checked:shadow-xl peer-checked:shadow-black/20'
 				>
 					<Icon size={36} />

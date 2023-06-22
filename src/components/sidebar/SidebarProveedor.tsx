@@ -39,7 +39,7 @@ export default function SidebarProveedor() {
 							src={Cool}
 							alt='Cool-LOGO'
 							className='w-28 cursor-pointer'
-							onClick={() => navigate('/proveedor-admin')}
+							onClick={() => navigate('/provider')}
 						/>
 					</div>
 
@@ -95,10 +95,7 @@ export default function SidebarProveedor() {
 						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
 							<ul className='space-y-4'>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a
-										href='/proveedor-admin'
-										className='flex items-center font-semibold gap-2'
-									>
+									<a href='/provider' className='flex items-center font-semibold gap-2'>
 										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Adventures
@@ -107,7 +104,7 @@ export default function SidebarProveedor() {
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
 									<a
-										href='/proveedor-admin/create'
+										href='/provider/create'
 										className='flex items-center font-semibold gap-2'
 									>
 										<FaUser size={20} className='font-bold text-OrangeCooL' />
@@ -115,28 +112,19 @@ export default function SidebarProveedor() {
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a
-										href='/proveedor-admin'
-										className='flex items-center font-semibold gap-2'
-									>
+									<a href='/provider' className='flex items-center font-semibold gap-2'>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a
-										href='/proveedor-admin'
-										className='flex items-center font-semibold gap-2'
-									>
+									<a href='/provider' className='flex items-center font-semibold gap-2'>
 										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a
-										href='/proveedor-admin'
-										className='flex items-center font-semibold gap-2'
-									>
+									<a href='/provider' className='flex items-center font-semibold gap-2'>
 										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>

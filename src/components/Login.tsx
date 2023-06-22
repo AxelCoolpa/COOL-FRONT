@@ -40,10 +40,9 @@ const Login = () => {
   useEffect(() => {
     if (error) {
       console.log('Error:', error);
-    } else if (!isLoading) {
-      navigate('/');
     }
-  }, [error, isLoading, navigate]);
+    navigate('/')
+  }, [error]);
 
   return (
     <div className='flex flex-col items-center justify-center h-screen m-8'>
@@ -90,7 +89,7 @@ const Login = () => {
           <p>Loading...</p>
         ) : (
           <>
-            {error && <p>Error: {error}</p>}
+            {error && <p className="text-red-500">Error: {error}</p>}
             <div className='flex flex-col items-center'>
               <button
                 type='submit'

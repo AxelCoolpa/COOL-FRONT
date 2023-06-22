@@ -34,7 +34,7 @@ export default function SidebarProveedor() {
 						<BiMenu />
 					</button>
 					{/* Brand */}
-					<div className='md:block'>
+					<div className='md:hidden'>
 						<img
 							src={Cool}
 							alt='Cool-LOGO'

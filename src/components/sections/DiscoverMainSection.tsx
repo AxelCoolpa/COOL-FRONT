@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux'
-import { selectDestinations } from '../../features/destinationSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchDestinations, selectDestinations, selectError, selectLoading } from '../../features/destinationSlice'
 import { categories } from '../categories/categories'
 
 import HeaderSection from './HeaderSection'
 import CategoryBox from '../categories/CategoryBox'
 import ListingCard from '../listings/ListingCard'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GiRetroController } from 'react-icons/gi'
 import CategoryInput from '../inputs/CategoryInput'
 
@@ -15,7 +15,19 @@ const DiscoverMainSection = () => {
 	const discover = destinations[Math.floor(Math.random() * destinations.length)]
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 	const [checkboxValues, setCheckboxValues] = useState([])
+	const loading = useSelector(selectLoading);
+	const error = useSelector(selectError);
+	const dispatch = useDispatch()
 	
+	useEffect(() => {
+		dispatch(fetchDestinations())
+	}, [dispatch])
+	if (loading) {
+		return <div>Cargando destinos...</div>;
+	  }
+	  if (error) {
+		return <div>Error al cargar destinos: {error} </div>;
+	  }
 	
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
@@ -29,10 +41,10 @@ const DiscoverMainSection = () => {
 	console.log(checkboxValues)
 	
 	const filteredDestinations = destinations.filter((destination) => {
-		if (selectedCategories.length === 0) {
+		if (checkboxValues.length === 0) {
 			return true;
 		} else {
-			return selectedCategories.includes(destination.categories)
+			return checkboxValues.includes(destination.categories)
 		}
 	})
 

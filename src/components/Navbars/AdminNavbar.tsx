@@ -44,7 +44,9 @@ const Navbar: React.FC = () => {
 								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
 							</a>
 							<Link className='text-sm capitalize text-navy-700 hover:underline' to='#'>
-								{location.pathname.split('/').slice(-1)}
+								{location.pathname.split('/')[1]}
+								{location.pathname.split('/').length > 2 &&
+									` / ` + location.pathname.split('/')[2]}
 							</Link>
 						</span>
 					</div>

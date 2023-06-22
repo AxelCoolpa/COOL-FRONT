@@ -1,10 +1,13 @@
 import React, { createRef, useState } from 'react'
 import { Placement, createPopper } from '@popperjs/core'
 
-import imagenUno from '../../assets/Avatar.jpg'
 import Avatar from '../Avatar'
 
-const UserDropdown: React.FC = () => {
+interface UserDropdownProps {
+	avatar?: string
+}
+
+const UserDropdown: React.FC<UserDropdownProps> = ({ avatar }) => {
 	const [popoverShow, setPopoverShow] = useState<boolean>(false)
 	const btnDropdownRef = createRef<HTMLAnchorElement>()
 	const popoverDropdownRef = createRef<HTMLDivElement>()
@@ -31,7 +34,7 @@ const UserDropdown: React.FC = () => {
 			>
 				<div className='items-center flex'>
 					<span className='w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full'>
-						<Avatar avatar={imagenUno} wh={12} />
+						<Avatar avatar={avatar} wh={12} />
 					</span>
 				</div>
 			</a>

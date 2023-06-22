@@ -45,12 +45,10 @@ const AddAdventure = () => {
 		gallery: [''],
 		categories: [''],
 		location: '',
-		extras: {
-			activities: '',
-			starterPack: '',
-			startTime: '',
-			endTime: '',
-		},
+		activities: [''],
+		starterPack: [''],
+		startTime: [''],
+		endTime: [''],
 	})
 
 	formData.categories = checkboxValues
@@ -96,12 +94,10 @@ const AddAdventure = () => {
 			gallery: [''],
 			categories: [''],
 			location: '',
-			extras: {
-				activities: '',
-				starterPack: '',
-				startTime: '',
-				endTime: '',
-			},
+			activities: [''],
+			starterPack: [''],
+			startTime: [''],
+			endTime: [''],
 		})
 		console.log(formData)
 	}

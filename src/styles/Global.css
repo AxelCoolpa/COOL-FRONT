@@ -38,3 +38,12 @@
 		background-color: #ffffffc2;
 	}
 }
+
+.fadeEnter {
+	opacity: 0;
+	transition: opacity 1000ms ease-in;
+  }
+  
+  .fade-enter-active {
+	opacity: 1;
+  }

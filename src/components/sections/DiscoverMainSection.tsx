@@ -13,15 +13,10 @@ import CategoryInput from '../inputs/CategoryInput'
 const DiscoverMainSection = () => {
 	const destinations = useSelector(selectDestinations)
 	const discover = destinations[Math.floor(Math.random() * destinations.length)]
-	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 	const [checkboxValues, setCheckboxValues] = useState([])
 	const loading = useSelector(selectLoading);
 	const error = useSelector(selectError);
-	const dispatch = useDispatch()
 	
-	useEffect(() => {
-		dispatch(fetchDestinations())
-	}, [dispatch])
 	if (loading) {
 		return <div>Cargando destinos...</div>;
 	  }
@@ -35,28 +30,22 @@ const DiscoverMainSection = () => {
 		if (isChecked) {
 			setCheckboxValues([...checkboxValues, value])
 		} else {
-			setCheckboxValues(checkboxValues.filter((val) => val !== value))
+				setCheckboxValues((prevCheckboxValues) =>
+      		prevCheckboxValues.filter((val) => val !== value)
+    	);
 		}
 	}
 	console.log(checkboxValues)
 	
 	const filteredDestinations = destinations.filter((destination) => {
 		if (checkboxValues.length === 0) {
+			console.log('ninguna seleccionada')
 			return true;
 		} else {
-			return checkboxValues.includes(destination.categories)
+			return checkboxValues.some((category) =>
+			destination.categories.includes(category))
 		}
 	})
-
-	/* const handleCategorySelect = (label: string) => {
-		setSelectedCategories((prevSelectedCategories) => {
-			if (prevSelectedCategories.includes(label)) {
-				return prevSelectedCategories.filter((category) => category != label && console.log());
-			} else {
-				return [...prevSelectedCategories, label];
-			}
-		})
-	}; */
 
 
 	return (

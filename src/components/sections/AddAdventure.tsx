@@ -50,6 +50,8 @@ const AddAdventure = () => {
 		endTime: [],
 	})
 
+	formData.categories = checkboxValues
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
 		setFormData((prevFormData) => ({
@@ -65,6 +67,7 @@ const AddAdventure = () => {
 			gallery: updatedGallery,
 		}))
 	}
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 
@@ -107,7 +110,7 @@ const AddAdventure = () => {
 			data.append('gallery', formData.gallery[i])
 		}
 
-		formData.categories.map((category) => {
+		formData.categories.forEach((category) => {
 			data.append('categories', category)
 		})
 

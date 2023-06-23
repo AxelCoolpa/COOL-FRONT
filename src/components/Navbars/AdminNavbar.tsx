@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
 							<img
 								src={Cool}
 								alt='Cool-LOGO'
-								className='absolute hidden min-[950px]:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
+								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
 								onClick={() => navigate('/proveedor-admin')}
 							/>
 						</div>
@@ -218,10 +218,10 @@ const Navbar: React.FC = () => {
 								animation='origin-[75%_0%] md:origin-top-right transition-all duration-300 ease-in-out'
 							/>
 						</div>
-						<hr className='w-12 rotate-90' />
+						<hr className='w-12 rotate-90 hidden xl:block' />
 						{/* User */}
 						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
-							<div className='flex items-center gap-6'>
+							<div className='flex items-center gap-3 xl:gap-6'>
 								<Dropdown
 									button={<Avatar avatar={AvatarImg} wh={12} />}
 									children={
@@ -271,12 +271,12 @@ const Navbar: React.FC = () => {
 									}
 									classNames={'py-2 top-8 -left-[180px] w-max'}
 								/>
-								{/* <div className='flex flex-col justify-center'>
+								<div className='hidden xl:flex flex-col justify-center'>
 									<label className='2xl:text-lg font-semibold'>
 										{userProvider?.username}
 									</label>
 									<span className='text-xs'>{userProvider?.role?.roleName}</span>
-								</div> */}
+								</div>
 								<div className=''>
 									<select
 										name='languaje'

@@ -1,20 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchDestinations,
   fetchDestinationsStart,
   selectDestinations,
   selectError,
   selectLoading,
 } from "../../features/destinationSlice";
 import { categories } from "../categories/categories";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import HeaderSection from "./HeaderSection";
-import CategoryBox from "../categories/CategoryBox";
 import ListingCard from "../listings/ListingCard";
 import { useEffect, useState } from "react";
-import { GiRetroController } from "react-icons/gi";
 import CategoryInput from "../inputs/CategoryInput";
-import styles from "../../styles/Global";
 
 const DiscoverMainSection = () => {
   const destinations = useSelector(selectDestinations);
@@ -63,8 +58,8 @@ const DiscoverMainSection = () => {
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col gap-4 items-center pb-8">
-        <h2 className="text-6xl font-bold">Discover</h2>
-        <h3 className="text-3xl">Choose your favorite eperience</h3>
+        <h3 className="text-5xl font-bold">Discover</h3>
+        <h3 className="text-2xl">Choose your favorite experience</h3>
       </div>
       <HeaderSection
         id={discover?._id}
@@ -95,19 +90,11 @@ const DiscoverMainSection = () => {
       <div className="px-5 pt-10">
         <h2 className="text-2xl font-semibold">Trending adventure</h2>
         {!loading && !error && (
-			<TransitionGroup className="results-container opacity: 0 transition: opacity 600ms ease-in">
-					<div className="pt-10 px-8 grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 gap-11">
+        <div className="pt-10 px-8 grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 gap-11">
                 {filteredDestinations.map((listing) => (
-                  <CSSTransition
-                    key={listing._id}
-                    classNames="fadeEnter" 
-                    timeout={600}
-                  >
                     <ListingCard key={listing._id} data={listing} />
-                  </CSSTransition>
                 ))}
             </div>
-              </TransitionGroup>
         )}
       </div>
     </div>

@@ -11,10 +11,10 @@ import ListingCard from "../listings/ListingCard";
 import { useEffect, useState } from "react";
 import CategoryInput from "../inputs/CategoryInput";
 
+
 const DiscoverMainSection = () => {
   const destinations = useSelector(selectDestinations);
-  const discover =
-    destinations[Math.floor(Math.random() * destinations.length)];
+  const discover = destinations[Math.floor(Math.random() * destinations.length)];
   const [checkboxValues, setCheckboxValues] = useState([]);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -90,10 +90,12 @@ const DiscoverMainSection = () => {
       <div className="px-5 pt-10">
         <h2 className="text-2xl font-semibold">Trending adventure</h2>
         {!loading && !error && (
-        <div className="pt-10 px-8 grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 gap-11">
+          <div className="pt-10 px-8 grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 gap-11">
                 {filteredDestinations.map((listing) => (
+                  
                     <ListingCard key={listing._id} data={listing} />
-                ))}
+                    
+                    ))}
             </div>
         )}
       </div>

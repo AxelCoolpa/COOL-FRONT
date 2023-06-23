@@ -76,6 +76,8 @@ const AddAdventure = () => {
 			description,
 			individualPrice,
 			groupPrice,
+			gallery,
+			categories,
 			location,
 			activities,
 			starterPack,
@@ -83,14 +85,32 @@ const AddAdventure = () => {
 			endTime,
 		} = formData
 
-		if (!title || !description || !individualPrice || !groupPrice || !location) {
+		if (
+			!title ||
+			!description ||
+			!individualPrice ||
+			!groupPrice ||
+			!gallery ||
+			!categories ||
+			!location ||
+			!activities ||
+			!starterPack ||
+			!startTime ||
+			!endTime
+		) {
 			console.log('Por favor, complete todos los campos')
 			console.log({
 				title,
 				description,
 				individualPrice,
 				groupPrice,
+				gallery,
+				categories,
 				location,
+				activities,
+				starterPack,
+				startTime,
+				endTime,
 			})
 			return
 		}

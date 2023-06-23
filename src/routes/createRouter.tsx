@@ -1,14 +1,9 @@
-import { useEffect } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-
 import { User } from '../layouts/User'
 import { Admin } from '../layouts/Admin'
 import { ProvDashboard } from '../layouts/ProvDashboard'
 import { ProvRegister } from '../layouts/ProvRegister'
-
-import { RootState } from '../store/Store'
-import { checkAuthentication } from '../features/authSlice'
+import PrivateRoute from './PrivateRoute'
 
 import Home from '../pages/User/Home'
 import LoginPage from '../pages/LoginPage'
@@ -50,7 +45,7 @@ const privateValidationUser = [
 		element: <Tickets />,
 	},
 ]
-const publicValidationUser = [
+const user = [
 	{
 		path: '',
 		element: <Home />,
@@ -63,12 +58,32 @@ const publicValidationUser = [
 		path: 'details/:id',
 		element: <Detail />,
 	},
+	{
+		path: 'accomodation',
+		element: <Accomodation />,
+	},
+	{
+		path: 'transport',
+		element: <Transport />,
+	},
+	{
+		path: 'maps',
+		element: <Maps />,
+	},
+	{
+		path: 'packages',
+		element: <Packages />,
+	},
+	{
+		path: 'tickets',
+		element: <Tickets />,
+	},
 ]
 
 export const router = createBrowserRouter([
 	{
 		path: '/admin',
-		element: <Admin />,
+		element: <Admin/>,
 		children: [
 			{
 				path: 'dashboard',
@@ -82,9 +97,12 @@ export const router = createBrowserRouter([
 	},
 	{
 		path: '/',
-		element: <User />,
-
-		children: publicValidationUser,
+		element: (
+			<PrivateRoute>
+				<User />
+			</PrivateRoute>
+		),
+		children: user,
 	},
 	{
 		path: '/provider',

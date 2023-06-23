@@ -23,26 +23,36 @@ import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
 
-const privateValidationUser = [
+const admin = [
 	{
-		path: 'accomodation',
-		element: <Accomodation />,
+		path: 'dashboard',
+		element: <Dashboard />,
 	},
 	{
-		path: 'transport',
-		element: <Transport />,
+		path: 'settings',
+		element: <Settings />,
+	},
+]
+const provider = [
+	{
+		path: '',
+		element: <ShowDiscover />,
 	},
 	{
-		path: 'maps',
-		element: <Maps />,
+		path: 'create',
+		element: <CreateDiscover />,
 	},
 	{
-		path: 'packages',
-		element: <Packages />,
+		path: 'update/:id',
+		element: <UpdateAdventure />,
 	},
 	{
-		path: 'tickets',
-		element: <Tickets />,
+		path: 'adventure',
+		element: <Adventure />,
+	},
+	{
+		path: 'tableuser',
+		element: <TableUser />,
 	},
 ]
 const user = [
@@ -83,17 +93,12 @@ const user = [
 export const router = createBrowserRouter([
 	{
 		path: '/admin',
-		element: <Admin/>,
-		children: [
-			{
-				path: 'dashboard',
-				element: <Dashboard />,
-			},
-			{
-				path: 'settings',
-				element: <Settings />,
-			},
-		],
+		element: (
+			<PrivateRoute>
+				<Admin/>
+			</PrivateRoute>
+		),
+		children: admin,
 	},
 	{
 		path: '/',
@@ -106,30 +111,12 @@ export const router = createBrowserRouter([
 	},
 	{
 		path: '/provider',
-		element: <ProvDashboard />,
-
-		children: [
-			{
-				path: '',
-				element: <ShowDiscover />,
-			},
-			{
-				path: 'create',
-				element: <CreateDiscover />,
-			},
-			{
-				path: 'update/:id',
-				element: <UpdateAdventure />,
-			},
-			{
-				path: 'adventure',
-				element: <Adventure />,
-			},
-			{
-				path: 'tableuser',
-				element: <TableUser />,
-			},
-		],
+		element: (
+			<PrivateRoute>
+				<ProvDashboard />
+			</PrivateRoute>
+		),
+		children: provider,
 	},
 	{
 		path: '/proveedor-registro',
@@ -138,11 +125,10 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-				element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
+				element: <Registerprovideer />,
 			},
 		],
 	},
-
 	{
 		path: '/login',
 		element: <LoginPage />,

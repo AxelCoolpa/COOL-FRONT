@@ -14,9 +14,9 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-      setUser: (state, action: PayloadAction<{ role: string }>) => {
+      setUser: (state, action: PayloadAction<{ roleName: string }>) => {
         state.isAuthenticated = true;
-        state.userRole = action.payload.role;
+        //state.userRole = action.payload.roleName;
       },
       removeUser: (state) => {
         state.isAuthenticated = false;

@@ -37,6 +37,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							name='individualPrice'
 							handleChange={handleChange}
 							value={form?.individualPrice}
+							enctype='multipart/form-data'
 						/>
 						<div className='absolute -right-16 top-2'>
 							<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />

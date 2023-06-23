@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../store/Store';
+import { TbArrowUp } from 'react-icons/tb';
 
 
 export interface LoginFormData {
@@ -10,12 +11,14 @@ export interface LoginFormData {
 
 export interface LoginState {
   isLoading: boolean;
+  isAuthenticated: boolean;
   error: string | null;
   formData: LoginFormData;
 }
 
 const initialState: LoginState = {
   isLoading: false,
+  isAuthenticated: false,
   error: null,
   formData: {
 	email:'',
@@ -33,10 +36,12 @@ const loginSlice = createSlice({
 	  },
 	  loginSuccess: (state) => {
 		state.isLoading = false;
+    state.isAuthenticated = true;
 		state.error = null;
-	  },
-	  loginFailure: (state, action: PayloadAction<string>) => {
-		state.isLoading = false;
+  },
+  loginFailure: (state, action: PayloadAction<string>) => {
+    state.isLoading = false;
+    state.isAuthenticated = false;
 		state.error = action.payload;
 	  },
 	  updateFormData: (state, action: PayloadAction<Partial<LoginFormData>>) => {

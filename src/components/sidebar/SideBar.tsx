@@ -7,6 +7,8 @@ import { GiWavyItinerary } from 'react-icons/gi'
 import { GoHome } from 'react-icons/go'
 import { GrSafariOption } from 'react-icons/gr'
 import { RiCarFill } from 'react-icons/ri'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/LoginSlice';
 
 import { user1 } from '../../mocks/listingsUser'
 
@@ -17,7 +19,10 @@ import Avatar from '../Avatar'
 
 const Sidebar: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+	const dispatch = useDispatch();
+	const handleLogout = () => {
+		dispatch(logout());
+	  };
 	const notifications = true
 
 	const toggleMenu = () => {
@@ -83,7 +88,9 @@ const Sidebar: React.FC = () => {
 				</nav>
 				<div className='ml-2 xl:ml-6 mb-6 flex items-center justify-start gap-6'>
 					{/* Avatar */}
+
 					<div className='flex items-center justify-start'>
+					<button onClick={handleLogout}>Logout</button>
 						<div className='object-cover rounded-full mr-3 cursor-pointer'>
 							<Avatar avatar={user1.avatar} alt={user1.name} wh={12} />
 						</div>

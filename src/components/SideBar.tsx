@@ -6,7 +6,8 @@ import avatar from "../assets/background-Cool.jpeg"
 
 const Sidebar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
+  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };

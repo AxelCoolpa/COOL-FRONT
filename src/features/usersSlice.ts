@@ -6,6 +6,9 @@ interface Users {
 	_id?: string
 	username?: string
 	email?: string
+	role?: {
+		roleName?: string
+	}
 }
 
 interface UsersState {

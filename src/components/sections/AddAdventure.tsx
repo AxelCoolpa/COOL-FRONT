@@ -45,12 +45,10 @@ const AddAdventure = () => {
 		gallery: [],
 		categories: [''],
 		location: '',
-		extras: {
-			activities: '',
-			starterPack: '',
-			startTime: '',
-			endTime: '',
-		},
+		activities: [''],
+		starterPack: [''],
+		startTime: [''],
+		endTime: [''],
 	})
 
 	formData.categories = checkboxValues
@@ -73,6 +71,8 @@ const AddAdventure = () => {
 	}
 
 	//TODO: Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
+
+	console.log(formData)
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -101,60 +101,58 @@ const AddAdventure = () => {
 			gallery: [],
 			categories: [''],
 			location: '',
-			extras: {
-				activities: '',
-				starterPack: '',
-				startTime: '',
-				endTime: '',
-			},
+			activities: [''],
+			starterPack: [''],
+			startTime: [''],
+			endTime: [''],
 		})
 		console.log(formData)
 	}
 
 	return (
 		<Container>
-			<form   onSubmit={handleSubmit}>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
 				<h2 className='text-[32px] font-medium'>Add adventure</h2>
-				<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
-					<DropZone onFilesSelected={handleFilesSelected} />
-				</div>
-				<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
-					<AddAdventureForm handleChange={handleChange} form={formData} />
-					<div className='xl:col-span-2 flex xl:scale-[80%] min-[1440px]:scale-100'>
-						<ProviderCard />
+				<form onSubmit={handleSubmit}>
+					<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
-				</div>
-
-				<h3 className='text-2xl font-semibold py-8'>Category adventure</h3>
-
-				<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pb-14'>
-					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center'>
-						{categories.map((item) => (
-							<ul key={item.label}>
-								<CategoryInput
-									handleChange={handleCheckboxChange}
-									label={item.label}
-									icon={item.icon}
-									id={item.label}
-									name={item.label}
-									value={item.label}
-								/>
-							</ul>
-						))}
-					</div>
-					<div className='xl:col-span-2'>
-						<h3 className='text-2xl font-semibold'>Adventure location</h3>
-						<div className='flex flex-col items-center py-10'>
-							<Map w={400} h={260} />
-						</div>
-						<div className='mx-auto w-full lg:w-2/5 xl:w-full'>
-							<Button label='Ready' card  />
+					<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
+						<AddAdventureForm handleChange={handleChange} form={formData} />
+						<div className='xl:col-span-2 flex xl:scale-[80%] min-[1440px]:scale-100'>
+							<ProviderCard />
 						</div>
 					</div>
-				</div>
+
+					<h3 className='text-2xl font-semibold py-8'>Category adventure</h3>
+
+					<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pb-14'>
+						<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center'>
+							{categories.map((item) => (
+								<ul key={item.label}>
+									<CategoryInput
+										handleChange={handleCheckboxChange}
+										label={item.label}
+										icon={item.icon}
+										id={item.label}
+										name={item.label}
+										value={item.label}
+									/>
+								</ul>
+							))}
+						</div>
+						<div className='xl:col-span-2'>
+							<h3 className='text-2xl font-semibold'>Adventure location</h3>
+							<div className='flex flex-col items-center py-10'>
+								<Map w={400} h={260} />
+							</div>
+							<div className='mx-auto w-full lg:w-2/5 xl:w-full'>
+								<Button label='Ready' card />
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
-			</form>
 		</Container>
 	)
 }

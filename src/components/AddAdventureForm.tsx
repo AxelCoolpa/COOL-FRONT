@@ -9,20 +9,16 @@ import { RxActivityLog } from 'react-icons/rx'
 
 import Input from './inputs/Input'
 
-interface EnumExtras {
-	activities: string
-	starterPack: string
-	startTime: string
-	endTime: string
-}
-
 interface EnumForm {
 	title: string
 	description: string
 	individualPrice: string
 	groupPrice: string
 	location: string
-	extras: EnumExtras
+	activities?: string[]
+	starterPack?: string[]
+	startTime?: string[]
+	endTime?: string[]
 }
 interface AddAdventureFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -41,6 +37,7 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							name='individualPrice'
 							handleChange={handleChange}
 							value={form?.individualPrice}
+							enctype='multipart/form-data'
 						/>
 						<div className='absolute -right-16 top-2'>
 							<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />
@@ -96,9 +93,9 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							<Input
 								placeholder='Activities'
 								id='activities'
-								name='extras.activities'
+								name='activities'
 								handleChange={handleChange}
-								value={form.extras.activities}
+								value={form?.activities}
 							/>
 						</div>
 					</div>
@@ -110,10 +107,10 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							</div>
 							<Input
 								placeholder='Starter Pack'
-								id='extras.starterPack'
-								name='extras.starterPack'
+								id='starterPack'
+								name='starterPack'
 								handleChange={handleChange}
-								value={form?.extras.starterPack}
+								value={form?.starterPack}
 							/>
 						</div>
 						<div className='flex flex-col gap-10 text-[#898989] w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
@@ -123,10 +120,10 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							</div>
 							<Input
 								placeholder='Start Time'
-								id='extras.startTime'
-								name='extras.startTime'
+								id='startTime'
+								name='startTime'
 								handleChange={handleChange}
-								value={form?.extras.startTime}
+								value={form?.startTime}
 							/>
 						</div>
 						<div className='flex flex-col gap-10 text-[#898989] w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
@@ -136,10 +133,10 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							</div>
 							<Input
 								placeholder='End Time'
-								id='extras.endTime'
-								name='extras.endTime'
+								id='endTime'
+								name='endTime'
 								handleChange={handleChange}
-								value={form?.extras.endTime}
+								value={form?.endTime}
 							/>
 						</div>
 					</div>

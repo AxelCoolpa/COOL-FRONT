@@ -12,8 +12,9 @@ const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected }) => {
 	const [files, setFiles] = useState<File[]>([])
 
 	const handleDrop = (acceptedFiles: File[]) => {
-		setFiles(acceptedFiles)
+		setFiles((prevFiles) => ([...prevFiles, ...acceptedFiles]))
 		onFilesSelected(acceptedFiles)
+		console.log(files)
 	}
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({

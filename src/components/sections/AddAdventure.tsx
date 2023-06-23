@@ -42,7 +42,7 @@ const AddAdventure = () => {
 		description: '',
 		individualPrice: '',
 		groupPrice: '',
-		gallery: [''],
+		gallery: [],
 		categories: [''],
 		location: '',
 		extras: {
@@ -65,6 +65,11 @@ const AddAdventure = () => {
 
 	const handleFilesSelected = (files: File[]) => {
 		console.log('Archivos seleccionados:', files)
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			gallery: [...prevFormData.gallery , ...files],
+		}))
+		console.log(formData)
 	}
 
 	//TODO: Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
@@ -93,7 +98,7 @@ const AddAdventure = () => {
 			description: '',
 			individualPrice: '',
 			groupPrice: '',
-			gallery: [''],
+			gallery: [],
 			categories: [''],
 			location: '',
 			extras: {
@@ -108,6 +113,7 @@ const AddAdventure = () => {
 
 	return (
 		<Container>
+			<form   onSubmit={handleSubmit}>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
 				<h2 className='text-[32px] font-medium'>Add adventure</h2>
 				<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
@@ -143,11 +149,12 @@ const AddAdventure = () => {
 							<Map w={400} h={260} />
 						</div>
 						<div className='mx-auto w-full lg:w-2/5 xl:w-full'>
-							<Button label='Ready' card onClick={handleSubmit} />
+							<Button label='Ready' card  />
 						</div>
 					</div>
 				</div>
 			</div>
+			</form>
 		</Container>
 	)
 }

@@ -42,7 +42,7 @@ const AddAdventure = () => {
 		description: '',
 		individualPrice: '',
 		groupPrice: '',
-		gallery: [''],
+		gallery: [],
 		categories: [''],
 		location: '',
 		activities: [''],
@@ -63,6 +63,11 @@ const AddAdventure = () => {
 
 	const handleFilesSelected = (files: File[]) => {
 		console.log('Archivos seleccionados:', files)
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			gallery: [...prevFormData.gallery , ...files],
+		}))
+		console.log(formData)
 	}
 
 	//TODO: Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
@@ -93,7 +98,7 @@ const AddAdventure = () => {
 			description: '',
 			individualPrice: '',
 			groupPrice: '',
-			gallery: [''],
+			gallery: [],
 			categories: [''],
 			location: '',
 			activities: [''],

@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -29,10 +30,8 @@ const AddAdventure = () => {
 		const isChecked = e.target.checked
 
 		if (isChecked) {
-			// Si el checkbox se ha marcado, añadir el valor al array
 			setCheckboxValues([...checkboxValues, value])
 		} else {
-			// Si el checkbox se ha desmarcado, quitar el valor del array
 			setCheckboxValues(checkboxValues.filter((val) => val !== value))
 		}
 	}
@@ -42,16 +41,14 @@ const AddAdventure = () => {
 		description: '',
 		individualPrice: '',
 		groupPrice: '',
-		gallery: [''],
-		categories: [''],
+		gallery: [],
+		categories: [],
 		location: '',
-		activities: [''],
-		starterPack: [''],
-		startTime: [''],
-		endTime: [''],
+		activities: [],
+		starterPack: [],
+		startTime: [],
+		endTime: [],
 	})
-
-	formData.categories = checkboxValues
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
@@ -62,19 +59,27 @@ const AddAdventure = () => {
 	}
 
 	const handleFilesSelected = (files: File[]) => {
-		console.log('Archivos seleccionados:', files)
+		const updatedGallery = [...formData.gallery, ...files]
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			gallery: updatedGallery,
+		}))
 	}
-
-	//TODO: Agregar funcionalidad para enviar a formData.gallery los archivos seleccionados
-
-	console.log(formData)
-
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 
-		const { title, description, individualPrice, groupPrice } = formData
+		const {
+			title,
+			description,
+			individualPrice,
+			groupPrice,
+			location,
+			activities,
+			starterPack,
+			startTime,
+			endTime,
+		} = formData
 
-		// Validar los campos del formulario antes de enviarlos al servidor
 		if (!title || !description || !individualPrice || !groupPrice || !location) {
 			console.log('Por favor, complete todos los campos')
 			console.log({
@@ -87,21 +92,43 @@ const AddAdventure = () => {
 			return
 		}
 
-		dispatch(createAdventure(formData, userID))
-		setFormData({
-			title: '',
-			description: '',
-			individualPrice: '',
-			groupPrice: '',
-			gallery: [''],
-			categories: [''],
-			location: '',
-			activities: [''],
-			starterPack: [''],
-			startTime: [''],
-			endTime: [''],
+		const data = new FormData()
+		data.append('title', title)
+		data.append('description', description)
+		data.append('individualPrice', individualPrice)
+		data.append('groupPrice', groupPrice)
+		data.append('location', location)
+		data.append('activities', activities)
+		data.append('starterPack', starterPack)
+		data.append('startTime', startTime)
+		data.append('endTime', endTime)
+
+		for (let i = 0; i < formData.gallery.length; i++) {
+			data.append('gallery', formData.gallery[i])
+		}
+
+		formData.categories.map((category) => {
+			data.append('categories', category)
 		})
-		console.log(formData)
+
+		try {
+			await dispatch(createAdventure(data, userID))
+			setFormData({
+				title: '',
+				description: '',
+				individualPrice: '',
+				groupPrice: '',
+				gallery: [],
+				categories: [],
+				location: '',
+				activities: [],
+				starterPack: [],
+				startTime: [],
+				endTime: [],
+			})
+		} catch (error) {
+			console.log('Error al enviar el formulario:', error)
+		}
 	}
 
 	return (

@@ -93,7 +93,10 @@ const Register = (): JSX.Element => {
   );
 
   return (
-    <motion.div initial={{ x: "-5%" }} animate={headingControls}>
+    <motion.div initial={{ y: 20, opacity: 0 }}
+		animate={{ y: 0, opacity: 2 }}
+		exit={{ y: -10, opacity: 0 }}
+		transition={{ duration: 0.6 }} >
       <div className="flex flex-col items-center justify-center h-screen m-8">
         <img src={logo} alt="Cool-LOGO" className="flex w-[17vw] ml-24" />
         <form className="w-full max-w-md p-6 ml-20" onSubmit={handleSubmit}>
@@ -103,14 +106,12 @@ const Register = (): JSX.Element => {
               animate={headingControls}
               className="font-poppy text-5xl"
             >
-              Hello!
+              
             </motion.h2>
             <motion.h3
               className="font-poppy text-3xl"
-              initial={{ x: "-10%" }}
-              animate={headingControls}
             >
-              Register to get started!
+              Hello! Register to get started!
             </motion.h3>
           </div>
 

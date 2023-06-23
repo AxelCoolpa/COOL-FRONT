@@ -45,6 +45,10 @@ const loginSlice = createSlice({
     state.isAuthenticated = false;
 		state.error = action.payload;
 	  },
+    logout: (state) => {
+      state.isAuthenticated = false;
+      localStorage.removeItem('isAuthenticated');
+    },
 	  updateFormData: (state, action: PayloadAction<Partial<LoginFormData>>) => {
 		state.formData = {
 		  ...state.formData,
@@ -54,7 +58,7 @@ const loginSlice = createSlice({
 	},
   });
 
-export const { loginStart, loginSuccess, loginFailure, updateFormData } = loginSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, updateFormData, logout } = loginSlice.actions;
 
 export default loginSlice.reducer;
 

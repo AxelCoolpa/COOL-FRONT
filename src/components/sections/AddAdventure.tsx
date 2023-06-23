@@ -1,120 +1,135 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { categories } from '../categories/categories';
+import { categories } from '../categories/categories'
 import {
-  createAdventure,
-  createAdventureFormData,
-} from '../../features/createAdventureSlice';
+	createAdventure,
+	createAdventureFormData,
+} from '../../features/createAdventureSlice'
 
-import DropZone from '../inputs/DropZone';
-import AddAdventureForm from '../AddAdventureForm';
-import ProviderCard from '../listings/ProviderCard';
-import CategoryInput from '../inputs/CategoryInput';
-import Map from '../Map';
-import Button from '../buttons/Button';
-import { selectUsers } from '../../features/usersSlice';
-import Container from '../containers/Conainer';
+import DropZone from '../inputs/DropZone'
+import AddAdventureForm from '../AddAdventureForm'
+import ProviderCard from '../listings/ProviderCard'
+import CategoryInput from '../inputs/CategoryInput'
+import Map from '../Map'
+import Button from '../buttons/Button'
+import { selectUsers } from '../../features/usersSlice'
+import Container from '../containers/Conainer'
 
 const AddAdventure = () => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch()
 
-  const users = useSelector(selectUsers);
-  const userID = users[1]?._id;
+	const users = useSelector(selectUsers)
+	const userID = users[1]?._id
 
-  const [checkboxValues, setCheckboxValues] = useState([]);
+	const [checkboxValues, setCheckboxValues] = useState([])
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const isChecked = e.target.checked;
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
 
-    if (isChecked) {
-      setCheckboxValues([...checkboxValues, value]);
-    } else {
-      setCheckboxValues(checkboxValues.filter((val) => val !== value));
-    }
-  };
+		if (isChecked) {
+			setCheckboxValues([...checkboxValues, value])
+		} else {
+			setCheckboxValues(checkboxValues.filter((val) => val !== value))
+		}
+	}
 
-  const [formData, setFormData] = useState<createAdventureFormData>({
-    title: '',
-    description: '',
-    individualPrice: '',
-    groupPrice: '',
-    gallery: [],
-    categories: [],
-    location: '',
-    activities: [],
-    starterPack: [],
-    startTime: [],
-    endTime: [],
-  });
+	const [formData, setFormData] = useState<createAdventureFormData>({
+		title: '',
+		description: '',
+		individualPrice: '',
+		groupPrice: '',
+		gallery: [],
+		categories: [],
+		location: '',
+		activities: [],
+		starterPack: [],
+		startTime: [],
+		endTime: [],
+	})
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value,
+		}))
+	}
 
-  const handleFilesSelected = (files: File[]) => {
-	const updatedGallery = [...formData.gallery, ...files];
-	setFormData((prevFormData) => ({
-	  ...prevFormData,
-	  gallery: updatedGallery,
-	}));
-  };
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+	const handleFilesSelected = (files: File[]) => {
+		const updatedGallery = [...formData.gallery, ...files]
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			gallery: updatedGallery,
+		}))
+	}
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault()
 
-    const { title, description, individualPrice, groupPrice } = formData;
+		const {
+			title,
+			description,
+			individualPrice,
+			groupPrice,
+			location,
+			activities,
+			starterPack,
+			startTime,
+			endTime,
+		} = formData
 
-    if (!title || !description || !individualPrice || !groupPrice || !location) {
-      console.log('Por favor, complete todos los campos');
-      console.log({
-        title,
-        description,
-        individualPrice,
-        groupPrice,
-        location,
-      });
-      return;
-    }
+		if (!title || !description || !individualPrice || !groupPrice || !location) {
+			console.log('Por favor, complete todos los campos')
+			console.log({
+				title,
+				description,
+				individualPrice,
+				groupPrice,
+				location,
+			})
+			return
+		}
 
-    const data = new FormData();
-    data.append('title', title);
-    data.append('description', description);
-    data.append('individualPrice', individualPrice);
-    data.append('groupPrice', groupPrice);
+		const data = new FormData()
+		data.append('title', title)
+		data.append('description', description)
+		data.append('individualPrice', individualPrice)
+		data.append('groupPrice', groupPrice)
+		data.append('location', location)
+		data.append('activities', activities)
+		data.append('starterPack', starterPack)
+		data.append('startTime', startTime)
+		data.append('endTime', endTime)
 
-    for (let i = 0; i < formData.gallery.length; i++) {
-      data.append('gallery', formData.gallery[i]);
-    }
+		for (let i = 0; i < formData.gallery.length; i++) {
+			data.append('gallery', formData.gallery[i])
+		}
 
-    formData.categories.forEach((category) => {
-      data.append('categories', category);
-    });
+		formData.categories.map((category) => {
+			data.append('categories', category)
+		})
 
-    try {
-      await dispatch(createAdventure(data, userID));
-      setFormData({
-        title: '',
-        description: '',
-        individualPrice: '',
-        groupPrice: '',
-        gallery: [],
-        categories: [],
-        location: '',
-        activities: [],
-        starterPack: [],
-        startTime: [],
-        endTime: [],
-      });
-    } catch (error) {
-      console.log('Error al enviar el formulario:', error);
-    }
-  };
+		try {
+			await dispatch(createAdventure(data, userID))
+			setFormData({
+				title: '',
+				description: '',
+				individualPrice: '',
+				groupPrice: '',
+				gallery: [],
+				categories: [],
+				location: '',
+				activities: [],
+				starterPack: [],
+				startTime: [],
+				endTime: [],
+			})
+		} catch (error) {
+			console.log('Error al enviar el formulario:', error)
+		}
+	}
 
 	return (
 		<Container>

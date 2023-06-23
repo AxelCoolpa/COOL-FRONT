@@ -18,7 +18,7 @@ export interface LoginState {
 
 const initialState: LoginState = {
   isLoading: false,
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem('isAuthenticated') === 'true',
   error: null,
   formData: {
 	email:'',
@@ -38,6 +38,7 @@ const loginSlice = createSlice({
 		state.isLoading = false;
     state.isAuthenticated = true;
 		state.error = null;
+    localStorage.setItem('isAuthenticated', 'true');
   },
   loginFailure: (state, action: PayloadAction<string>) => {
     state.isLoading = false;

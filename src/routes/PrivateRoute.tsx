@@ -5,17 +5,16 @@ import { RootState } from "../store/Store";
 
 interface ProtectedRouteProps {
 	children: ReactNode;
-	requiredRole: string;
-}
-
-const ProtectedRoute: React.FC<ProtectedRouteProps>  = ({ children, requiredRole }) => {
-	const { isAuthenticated, userRole } = useSelector((state: RootState) => state.auth);
+  }
   
-	if (isAuthenticated && userRole === requiredRole) {
+  const PrivateRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+	const isAuthenticated = useSelector((state: RootState) => state.login.isAuthenticated);
+  
+	if (isAuthenticated) {
 	  return <>{children}</>;
+	} else {
+	  return <Navigate to="/login" />;
 	}
-	
-	return <Navigate to="/login" />;
   };
   
-  export default ProtectedRoute;
+  export default PrivateRoute;

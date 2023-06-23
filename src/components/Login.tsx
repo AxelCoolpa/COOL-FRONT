@@ -41,18 +41,17 @@ const Login = () => {
 
 
   return (
+    <motion.div initial={{ y: 20, opacity: 0 }}
+		animate={{ y: 0, opacity: 2 }}
+		exit={{ y: -10, opacity: 0 }}
+		transition={{ duration: 0.6 }} >
+
+    
     <div className='flex flex-col items-center justify-center h-screen m-8'>
       <img src={logo} alt='Cool-LOGO' className='flex w-[17vw] ml-36 mb-8 ' />
       <form className='w-full max-w-md p-6 ml-20' onSubmit={handleSubmit}>
         <div className='text-2xl mb-6'>
-          <motion.h1
-            initial={{ x: '-200%' }}
-            animate={headingControls}
-            className='font-poppy text-6xl'
-          >
-            Hello!
-          </motion.h1>
-          <motion.h3 className='font-poppy text-3xl'>Login to get started!</motion.h3>
+          <motion.h2 className='font-poppy text-5xl'>Hello! Login to get started!</motion.h2>
         </div>
 
         <div className='mb-4'>
@@ -127,6 +126,7 @@ const Login = () => {
         </div>
       </form>
     </div>
+    </motion.div>
   );
 };
 

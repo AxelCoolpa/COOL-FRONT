@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../store/Store';
+import { TbArrowUp } from 'react-icons/tb';
 
 
 export interface LoginFormData {
@@ -10,12 +11,14 @@ export interface LoginFormData {
 
 export interface LoginState {
   isLoading: boolean;
+  isAuthenticated: boolean;
   error: string | null;
   formData: LoginFormData;
 }
 
 const initialState: LoginState = {
   isLoading: false,
+  isAuthenticated: localStorage.getItem('isAuthenticated') === 'true',
   error: null,
   formData: {
 	email:'',
@@ -33,12 +36,19 @@ const loginSlice = createSlice({
 	  },
 	  loginSuccess: (state) => {
 		state.isLoading = false;
+    state.isAuthenticated = true;
 		state.error = null;
-	  },
-	  loginFailure: (state, action: PayloadAction<string>) => {
-		state.isLoading = false;
+    localStorage.setItem('isAuthenticated', 'true');
+  },
+  loginFailure: (state, action: PayloadAction<string>) => {
+    state.isLoading = false;
+    state.isAuthenticated = false;
 		state.error = action.payload;
 	  },
+    logout: (state) => {
+      state.isAuthenticated = false;
+      localStorage.removeItem('isAuthenticated');
+    },
 	  updateFormData: (state, action: PayloadAction<Partial<LoginFormData>>) => {
 		state.formData = {
 		  ...state.formData,
@@ -48,7 +58,7 @@ const loginSlice = createSlice({
 	},
   });
 
-export const { loginStart, loginSuccess, loginFailure, updateFormData } = loginSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, updateFormData, logout } = loginSlice.actions;
 
 export default loginSlice.reducer;
 

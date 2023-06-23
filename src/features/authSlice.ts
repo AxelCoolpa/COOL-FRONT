@@ -1,42 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { loginUserAPI } from '../api/loginAPI'
-import { AppThunk } from "../store/Store";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export interface AuthFormData {
-  email: string
-  password: string
+export interface AuthState {
+  isAuthenticated: boolean;
+  userRole: string;
 }
 
-interface AuthState {
-    formData: AuthFormData;
-    isAuthenticated: boolean;
-    isLoading: boolean
-    error: string | null;
-  }
-
-const initialState: AuthState = {
-  formData: {
-		email: '',
-		password: '',
-	},
-	  isLoading: false,     
+const initialState: AuthState = {   
     isAuthenticated: false,
-    error: null,
+    userRole: '',
 }
 
 const authSlice = createSlice({
-    name: "auth",
+    name: 'auth',
     initialState,
     reducers: {
-        updateFormData: (state, action) => {
-          state.formData = { ...state.formData, ...action.payload }
-        },
-        isAuthenticated: (state) => {
-        state.isAuthenticated = true
+      setUser: (state, action: PayloadAction<{ roleName: string }>) => {
+        state.isAuthenticated = true;
+        //state.userRole = action.payload.roleName;
       },
-      loginFailure: (state, action) => {
-        state.isLoading = false
-        state.error = action.payload
+      removeUser: (state) => {
+        state.isAuthenticated = false;
+        state.userRole = '';
       },
     },   
   });
@@ -44,19 +28,8 @@ const authSlice = createSlice({
   
 
 export const {
-    isAuthenticated,
-    updateFormData,
-    loginFailure
+    setUser,
+    removeUser,
 } = authSlice.actions
 
 export default authSlice.reducer
-
-export const checkAuthentication = (formData: AuthFormData): AppThunk => async (dispatch) => {
-  try {
-    dispatch(updateFormData)
-    await loginUserAPI(formData)
-    dispatch(isAuthenticated())
-  } catch (error: any) {
-    dispatch(loginFailure(error.message))
-  }
-}

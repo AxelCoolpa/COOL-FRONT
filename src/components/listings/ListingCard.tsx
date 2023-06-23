@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useLocation, useNavigate } from 'react-router'
-
+import { motion, useAnimation } from "framer-motion";
 import { AiFillStar } from 'react-icons/ai'
 import { BsDot } from 'react-icons/bs'
 
@@ -15,6 +15,7 @@ interface ListingCardProps {
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
+	const headingControls = useAnimation();
 	const navigate = useNavigate()
 	const location = useLocation()
 
@@ -23,7 +24,21 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 		.toString()
 		.slice(0, 3)
 
+		useEffect(() => {
+			const startAnimation = async () => {
+			  await headingControls.start({
+				x: 0,
+				transition: { duration: 0.4, delay: 0.5 },
+			  });
+			};
+			startAnimation();
+		  }, [headingControls]);
+		
 	return (
+		<motion.div initial={{ y: 10, opacity: 0 }}
+		animate={{ y: 0, opacity: 2 }}
+		exit={{ y: -10, opacity: 0 }}
+		transition={{ duration: 0.4 }} >
 		<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
 			<div className='relative'>
 				<img
@@ -88,6 +103,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 				</button>
 			</div>
 		</div>
+		</motion.div>
 	)
 }
 

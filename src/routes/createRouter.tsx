@@ -21,7 +21,7 @@ import Detail from '../pages/User/Detail'
 import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
-import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
+import UpdateDiscover from '../pages/ProvUser/UpdateDiscover'
 
 const admin = [
 	{
@@ -44,7 +44,7 @@ const provider = [
 	},
 	{
 		path: 'update/:id',
-		element: <UpdateAdventure />,
+		element: <UpdateDiscover />,
 	},
 	{
 		path: 'adventure',
@@ -95,7 +95,7 @@ export const router = createBrowserRouter([
 		path: '/admin',
 		element: (
 			<PrivateRoute>
-				<Admin/>
+				<Admin />
 			</PrivateRoute>
 		),
 		children: admin,

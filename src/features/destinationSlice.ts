@@ -1,8 +1,6 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { getDestinations } from '../api/getDestinations'
-import { AppDispatch, AppThunk, RootState } from '../store/Store'
-
-import { EnumExtras } from '../types'
+import { AppDispatch, RootState } from '../store/Store'
 
 interface Destination {
 	_id: string
@@ -13,7 +11,12 @@ interface Destination {
 	groupPrice: string
 	categories: Array<string>
 	location: string
-	extras?: EnumExtras
+
+	activities: string[]
+	starterPack: string[]
+	startTime: string[]
+	endTime: string[]
+
 	rating: Array<number>
 	reviews: Array<string>
 }

@@ -22,10 +22,11 @@ import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
+import ProfileProvider from '../pages/ProvUser/Profile'
 
 const admin = [
 	{
-		path: 'dashboard',
+		path: '',
 		element: <Dashboard />,
 	},
 	{
@@ -132,6 +133,10 @@ export const router = createBrowserRouter([
 	{
 		path: '/login',
 		element: <LoginPage />,
+	},
+	{
+		path: '/provider-profile',
+		element: <ProfileProvider />,
 	},
 	{
 		path: '/register',

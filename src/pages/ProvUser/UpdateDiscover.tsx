@@ -1,7 +1,7 @@
-import React from 'react'
+import UpdateAdventure from '../../components/sections/UpdateAdventure'
 
 const UpdateDiscover = () => {
-	return <div>UpdateDiscover</div>
+	return <UpdateAdventure />
 }
 
 export default UpdateDiscover

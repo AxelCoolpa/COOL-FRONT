@@ -7,14 +7,14 @@ import {
 	createAdventure,
 	createAdventureFormData,
 } from '../../features/createAdventureSlice'
+import { selectUsers } from '../../features/usersSlice'
 
 import DropZone from '../inputs/DropZone'
-import AddAdventureForm from '../forms/AddAdventureForm'
+import AdventureForm from '../forms/AdventureForm'
 import ProviderCard from '../listings/ProviderCard'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
-import { selectUsers } from '../../features/usersSlice'
 import Container from '../containers/Conainer'
 
 const AddAdventure = () => {
@@ -163,7 +163,7 @@ const AddAdventure = () => {
 						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
 					<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
-						<AddAdventureForm handleChange={handleChange} form={formData} />
+						<AdventureForm handleChange={handleChange} form={formData} />
 						<div className='xl:col-span-2 flex xl:scale-[80%] min-[1440px]:scale-100'>
 							<ProviderCard />
 						</div>

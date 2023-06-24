@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RouteProps } from "react-router-dom";
-import { RootState } from '../store'
-import LoginPage from "../pages/LoginPage";
-import { checkAuthentication } from "../features/authSlice";
+import React, { ReactNode } from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { RootState } from "../store/Store";
 
-interface Props {
-  privateValidation: boolean;
-}
-
-const authValidationUser = ({ validationUser }: Props) => {
-	const userState = useSelector((store: RootState) => store.auth)
-	return userState.isAuthenticated ?  privateValidationUser : publicValidationUser && <LoginPage />
-}
+interface ProtectedRouteProps {
+	children: ReactNode;
+  }
+  
+  const PrivateRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+	const isAuthenticated = useSelector((state: RootState) => state.login.isAuthenticated);
+  
+	if (isAuthenticated) {
+	  return <>{children}</>;
+	} else {
+	  return <Navigate to="/login" />;
+	}
+  };
+  
+  export default PrivateRoute;

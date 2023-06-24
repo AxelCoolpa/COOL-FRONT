@@ -1,14 +1,9 @@
-import { useEffect } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-
 import { User } from '../layouts/User'
 import { Admin } from '../layouts/Admin'
 import { ProvDashboard } from '../layouts/ProvDashboard'
 import { ProvRegister } from '../layouts/ProvRegister'
-
-import { RootState } from '../store/Store'
-import { checkAuthentication } from '../features/authSlice'
+import PrivateRoute from './PrivateRoute'
 
 import Home from '../pages/User/Home'
 import LoginPage from '../pages/LoginPage'
@@ -28,7 +23,51 @@ import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
 
-const privateValidationUser = [
+const admin = [
+	{
+		path: 'dashboard',
+		element: <Dashboard />,
+	},
+	{
+		path: 'settings',
+		element: <Settings />,
+	},
+]
+const provider = [
+	{
+		path: '',
+		element: <ShowDiscover />,
+	},
+	{
+		path: 'create',
+		element: <CreateDiscover />,
+	},
+	{
+		path: 'update/:id',
+		element: <UpdateAdventure />,
+	},
+	{
+		path: 'adventure',
+		element: <Adventure />,
+	},
+	{
+		path: 'tableuser',
+		element: <TableUser />,
+	},
+]
+const user = [
+	{
+		path: '',
+		element: <Home />,
+	},
+	{
+		path: 'adventure',
+		element: <Adventure />,
+	},
+	{
+		path: 'details/:id',
+		element: <Detail />,
+	},
 	{
 		path: 'accomodation',
 		element: <Accomodation />,
@@ -50,68 +89,34 @@ const privateValidationUser = [
 		element: <Tickets />,
 	},
 ]
-const publicValidationUser = [
-	{
-		path: '',
-		element: <Home />,
-	},
-	{
-		path: 'adventure',
-		element: <Adventure />,
-	},
-	{
-		path: 'details/:id',
-		element: <Detail />,
-	},
-]
 
 export const router = createBrowserRouter([
 	{
 		path: '/admin',
-		element: <Admin />,
-		children: [
-			{
-				path: 'dashboard',
-				element: <Dashboard />,
-			},
-			{
-				path: 'settings',
-				element: <Settings />,
-			},
-		],
+		element: (
+			<PrivateRoute>
+				<Admin/>
+			</PrivateRoute>
+		),
+		children: admin,
 	},
 	{
 		path: '/',
-		element: <User />,
-
-		children: publicValidationUser,
+		element: (
+			<PrivateRoute>
+				<User />
+			</PrivateRoute>
+		),
+		children: user,
 	},
 	{
 		path: '/provider',
-		element: <ProvDashboard />,
-
-		children: [
-			{
-				path: '',
-				element: <ShowDiscover />,
-			},
-			{
-				path: 'create',
-				element: <CreateDiscover />,
-			},
-			{
-				path: 'update/:id',
-				element: <UpdateAdventure />,
-			},
-			{
-				path: 'adventure',
-				element: <Adventure />,
-			},
-			{
-				path: 'tableuser',
-				element: <TableUser />,
-			},
-		],
+		element: (
+			<PrivateRoute>
+				<ProvDashboard />
+			</PrivateRoute>
+		),
+		children: provider,
 	},
 	{
 		path: '/proveedor-registro',
@@ -120,11 +125,10 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-				element: <Registerprovideer />, //!REGISTRO DE PROVEEDOR
+				element: <Registerprovideer />,
 			},
 		],
 	},
-
 	{
 		path: '/login',
 		element: <LoginPage />,

@@ -7,7 +7,7 @@ import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { LuCalendarCheck } from 'react-icons/lu'
 import { RxActivityLog } from 'react-icons/rx'
 
-import Input from './inputs/Input'
+import Input from '../inputs/Input'
 
 interface EnumForm {
 	title: string

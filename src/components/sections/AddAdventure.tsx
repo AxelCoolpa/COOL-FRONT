@@ -9,7 +9,7 @@ import {
 } from '../../features/createAdventureSlice'
 
 import DropZone from '../inputs/DropZone'
-import AddAdventureForm from '../AddAdventureForm'
+import AddAdventureForm from '../forms/AddAdventureForm'
 import ProviderCard from '../listings/ProviderCard'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'

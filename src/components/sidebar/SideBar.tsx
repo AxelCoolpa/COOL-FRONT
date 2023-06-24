@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../features/LoginSlice';
 
 import { selectUsers } from '../../features/usersSlice'
-import { user1 } from '../../mocks/listingsUser'
 import AvatarImg from '../../assets/Avatar.jpg'
 import Cool from '../../assets/cool.png'
 import withNotifications from '../../assets/withNotifications.svg'
@@ -153,25 +152,9 @@ const Sidebar: React.FC = () => {
 								</div>
 								
 							</div>
-							<div className='ml-2'>
-							<p className='text-sm font-medium'>{`${user1.name} ${user1.lastName}`}</p>
-							<p className='text-xs'>{`@${user1.userName}`}</p>
-						</div>
 							</ul>
 
 
-					{/* <div className='flex items-center justify-start'>
-
-					<button onClick={handleLogout}>Logout</button>
-						
-						<div className='object-cover rounded-full mr-3 cursor-pointer'>
-							<Avatar avatar={user1.avatar} alt={user1.name} wh={12} />
-						</div>
-						<div className='ml-2'>
-							<p className='text-sm font-medium'>{`${user1.name} ${user1.lastName}`}</p>
-							<p className='text-xs'>{`@${user1.userName}`}</p>
-						</div>
-					</div> */}
 					<div>
 						{notifications ? (
 							<img

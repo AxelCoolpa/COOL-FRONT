@@ -16,7 +16,7 @@ interface AddAdventureFormProps {
 	form: createAdventureFormData
 }
 
-const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) => {
+const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) => {
 	return (
 		<div className='col-span-5 flex flex-col items-center gap-12 transition'>
 			<div className='flex flex-col lg:flex-row gap-8 lg:gap-32'>
@@ -146,4 +146,4 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 	)
 }
 
-export default AddAdventureForm
+export default AdventureForm

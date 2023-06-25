@@ -22,10 +22,12 @@ import CreateDiscover from '../pages/ProvUser/CreateDiscover'
 import ShowDiscover from '../pages/ProvUser/ShowDiscover'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import UpdateDiscover from '../pages/ProvUser/UpdateDiscover'
+//import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
+import ProfileProvider from '../pages/ProvUser/Profile'
 
 const admin = [
 	{
-		path: 'dashboard',
+		path: '',
 		element: <Dashboard />,
 	},
 	{
@@ -51,8 +53,12 @@ const provider = [
 		element: <Adventure />,
 	},
 	{
-		path: 'tableuser',
+		path: 'clients',
 		element: <TableUser />,
+	},
+	{
+		path: 'profile',
+		element: <ProfileProvider />,
 	},
 ]
 const user = [

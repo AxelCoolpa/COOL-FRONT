@@ -6,6 +6,7 @@ import authSlice from '../features/authSlice'
 import createAdventureSlice from '../features/createAdventureSlice'
 import destinationSlice from '../features/destinationSlice'
 import usersSlice from '../features/usersSlice'
+import destinationsByIdSlice from '../features/destinationByIdSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
 		createAdventure: createAdventureSlice,
 		destination: destinationSlice,
 		user: usersSlice,
+		destinationById: destinationsByIdSlice,
 	},
 })
 

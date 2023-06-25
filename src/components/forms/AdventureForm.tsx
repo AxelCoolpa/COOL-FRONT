@@ -1,31 +1,22 @@
 import React from 'react'
 
-import { BiKey } from 'react-icons/bi'
+// import { BiKey } from 'react-icons/bi'
 import { CgInfo } from 'react-icons/cg'
 import { FiPackage } from 'react-icons/fi'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { LuCalendarCheck } from 'react-icons/lu'
 import { RxActivityLog } from 'react-icons/rx'
 
-import Input from './inputs/Input'
+import { createAdventureFormData } from '../../features/createAdventureSlice'
 
-interface EnumForm {
-	title: string
-	description: string
-	individualPrice: string
-	groupPrice: string
-	location: string
-	activities?: string[]
-	starterPack?: string[]
-	startTime?: string[]
-	endTime?: string[]
-}
+import Input from '../inputs/Input'
+
 interface AddAdventureFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	form: EnumForm
+	form: createAdventureFormData
 }
 
-const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) => {
+const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) => {
 	return (
 		<div className='col-span-5 flex flex-col items-center gap-12 transition'>
 			<div className='flex flex-col lg:flex-row gap-8 lg:gap-32'>
@@ -37,7 +28,6 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 							name='individualPrice'
 							handleChange={handleChange}
 							value={form?.individualPrice}
-							enctype='multipart/form-data'
 						/>
 						<div className='absolute -right-16 top-2'>
 							<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />
@@ -156,4 +146,4 @@ const AddAdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form 
 	)
 }
 
-export default AddAdventureForm
+export default AdventureForm

@@ -55,7 +55,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 				<div className='absolute flex flex-col left-0 sm:left-5 lg:left-10 xl:left-20 top-[150px] lg:top-44 gap-5 text-white scale-75 xl:scale-100'>
 					{name && <h2 className='text-4xl font-bold'>{name}</h2>}
 
-					{rate && favorite ? (
+					{rate?.length > 0 ? (
 						<div className='flex items-center'>
 							<Rating
 								name='text-feedback'

@@ -52,8 +52,12 @@ const provider = [
 		element: <Adventure />,
 	},
 	{
-		path: 'tableuser',
+		path: 'clients',
 		element: <TableUser />,
+	},
+	{
+		path: 'profile',
+		element: <ProfileProvider />,
 	},
 ]
 const user = [
@@ -133,10 +137,6 @@ export const router = createBrowserRouter([
 	{
 		path: '/login',
 		element: <LoginPage />,
-	},
-	{
-		path: '/provider-profile',
-		element: <ProfileProvider />,
 	},
 	{
 		path: '/register',

@@ -1,7 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../store/Store';
-import { MdSecurityUpdateWarning } from 'react-icons/md';
 //import { TbArrowUp } from 'react-icons/tb';
 
 

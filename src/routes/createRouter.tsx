@@ -24,6 +24,7 @@ import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import UpdateDiscover from '../pages/ProvUser/UpdateDiscover'
 //import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
 import ProfileProvider from '../pages/ProvUser/Profile'
+import ProfileUser from '../pages/User/Profile'
 
 const admin = [
 	{
@@ -93,6 +94,10 @@ const user = [
 	{
 		path: 'tickets',
 		element: <Tickets />,
+	},
+	{
+		path: 'profile',
+		element: <ProfileUser />,
 	},
 ]
 

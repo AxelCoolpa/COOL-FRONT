@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../store/Store';
+import { MdSecurityUpdateWarning } from 'react-icons/md';
 //import { TbArrowUp } from 'react-icons/tb';
 
 
@@ -46,6 +47,7 @@ const loginSlice = createSlice({
 		state.isLoading = false;
     state.isAuthenticated = true;
 		state.error = null;
+    state.user = state.user
     localStorage.setItem('userData', JSON.stringify(action.payload));
     localStorage.setItem('isAuthenticated', 'true');
   },
@@ -57,6 +59,8 @@ const loginSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       localStorage.removeItem('isAuthenticated');
+      state.user = null
+      localStorage.removeItem('userData')
     },
 	  updateFormData: (state, action: PayloadAction<Partial<LoginFormData>>) => {
 		state.formData = {

@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../store/Store';
-import { TbArrowUp } from 'react-icons/tb';
+//import { TbArrowUp } from 'react-icons/tb';
 
 
 export interface LoginFormData {
@@ -42,10 +42,11 @@ const loginSlice = createSlice({
 		state.isLoading = true;
 		state.error = null;
 	  },
-	  loginSuccess: (state) => {
+	  loginSuccess: (state, action: PayloadAction<string>) => {
 		state.isLoading = false;
     state.isAuthenticated = true;
 		state.error = null;
+    localStorage.setItem('userData', JSON.stringify(action.payload));
     localStorage.setItem('isAuthenticated', 'true');
   },
   loginFailure: (state, action: PayloadAction<string>) => {

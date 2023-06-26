@@ -43,11 +43,11 @@ const loginSlice = createSlice({
 		state.isLoading = true;
 		state.error = null;
 	  },
-	  loginSuccess: (state, action: PayloadAction<string>) => {
+	  loginSuccess: (state, action: PayloadAction<UserData>) => {
 		state.isLoading = false;
     state.isAuthenticated = true;
 		state.error = null;
-    state.user = state.user
+    state.user = action.payload
     localStorage.setItem('userData', JSON.stringify(action.payload));
     localStorage.setItem('isAuthenticated', 'true');
   },

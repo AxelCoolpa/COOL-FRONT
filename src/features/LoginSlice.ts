@@ -9,11 +9,18 @@ export interface LoginFormData {
 	password: string;
   }
 
+export interface UserData {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export interface LoginState {
   isLoading: boolean;
   isAuthenticated: boolean;
   error: string | null;
   formData: LoginFormData;
+  user: UserData | null;
 }
 
 const initialState: LoginState = {
@@ -23,7 +30,8 @@ const initialState: LoginState = {
   formData: {
 	email:'',
 	password:''
-  }
+  },
+  user: null, // JSON.parse(localStorage.getItem("user") || '{}'),
 }
 
 const loginSlice = createSlice({

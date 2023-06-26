@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import { selectUserById } from '../../features/userByIdSlice'
 
-import { IoIosArrowBack } from 'react-icons/io'
 import { LuSave } from 'react-icons/lu'
 
 const SettingsUserCard = () => {
@@ -13,10 +12,10 @@ const SettingsUserCard = () => {
 				<div className='rounded-t bg-white mb-0 px-6 py-6'>
 					<div className='text-center flex justify-between'>
 						<h6 className='text-blueGray-700 text-xl font-bold'>My account</h6>
-						<button className='flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'>
+						{/* <button className='flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'>
 							<LuSave size={18} />
 							Save
-						</button>
+						</button> */}
 					</div>
 				</div>
 				<div className='flex-auto px-4 lg:px-10 py-10 pt-0'>
@@ -200,14 +199,7 @@ const SettingsUserCard = () => {
 								</div>
 							</div>
 						</div>
-						<div className='flex justify-between mt-6'>
-							<a
-								className='flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'
-								href='/profile'
-							>
-								<IoIosArrowBack size={18} />
-								Back
-							</a>
+						<div className='flex justify-end mt-6'>
 							<button className='flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'>
 								<LuSave size={18} />
 								Save

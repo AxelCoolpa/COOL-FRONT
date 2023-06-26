@@ -88,7 +88,8 @@ export const loginUser = (formData: LoginFormData): AppThunk => async (dispatch)
     });
 
     if (response.ok) {
-      dispatch(loginSuccess());
+      const userData = await response.json()
+      dispatch(loginSuccess(userData));
     } else {
       const errorData = await response.json();
       dispatch(loginFailure(errorData.message));

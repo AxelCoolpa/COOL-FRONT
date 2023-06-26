@@ -21,7 +21,7 @@ import ProviderCard from '../listings/ProviderCard'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
-import Container from '../containers/Conainer'
+import Container from '../containers/Container'
 
 const UpdateAdventure = () => {
 	const dispatch = useDispatch()

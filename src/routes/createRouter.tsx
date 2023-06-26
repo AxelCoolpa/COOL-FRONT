@@ -24,7 +24,9 @@ import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import UpdateDiscover from '../pages/ProvUser/UpdateDiscover'
 //import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
 import ProfileProvider from '../pages/ProvUser/Profile'
+import SettingsUser from '../pages/User/Settings'
 import ProfileUser from '../pages/User/Profile'
+import Notifications from '../pages/User/Notifications'
 
 const admin = [
 	{
@@ -97,7 +99,15 @@ const user = [
 	},
 	{
 		path: 'profile',
+		element: <SettingsUser />,
+	},
+	{
+		path: 'profile/:id',
 		element: <ProfileUser />,
+	},
+	{
+		path: 'notifications/:id',
+		element: <Notifications />,
 	},
 ]
 

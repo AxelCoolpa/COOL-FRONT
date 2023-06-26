@@ -25,17 +25,6 @@ const AddAdventure = () => {
 
 	const [checkboxValues, setCheckboxValues] = useState([])
 
-	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value
-		const isChecked = e.target.checked
-
-		if (isChecked) {
-			setCheckboxValues([...checkboxValues, value])
-		} else {
-			setCheckboxValues(checkboxValues.filter((val) => val !== value))
-		}
-	}
-
 	const [formData, setFormData] = useState<createAdventureFormData>({
 		title: '',
 		description: '',
@@ -50,7 +39,27 @@ const AddAdventure = () => {
 		endTime: [],
 	})
 
-	formData.categories = checkboxValues
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
+
+		if (isChecked) {
+			// setCheckboxValues([...checkboxValues, value])
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				categories: [...formData.categories, value],
+			}))
+		} else {
+			// setCheckboxValues(checkboxValues.filter((val) => val !== value))
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				categories: formData.categories.filter((val) => val !== value),
+			}))
+		}
+	}
+
+	// formData.categories = checkboxValues
+	// console.log(formData.categories)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target

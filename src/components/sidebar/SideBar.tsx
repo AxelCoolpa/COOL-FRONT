@@ -7,8 +7,8 @@ import { GiWavyItinerary } from 'react-icons/gi'
 import { GoHome } from 'react-icons/go'
 import { GrSafariOption } from 'react-icons/gr'
 import { RiCarFill } from 'react-icons/ri'
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../features/LoginSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../features/LoginSlice'
 
 import { selectUsers } from '../../features/usersSlice'
 import AvatarImg from '../../assets/Avatar.jpg'
@@ -20,13 +20,13 @@ import Dropdown from '../dropdown/DropSidebar'
 
 const Sidebar: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	const user = useSelector(selectUsers)
 	const userProvider = user[1]
 
 	const handleLogout = () => {
-		dispatch(logout());
-	  };
+		dispatch(logout())
+	}
 	const notifications = true
 
 	const toggleMenu = () => {
@@ -94,66 +94,52 @@ const Sidebar: React.FC = () => {
 					{/* Avatar */}
 
 					<ul className='relative ml-3 flex-col md:flex-row list-none items-center hidden md:flex'>
-					<div className='flex items-center gap-3 xl:gap-6'>
-								<Dropdown
-									button={<Avatar avatar={AvatarImg} wh={12} />}
-									children={
-										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
-											<div className='mt-3 ml-4'>
-												<div className='flex flex-col gap-2'>
-													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {userProvider?.username}
-													</p>
-													<p className='text-sm pl-6 cursor-default'>
-														{userProvider?.role?.roleName}
-													</p>
-												</div>
-											</div>
-											<div className='mt-3 mx-4 flex flex-col'>
-												<div className='h-px w-full bg-gray-200' />
-												<a
-													href='#'
-													className={
-														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
-													}
-													onClick={(e) => e.preventDefault()}
-												>
-													Another action
-												</a>
-												<a
-													href='#'
-													className={
-														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
-													}
-													onClick={(e) => e.preventDefault()}
-												>
-													Something else here
-												</a>
-												<div className='mt-3 h-px w-full bg-gray-200' />
-												<a
-													href='#'
-													className={
-														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
-													}
-													onClick={(e) => e.preventDefault()}
-												>
-													<button className="mt-1 text-sm font-medium text-red-500 hover:text-red-500" onClick={handleLogout}>Logout</button>
-												</a>
+						<div className='flex items-center gap-3 xl:gap-6'>
+							<Dropdown
+								button={<Avatar avatar={AvatarImg} wh={12} />}
+								children={
+									<div className='flex w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
+										<div className='mt-3 ml-4'>
+											<div className='flex flex-col gap-2'>
+												<p className='text-sm font-bold cursor-default'>
+													👋 Hey, {userProvider?.fullname || userProvider?.username}
+												</p>
 											</div>
 										</div>
-									}
-									classNames={'py-3 bottom-6 -right-[210px] w-max'}
-								/>
-								<div className='hidden xl:flex flex-col justify-center'>
-									<label className='2xl:text-lg font-semibold'>
-										{userProvider?.username}
-									</label>
-									<span className='text-xs'>{userProvider?.role?.roleName}</span>
-								</div>
-								
+										<div className='my-3 mx-4 flex flex-col'>
+											<div className='mb-3 h-px w-full' />
+											<a
+												href='/profile'
+												className='text-sm my-3 px-4 font-normal block w-full whitespace-nowrap hover:underline'
+											>
+												Profile / Settings
+											</a>
+											<div className='mt-3 h-px w-full bg-gray-200' />
+											<a
+												href='#'
+												className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'
+												onClick={(e) => e.preventDefault()}
+											>
+												<button
+													className='my-3 text-sm font-medium text-red-500 hover:text-red-500 hover:underline'
+													onClick={handleLogout}
+												>
+													Logout
+												</button>
+											</a>
+										</div>
+									</div>
+								}
+								classNames={'py-3 bottom-6 -right-[210px] w-max'}
+							/>
+							<div className='hidden xl:flex flex-col justify-center'>
+								<label className='2xl:text-lg font-semibold'>
+									{userProvider?.name || userProvider?.username}
+								</label>
+								<span className='text-xs'>@{userProvider?.username}</span>
 							</div>
-							</ul>
-
+						</div>
+					</ul>
 
 					<div>
 						{notifications ? (

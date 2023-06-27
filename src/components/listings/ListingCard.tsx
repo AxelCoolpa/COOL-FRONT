@@ -10,6 +10,10 @@ import HeartButton from '../buttons/HeartButton'
 import { EnumData } from '../../types'
 import EditButon from '../buttons/EditButton'
 
+import Dropdown from '../dropdown/index'
+import MoreOptionsButton from '../buttons/MoreOptionsButon'
+import DeleteButton from '../buttons/DeleteButton'
+
 interface ListingCardProps {
 	data: EnumData | undefined
 }
@@ -49,7 +53,38 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 					/>
 					<div className='absolute top-3 right-3'>
 						{location.pathname === '/provider' ? (
-							<EditButon onClick={() => navigate(`/provider/update/${data?._id}`)} />
+							<Dropdown
+								button={<MoreOptionsButton />}
+								children={
+									<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
+										<div className='mt-3 ml-4'>
+											<div className='flex flex-col gap-2'>
+												<p className='text-sm font-bold cursor-default'>Options</p>
+											</div>
+										</div>
+										<div className='mt-3 mx-4 flex flex-col gap-5'>
+											<div className='h-px w-full bg-gray-200' />
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
+												<div className='flex gap-5 items-center '>
+													<EditButon
+														onClick={() => navigate(`/provider/update/${data?._id}`)}
+													/>
+													<p>Edit destination</p>
+												</div>
+											</div>
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
+												<div className='flex gap-5 items-center '>
+													<DeleteButton
+														onClick={() => navigate(`/provider/update/${data?._id}`)}
+													/>
+													<p>Delete destination</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								}
+								classNames={'py-2 top-8 -left-[180px] w-max'}
+							/>
 						) : (
 							<HeartButton size={25} />
 						)}

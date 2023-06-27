@@ -18,15 +18,15 @@ import { logout } from '../../features/LoginSlice'
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
 	const userProvider = user[1]
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()
 
 	const notifications = true
 
 	const handleLogout = () => {
-		dispatch(logout());
-	  };
+		dispatch(logout())
+	}
 
 	return (
 		<>
@@ -269,7 +269,12 @@ const Navbar: React.FC = () => {
 													}
 													onClick={(e) => e.preventDefault()}
 												>
-													<button className="mt-1 text-sm font-medium text-red-500 hover:text-red-500" onClick={handleLogout}>Logout</button>
+													<button
+														className='mt-1 text-sm font-medium text-red-500 hover:text-red-500'
+														onClick={handleLogout}
+													>
+														Logout
+													</button>
 												</a>
 											</div>
 										</div>

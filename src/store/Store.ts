@@ -8,6 +8,7 @@ import destinationSlice from '../features/destinationSlice'
 import usersSlice from '../features/usersSlice'
 import destinationsByIdSlice from '../features/destinationByIdSlice'
 import userByIdSlice from '../features/userByIdSlice'
+import deleteAdventureSlice from '../features/deleteAdventureSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
 		user: usersSlice,
 		destinationById: destinationsByIdSlice,
 		userById: userByIdSlice,
+		deleteAdventure: deleteAdventureSlice,
 	},
 })
 

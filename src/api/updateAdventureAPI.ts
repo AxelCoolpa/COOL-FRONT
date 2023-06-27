@@ -8,10 +8,10 @@ export const updateAdventureAPI = async (
 	userID: string,
 	destinationID: string
 ) => {
-	const URL = `${baseURL}/destination/${userID}/create`
+	const URL = `${baseURL}/destination/${userID}/update/${destinationID}`
 
 	try {
-		const response = await axios.post(URL, formData, {
+		const response = await axios.put(URL, formData, {
 			headers: { 'Content-Type': 'multipart/form-data' },
 		})
 		// Aquí puedes realizar el manejo de la respuesta de la API

@@ -21,7 +21,8 @@ export const listingTickets = [
 		activity: 'Tour',
 		date: '25 Jul',
 		time: '03:00 hs',
-		peoples: '3 Customers',
+		peoples: '3 adults',
+		secondaryPeoples: '1 children',
 	},
 	{
 		_id: '112383992028492',
@@ -29,6 +30,7 @@ export const listingTickets = [
 		activity: 'International visit',
 		date: '28 Jun',
 		time: '18:00 hs',
-		peoples: '4 Customers',
+		peoples: '4 adults',
+		secondaryPeoples: '2 children',
 	},
 ]

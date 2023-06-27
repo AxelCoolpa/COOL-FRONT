@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../store/Store';
-import { TbArrowUp } from 'react-icons/tb';
+//import { TbArrowUp } from 'react-icons/tb';
 
 
 export interface LoginFormData {
@@ -9,11 +9,18 @@ export interface LoginFormData {
 	password: string;
   }
 
+export interface UserData {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export interface LoginState {
   isLoading: boolean;
   isAuthenticated: boolean;
   error: string | null;
   formData: LoginFormData;
+  user: UserData | null;
 }
 
 const initialState: LoginState = {
@@ -23,7 +30,8 @@ const initialState: LoginState = {
   formData: {
 	email:'',
 	password:''
-  }
+  },
+  user: null, // JSON.parse(localStorage.getItem("user") || '{}'),
 }
 
 const loginSlice = createSlice({
@@ -34,10 +42,12 @@ const loginSlice = createSlice({
 		state.isLoading = true;
 		state.error = null;
 	  },
-	  loginSuccess: (state) => {
+	  loginSuccess: (state, action: PayloadAction<UserData>) => {
 		state.isLoading = false;
     state.isAuthenticated = true;
 		state.error = null;
+    state.user = action.payload
+    localStorage.setItem('userData', JSON.stringify(action.payload));
     localStorage.setItem('isAuthenticated', 'true');
   },
   loginFailure: (state, action: PayloadAction<string>) => {
@@ -48,6 +58,8 @@ const loginSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       localStorage.removeItem('isAuthenticated');
+      state.user = null
+      localStorage.removeItem('userData')
     },
 	  updateFormData: (state, action: PayloadAction<Partial<LoginFormData>>) => {
 		state.formData = {
@@ -75,7 +87,8 @@ export const loginUser = (formData: LoginFormData): AppThunk => async (dispatch)
     });
 
     if (response.ok) {
-      dispatch(loginSuccess());
+      const userData = await response.json()
+      dispatch(loginSuccess(userData));
     } else {
       const errorData = await response.json();
       dispatch(loginFailure(errorData.message));

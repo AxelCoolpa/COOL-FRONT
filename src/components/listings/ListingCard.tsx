@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { deleteAdventure } from '../../features/deleteAdventureSlice'
 
 import { useLocation, useNavigate } from 'react-router'
 import { motion, useAnimation } from 'framer-motion'
 import { AiFillStar } from 'react-icons/ai'
 import { BsDot } from 'react-icons/bs'
 
-import HeartButton from '../buttons/HeartButton'
-
 import { EnumData } from '../../types'
-import EditButon from '../buttons/EditButton'
 
 import Dropdown from '../dropdown/index'
+import HeartButton from '../buttons/HeartButton'
 import MoreOptionsButton from '../buttons/MoreOptionsButon'
+import EditButon from '../buttons/EditButton'
 import DeleteButton from '../buttons/DeleteButton'
-import { useDispatch } from 'react-redux'
-import { deleteAdventure } from '../../features/deleteAdventureSlice'
 
 interface ListingCardProps {
 	data: EnumData | undefined
@@ -36,7 +36,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 
 		setTimeout(() => {
 			window.location.reload()
-		}, 100)
+		}, 1000)
 	}
 
 	useEffect(() => {

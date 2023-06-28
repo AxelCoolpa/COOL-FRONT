@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../store/Store'
 import { createAdventureAPI } from '../api/createAdventureAPI'
 
+import { toast } from 'react-hot-toast'
 export interface createAdventureFormData {
 	title: string
 	description: string
@@ -61,7 +62,9 @@ export const createAdventure =
 			await createAdventureAPI(formData, userID)
 
 			dispatch(createAdventureSuccess())
+			toast.success('Destination created successfully')
 		} catch (error: any) {
 			dispatch(createAdventureFailure(error.message))
+			toast.error('Something went wrong')
 		}
 	}

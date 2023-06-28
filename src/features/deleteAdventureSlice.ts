@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../store/Store'
 import { deleteDestinationAPI } from '../api/deleteDestination'
 
+import { toast } from 'react-hot-toast'
+
 interface deleteAdventureState {
 	isLoading: boolean
 	error: string | null
@@ -43,8 +45,10 @@ export const deleteAdventure =
 			await deleteDestinationAPI(destinationID)
 
 			dispatch(deleteAdventureSuccess())
+			toast.success('Destination was successfully deleted')
 		} catch (error: any) {
 			dispatch(deleteAdventureFailure(error.message))
+			toast.error('Something went wrong')
 		}
 	}
 

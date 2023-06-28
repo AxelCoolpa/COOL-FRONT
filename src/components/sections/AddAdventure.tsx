@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { toast } from 'react-hot-toast'
+
 import { categories } from '../categories/categories'
 import {
 	createAdventure,
@@ -23,8 +25,6 @@ const AddAdventure = () => {
 	const users = useSelector(selectUsers)
 	const userID = users[1]?._id
 
-	const [checkboxValues, setCheckboxValues] = useState([])
-
 	const [formData, setFormData] = useState<createAdventureFormData>({
 		title: '',
 		description: '',
@@ -44,13 +44,11 @@ const AddAdventure = () => {
 		const isChecked = e.target.checked
 
 		if (isChecked) {
-			// setCheckboxValues([...checkboxValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				categories: [...formData.categories, value],
 			}))
 		} else {
-			// setCheckboxValues(checkboxValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				categories: formData.categories.filter((val) => val !== value),
@@ -107,20 +105,7 @@ const AddAdventure = () => {
 			!startTime ||
 			!endTime
 		) {
-			console.log('Por favor, complete todos los campos')
-			console.log({
-				title,
-				description,
-				individualPrice,
-				groupPrice,
-				gallery,
-				categories,
-				location,
-				activities,
-				starterPack,
-				startTime,
-				endTime,
-			})
+			toast.error('Por favor, complete todos los campos')
 			return
 		}
 
@@ -158,6 +143,10 @@ const AddAdventure = () => {
 				startTime: [],
 				endTime: [],
 			})
+
+			await setTimeout(() => {
+				window.location.reload()
+			}, 1000)
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
 		}

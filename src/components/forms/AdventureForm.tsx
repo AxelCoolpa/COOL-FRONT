@@ -14,9 +14,10 @@ import Input from '../inputs/Input'
 interface AddAdventureFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	form: createAdventureFormData
+	id?: string
 }
 
-const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) => {
+const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form, id }) => {
 	return (
 		<div className='col-span-5 flex flex-col items-center gap-12 transition'>
 			<div className='flex flex-col lg:flex-row gap-8 lg:gap-32'>
@@ -53,7 +54,9 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) 
 				<div className='flex flex-col items-center gap-10'>
 					<div className='flex flex-col lg:flex-row gap-8'>
 						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
-							<label className='text-OrangeCooL'>Adventure ID #0052466623</label>
+							<label className='text-OrangeCooL'>
+								Adventure ID #<span className='text-xs'>{id}</span>
+							</label>
 							<Input
 								placeholder='Title adventure'
 								id='title'
@@ -62,10 +65,10 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) 
 								value={form?.title}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 text-[#898989] w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<HiOutlineLocationMarker size={25} />
-								<label className=''>Which is the location?</label>
+								<label>Which is the location?</label>
 							</div>
 							<Input
 								placeholder='Location'
@@ -75,10 +78,10 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) 
 								value={form?.location}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 text-[#898989] w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<RxActivityLog size={20} />
-								<label className='text-[#686868]'>Activities</label>
+								<label>Activities</label>
 							</div>
 							<Input
 								placeholder='Activities'
@@ -90,10 +93,10 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) 
 						</div>
 					</div>
 					<div className='flex flex-col lg:flex-row gap-8'>
-						<div className='flex flex-col gap-10 text-[#898989] w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<FiPackage size={25} />
-								<label className='text-[#686868]'>Starter Pack</label>
+								<label>Starter Pack</label>
 							</div>
 							<Input
 								placeholder='Starter Pack'
@@ -103,10 +106,10 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) 
 								value={form?.starterPack}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 text-[#898989] w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<LuCalendarCheck size={25} />
-								<label className=''>Start Time</label>
+								<label>Start Time</label>
 							</div>
 							<Input
 								placeholder='Start Time'
@@ -116,7 +119,7 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) 
 								value={form?.startTime}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 text-[#898989] w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<LuCalendarCheck size={25} />
 								<label>End Time</label>

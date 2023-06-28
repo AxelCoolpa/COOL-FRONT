@@ -13,6 +13,7 @@ interface InputProps {
 	handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 	value?: string
 	icon?: IconType
+	secondaryIcon?: IconType
 }
 
 const Input: React.FC<InputProps> = ({
@@ -27,6 +28,7 @@ const Input: React.FC<InputProps> = ({
 	handleChange,
 	value,
 	icon: Icon,
+	secondaryIcon: SecondaryIcon,
 }) => {
 	return (
 		<div className='w-full relative'>
@@ -87,6 +89,13 @@ const Input: React.FC<InputProps> = ({
 				>
 					{label}
 				</label>
+			)}
+
+			{SecondaryIcon && (
+				<SecondaryIcon
+					size={28}
+					className='absolute right-4 top-4 flex items-center justify-center '
+				/>
 			)}
 		</div>
 	)

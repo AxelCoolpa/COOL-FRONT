@@ -1,11 +1,11 @@
 import axios from "axios";
-import { AuthState } from '../features/authSlice'
+
+import { baseURL } from "../baseURL";
 
 export const getAuthUser = async (data: AuthState)<any> => {
     try {
-        const response = await axios.get('http://localhost:3000/api/users', data)
-        return console.log(response.data)
-
+        const response = await axios.get(`${baseURL}/users`, data)
+        return response.data
     } catch(error: any) {
 		throw new Error(error.response?.data?.message || error.message)
 	}

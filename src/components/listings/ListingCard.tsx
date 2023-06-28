@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { deleteAdventure } from '../../features/deleteAdventureSlice'
 
 import { useLocation, useNavigate } from 'react-router'
 import { motion, useAnimation } from 'framer-motion'
 import { AiFillStar } from 'react-icons/ai'
 import { BsDot } from 'react-icons/bs'
 
-import HeartButton from '../buttons/HeartButton'
-
 import { EnumData } from '../../types'
-import EditButon from '../buttons/EditButton'
 
 import Dropdown from '../dropdown/index'
+import HeartButton from '../buttons/HeartButton'
 import MoreOptionsButton from '../buttons/MoreOptionsButon'
+import EditButon from '../buttons/EditButton'
 import DeleteButton from '../buttons/DeleteButton'
 
 interface ListingCardProps {
@@ -21,12 +23,21 @@ interface ListingCardProps {
 const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 	const headingControls = useAnimation()
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const location = useLocation()
 
 	const averageRating = data?.rating
 		.reduce((a, b) => a + b / data?.rating.length, 0)
 		.toString()
 		.slice(0, 3)
+
+	const onDelete = async () => {
+		await dispatch(deleteAdventure(data?._id))
+
+		setTimeout(() => {
+			window.location.reload()
+		}, 1000)
+	}
 
 	useEffect(() => {
 		const startAnimation = async () => {
@@ -69,21 +80,26 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 													<EditButon
 														onClick={() => navigate(`/provider/update/${data?._id}`)}
 													/>
-													<p>Edit destination</p>
+													<p
+														onClick={() => navigate(`/provider/update/${data?._id}`)}
+														className='cursor-pointer'
+													>
+														Edit destination
+													</p>
 												</div>
 											</div>
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
 												<div className='flex gap-5 items-center '>
-													<DeleteButton
-														onClick={() => navigate(`/provider/update/${data?._id}`)}
-													/>
-													<p>Delete destination</p>
+													<DeleteButton onClick={onDelete} />
+													<p onClick={onDelete} className='cursor-pointer'>
+														Delete destination
+													</p>
 												</div>
 											</div>
 										</div>
 									</div>
 								}
-								classNames={'py-2 top-8 -left-[180px] w-max'}
+								classNames={'py-2 top-4 right-0 w-max'}
 							/>
 						) : (
 							<HeartButton size={25} />

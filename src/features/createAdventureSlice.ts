@@ -9,7 +9,7 @@ export interface createAdventureFormData {
 	location: string
 	individualPrice: string
 	groupPrice: string
-	gallery: []
+	gallery: File[]
 	activities: string[]
 	starterPack: string[]
 	startTime: string[]

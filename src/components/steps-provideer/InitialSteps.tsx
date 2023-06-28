@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
+import StepOne from './StepOne';
+import StepTwo from './StepTwo';
+import StepThree from './StepThree';
+import StepFour from './StepFour';
 type StepProps = {
   onNext: () => void;
   onPrevious: () => void;
@@ -41,8 +44,12 @@ const StepByStepComponent: React.FC = () => {
   };
 
   return (
-    <div className="w-2/3 mx-auto mt-8">
-      <stepComponent  onNext={handleNext} onPrevious={handlePrevious} />
+    <div className="w-2/3 mx-auto mt-8 ">
+      {/* <stepComponent  onNext={handleNext} onPrevious={handlePrevious} /> */}
+      {/* <StepOne /> */}
+      {/* <StepTwo /> */}
+      {/* <StepThree /> */}
+      <StepFour />
     </div>
   );
 };

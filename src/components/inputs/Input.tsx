@@ -63,7 +63,7 @@ const Input: React.FC<InputProps> = ({
 			{Icon && (
 				<Icon
 					size={28}
-					className='absolute left-4 top-5 flex items-center justify-center text-OrangeCooL'
+					className='absolute left-4 top-2 flex items-center justify-center text-OrangeCooL'
 				/>
 			)}
 

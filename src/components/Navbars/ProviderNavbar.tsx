@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
 						</div>
 						{/* Actual Page */}
 						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							<a className='text-sm text-navy-700 hover:underline' href=' '>
+							<a className='text-sm text-navy-700 hover:underline' href='/provider'>
 								Pages
 								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
 							</a>

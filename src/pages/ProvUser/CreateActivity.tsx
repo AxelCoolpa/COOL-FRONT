@@ -1,7 +1,7 @@
-import AddAdventure from '../../components/sections/AddAdventure'
+import AddActivity from '../../components/sections/AddActivity'
 
 const CreateActivity = () => {
-	return <AddAdventure />
+	return <AddActivity />
 }
 
 export default CreateActivity

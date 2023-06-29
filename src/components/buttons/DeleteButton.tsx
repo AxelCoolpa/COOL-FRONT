@@ -1,7 +1,7 @@
 import { RiDeleteBin5Line } from 'react-icons/ri'
 
 interface Props {
-	onClick: () => void
+	onClick?: () => void
 	size?: number
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Select, { components } from 'react-select';
 import Button from '../buttons/Button';
-
+import { StepProps } from './InitialSteps';
 interface Country {
   code: string;
   dialCode: string;
@@ -9,7 +9,9 @@ interface Country {
   flag: string;
 }
 
-const StepOne = () => {
+ 
+
+const StepOne: React.FC<StepProps>= ({next}) => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -67,9 +69,9 @@ const StepOne = () => {
         <h1 className='font-bold text-lg ' >Launch your company now</h1>
         <span>Get the process started in less than 10 minutes. <br />Let us handle the rest</span>
       </header>
-      <form>
 
-        <div className="max-w-sm mx-auto">
+        <div className="max-w-sm mx-auto flex-col justify-start">
+      <form>
           <div className="mb-4">
             <input id="email" name="email" placeholder='Email' className='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500  placeholder-gray-500 placeholder-opacity-75 font-poppy' />
           </div>
@@ -111,11 +113,11 @@ const StepOne = () => {
               />
             </div>
           </div>
+      </form>
           <div className="flex w-48 relative bottom-5 h-16" >
-          <Button  label="Start my business" small={true} />
+          <Button  label="Start my business" small={true} onClick={next}/>
           </div>
         </div>
-      </form>
     </div>
   )
 }

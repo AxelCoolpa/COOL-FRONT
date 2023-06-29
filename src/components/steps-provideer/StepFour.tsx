@@ -1,7 +1,16 @@
 import { useEffect, useState } from 'react'
+import { StepProps } from './InitialSteps'
 
-const StepFour = () => {
+const StepFour: React.FC<StepProps> = ({next , previous , handleStepClick}) => {
 
+    const handleNext = () => {
+        next && next()
+     handleStepClick && handleStepClick(3)
+      }
+      const handlePrevious = () => {
+         previous && previous()
+         handleStepClick && handleStepClick(1)
+      }
     return (
         <>
             <nav className="flex justify-end items-center mb-8 ">
@@ -10,7 +19,7 @@ const StepFour = () => {
                     <a href="#" className="text-orange-600 no-underline font-bold pl-2">Get help</a>
                 </span>
             </nav>
-            <div className=" p-2">
+            <div className=" p-2 ">
                 <h1 className='font-bold text-lg '>Business Details</h1>
                 <span className="block mb-4">Details about you business corporation and shares</span>
                 <div className='w-1/2'>
@@ -35,8 +44,8 @@ const StepFour = () => {
                 </div>
             </div>
             <div className='flex justify-between ml-6 mt-8 w-[300px]'>
-                <button className='bg-white text-black px-6 border rounded-[5px] h-[40px]'>Previous</button>
-                <button className='bg-OrangeCooL text-white px-6 border  rounded-[5px] h-[40px]'>Next</button>
+                <button className='bg-white text-black px-6 border rounded-[5px] h-[40px]' onClick={handlePrevious}>Previous</button>
+                <button className='bg-OrangeCooL text-white px-6 border  rounded-[5px] h-[40px]' onClick={handleNext}>Next</button>
             </div>
         </>
     )

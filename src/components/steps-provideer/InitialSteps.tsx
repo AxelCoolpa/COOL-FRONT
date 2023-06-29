@@ -3,37 +3,48 @@ import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 import StepFour from './StepFour';
-type StepProps = {
-  onNext: () => void;
-  onPrevious: () => void;
+import StepFive from './StepFIve';
+import GreenSidebar from '../SideProvider/GreenSidebar';
+import StepSidebar from '../SideProvider/StepSidebar';
+
+export type StepProps = {
+  next?: () => void;
+  previous?: () => void;
+  skip?: ()=> void
+  handleStepClick?: (index: number)=> void
 };
+
+
 
 const StepByStepComponent: React.FC = () => {
   const [step, setStep] = useState(1);
-  const [stepComponent, setStepComponent] = useState<React.ComponentType<StepProps> | null>(null);
+  const [currentStep, setCurrentStep] = useState(0);
 
-  useEffect(() => {
-    const loadStepComponent = async () => {
-      let component: { default: React.ComponentType<StepProps> };
-      switch (step) {
-        case 1:
-          component = await import('./StepOne');
-          break;
-        case 2:
-          component = await import('./StepTwo');
-          break;
-        case 3:
-          component = await import('./StepThree');
-          break;
-        default:
-          // Componente de paso predeterminado o lógica de manejo de error
-          break;
-      }
-      setStepComponent(() => component.default);
-    };
+  
+  //const [stepComponent, setStepComponent] = useState<React.ComponentType<StepProps> | null>(null);
 
-    loadStepComponent();
-  }, [step]);
+  // useEffect(() => {
+  //   const loadStepComponent = async () => {
+  //     let component: { default: React.ComponentType<StepProps> };
+  //     switch (step) {
+  //       case 1:
+  //         component = await import('./StepOne');
+  //         break;
+  //       case 2:
+  //         component = await import('./StepTwo');
+  //         break;
+  //       case 3:
+  //         component = await import('./StepThree');
+  //         break;
+  //       default:
+  //         // Componente de paso predeterminado o lógica de manejo de error
+  //         break;
+  //     }
+  //     setStepComponent(() => component.default);
+  //   };
+
+  //   loadStepComponent();
+  // }, [step]);
 
   const handleNext = () => {
     setStep(step + 1);
@@ -43,14 +54,38 @@ const StepByStepComponent: React.FC = () => {
     setStep(step - 1);
   };
 
+  const handleSkip =() => {
+    setStep(1)
+  }
+  
+  const handleStepClick = (stepIndex: number) => {
+    setCurrentStep(stepIndex);
+  };
+
   return (
-    <div className="w-2/3 mx-auto mt-8 ">
-      {/* <stepComponent  onNext={handleNext} onPrevious={handlePrevious} /> */}
-      {/* <StepOne /> */}
-      {/* <StepTwo /> */}
-      {/* <StepThree /> */}
-      <StepFour />
+    <>
+    { step <= 2 &&<GreenSidebar step={step}/>}
+    {step >=3 && <StepSidebar handleStepClick={handleStepClick} currentStep={currentStep}/>}
+    <div className="w-2/3 mx-auto mt-6 ">
+     
+      {
+       step === 1 && <StepOne  next={handleNext} />
+      }
+      {
+       step === 2 && <StepTwo  next={handleNext} previous={handlePrevious}/>
+      }
+      {
+       step === 3 && <StepThree  next={handleNext} previous={handlePrevious} handleStepClick={handleStepClick}/>
+      }
+      {
+       step === 4 && <StepFour  next={handleNext} previous={handlePrevious} handleStepClick={handleStepClick}/>
+      }
+      {
+       step === 5 && <StepFive  next={handleNext} previous={handlePrevious} skip={handleSkip} handleStepClick={handleStepClick}/>
+      }
+     
     </div>
+    </>
   );
 };
 

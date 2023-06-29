@@ -230,7 +230,7 @@ const Navbar: React.FC = () => {
 								<Dropdown
 									button={<Avatar avatar={AvatarImg} wh={12} />}
 									children={
-										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
+										<div className='flex h-52 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
@@ -244,13 +244,12 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
 												<a
-													href='#'
+													href='/provider/profile'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
-													onClick={(e) => e.preventDefault()}
 												>
-													Another action
+													Profile
 												</a>
 												<a
 													href='#'

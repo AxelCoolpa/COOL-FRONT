@@ -244,13 +244,12 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
 												<a
-													href='#'
+													href='/PRUEBAprovider/profile'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
-													onClick={(e) => e.preventDefault()}
 												>
-													Another action
+													Profile
 												</a>
 												<a
 													href='#'

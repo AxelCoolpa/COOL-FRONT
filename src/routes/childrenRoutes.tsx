@@ -51,10 +51,6 @@ export const provider = [
 		element: <UpdateActivity />,
 	},
 	{
-		path: 'adventure',
-		element: <Adventure />,
-	},
-	{
 		path: 'clients',
 		element: <TableUser />,
 	},
@@ -75,10 +71,6 @@ export const PruebaProvider = [
 	{
 		path: 'update/:id',
 		element: <UpdateAdventure />,
-	},
-	{
-		path: 'adventure',
-		element: <Adventure />,
 	},
 	{
 		path: 'clients',

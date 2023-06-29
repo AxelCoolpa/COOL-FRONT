@@ -59,7 +59,7 @@ export const provider = [
 		element: <ProfileProvider />,
 	},
 ]
-export const PruebaProvider = [
+export const PruebaAdminProvider = [
 	{
 		path: '',
 		element: <ShowAdventures />,
@@ -79,7 +79,11 @@ export const PruebaProvider = [
 	{
 		path: 'profile',
 		element: <AdminProfile />,
-	},
+	},/* 
+	{
+		path: 'home',
+		element: <AdminProfile />,
+	}, */
 ]
 export const user = [
 	{

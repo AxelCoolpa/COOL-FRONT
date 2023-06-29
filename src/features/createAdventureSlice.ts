@@ -11,10 +11,7 @@ export interface createAdventureFormData {
 	individualPrice: string
 	groupPrice: string
 	gallery: []
-	activities: string[]
-	starterPack: string[]
-	startTime: string[]
-	endTime: string[]
+
 	rating?: number[]
 	reviews?: string[]
 }

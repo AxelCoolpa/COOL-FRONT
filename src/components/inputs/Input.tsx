@@ -14,6 +14,7 @@ interface InputProps {
 	value?: string
 	icon?: IconType
 	secondaryIcon?: IconType
+	booking?: boolean
 }
 
 const Input: React.FC<InputProps> = ({
@@ -29,6 +30,7 @@ const Input: React.FC<InputProps> = ({
 	value,
 	icon: Icon,
 	secondaryIcon: SecondaryIcon,
+	booking,
 }) => {
 	return (
 		<div className='w-full relative'>
@@ -41,9 +43,6 @@ const Input: React.FC<InputProps> = ({
 				value={value}
 				className={`
           peer
-          w-full
-					xl:w-4/5
-					2xl:w-full
           p-4
 					min-[1440px]:p-4
           font-light
@@ -54,6 +53,7 @@ const Input: React.FC<InputProps> = ({
           transition
           disabled:opacity-70
           disabled:cursor-not-allowed
+					${booking ? 'xl:w-4/5 2xl:w-full' : 'w-full'}
 					${sizeH ? `h-${sizeH}` : ''}
           ${label ? 'pt-6' : 'pt-4'}
           ${errors ? 'border-red-700' : 'border-neutral-300'}

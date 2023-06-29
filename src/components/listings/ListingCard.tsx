@@ -15,6 +15,7 @@ import HeartButton from '../buttons/HeartButton'
 import MoreOptionsButton from '../buttons/MoreOptionsButon'
 import EditButon from '../buttons/EditButton'
 import DeleteButton from '../buttons/DeleteButton'
+import { toast } from 'react-hot-toast'
 
 interface ListingCardProps {
 	data: EnumData | undefined
@@ -63,7 +64,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>
-						{location.pathname === '/provider' ? (
+						{location.pathname === '/PRUEBAprovider' ||
+						location.pathname === '/provider' ? (
 							<Dropdown
 								button={<MoreOptionsButton />}
 								children={
@@ -76,25 +78,61 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 										<div className='mt-3 mx-4 flex flex-col gap-5'>
 											<div className='h-px w-full bg-gray-200' />
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-												<div className='flex gap-5 items-center '>
-													<EditButon
-														onClick={() => navigate(`/provider/update/${data?._id}`)}
-													/>
-													<p
-														onClick={() => navigate(`/provider/update/${data?._id}`)}
-														className='cursor-pointer'
-													>
-														Edit destination
-													</p>
-												</div>
+												{location.pathname === '/PRUEBAprovider' ? (
+													<div className='flex gap-5 items-center '>
+														<EditButon
+															onClick={() =>
+																navigate(`/PRUEBAprovider/update/${data?._id}`)
+															}
+														/>
+														<p
+															onClick={() =>
+																navigate(`/PRUEBAprovider/update/${data?._id}`)
+															}
+															className='cursor-pointer'
+														>
+															Edit destination
+														</p>
+													</div>
+												) : (
+													<div className='flex gap-5 items-center '>
+														<EditButon
+															onClick={() => navigate(`/provider/update/${data?._id}`)}
+														/>
+														<p
+															onClick={() => navigate(`/provider/update/${data?._id}`)}
+															className='cursor-pointer'
+														>
+															Edit activity
+														</p>
+													</div>
+												)}
 											</div>
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-												<div className='flex gap-5 items-center '>
-													<DeleteButton onClick={onDelete} />
-													<p onClick={onDelete} className='cursor-pointer'>
-														Delete destination
-													</p>
-												</div>
+												{location.pathname === '/PRUEBAprovider' ? (
+													<div className='flex gap-5 items-center '>
+														<DeleteButton onClick={onDelete} />
+														<p onClick={onDelete} className='cursor-pointer'>
+															Delete destination
+														</p>
+													</div>
+												) : (
+													<div className='flex gap-5 items-center '>
+														<DeleteButton
+															onClick={() =>
+																toast.error('Error al eliminar la actividad')
+															}
+														/>
+														<p
+															onClick={() =>
+																toast.error('Error al eliminar la actividad')
+															}
+															className='cursor-pointer'
+														>
+															Delete activity
+														</p>
+													</div>
+												)}
 											</div>
 										</div>
 									</div>

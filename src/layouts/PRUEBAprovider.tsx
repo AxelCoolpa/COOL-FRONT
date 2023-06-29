@@ -8,12 +8,12 @@ import { fetchDestinations } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'
 import { fetchUsers } from '../features/usersSlice'
 
-export const ProvDashboard = () => {
-	const dispatch = useDispatch()
+export const PRUEBAprovider = () => {
+	/* const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(fetchDestinations())
 		dispatch(fetchUsers())
-	}, [dispatch])
+	}, [dispatch]) */
 	return (
 		<>
 			<SidebarB />

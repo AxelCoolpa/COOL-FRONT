@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
 								src={Cool}
 								alt='Cool-LOGO'
 								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
-								onClick={() => navigate('/PRUEBAprovider')}
+								onClick={() => navigate('/provider')}
 							/>
 						</div>
 						{/* Actual Page */}
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
 								<input
 									type='search'
 									placeholder='Search'
-									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full min-[1360px]:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
+									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full xl:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
 								/>
 							</div>
 						</form>

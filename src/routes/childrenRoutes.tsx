@@ -1,22 +1,31 @@
+//* USER
 import Home from '../pages/User/Home'
-import Settings from '../pages/Admin/Settings'
-import Dashboard from '../pages/Admin/Dashboard'
-import Accomodation from '../pages/User/Accomodation'
 import Adventure from '../pages/User/Adventure'
-import Transport from '../pages/User/Transport'
-import { Maps } from '../pages/User/Maps'
-import Packages from '../pages/User/Packages'
-import TableUser from '../pages/ProvUser/TableUser'
-import Tickets from '../pages/User/Tickets'
 import Detail from '../pages/User/Detail'
-import CreateDiscover from '../pages/ProvUser/CreateDiscover'
-import ShowDiscover from '../pages/ProvUser/ShowDiscover'
-import UpdateDiscover from '../pages/ProvUser/UpdateDiscover'
-//import UpdateAdventure from '../pages/ProvUser/UpdateAdventure'
-import ProfileProvider from '../pages/ProvUser/Profile'
+import Packages from '../pages/User/Packages'
+import Transport from '../pages/User/Transport'
+import Accomodation from '../pages/User/Accomodation'
+import Tickets from '../pages/User/Tickets'
+import { Maps } from '../pages/User/Maps'
 import SettingsUser from '../pages/User/Settings'
 import ProfileUser from '../pages/User/Profile'
 import Notifications from '../pages/User/Notifications'
+
+//* PROVIDER
+import ShowActivities from '../pages/ProvUser/ShowActivities'
+import CreateActivity from '../pages/ProvUser/CreateActivity'
+import UpdateActivity from '../pages/ProvUser/UpdateActivity'
+import ProfileProvider from '../pages/ProvUser/Profile'
+import TableUser from '../pages/ProvUser/TableUser'
+
+//* ADMIN
+import Dashboard from '../pages/Admin/Dashboard'
+import ShowAdventures from '../pages/Admin/ShowAdventures'
+import CreateAdventure from '../pages/Admin/CreateAdventure'
+import UpdateAdventure from '../pages/Admin/UpdateAdventure'
+import AdminTableUser from '../pages/Admin/AdminTableUser'
+import AdminProfile from '../pages/Admin/AdminProfile'
+import Settings from '../pages/Admin/Settings'
 
 export const admin = [
 	{
@@ -31,15 +40,15 @@ export const admin = [
 export const provider = [
 	{
 		path: '',
-		element: <ShowDiscover />,
+		element: <ShowActivities />,
 	},
 	{
 		path: 'create',
-		element: <CreateDiscover />,
+		element: <CreateActivity />,
 	},
 	{
 		path: 'update/:id',
-		element: <UpdateDiscover />,
+		element: <UpdateActivity />,
 	},
 	{
 		path: 'adventure',
@@ -57,15 +66,15 @@ export const provider = [
 export const PruebaProvider = [
 	{
 		path: '',
-		element: <ShowDiscover />,
+		element: <ShowAdventures />,
 	},
 	{
 		path: 'create',
-		element: <CreateDiscover />,
+		element: <CreateAdventure />,
 	},
 	{
 		path: 'update/:id',
-		element: <UpdateDiscover />,
+		element: <UpdateAdventure />,
 	},
 	{
 		path: 'adventure',
@@ -73,11 +82,11 @@ export const PruebaProvider = [
 	},
 	{
 		path: 'clients',
-		element: <TableUser />,
+		element: <AdminTableUser />,
 	},
 	{
 		path: 'profile',
-		element: <ProfileProvider />,
+		element: <AdminProfile />,
 	},
 ]
 export const user = [

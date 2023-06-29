@@ -16,7 +16,7 @@ import { MdLocationCity } from 'react-icons/md'
 import UserDropdown from '../dropdown/UserDropdown'
 import Dropdown from '../dropdown/Dropdown'
 
-export default function SidebarProveedor() {
+export default function SidebarAdmin() {
 	const navigate = useNavigate()
 
 	const [collapseShow, setCollapseShow] = React.useState('hidden')
@@ -95,16 +95,19 @@ export default function SidebarProveedor() {
 						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
 							<ul className='space-y-4'>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
+									<a
+										href='/PRUEBAprovider'
+										className='flex items-center font-semibold gap-2'
+									>
 										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
-											Activities
+											Adventures
 										</p>
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
 									<a
-										href='/provider/create'
+										href='/PRUEBAprovider/create'
 										className='flex items-center font-semibold gap-2'
 									>
 										<FaUser size={20} className='font-bold text-OrangeCooL' />
@@ -112,116 +115,34 @@ export default function SidebarProveedor() {
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
+									<a
+										href='/PRUEBAprovider'
+										className='flex items-center font-semibold gap-2'
+									>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
+									<a
+										href='/PRUEBAprovider'
+										className='flex items-center font-semibold gap-2'
+									>
 										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
+									<a
+										href='/PRUEBAprovider'
+										className='flex items-center font-semibold gap-2'
+									>
 										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>#</p>
 									</a>
 								</li>
 							</ul>
 						</nav>
-
-						{/* <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/dashboard") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/dashboard"
-                >
-                  <i
-                    className={
-                      "fas fa-tv mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/dashboard") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Dashboard
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/settings") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/settings"
-                >
-                  <i
-                    className={
-                      "fas fa-tools mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/settings") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Settings
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/tables") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/tables"
-                >
-                  <i
-                    className={
-                      "fas fa-table mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/tables") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Tables
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/maps"
-                >
-                  <i
-                    className={
-                      "fas fa-map-marked mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/maps") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Maps
-                </Link>
-              </li>
-            </ul> */}
 
 						{/* Divider */}
 						<hr className='my-4 md:min-w-full' />

@@ -63,7 +63,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>
-						{location.pathname === '/provider' ? (
+						{location.pathname === '/PRUEBAprovider' ? (
 							<Dropdown
 								button={<MoreOptionsButton />}
 								children={
@@ -78,10 +78,14 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
 												<div className='flex gap-5 items-center '>
 													<EditButon
-														onClick={() => navigate(`/provider/update/${data?._id}`)}
+														onClick={() =>
+															navigate(`/PRUEBAprovider/update/${data?._id}`)
+														}
 													/>
 													<p
-														onClick={() => navigate(`/provider/update/${data?._id}`)}
+														onClick={() =>
+															navigate(`/PRUEBAprovider/update/${data?._id}`)
+														}
 														className='cursor-pointer'
 													>
 														Edit destination

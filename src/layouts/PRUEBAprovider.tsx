@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import DashContainer2 from '../components/sections/dashContainer2'
 import Navbar from '../components/Navbars/AdminNavbar'
 import { useEffect } from 'react'
-import { fetchDestinations } from '../features/destinationSlice'
+import { fetchDestinations, fetchDestinationsSuccess } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'
 import { fetchUsers } from '../features/usersSlice'
 import SidebarAdmin from '../components/sidebar/SidebarAdmin'
@@ -11,7 +11,7 @@ export const PRUEBAprovider = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(fetchDestinations())
+		dispatch(fetchDestinationsSuccess)
 		dispatch(fetchUsers())
 	}, [dispatch])
 

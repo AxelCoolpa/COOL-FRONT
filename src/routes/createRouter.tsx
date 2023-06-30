@@ -8,7 +8,7 @@ import PrivateRoute from './PrivateRoute'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
-import { admin, provider, user, PruebaProvider } from './childrenRoutes'
+import { admin, provider, user, PruebaAdminProvider } from './childrenRoutes'
 import { PRUEBAprovider } from '../layouts/PRUEBAprovider'
 
 
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
 				<PRUEBAprovider />
 			</PrivateRoute>
 		),
-		children: PruebaProvider
+		children: PruebaAdminProvider
 	},
 	{
 		path: '/proveedor-registro',

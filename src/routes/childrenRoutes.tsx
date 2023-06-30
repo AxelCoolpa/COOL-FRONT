@@ -26,6 +26,7 @@ import UpdateAdventure from '../pages/Admin/UpdateAdventure'
 import AdminTableUser from '../pages/Admin/AdminTableUser'
 import AdminProfile from '../pages/Admin/AdminProfile'
 import Settings from '../pages/Admin/Settings'
+import PruebaHome from '../pages/ProvUser/pruebaHome'
 
 export const admin = [
 	{
@@ -79,11 +80,11 @@ export const PruebaAdminProvider = [
 	{
 		path: 'profile',
 		element: <AdminProfile />,
-	},/* 
+	},
 	{
 		path: 'home',
-		element: <AdminProfile />,
-	}, */
+		element: <PruebaHome />,
+	},
 ]
 export const user = [
 	{

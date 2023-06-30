@@ -98,17 +98,17 @@ export default function SidebarProveedor() {
 									<a href='/provider' className='flex items-center font-semibold gap-2'>
 										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
-											Adventures
+											Activities
 										</p>
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
 									<a
-										href='/provider/create'
+										href='/provider/clients'
 										className='flex items-center font-semibold gap-2'
 									>
 										<FaUser size={20} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>Create</p>
+										<p className='flex-grow ml-3 xl:ml-3'>Clients</p>
 									</a>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>

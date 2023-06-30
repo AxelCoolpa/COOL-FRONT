@@ -18,15 +18,15 @@ import { logout } from '../../features/LoginSlice'
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
 	const userProvider = user[1]
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()
 
 	const notifications = true
 
 	const handleLogout = () => {
-		dispatch(logout());
-	  };
+		dispatch(logout())
+	}
 
 	return (
 		<>
@@ -39,12 +39,12 @@ const Navbar: React.FC = () => {
 								src={Cool}
 								alt='Cool-LOGO'
 								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
-								onClick={() => navigate('/proveedor-admin')}
+								onClick={() => navigate('/PRUEBAprovider')}
 							/>
 						</div>
 						{/* Actual Page */}
 						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							<a className='text-sm text-navy-700 hover:underline' href=' '>
+							<a className='text-sm text-navy-700 hover:underline' href='/PRUEBAprovider'>
 								Pages
 								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
 							</a>
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
 								<input
 									type='search'
 									placeholder='Search'
-									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full xl:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
+									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full min-[1360px]:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
 								/>
 							</div>
 						</form>
@@ -244,13 +244,12 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
 												<a
-													href='#'
+													href='/PRUEBAprovider/profile'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
-													onClick={(e) => e.preventDefault()}
 												>
-													Another action
+													Profile
 												</a>
 												<a
 													href='#'
@@ -269,7 +268,12 @@ const Navbar: React.FC = () => {
 													}
 													onClick={(e) => e.preventDefault()}
 												>
-													<button className="mt-1 text-sm font-medium text-red-500 hover:text-red-500" onClick={handleLogout}>Logout</button>
+													<button
+														className='mt-1 text-sm font-medium text-red-500 hover:text-red-500'
+														onClick={handleLogout}
+													>
+														Logout
+													</button>
 												</a>
 											</div>
 										</div>

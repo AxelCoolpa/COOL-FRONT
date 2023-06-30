@@ -8,6 +8,13 @@ import destinationSlice from '../features/destinationSlice'
 import usersSlice from '../features/usersSlice'
 import destinationsByIdSlice from '../features/destinationByIdSlice'
 import userByIdSlice from '../features/userByIdSlice'
+import deleteAdventureSlice from '../features/deleteAdventureSlice'
+import updateAdventureSlice from '../features/updateAdventureSlice'
+import createActiviySlice from '../features/createActivitySlice'
+import updateActivitySlice from '../features/updateActivitySlice'
+import deleteActivitySlice from '../features/deleteActivitySlice'
+import activitiesSlice from '../features/activitiesSlice'
+import activityByIdSlice from '../features/activityByIdSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -15,11 +22,21 @@ export const store = configureStore({
 		register: registerReducer,
 		login: LoginSlice,
 		auth: authSlice,
-		createAdventure: createAdventureSlice,
-		destination: destinationSlice,
+		//* Users
 		user: usersSlice,
-		destinationById: destinationsByIdSlice,
 		userById: userByIdSlice,
+		//* Destinations
+		destination: destinationSlice,
+		destinationById: destinationsByIdSlice,
+		createAdventure: createAdventureSlice,
+		updateAdventure: updateAdventureSlice,
+		deleteAdventure: deleteAdventureSlice,
+		//* Activity
+		activities: activitiesSlice,
+		activityById: activityByIdSlice,
+		createActivity: createActiviySlice,
+		updateActivity: updateActivitySlice,
+		deleteActivity: deleteActivitySlice,
 	},
 })
 

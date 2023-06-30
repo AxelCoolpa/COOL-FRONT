@@ -1,9 +1,7 @@
-//   MrTban, Marto
-
 import SidebarB from '../components/sidebar/SidebarProveedor'
 import { Outlet } from 'react-router-dom'
 import DashContainer2 from '../components/sections/dashContainer2'
-import Navbar from '../components/Navbars/AdminNavbar'
+import Navbar from '../components/Navbars/ProviderNavbar'
 import { useEffect } from 'react'
 import { fetchDestinations } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'

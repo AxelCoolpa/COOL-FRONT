@@ -20,7 +20,7 @@ export const PRUEBAprovider = () => {
 			<SidebarAdmin />
 			<DashContainer2>
 				<Navbar />
-				<div className='md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto'>
+				<div className='md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-20 flex flex-wrap items-center justify-between w-full mx-auto'>
 					<Outlet />
 				</div>
 			</DashContainer2>

@@ -10,14 +10,12 @@ const PruebaHome = () => {
         <div className="absolute inset-0 h-full w-full bg-blue-500/50" />
       </div>
       <Card className="xl:flex justify-between items-center -mt-8 mb-6 lg:mx-3">
-      
                 <PruebaBookingBar />
-        
       </Card>
         
       <Card className="mt-10 gap-6 lg:mx-3">
         <CardBody>
-            <div className="">
+            <div className="flex items-center gap-6">
                 
             </div>
             <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">

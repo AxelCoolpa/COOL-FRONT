@@ -29,8 +29,6 @@ const AddAdventure = () => {
 	const [formData, setFormData] = useState<createAdventureFormData>({
 		title: '',
 		description: '',
-		individualPrice: '',
-		groupPrice: '',
 		gallery: [],
 		categories: [],
 		location: '',

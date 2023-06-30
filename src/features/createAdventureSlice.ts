@@ -8,8 +8,6 @@ export interface createAdventureFormData {
 	description: string
 	categories: string[]
 	location: string
-	individualPrice: string
-	groupPrice: string
 	gallery: []
 
 	rating?: number[]

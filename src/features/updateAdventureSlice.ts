@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../store/Store'
 import { updateAdventureAPI } from '../api/updateAdventureAPI'
 
+import { toast } from 'react-hot-toast'
 export interface updateAdventureFormData {
 	title: string
 	description: string
@@ -58,7 +59,9 @@ export const updateAdventure =
 			await updateAdventureAPI(formData, userID, destinationID)
 
 			dispatch(updateAdventureSuccess())
+			toast.success('Adventue update successfully')
 		} catch (error: any) {
 			dispatch(updateAdventureFailure(error.message))
+			toast.error('Something went wrong')
 		}
 	}

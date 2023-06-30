@@ -36,22 +36,22 @@ const ProfileUserSection = () => {
 
 	return (
 		<div className='flex flex-col gap-10'>
-			<h1 className='text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold pt-5 text-center tracking-tighter'>
+			<h1 className='text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold py-5 text-center tracking-tighter'>
 				Your profile
 			</h1>
-			<div className='flex flex-col gap-10 mx-28'>
+			<div className='flex flex-col gap-10 mx-5 xl:mx-10 2xl:mx-20'>
 				<div className='flex gap-7 ml-3'>
 					<Avatar avatar={currentUser?.profileImg} />
 					<div className='flex flex-col justify-center'>
 						<h3 className='text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold'>
 							Hello, {currentUser?.name}
 						</h3>
-						<span className='text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-neutral-400'>
+						<span className='text-sm lg:text-base xl:text-lg 2xl:text-xl text-neutral-400'>
 							{currentUser?.location}
 						</span>
 					</div>
 				</div>
-				<div className='flex flex-col gap-[30px] text-xs md:text-sm lg:text-base xl:text-lg'>
+				<div className='flex flex-col gap-[30px] text-sm lg:text-base xl:text-lg'>
 					<ProfileButton
 						label='Personal Information'
 						icon={TbUserCircle}

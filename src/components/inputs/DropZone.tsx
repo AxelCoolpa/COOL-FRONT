@@ -31,7 +31,7 @@ const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected }) => {
 			) : (
 				<>
 					<TbPhotoPlus size={54} />
-					<p className='text-xs min-[1440px]:text-base'>
+					<p className='text-xs lg:text-sm min-[1440px]:text-base'>
 						Arrastra y suelta archivos aquí, o haz clic para seleccionar archivos
 					</p>
 				</>

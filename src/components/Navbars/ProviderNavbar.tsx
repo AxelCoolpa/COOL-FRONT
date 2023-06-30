@@ -39,12 +39,12 @@ const Navbar: React.FC = () => {
 								src={Cool}
 								alt='Cool-LOGO'
 								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
-								onClick={() => navigate('/PRUEBAprovider')}
+								onClick={() => navigate('/provider')}
 							/>
 						</div>
 						{/* Actual Page */}
 						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							<a className='text-sm text-navy-700 hover:underline' href='/PRUEBAprovider'>
+							<a className='text-sm text-navy-700 hover:underline' href='/provider'>
 								Pages
 								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
 							</a>
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
 								<input
 									type='search'
 									placeholder='Search'
-									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full min-[1360px]:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
+									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full xl:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
 								/>
 							</div>
 						</form>
@@ -230,7 +230,7 @@ const Navbar: React.FC = () => {
 								<Dropdown
 									button={<Avatar avatar={AvatarImg} wh={12} />}
 									children={
-										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
+										<div className='flex h-52 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
@@ -244,7 +244,7 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
 												<a
-													href='/PRUEBAprovider/profile'
+													href='/provider/profile'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}

@@ -39,11 +39,11 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 		.slice(0, 3)
 
 	return (
-		<div className='flex flex-col items-center justify-center gap-6'>
-			<div className='relative flex items-center justify-center xl:h-[350px] 2xl:h-[400px] transition'>
+		<div className='flex flex-col items-center justify-center gap-6 w-full'>
+			<div className='relative flex items-center justify-center w-full xl:h-[350px] 2xl:h-[400px] transition'>
 				<img
 					src={image || headerImg}
-					className='-z-10 w-screen h-[250px] lg:h-[300px] xl:h-[350px] 2xl:h-[400px] object-cover rounded-[20px]'
+					className='-z-10 w-full h-[250px] lg:h-[300px] xl:h-[350px] 2xl:h-[400px] object-cover rounded-[20px]'
 				/>
 				<div className='absolute top-0 flex w-full bg-black/50 rounded-[20px] h-full xl:h-[350px] 2xl:h-[400px]'></div>
 				{title && subtitle ? (

@@ -1,14 +1,14 @@
 import axios from 'axios'
-import updateAdventureFormData from '../features/updateAdventureSlice'
+import updateActivityFormData from '../features/updateActivitySlice'
 
 import { baseURL } from '../baseURL'
 
-export const updateAdventureAPI = async (
-	formData: typeof updateAdventureFormData,
-	userID: string,
-	destinationID: string
+export const updateActivityAPI = async (
+	formData: typeof updateActivityFormData,
+	providerID: string,
+	activityID: string
 ) => {
-	const URL = `${baseURL}/destination/${userID}/update/${destinationID}`
+	const URL = `${baseURL}/activity/${providerID}/update/${activityID}`
 
 	try {
 		const response = await axios.put(URL, formData, {

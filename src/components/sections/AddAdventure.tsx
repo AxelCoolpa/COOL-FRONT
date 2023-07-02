@@ -29,8 +29,6 @@ const AddAdventure = () => {
 	const [formData, setFormData] = useState<createAdventureFormData>({
 		title: '',
 		description: '',
-		individualPrice: '',
-		groupPrice: '',
 		gallery: [],
 		categories: [],
 		location: '',
@@ -72,25 +70,9 @@ const AddAdventure = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 
-		const {
-			title,
-			description,
-			individualPrice,
-			groupPrice,
-			gallery,
-			categories,
-			location,
-		} = formData
+		const { title, description, gallery, categories, location } = formData
 
-		if (
-			!title ||
-			!description ||
-			!individualPrice ||
-			!groupPrice ||
-			!gallery ||
-			!categories ||
-			!location
-		) {
+		if (!title || !description || !gallery || !categories || !location) {
 			toast.error('Por favor, complete todos los campos')
 			return
 		}
@@ -98,8 +80,6 @@ const AddAdventure = () => {
 		const data = new FormData()
 		data.append('title', title)
 		data.append('description', description)
-		data.append('individualPrice', individualPrice)
-		data.append('groupPrice', groupPrice)
 		data.append('location', location)
 
 		for (let i = 0; i < formData.gallery.length; i++) {
@@ -115,8 +95,6 @@ const AddAdventure = () => {
 			setFormData({
 				title: '',
 				description: '',
-				individualPrice: '',
-				groupPrice: '',
 				gallery: [],
 				categories: [],
 				location: '',

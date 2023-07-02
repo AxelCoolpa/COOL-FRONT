@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { categories } from '../categories/categories'
 
@@ -17,7 +17,6 @@ import {
 
 import DropZone from '../inputs/DropZone'
 import AdventureForm from '../forms/AdventureForm'
-import ProviderCard from '../listings/ProviderCard'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
@@ -25,6 +24,7 @@ import Container from '../containers/Container'
 
 const UpdateAdventure = () => {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const { id } = useParams()
 	const destinationID = id
@@ -65,9 +65,6 @@ const UpdateAdventure = () => {
 		}
 	}
 
-	// formData.categories = checkboxValues
-	// console.log(formData.categories)
-
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
 		setFormData((prevFormData) => ({
@@ -87,37 +84,25 @@ const UpdateAdventure = () => {
 	const handleUpdate = async (e: React.FormEvent) => {
 		e.preventDefault()
 
-		const {
-			title,
-			description,
-			individualPrice,
-			groupPrice,
-			gallery,
-			categories,
-			location,
-		} = formData
+		const { title, description, individualPrice, groupPrice, location } = formData
 
-		if (
-			!title ||
-			!description ||
-			!individualPrice ||
-			!groupPrice ||
-			!gallery ||
-			!categories ||
-			!location
-		) {
-			console.log('Por favor, complete todos los campos')
-			console.log({
-				title,
-				description,
-				individualPrice,
-				groupPrice,
-				gallery,
-				categories,
-				location,
-			})
-			return
-		}
+		// if (
+		// 	!title ||
+		// 	!description ||
+		// 	!individualPrice ||
+		// 	!groupPrice ||
+		// 	!location
+		// ) {
+		// 	console.log('Por favor, complete todos los campos')
+		// 	console.log({
+		// 		title,
+		// 		description,
+		// 		individualPrice,
+		// 		groupPrice,
+		// 		location,
+		// 	})
+		// 	return
+		// }
 
 		const data = new FormData()
 		data.append('title', title)
@@ -125,10 +110,6 @@ const UpdateAdventure = () => {
 		data.append('individualPrice', individualPrice)
 		data.append('groupPrice', groupPrice)
 		data.append('location', location)
-		data.append('activities', activities)
-		data.append('starterPack', starterPack)
-		data.append('startTime', startTime)
-		data.append('endTime', endTime)
 
 		for (let i = 0; i < formData.gallery.length; i++) {
 			data.append('gallery', formData.gallery[i])
@@ -139,16 +120,7 @@ const UpdateAdventure = () => {
 		})
 
 		try {
-			await dispatch(updateAdventure(data, userID))
-			setFormData({
-				title: '',
-				description: '',
-				individualPrice: '',
-				groupPrice: '',
-				gallery: [],
-				categories: [],
-				location: '',
-			})
+			await dispatch(updateAdventure(data, userID, destinationID))
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
 		}
@@ -227,7 +199,7 @@ const UpdateAdventure = () => {
 							/>
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Create' card />
+							<Button label='Save' card />
 						</div>
 					</div>
 				</form>

@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
+import {  useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import styles from '../../styles/Global'
 import Cool from '../../assets/cool.png'
 
@@ -43,9 +43,10 @@ export default function SidebarAdmin() {
 						/>
 					</div>
 
-					{/* User */}
+					{/* User --- ACTUALIZAR --- User */}
+					
 
-					<ul className='md:hidden items-center flex flex-wrap list-none'>
+					< ul className='md:hidden items-center flex flex-wrap list-none'>
 						<li className='inline-block relative'>
 							<Dropdown />
 						</li>
@@ -74,7 +75,7 @@ export default function SidebarAdmin() {
 							</div>
 						</div>
 
-						{/* Form */}
+						{/* Search */}
 						<form className='mt-6 mb-4 md:hidden'>
 							<div className='relative flex w-full flex-wrap items-stretch'>
 								<span className='z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3'>
@@ -95,51 +96,51 @@ export default function SidebarAdmin() {
 						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
 							<ul className='space-y-4'>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a
-										href='/PRUEBAprovider'
-										className='flex items-center font-semibold gap-2'
+									<Link
+										to=''
+										className='flex items-center   font-semibold gap-2'
 									>
 										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Adventures
 										</p>
-									</a>
+									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a
-										href='/PRUEBAprovider/clients'
+									<Link
+										to='clients'
 										className='flex items-center font-semibold gap-2'
 									>
 										<FaUser size={20} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Clients</p>
-									</a>
+									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a
-										href='/PRUEBAprovider'
+									<Link
+										to='home'
 										className='flex items-center font-semibold gap-2'
 									>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>#</p>
-									</a>
+										<p className='flex-grow ml-3 xl:ml-3'>home</p>
+									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a
-										href='/PRUEBAprovider'
+									<Link
+										to=''
 										className='flex items-center font-semibold gap-2'
 									>
 										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>#</p>
-									</a>
+										<p className='flex-grow ml-3 xl:ml-3'>destino</p>
+									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a
-										href='/PRUEBAprovider'
+									<Link
+										to=''
 										className='flex items-center font-semibold gap-2'
 									>
 										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>#</p>
-									</a>
+										<p className='flex-grow ml-3 xl:ml-3'>actividad</p>
+									</Link>
 								</li>
 							</ul>
 						</nav>

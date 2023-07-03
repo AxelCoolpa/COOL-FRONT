@@ -15,6 +15,7 @@ import updateActivitySlice from '../features/updateActivitySlice'
 import deleteActivitySlice from '../features/deleteActivitySlice'
 import activitiesSlice from '../features/activitiesSlice'
 import activityByIdSlice from '../features/activityByIdSlice'
+import updateUserSlice from '../features/updateUserSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
 		//* Users
 		user: usersSlice,
 		userById: userByIdSlice,
+		updateUser: updateUserSlice,
 		//* Destinations
 		destination: destinationSlice,
 		destinationById: destinationsByIdSlice,

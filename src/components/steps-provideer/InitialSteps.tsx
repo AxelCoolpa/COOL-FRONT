@@ -7,11 +7,26 @@ import StepFive from './StepFIve';
 import GreenSidebar from '../SideProvider/GreenSidebar';
 import StepSidebar from '../SideProvider/StepSidebar';
 
+
+interface FormProvider {
+  companyName: string,
+  companyAddress: string,
+  companyPhone: string,
+  companyEmail: string,
+  companyRepresentative: string,
+  relatedChannel:string,
+  descriptionBusiness:string,
+  isRegistered:boolean,
+  
+}
+
 export type StepProps = {
   next?: () => void;
   previous?: () => void;
   skip?: ()=> void
   handleStepClick?: (index: number)=> void
+  formData: FormProvider
+  handleSetForm:(form: FormProvider)=> void
 };
 
 
@@ -19,7 +34,17 @@ export type StepProps = {
 const StepByStepComponent: React.FC = () => {
   const [step, setStep] = useState(1);
   const [currentStep, setCurrentStep] = useState(0);
-
+  const [form, setForm] = useState<FormProvider>({
+    companyName:"",
+   companyAddress:"",
+   companyPhone:"",
+   companyEmail: "",
+   companyRepresentative:"",
+   relatedChannel:"",
+   descriptionBusiness:"",
+   isRegistered:false,
+  });
+  
   
   //const [stepComponent, setStepComponent] = useState<React.ComponentType<StepProps> | null>(null);
 
@@ -56,11 +81,23 @@ const StepByStepComponent: React.FC = () => {
 
   const handleSkip =() => {
     setStep(1)
+    setForm({companyName:"",
+    companyAddress:"",
+    companyPhone:"",
+    companyEmail: "",
+    companyRepresentative:"",
+    relatedChannel:"",
+    descriptionBusiness:"",
+    isRegistered:false})
   }
   
   const handleStepClick = (stepIndex: number) => {
     setCurrentStep(stepIndex);
   };
+
+const handleSetForm = (form: FormProvider) => {
+  setForm(form);
+}
 
   return (
     <>
@@ -69,19 +106,19 @@ const StepByStepComponent: React.FC = () => {
     <div className="w-2/3 mx-auto mt-6 ">
      
       {
-       step === 1 && <StepOne  next={handleNext} />
+       step === 1 && <StepOne handleSetForm={handleSetForm} next={handleNext} formData={form}/>
       }
       {
-       step === 2 && <StepTwo  next={handleNext} previous={handlePrevious}/>
+       step === 2 && <StepTwo handleSetForm={handleSetForm} formData={form} next={handleNext} previous={handlePrevious}/>
       }
       {
-       step === 3 && <StepThree  next={handleNext} previous={handlePrevious} handleStepClick={handleStepClick}/>
+       step === 3 && <StepThree handleSetForm={handleSetForm} formData={form} next={handleNext} previous={handlePrevious} handleStepClick={handleStepClick}/>
       }
       {
-       step === 4 && <StepFour  next={handleNext} previous={handlePrevious} handleStepClick={handleStepClick}/>
+       step === 4 && <StepFour handleSetForm={handleSetForm}  formData={form} next={handleNext} previous={handlePrevious} handleStepClick={handleStepClick}/>
       }
       {
-       step === 5 && <StepFive  next={handleNext} previous={handlePrevious} skip={handleSkip} handleStepClick={handleStepClick}/>
+       step === 5 && <StepFive handleSetForm={handleSetForm} formData={form} next={handleNext} previous={handlePrevious} skip={handleSkip} handleStepClick={handleStepClick}/>
       }
      
     </div>

@@ -9,7 +9,7 @@ const StepThree: React.FC<StepProps> = ({handleStepClick ,next , previous}) => {
   const handleSearch = (e :React.FormEvent) => {
     e.preventDefault()
     // Genera la URL de búsqueda del mapa utilizando el valor del input de búsqueda
-    const url = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(searchValue)}&key=TU_API_KEY`;
+    const url = `https://www.google.com/maps/embed?pb=${encodeURIComponent(searchValue)}`;
     setMapUrl(url);
   }
   const handleNext = () => {

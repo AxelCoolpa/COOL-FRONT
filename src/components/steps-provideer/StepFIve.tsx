@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { IoCloseOutline } from 'react-icons/io5';
 import { StepProps } from './InitialSteps'; 
 

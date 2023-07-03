@@ -4,19 +4,21 @@ import { AppDispatch, RootState } from '../store/Store'
 
 export interface UserById {
 	_id?: string
-	username?: string
-	email?: string
-	name?: string
-	lastName?: string
-	profileImg?: File[]
+	username: string
+	email: string
+	firstName: string
+	lastname: string
+	avatar: string
 
 	//* Contact information
-	phoneNumber?: string
-	address?: string
-	city?: string
-	country?: string
-	ZIP?: number
-	about?: string
+	phone: string
+	DNI: string
+	location: string
+	// address?: string
+	// city?: string
+	// country?: string
+	// ZIP?: number
+	description: string
 
 	role?: {
 		roleName?: string

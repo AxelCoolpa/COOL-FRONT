@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { selectUserById } from '../../features/userByIdSlice'
@@ -10,9 +11,10 @@ import DropZone from '../inputs/DropZone'
 const SettingsUserCard = () => {
 	const dispatch = useDispatch()
 
+	const { id } = useParams()
+	const userID = id
+
 	const user = useSelector(selectUserById)
-	const userID = user._id
-	console.log(user)
 
 	const [formData, setFormData] = useState<updateUserFormData>({
 		username: user?.username,
@@ -36,11 +38,11 @@ const SettingsUserCard = () => {
 		}))
 	}
 
-	const handleFilesSelected = (files: File[]) => {
-		const updatedGallery = [...formData.avatar, ...files]
+	const handleFilesSelected = (file: File[]) => {
+		const updatedAvatar = [...formData.avatar, ...file]
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			avatar: updatedGallery,
+			avatar: updatedAvatar,
 		}))
 	}
 

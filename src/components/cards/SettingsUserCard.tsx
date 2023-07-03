@@ -12,7 +12,7 @@ const SettingsUserCard = () => {
 
 	const user = useSelector(selectUserById)
 	const userID = user._id
-	console.log(userID)
+	console.log(user)
 
 	const [formData, setFormData] = useState<updateUserFormData>({
 		username: user?.username,
@@ -23,9 +23,8 @@ const SettingsUserCard = () => {
 		DNI: user?.DNI,
 		phone: user?.phone,
 		location: user?.location,
-		// address: user?.address,
 		// city: user?.city,
-		// ZIP: user?.ZIP,
+		// address: user?.address,
 		description: user?.description,
 	})
 
@@ -262,25 +261,6 @@ const SettingsUserCard = () => {
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
 										placeholder={user?.city || 'New York'}
 										value={formData?.city}
-										onChange={handleChange}
-									/>
-								</div>
-							</div> */}
-							{/* ZIP */}
-							{/* <div className='w-full lg:w-4/12 p-4'>
-								<div className='relative w-full mb-3'>
-									<label
-										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
-										htmlFor='grid-password'
-									>
-										Postal Code
-									</label>
-									<input
-										id='ZIP'
-										name='ZIP'
-										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder={user?.ZIP || 'Postal Code'}
-										value={formData?.ZIP}
 										onChange={handleChange}
 									/>
 								</div>

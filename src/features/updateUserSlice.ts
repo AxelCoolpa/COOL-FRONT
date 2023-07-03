@@ -15,7 +15,6 @@ export interface updateUserFormData {
 	location: string
 	// address?: string
 	// city?: string
-	// ZIP?: string
 	description: string
 }
 

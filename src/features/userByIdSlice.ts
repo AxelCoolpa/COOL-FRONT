@@ -14,10 +14,9 @@ export interface UserById {
 	phone: string
 	DNI: string
 	location: string
-	// address?: string
-	// city?: string
 	// country?: string
-	// ZIP?: number
+	// city?: string
+	// address?: string
 	description: string
 
 	role?: {

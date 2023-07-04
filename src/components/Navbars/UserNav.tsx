@@ -19,7 +19,7 @@ import { useGetUsersQuery } from '../../api/getUsers'
 
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
-	//const userProvider = user[1]
+
 	const formData = useSelector((state: RootState) => state.login.formData);
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -254,15 +254,14 @@ const Navbar: React.FC = () => {
 												>
 													Profile
 												</Link>
-												<Link
-													to='/provider'
+												<a
+													href='provider'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
-													onClick={(e) => e.preventDefault()}
 												>
-													Something else here
-												</Link>
+													PROVIDER USER
+												</a>
 												<div className='mt-3 h-px w-full bg-gray-200' />
 												<a
 													href='#'

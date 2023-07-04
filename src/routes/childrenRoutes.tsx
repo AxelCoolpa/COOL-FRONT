@@ -96,6 +96,10 @@ export const user = [
 		element: <Home />,
 	},
 	{
+		path: 'create',
+		element: <CreateAdventure />,
+	},
+	{
 		path: 'clients',
 		element: <TableUser />,
 	},
@@ -124,7 +128,7 @@ export const user = [
 		element: <Tickets />,
 	},
 	{
-		path: 'profile',
+		path: '/profile',
 		element: <SettingsUser />,
 	},
 	{

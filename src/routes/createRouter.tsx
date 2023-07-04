@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { User } from '../layouts/User'
 import { Admin } from '../layouts/Admin'
-import { ProvDashboard } from '../layouts/ProvDashboard'
+import { Provider } from '../layouts/Provider'
 import { ProvRegister } from '../layouts/ProvRegister'
 import PrivateRoute from './PrivateRoute'
 
@@ -9,7 +9,7 @@ import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 import { admin, provider, user, PruebaAdminProvider } from './childrenRoutes'
-import { PRUEBAprovider } from '../layouts/PRUEBAprovider'
+import { AdminDash } from '../layouts/AdminDash'
 
 
 export const router = createBrowserRouter([
@@ -35,16 +35,16 @@ export const router = createBrowserRouter([
 		path: '/provider',
 		element: (
 			<PrivateRoute>
-				<ProvDashboard />
+				<Provider />
 			</PrivateRoute>
 		),
 		children: provider,
 	},
 	{
-		path: '/PRUEBAprovider',
+		path: '/admindash',
 		element: (
 			<PrivateRoute>
-				<PRUEBAprovider />
+				<AdminDash />
 			</PrivateRoute>
 		),
 		children: PruebaAdminProvider

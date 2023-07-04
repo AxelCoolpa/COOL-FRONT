@@ -15,7 +15,6 @@ export const PRUEBAprovider = () => {
 		dispatch(fetchUsers())
 	}, [dispatch])
 
-	const formData = JSON.parse(localStorage.getItem("formData"));
 
 	return (
 		<>

@@ -1,6 +1,6 @@
 import React from 'react'
 import SideBar from '../components/sidebar/SideBar'
-import SidebarB from '../components/sidebar/SidebarProveedor'
+import SidebarB from '../components/sidebar/SidebarUser'
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import Dashboard from '../pages/Admin/Dashboard'
 import Settings from '../pages/Admin/Settings'

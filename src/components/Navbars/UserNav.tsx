@@ -13,12 +13,12 @@ import AvatarImg from '../../assets/Avatar.jpg'
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
-import { loginStart, logout } from '../../features/LoginSlice'
+import { logout } from '../../features/LoginSlice'
 import { RootState } from '../../store/Store'
 
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
-	const userProvider = user[1]
+	//const userProvider = user[1]
 	const formData = useSelector((state: RootState) => state.login.formData);
 	const dispatch = useDispatch()
 	const navigate = useNavigate()

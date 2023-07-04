@@ -7,10 +7,9 @@ const Loading: React.FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
-
+    }, 1000);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [setTimeout]);
 
   if (isLoading) {
     return (
@@ -22,8 +21,7 @@ const Loading: React.FC = () => {
 
   return (
     <>
-            
-
+      {isLoading}
     </>
   );
 };

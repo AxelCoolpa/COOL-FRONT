@@ -96,6 +96,10 @@ export const user = [
 		element: <Adventure />,
 	},
 	{
+		path: 'clients',
+		element: <TableUser />,
+	},
+	{
 		path: 'details/:id',
 		element: <Detail />,
 	},

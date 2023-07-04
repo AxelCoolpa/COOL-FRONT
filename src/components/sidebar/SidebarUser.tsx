@@ -6,8 +6,8 @@ import styles from '../../styles/Global'
 import Cool from '../../assets/cool.png'
 
 import { BiMenu } from 'react-icons/bi'
-import { BsFillGrid1X2Fill } from 'react-icons/bs'
-import { FaUser } from 'react-icons/fa'
+import { BsFillGrid1X2Fill, BsTicketPerforated } from 'react-icons/bs'
+import { FaBed, FaMapMarkerAlt, FaUser } from 'react-icons/fa'
 import { FiSearch } from 'react-icons/fi'
 import { GrSafariOption } from 'react-icons/gr'
 import { IoMdSettings } from 'react-icons/io'
@@ -15,6 +15,10 @@ import { MdLocationCity } from 'react-icons/md'
 
 import UserDropdown from '../dropdown/UserDropdown'
 import Dropdown from '../dropdown/Dropdown'
+import { GiWavyItinerary } from 'react-icons/gi'
+import { RiCarFill } from 'react-icons/ri'
+import { CgInfinity } from 'react-icons/cg'
+import { GoHome } from 'react-icons/go'
 
 export default function SidebarUser() {
 	const navigate = useNavigate()
@@ -95,38 +99,75 @@ export default function SidebarUser() {
 						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
 							<ul className='space-y-4'>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
-										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
+								<Link
+										to=''
+										className='flex items-center   font-semibold gap-2'
+									>
+										<GoHome size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
-											Activities
+											Home
 										</p>
-									</a>
+									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<a
-										href='/provider/clients'
-										className='flex items-center font-semibold gap-2'
+								<Link
+										to='clients'
+										className='flex items-center   font-semibold gap-2'
 									>
-										<FaUser size={20} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>Clients</p>
-									</a>
+									<GiWavyItinerary size={20} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
+											Itinerary
+										</p>
+									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
-										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>#</p>
-									</a>
-								</li>
-								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
-										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>#</p>
-									</a>
+								<Link
+										to='packages'
+										className='flex items-center   font-semibold gap-2'
+									>
+										<CgInfinity size={22} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
+											Packages
+										</p>
+									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<a href='/provider' className='flex items-center font-semibold gap-2'>
-										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>#</p>
+								<Link
+										to='transport'
+										className='flex items-center   font-semibold gap-2'
+									>
+										<RiCarFill size={22} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
+											Transport
+										</p>
+									</Link>
+								</li>
+								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
+								<Link
+										to='accomodation'
+										className='flex items-center   font-semibold gap-2'
+									>
+										<FaBed size={22} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
+											Hotels
+										</p>
+									</Link>
+								</li>
+								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
+								<Link
+										to='tickets'
+										className='flex items-center   font-semibold gap-2'
+									>
+										<BsTicketPerforated size={22} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
+											Tickets
+										</p>
+									</Link>
+								</li>
+								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
+									<a href='maps' className='flex items-center font-semibold gap-2'>
+									<FaMapMarkerAlt size={26} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3'>Maps</p>
 									</a>
 								</li>
 							</ul>

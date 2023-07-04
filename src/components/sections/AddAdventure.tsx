@@ -68,7 +68,7 @@ const AddAdventure = () => {
 	// 	}))
 	// }
 
-	const handleUpload = (picture) => {
+	const handleUpload = (picture: any) => {
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			gallery: picture,
@@ -128,11 +128,7 @@ const AddAdventure = () => {
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						{/* <DropZone onFilesSelected={handleFilesSelected} /> */}
 
-						<CloudinaryUploadImg
-							onUpload={handleUpload}
-							name='gallery'
-							onClick={handleChange}
-						/>
+						<CloudinaryUploadImg onUpload={handleUpload} />
 					</div>
 
 					{/* FORM */}

@@ -23,6 +23,8 @@ export const userApi = createApi({
 	})
 })
 
+export const { useGetUsersQuery, useGetUserByIdQuery } = userApi
+
 export const getUsersAPI = async () => {
 	try {
 		const response = await axios(`${baseURL}/users`)

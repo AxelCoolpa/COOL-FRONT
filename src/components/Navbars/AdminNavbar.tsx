@@ -13,11 +13,13 @@ import AvatarImg from '../../assets/Avatar.jpg'
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
-import { logout } from '../../features/LoginSlice'
+import { loginStart, logout } from '../../features/LoginSlice'
+import { RootState } from '../../store/Store'
 
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
 	const userProvider = user[1]
+	const formData = useSelector((state: RootState) => state.login.formData);
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -234,10 +236,10 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {userProvider?.username}
+														👋 Hey, {formData?.firstName}
 													</p>
 													<p className='text-sm pl-6 cursor-default'>
-														{userProvider?.role?.roleName}
+														{formData?.role?.rolename}
 													</p>
 												</div>
 											</div>
@@ -282,9 +284,9 @@ const Navbar: React.FC = () => {
 								/>
 								<div className='hidden xl:flex flex-col justify-center'>
 									<label className='2xl:text-lg font-semibold'>
-										{userProvider?.username}
+										{formData?.email}
 									</label>
-									<span className='text-xs'>{userProvider?.role?.roleName}</span>
+									<span className='text-xs'>{formData?.email}</span>
 								</div>
 								<div className=''>
 									<select

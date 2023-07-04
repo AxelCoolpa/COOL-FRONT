@@ -117,7 +117,7 @@ export default function SidebarAdmin() {
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
 									<Link
-										to='packages'
+										to='#'
 										className='flex items-center font-semibold gap-2'
 									>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
@@ -130,16 +130,16 @@ export default function SidebarAdmin() {
 										className='flex items-center font-semibold gap-2'
 									>
 										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>destino</p>
+										<p className='flex-grow ml-3 xl:ml-3'>Destino</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
 									<Link
-										to=''
+										to='create'
 										className='flex items-center font-semibold gap-2'
 									>
 										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>actividad</p>
+										<p className='flex-grow ml-3 xl:ml-3'>Create</p>
 									</Link>
 								</li>
 							</ul>

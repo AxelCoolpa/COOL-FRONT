@@ -14,6 +14,7 @@ import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
 import { logout } from '../../features/LoginSlice'
+import { RootState } from '../../store/Store'
 
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
@@ -22,6 +23,7 @@ const Navbar: React.FC = () => {
 	const navigate = useNavigate()
 	const location = useLocation()
 
+	const formData = useSelector((state: RootState) => state.login.formData);
 	const notifications = true
 
 	const handleLogout = () => {
@@ -234,10 +236,10 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {userProvider?.username}
+														👋 Hey, {formData?.email}
 													</p>
 													<p className='text-sm pl-6 cursor-default'>
-														{userProvider?.role?.roleName}
+														{formData?.email}
 													</p>
 												</div>
 											</div>
@@ -252,13 +254,12 @@ const Navbar: React.FC = () => {
 													Profile
 												</a>
 												<a
-													href='#'
+													href='/'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
-													onClick={(e) => e.preventDefault()}
 												>
-													Something else here
+													USUARIO FINAL
 												</a>
 												<div className='mt-3 h-px w-full bg-gray-200' />
 												<a
@@ -282,9 +283,9 @@ const Navbar: React.FC = () => {
 								/>
 								<div className='hidden xl:flex flex-col justify-center'>
 									<label className='2xl:text-lg font-semibold'>
-										{userProvider?.username}
+										{formData?.email}
 									</label>
-									<span className='text-xs'>{userProvider?.role?.roleName}</span>
+									<span className='text-xs'>{formData?.email}</span>
 								</div>
 								<div className=''>
 									<select

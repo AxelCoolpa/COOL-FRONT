@@ -21,9 +21,13 @@ const Home = () => {
 	const dispatch = useDispatch();
   
 	useEffect(() => {
-		dispatch(fetchDestinationsStart);
+		dispatch(fetchDestinationsStart());
 }, [dispatch]);
-	
+
+const validDestinations = destinations.filter(
+	(destination) => destination !== undefined && destination !== null
+)
+
 const filteredDestinations = destinations.filter((destination) => {
 	if (checkboxValues.length === 0) {
 		console.log("ninguna seleccionada");
@@ -34,8 +38,10 @@ const filteredDestinations = destinations.filter((destination) => {
 		  );
 		}
 	});
+
 	const discover =
 	filteredDestinations[Math.floor(Math.random() * destinations.length)];
+	
 	if (loading) {
 		return (
 			<div className="justify-items-center top-10">
@@ -46,6 +52,7 @@ const filteredDestinations = destinations.filter((destination) => {
 	if (error) {
 	  return <div>Error al cargar destinos: {error} </div>;
 	}
+	
 	return (
 		<>
 		<HeaderSection
@@ -60,8 +67,8 @@ const filteredDestinations = destinations.filter((destination) => {
             <div className="flex px-5">
               {/* {!loading && !error && ( */}
                 <div className=" grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 min-[1540px]:grid-cols-5 min-[1640px]:grid-cols-6 gap-1">
-                  {filteredDestinations.map((listing) => (
-                    <DestinationCard key={listing._id} data={listing} />
+                  {validDestinations.map((destination) => (
+                    <DestinationCard key={destination._id} data={destination} />
                   ))}
                 </div>
               {/* )} */}

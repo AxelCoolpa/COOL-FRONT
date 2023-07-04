@@ -15,4 +15,4 @@ const DashContainer2: React.FC<Props> = ({ children }) => {
     )
 }
 
-export default DashContainer2
+export default DashContainer2;

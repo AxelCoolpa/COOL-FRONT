@@ -6,7 +6,6 @@ import { baseURL } from '../baseURL'
 export const loginUserAPI = async (formData: LoginFormData): Promise<void> => {
 	try {
 		const response = await axios.post(`${baseURL}/signIn`, formData)
-		console.log(response.data)
 		return response.data
 	} catch (error: any) {
 		throw new Error(error.response?.data?.message || error.message)

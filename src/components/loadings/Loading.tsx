@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './loading.css'
 
 const Loading: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setIsLoading(false);
+      setIsLoading(true);
     }, 1000);
-    return () => clearTimeout(timeout);
-  }, [setTimeout]);
+    return () => {clearTimeout(timeout)}
+  }, []);
 
   if (isLoading) {
     return (

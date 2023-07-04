@@ -31,8 +31,12 @@ const Dashboard: React.FC = () => {
       
       data?.map((user) => (
         <div key={user._id} className="bg-white rounded-lg shadow p-4 mb-4">
+          <h3 className="text-xl font-bold">{user.email}</h3>
           <h3 className="text-xl font-bold">{user.username}</h3>
-          <p className="text-gray-500">Email: {user.email}</p>
+          <h3 className="text-xl font-bold">{user.avatar}</h3>
+          <p className="text-gray-500">ID: {user._id}</p>
+          <p className="text-gray-500">Name: {user.firstname}</p>
+          <p className="text-gray-500">Last Name: {user.lastName}</p>
           <button
             className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
             onClick={() => handleAcceptUser(user._id)}

@@ -117,11 +117,11 @@ export default function SidebarAdmin() {
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
 									<Link
-										to='home'
+										to='packages'
 										className='flex items-center font-semibold gap-2'
 									>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>home</p>
+										<p className='flex-grow ml-3 xl:ml-3'>Packages</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>

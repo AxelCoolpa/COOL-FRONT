@@ -4,13 +4,6 @@ import './loading.css'
 const Loading: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsLoading(true);
-    }, 1000);
-    return () => {clearTimeout(timeout)}
-  }, []);
-
   if (isLoading) {
     return (
       <div className="loading-animation">
@@ -21,7 +14,6 @@ const Loading: React.FC = () => {
 
   return (
     <>
-      {isLoading}
     </>
   );
 };

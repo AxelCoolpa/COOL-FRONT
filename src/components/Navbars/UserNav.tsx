@@ -15,6 +15,7 @@ import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
 import { logout } from '../../features/LoginSlice'
 import { RootState } from '../../store/Store'
+import { useGetUsersQuery } from '../../api/getUsers'
 
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
@@ -236,7 +237,7 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {formData?.firstName}
+														👋 Hey, {formData?.email}
 													</p>
 													<p className='text-sm pl-6 cursor-default'>
 														{formData?.role?.rolename}
@@ -245,23 +246,23 @@ const Navbar: React.FC = () => {
 											</div>
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
-												<a
-													href='/PRUEBAprovider/profile'
+												<Link
+													to='profile'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
 												>
 													Profile
-												</a>
-												<a
-													href='#'
+												</Link>
+												<Link
+													to='/provider'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
 													onClick={(e) => e.preventDefault()}
 												>
 													Something else here
-												</a>
+												</Link>
 												<div className='mt-3 h-px w-full bg-gray-200' />
 												<a
 													href='#'

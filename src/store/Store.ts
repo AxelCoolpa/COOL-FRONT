@@ -16,6 +16,7 @@ import deleteActivitySlice from '../features/deleteActivitySlice'
 import activitiesSlice from '../features/activitiesSlice'
 import activityByIdSlice from '../features/activityByIdSlice'
 import updateUserSlice from '../features/updateUserSlice'
+import rooms from '../features/rooms'
 
 export const store = configureStore({
 	reducer: {
@@ -39,6 +40,8 @@ export const store = configureStore({
 		createActivity: createActiviySlice,
 		updateActivity: updateActivitySlice,
 		deleteActivity: deleteActivitySlice,
+		//* Accomodation
+		rooms
 	},
 })
 

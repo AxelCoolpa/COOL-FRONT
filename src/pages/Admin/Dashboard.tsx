@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useGetUsersQuery } from "../../api/getUsers";
 
 const Dashboard: React.FC = () => {
-  const [users, setUsers] = useState([]);
 	const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
 
   if (isLoading || isFetching) return <p>Loading...</p>
@@ -17,12 +16,12 @@ const Dashboard: React.FC = () => {
   };
 
   // Cargar la lista de usuarios desde el archivo JSON
-  fetch("/src/mocks/user-provider.json")
+  /* fetch("/src/mocks/user-provider.json")
     .then((response) => response.json())
     .then((data) => setUsers(data))
     .catch((error) =>
       console.error("Error to updated user list:", error)
-    );
+    ); */
 
   return (
     <div className="p-4">

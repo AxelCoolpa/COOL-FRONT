@@ -1,4 +1,4 @@
-import SidebarB from '../components/sidebar/SidebarProveedor'
+import SidebarUser from '../components/sidebar/SidebarUser'
 import { Outlet } from 'react-router-dom'
 import DashContainer2 from '../components/sections/dashContainer2'
 import Navbar from '../components/Navbars/ProviderNavbar'
@@ -15,7 +15,7 @@ export const ProvDashboard = () => {
 	}, [dispatch])
 	return (
 		<>
-			<SidebarB />
+			<SidebarUser />
 			<DashContainer2>
 				<Navbar />
 				<div className='md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto'>

@@ -5,9 +5,9 @@ import { baseURL } from '../baseURL'
 
 export const updateUserAPI = async (
 	formData: typeof updateUserFormData,
-	userID: string
+	idUser: string
 ) => {
-	const URL = `${baseURL}/user/${userID}/profile`
+	const URL = `${baseURL}/user/${idUser}/profile`
 
 	try {
 		const response = await axios.put(URL, formData, {

@@ -18,11 +18,16 @@ import withoutNotifications from '../../assets/withoutNotifications.svg'
 import Avatar from '../Avatar'
 import Dropdown from '../dropdown/DropSidebar'
 
+import { currentUser } from '../../mocks/listingsUser'
+import { useNavigate } from 'react-router-dom'
+
 const Sidebar: React.FC = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const dispatch = useDispatch()
-	const user = useSelector(selectUsers)
-	const userProvider = user[1]
+	const navigate = useNavigate()
+	const users = useSelector(selectUsers)
+
+	const currentUser = users[1]
 
 	const handleLogout = () => {
 		dispatch(logout())
@@ -102,7 +107,7 @@ const Sidebar: React.FC = () => {
 										<div className='mt-3 ml-4'>
 											<div className='flex flex-col gap-2'>
 												<p className='text-sm font-bold cursor-default'>
-													👋 Hey, {userProvider?.fullname || userProvider?.username}
+													👋 Hey, {currentUser?.fullname || currentUser?.username}
 												</p>
 											</div>
 										</div>
@@ -134,14 +139,14 @@ const Sidebar: React.FC = () => {
 							/>
 							<div className='hidden xl:flex flex-col justify-center'>
 								<label className='2xl:text-lg font-semibold'>
-									{userProvider?.name || userProvider?.username}
+									{currentUser?.name || currentUser?.username}
 								</label>
-								<span className='text-xs'>@{userProvider?.username}</span>
+								<span className='text-xs'>@{currentUser?.username}</span>
 							</div>
 						</div>
 					</ul>
 
-					<div>
+					<div onClick={() => navigate(`/notifications/${currentUser?._id}`)}>
 						{notifications ? (
 							<img
 								src={withNotifications}

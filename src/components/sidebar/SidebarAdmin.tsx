@@ -16,7 +16,7 @@ import { MdLocationCity } from 'react-icons/md'
 import UserDropdown from '../dropdown/UserDropdown'
 import Dropdown from '../dropdown/Dropdown'
 
-export default function SidebarAdmin() {
+export default function SidebarProvider() {
 	const navigate = useNavigate()
 
 	const [collapseShow, setCollapseShow] = React.useState('hidden')

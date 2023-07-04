@@ -12,6 +12,7 @@ export interface LoginFormData {
   password: string;
   avatar?: string;
   firstName?: string;
+  username?: string;
   lastname?: string;
   DNI?: string;
   phone?: string;
@@ -36,6 +37,7 @@ const initialState: LoginState = {
     email: "",
     password: "",
     avatar: "",
+    username: "",
     firstName: "",
     lastname: "",
     DNI: "",

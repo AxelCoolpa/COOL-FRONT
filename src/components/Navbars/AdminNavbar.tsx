@@ -236,10 +236,10 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {formData?.firstName}
+														👋 Hey, {formData?.email}
 													</p>
 													<p className='text-sm pl-6 cursor-default'>
-														{formData?.role?.rolename}
+														{formData?.username}
 													</p>
 												</div>
 											</div>

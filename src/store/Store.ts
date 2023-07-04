@@ -16,7 +16,11 @@ import deleteActivitySlice from '../features/deleteActivitySlice'
 import activitiesSlice from '../features/activitiesSlice'
 import activityByIdSlice from '../features/activityByIdSlice'
 import updateUserSlice from '../features/updateUserSlice'
+
 import rooms from '../features/rooms'
+import { userApi } from '../api/getUsers'
+import { setupListeners } from '@reduxjs/toolkit/dist/query'
+
 
 export const store = configureStore({
 	reducer: {
@@ -28,6 +32,7 @@ export const store = configureStore({
 		user: usersSlice,
 		userById: userByIdSlice,
 		updateUser: updateUserSlice,
+		[userApi.reducerPath]: userApi.reducer,
 		//* Destinations
 		destination: destinationSlice,
 		destinationById: destinationsByIdSlice,
@@ -42,8 +47,16 @@ export const store = configureStore({
 		deleteActivity: deleteActivitySlice,
 		//* Accomodation
 		rooms
-	},
+
+
+	}, 
+	// middleware para solicitar datos asincronos del backend
+	middleware: (getDefaultMiddleware) => 
+		getDefaultMiddleware().concat([userApi.middleware])
 })
+
+//para ejecutar actions dentro del store
+setupListeners(store.dispatch) 
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

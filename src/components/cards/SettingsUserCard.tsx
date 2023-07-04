@@ -7,6 +7,7 @@ import { updateUser, updateUserFormData } from '../../features/updateUserSlice'
 
 import { LuSave } from 'react-icons/lu'
 import DropZone from '../inputs/DropZone'
+import { toast } from 'react-hot-toast'
 
 const SettingsUserCard = () => {
 	const dispatch = useDispatch()
@@ -17,17 +18,17 @@ const SettingsUserCard = () => {
 	const user = useSelector(selectUserById)
 
 	const [formData, setFormData] = useState<updateUserFormData>({
-		username: user?.username,
-		email: user?.email,
-		avatar: user?.avatar,
-		firstName: user?.firstName,
-		lastname: user?.lastname,
-		DNI: user?.DNI,
-		phone: user?.phone,
-		location: user?.location,
+		username: user.username,
+		email: user.email,
+		avatar: user.avatar,
+		firstName: user.firstName,
+		lastname: user.lastname,
+		DNI: user.DNI,
+		phone: user.phone,
+		location: user.location,
 		// city: user?.city,
 		// address: user?.address,
-		description: user?.description,
+		description: user.description,
 	})
 	console.log(formData)
 
@@ -39,11 +40,11 @@ const SettingsUserCard = () => {
 		}))
 	}
 
-	const handleFilesSelected = (file: File[]) => {
-		const updatedAvatar = [...formData.avatar, ...file]
+	const handleFilesSelected = (files: File[]) => {
+		const updatedGallery = [files]
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			avatar: updatedAvatar,
+			avatar: updatedGallery,
 		}))
 	}
 
@@ -51,10 +52,14 @@ const SettingsUserCard = () => {
 		e.preventDefault()
 
 		try {
-			dispatch(updateUser(formData, userID))
-			console.log(formData)
-		} catch (error) {
-			console.log('Error al enviar el formulario:', error)
+			await dispatch(updateUser(formData, userID))
+
+			await setTimeout(() => {
+				window.location.reload()
+			}, 500)
+		} catch (error: any) {
+			toast.error('Error al enviar el formulario', error)
+			console.log(error.message)
 		}
 	}
 
@@ -96,7 +101,7 @@ const SettingsUserCard = () => {
 										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
 										htmlFor='grid-password'
 									>
-										Email address
+										Email
 									</label>
 									<input
 										type='email'
@@ -231,7 +236,7 @@ const SettingsUserCard = () => {
 								</div>
 							</div> */}
 							{/* COUNTRY */}
-							<div className='w-full lg:w-4/12 p-4'>
+							<div className='w-full lg:w-6/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
 										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'

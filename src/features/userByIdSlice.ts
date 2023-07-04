@@ -3,7 +3,7 @@ import { getUserByIdAPI } from '../api/getUserById'
 import { AppDispatch, RootState } from '../store/Store'
 
 export interface UserById {
-	_id?: string
+	_id: string
 	username: string
 	email: string
 	firstName: string
@@ -14,7 +14,6 @@ export interface UserById {
 	phone: string
 	DNI: string
 	location: string
-	// country?: string
 	// city?: string
 	// address?: string
 	description: string
@@ -25,7 +24,7 @@ export interface UserById {
 }
 
 interface UserByIdState {
-	user: UserById[]
+	user: UserById
 	loading: boolean
 	error: string | null
 }

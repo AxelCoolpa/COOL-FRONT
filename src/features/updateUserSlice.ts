@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast'
 export interface updateUserFormData {
 	username: string
 	email: string
-	avatar: string
+	avatar: []
 	firstName: string
 	lastname: string
 	DNI: string

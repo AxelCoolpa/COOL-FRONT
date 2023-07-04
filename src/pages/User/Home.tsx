@@ -20,38 +20,38 @@ const Home = () => {
 	const error = useSelector(selectError);
 	const dispatch = useDispatch();
   
-	
 	useEffect(() => {
-		dispatch(fetchDestinationsStart());
+		dispatch(fetchDestinationsStart);
 }, [dispatch]);
-if (loading) {
-	return (
-		<div className="justify-items-center top-10">
+	
+const filteredDestinations = destinations.filter((destination) => {
+	if (checkboxValues.length === 0) {
+		console.log("ninguna seleccionada");
+		return true;
+	} else {
+		return checkboxValues.some((category) =>
+		  destination.categories.includes(category)
+		  );
+		}
+	});
+	const discover =
+	filteredDestinations[Math.floor(Math.random() * destinations.length)];
+	if (loading) {
+		return (
+			<div className="justify-items-center top-10">
 		  <Loading />
 		</div>
 		) 
 	}
-	const filteredDestinations = destinations.filter((destination) => {
-	  if (checkboxValues.length === 0) {
-		console.log("ninguna seleccionada");
-		return true;
-	  } else {
-		return checkboxValues.some((category) =>
-		  destination.categories.includes(category)
-		);
-	  }
-	});
-	const discover =
-	  filteredDestinations[Math.floor(Math.random() * destinations.length)];
 	if (error) {
 	  return <div>Error al cargar destinos: {error} </div>;
 	}
 	return (
 		<>
 		<HeaderSection
-				title='Where do you want to go ?'
+				title='THE PLACE OF YOUR DREAMS'
 				subtitle='Explore the best destinations in the world'
-				image={discover?.gallery[1]}
+				image={discover?.gallery[0]}
 				/>
 
       <Card className="mt-12 gap-3 lg:mx-3">

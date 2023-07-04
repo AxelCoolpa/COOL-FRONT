@@ -1,4 +1,3 @@
-import SidebarUser from '../components/sidebar/SidebarUser'
 import { Outlet } from 'react-router-dom'
 import DashContainer2 from '../components/sections/dashContainer2'
 import Navbar from '../components/Navbars/ProviderNavbar'
@@ -6,6 +5,7 @@ import { useEffect } from 'react'
 import { fetchDestinations } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'
 import { fetchUsers } from '../features/usersSlice'
+import SidebarAdmin from '../components/sidebar/SidebarAdmin'
 
 export const ProvDashboard = () => {
 	const dispatch = useDispatch()
@@ -15,7 +15,7 @@ export const ProvDashboard = () => {
 	}, [dispatch])
 	return (
 		<>
-			<SidebarUser />
+			<SidebarAdmin />
 			<DashContainer2>
 				<Navbar />
 				<div className='md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto'>

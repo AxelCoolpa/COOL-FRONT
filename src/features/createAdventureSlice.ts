@@ -8,7 +8,7 @@ export interface createAdventureFormData {
 	description: string
 	categories: string[]
 	location: string
-	gallery: []
+	gallery: string
 
 	rating?: number[]
 	reviews?: string[]

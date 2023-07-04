@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { fetchDestinations } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'
 import { fetchUsers } from '../features/usersSlice'
-import SidebarAdmin from '../components/sidebar/SidebarAdmin'
+import SidebarAdmin from '../components/sidebar/SidebarProvider'
 
 export const AdminDash = () => {
 	const dispatch = useDispatch()

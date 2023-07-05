@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
 								src={Cool}
 								alt='Cool-LOGO'
 								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
-								onClick={() => navigate('/PRUEBAprovider')}
+								onClick={() => navigate('/')}
 							/>
 						</div>
 						{/* Actual Page */}

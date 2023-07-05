@@ -1,29 +1,39 @@
 import axios from 'axios'
 import { baseURL } from '../baseURL'
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 interface User {
-	_id: string,
-	firstname?: string,
-	avatar?: string,
-	lastName?: string,
-	username?: string,
-	email: string, 
+	_id: string
+	email: string
+	username?: string
+	avatar?: string
+	firstName?: string
+	lastname?: string
+	role?: {
+		roleName?: string
+	}
+	DNI: string
+	phone: string
+	location: string
+	description: string
+
+	favorites: []
+	destinations: []
 }
 
 export const userApi = createApi({
 	reducerPath: 'userAPI',
 	baseQuery: fetchBaseQuery({
-		baseUrl: `${baseURL}`
+		baseUrl: `${baseURL}`,
 	}),
 	endpoints: (builder) => ({
 		getUsers: builder.query<User[], null>({
-			query: () => 'users'
+			query: () => 'users',
 		}),
-		getUserById: builder.query<User, {_id: string}>({
-			query: ({_id}) => `users/${_id}`
-		})
-	})
+		getUserById: builder.query<User, { _id: string }>({
+			query: ({ _id }) => `users/${_id}`,
+		}),
+	}),
 })
 
 export const { useGetUsersQuery, useGetUserByIdQuery } = userApi

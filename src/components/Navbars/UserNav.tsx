@@ -1,31 +1,27 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { selectUsers } from '../../features/usersSlice'
-
-import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
+import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { BsArrowBarUp, BsDot } from 'react-icons/bs'
 
-import AvatarImg from '../../assets/Avatar.jpg'
+import AvatarPlaceholderImg from '../../assets/AvatarPlaceholder.jpg'
+
+import { useCurrentUser } from '../../hooks/useCurrentUser'
+import { logout } from '../../features/LoginSlice'
 
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
-import { logout } from '../../features/LoginSlice'
-import { RootState } from '../../store/Store'
-import { useGetUsersQuery } from '../../api/getUsers'
 
 const Navbar: React.FC = () => {
-	const user = useSelector(selectUsers)
-	//const userProvider = user[1]
-	const formData = useSelector((state: RootState) => state.login.formData);
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const location = useLocation()
 
-	const notifications = true
+	const { currentUser } = useCurrentUser()
+
+	const [notifications] = useState(false)
 
 	const handleLogout = () => {
 		dispatch(logout())
@@ -46,7 +42,7 @@ const Navbar: React.FC = () => {
 							/>
 						</div>
 						{/* Actual Page */}
-						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
+						{/* <span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
 							<a className='text-sm text-navy-700 hover:underline' href='/PRUEBAprovider'>
 								Pages
 								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
@@ -56,7 +52,7 @@ const Navbar: React.FC = () => {
 								{location.pathname.split('/').length > 2 &&
 									` / ` + location.pathname.split('/')[2]}
 							</Link>
-						</span>
+						</span> */}
 					</div>
 					{/* Form */}
 					<div className='flex items-center justify-center gap-4'>
@@ -68,14 +64,15 @@ const Navbar: React.FC = () => {
 								<input
 									type='search'
 									placeholder='Search'
-									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full min-[1360px]:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
+									className='px-3 py-3 pl-5 pr-12 relative rounded-[20px] text-sm shadow-CooL w-full min-[1360px]:w-[350px] 2xl:w-[400px]'
 								/>
 							</div>
 						</form>
 
 						<div className='flex gap-9'>
-							{/* start Notification */}
+							{/* START NOTOFICATIONS*/}
 
+							{/* NOTIFICATIONS */}
 							<Dropdown
 								button={
 									<p className='cursor-pointer'>
@@ -148,7 +145,9 @@ const Navbar: React.FC = () => {
 									<div className='flex w-[350px] flex-col gap-2 rounded-[20px] bg-white p-4 shadow-CooL'>
 										<div
 											style={{
-												backgroundImage: `url(${AvatarImg})`,
+												backgroundImage: `url(${
+													currentUser?.avatar || AvatarPlaceholderImg
+												})`,
 												backgroundRepeat: 'no-repeat',
 												backgroundSize: 'cover',
 											}}
@@ -178,6 +177,7 @@ const Navbar: React.FC = () => {
 								animation='origin-[75%_0%] md:origin-top-right transition-all duration-300 ease-in-out'
 							/>
 
+							{/* FAVORITES */}
 							<Dropdown
 								button={
 									<p className='cursor-pointer'>
@@ -196,7 +196,9 @@ const Navbar: React.FC = () => {
 									<div className='flex w-[350px] flex-col gap-2 rounded-[20px] bg-white p-4 shadow-CooL'>
 										<div
 											style={{
-												backgroundImage: `url(${AvatarImg})`,
+												backgroundImage: `url(${
+													currentUser?.avatar || AvatarPlaceholderImg
+												})`,
 												backgroundRepeat: 'no-repeat',
 												backgroundSize: 'cover',
 											}}
@@ -227,20 +229,24 @@ const Navbar: React.FC = () => {
 							/>
 						</div>
 						<hr className='w-12 rotate-90 hidden xl:block' />
-						{/* User */}
+
+						{/* USER */}
 						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
 							<div className='flex items-center gap-3 xl:gap-6'>
+								{/* PROFILE / SETTINGS */}
 								<Dropdown
-									button={<Avatar avatar={AvatarImg} wh={12} />}
+									button={
+										<Avatar
+											avatar={currentUser?.avatar || AvatarPlaceholderImg}
+											wh={12}
+										/>
+									}
 									children={
 										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {formData?.email}
-													</p>
-													<p className='text-sm pl-6 cursor-default'>
-														{formData?.role?.rolename}
+														👋 Hey, {currentUser?.firstName}
 													</p>
 												</div>
 											</div>
@@ -249,7 +255,7 @@ const Navbar: React.FC = () => {
 												<Link
 													to='profile'
 													className={
-														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+														'mt-3 text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
 												>
 													Profile
@@ -260,7 +266,7 @@ const Navbar: React.FC = () => {
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
 												>
-													Something else here
+													PROVIDER USER
 												</a>
 												<div className='mt-3 h-px w-full bg-gray-200' />
 												<a
@@ -282,12 +288,16 @@ const Navbar: React.FC = () => {
 									}
 									classNames={'py-2 top-8 -left-[180px] w-max'}
 								/>
+
+								{/* INFO */}
 								<div className='hidden xl:flex flex-col justify-center'>
 									<label className='2xl:text-lg font-semibold'>
-										{formData?.email}
+										{currentUser?.firstName}
 									</label>
-									<span className='text-xs'>{formData?.email}</span>
+									<span className='text-xs'>@{currentUser?.username}</span>
 								</div>
+
+								{/* LANGUAGE */}
 								<div className=''>
 									<select
 										name='languaje'

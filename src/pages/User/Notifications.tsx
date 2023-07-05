@@ -6,7 +6,7 @@ import { IoIosArrowBack } from 'react-icons/io'
 const Notifications = () => {
 	return (
 		<div>
-			<div className='relative flex items-center justify-center'>
+			<div className='relative flex items-center justify-center md:mt-10'>
 				<a
 					className='absolute left-0 mt-5 hidden md:flex items-center gap-1 font-bold uppercase text-xs lg:text-base px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'
 					href='/profile'

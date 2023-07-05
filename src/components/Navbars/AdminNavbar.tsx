@@ -19,7 +19,7 @@ import { RootState } from '../../store/Store'
 const Navbar: React.FC = () => {
 	const user = useSelector(selectUsers)
 	const userProvider = user[1]
-	const formData = useSelector((state: RootState) => state.login.formData);
+	const formData = useSelector((state: RootState) => state.login.formData)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -41,12 +41,12 @@ const Navbar: React.FC = () => {
 								src={Cool}
 								alt='Cool-LOGO'
 								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
-								onClick={() => navigate('/PRUEBAprovider')}
+								onClick={() => navigate('/admindash')}
 							/>
 						</div>
 						{/* Actual Page */}
 						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							<a className='text-sm text-navy-700 hover:underline' href='/PRUEBAprovider'>
+							<a className='text-sm text-navy-700 hover:underline' href='/admindash'>
 								Pages
 								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
 							</a>
@@ -246,7 +246,7 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
 												<a
-													href='/PRUEBAprovider/profile'
+													href='/admindash/profile'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
@@ -283,9 +283,7 @@ const Navbar: React.FC = () => {
 									classNames={'py-2 top-8 -left-[180px] w-max'}
 								/>
 								<div className='hidden xl:flex flex-col justify-center'>
-									<label className='2xl:text-lg font-semibold'>
-										{formData?.email}
-									</label>
+									<label className='2xl:text-lg font-semibold'>{formData?.email}</label>
 									<span className='text-xs'>{formData?.email}</span>
 								</div>
 								<div className=''>

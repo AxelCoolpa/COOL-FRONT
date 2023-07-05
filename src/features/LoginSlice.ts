@@ -11,8 +11,8 @@ export interface LoginFormData {
   email: string;
   password: string;
   avatar?: string;
-  firstName?: string;
   username?: string;
+  firstName?: string;
   lastname?: string;
   DNI?: string;
   phone?: string;

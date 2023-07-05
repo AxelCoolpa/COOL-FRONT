@@ -1,18 +1,13 @@
 import React from 'react';
+import { useGetUsersQuery } from '../../api/getUsers';
 
-interface TableProps {
-  rows: Row[];
-}
 
-interface Row {
-  id: number;
-  name: string;
-  age: number;
-}
-
-const TableCard: React.FC<TableProps> = ({ rows }) => {
+const TableCard: React.FC = ({ }) => {
+  const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
+  
+	if (isLoading || isFetching) return <p>Loading...</p>
+  if (error) return <p>Error.</p>
   return (
-
     <div
   className={`relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded
     "bg-lightBlue-900 text-white"`}
@@ -40,16 +35,16 @@ const TableCard: React.FC<TableProps> = ({ rows }) => {
       <thead className="bg-gray-100">
         <tr>
           <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">ID</th>
-          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">Name</th>
-          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">Age</th>
+          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">Username</th>
+          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">Email</th>
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
-        {rows.map((row) => (
-          <tr key={row.id}>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{row.id}</td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{row.name}</td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{row.age}</td>
+        {data?.map((data) => (
+          <tr key={data._id}>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data._id}</td>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data.username}</td>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data.email}</td>
           </tr>
         ))}
       </tbody>

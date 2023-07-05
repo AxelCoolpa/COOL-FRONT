@@ -6,9 +6,10 @@ import { TbPhotoPlus } from 'react-icons/tb'
 
 interface DropZoneProps {
 	onFilesSelected: (files: File[]) => void
+	text?: string
 }
 
-const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected }) => {
+const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected, text }) => {
 	const [files, setFiles] = useState<File[]>([])
 
 	const handleDrop = (acceptedFiles: File[]) => {
@@ -32,14 +33,14 @@ const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected }) => {
 				<>
 					<TbPhotoPlus size={54} />
 					<p className='text-xs lg:text-sm min-[1440px]:text-base'>
-						Arrastra y suelta archivos aquí, o haz clic para seleccionar archivos
+						{text || 'Drag and drop files here, or click to select files'}
 					</p>
 				</>
 			)}
 
 			{files.length > 0 && (
 				<>
-					<h4>Archivos seleccionados:</h4>
+					<h4>Selected files:</h4>
 					<div className='flex gap-2'>
 						{files.map((file, index) => (
 							<div key={index}>

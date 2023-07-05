@@ -1,29 +1,32 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-
-import { selectUsers } from '../../features/usersSlice'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
 import { BsArrowBarUp, BsDot } from 'react-icons/bs'
 
-import AvatarImg from '../../assets/Avatar.jpg'
+import AvatarPlaceholderImg from '../../assets/AvatarPlaceholder.jpg'
 
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
 import { logout } from '../../features/LoginSlice'
-import { RootState } from '../../store/Store'
+import { useGetUsersQuery } from '../../api/getUsers'
 
 const Navbar: React.FC = () => {
-	const user = useSelector(selectUsers)
-	const userProvider = user[1]
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const location = useLocation()
 
-	const formData = useSelector((state: RootState) => state.login.formData);
+	const localUser = JSON.parse(localStorage.getItem('user') || '{}')
+
+	const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
+
+	const currentUser = data?.find((user) => user.email === localUser.email)
+
+	if (isLoading || isFetching) return <p>Loading...</p>
+	if (error) return <p>Error.</p>
+
 	const notifications = true
 
 	const handleLogout = () => {
@@ -41,12 +44,12 @@ const Navbar: React.FC = () => {
 								src={Cool}
 								alt='Cool-LOGO'
 								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
-								onClick={() => navigate('/provider')}
+								onClick={() => navigate('/PRUEBAprovider')}
 							/>
 						</div>
 						{/* Actual Page */}
 						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							<a className='text-sm text-navy-700 hover:underline' href='/provider'>
+							<a className='text-sm text-navy-700 hover:underline' href='/PRUEBAprovider'>
 								Pages
 								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
 							</a>
@@ -67,7 +70,7 @@ const Navbar: React.FC = () => {
 								<input
 									type='search'
 									placeholder='Search'
-									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full xl:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
+									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full min-[1360px]:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
 								/>
 							</div>
 						</form>
@@ -147,7 +150,9 @@ const Navbar: React.FC = () => {
 									<div className='flex w-[350px] flex-col gap-2 rounded-[20px] bg-white p-4 shadow-CooL'>
 										<div
 											style={{
-												backgroundImage: `url(${AvatarImg})`,
+												backgroundImage: `url(${
+													currentUser?.avatar || AvatarPlaceholderImg
+												})`,
 												backgroundRepeat: 'no-repeat',
 												backgroundSize: 'cover',
 											}}
@@ -195,7 +200,9 @@ const Navbar: React.FC = () => {
 									<div className='flex w-[350px] flex-col gap-2 rounded-[20px] bg-white p-4 shadow-CooL'>
 										<div
 											style={{
-												backgroundImage: `url(${AvatarImg})`,
+												backgroundImage: `url(${
+													currentUser?.avatar || AvatarPlaceholderImg
+												})`,
 												backgroundRepeat: 'no-repeat',
 												backgroundSize: 'cover',
 											}}
@@ -230,36 +237,41 @@ const Navbar: React.FC = () => {
 						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
 							<div className='flex items-center gap-3 xl:gap-6'>
 								<Dropdown
-									button={<Avatar avatar={AvatarImg} wh={12} />}
+									button={
+										<Avatar
+											avatar={currentUser?.avatar || AvatarPlaceholderImg}
+											wh={12}
+										/>
+									}
 									children={
-										<div className='flex h-52 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
+										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {formData?.email}
+														👋 Hey, {currentUser?.email}
 													</p>
 													<p className='text-sm pl-6 cursor-default'>
-														{formData?.email}
+														{currentUser?.role?.roleName}
 													</p>
 												</div>
 											</div>
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
-												<a
-													href='/provider/profile'
+												<Link
+													to='profile'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
 												>
 													Profile
-												</a>
+												</Link>
 												<a
-													href='/'
+													href='provider'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
 												>
-													USUARIO FINAL
+													PROVIDER USER
 												</a>
 												<div className='mt-3 h-px w-full bg-gray-200' />
 												<a
@@ -283,9 +295,9 @@ const Navbar: React.FC = () => {
 								/>
 								<div className='hidden xl:flex flex-col justify-center'>
 									<label className='2xl:text-lg font-semibold'>
-										{formData?.email}
+										{currentUser?.firstName}
 									</label>
-									<span className='text-xs'>{formData?.email}</span>
+									<span className='text-xs'>{currentUser?.role?.roleName}</span>
 								</div>
 								<div className=''>
 									<select

@@ -10,7 +10,7 @@ export const user1 = {
 }
 
 export const currentUser = {
-	_id: '648876449bf8574ce56a694a',
+	_id: '64a308a8d16dcf7043bc2697',
 	userName: 'prisc456',
 	name: 'Pristia',
 	lastName: 'Candra',

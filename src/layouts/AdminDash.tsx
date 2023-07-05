@@ -5,15 +5,16 @@ import { useEffect } from 'react'
 import { fetchDestinations } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'
 import { fetchUsers } from '../features/usersSlice'
-import SidebarAdmin from '../components/sidebar/SidebarAdmin'
+import SidebarAdmin from '../components/sidebar/SidebarProvider'
 
-export const PRUEBAprovider = () => {
+export const AdminDash = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(fetchDestinations())
 		dispatch(fetchUsers())
 	}, [dispatch])
+
 
 	return (
 		<>

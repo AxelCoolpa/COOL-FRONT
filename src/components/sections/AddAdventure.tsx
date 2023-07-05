@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { toast } from 'react-hot-toast'
@@ -11,13 +12,13 @@ import {
 } from '../../features/createAdventureSlice'
 import { selectUsers } from '../../features/usersSlice'
 
-import DropZone from '../inputs/DropZone'
+// import DropZone from '../inputs/DropZone'
 import AdventureForm from '../forms/AdventureForm'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
-import { useNavigate } from 'react-router-dom'
+import CloudinaryUploadImg from '../cloudinary/ImageUpload'
 
 const AddAdventure = () => {
 	const dispatch = useDispatch()
@@ -29,7 +30,7 @@ const AddAdventure = () => {
 	const [formData, setFormData] = useState<createAdventureFormData>({
 		title: '',
 		description: '',
-		gallery: [],
+		gallery: '',
 		categories: [],
 		location: '',
 	})
@@ -59,11 +60,18 @@ const AddAdventure = () => {
 		}))
 	}
 
-	const handleFilesSelected = (files: File[]) => {
-		const updatedGallery = [...formData.gallery, ...files]
+	// const handleFilesSelected = (files: File[]) => {
+	// 	const updatedGallery = [...formData.gallery, ...files]
+	// 	setFormData((prevFormData) => ({
+	// 		...prevFormData,
+	// 		gallery: updatedGallery,
+	// 	}))
+	// }
+
+	const handleUpload = (picture: any) => {
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			gallery: updatedGallery,
+			gallery: picture,
 		}))
 	}
 
@@ -91,18 +99,18 @@ const AddAdventure = () => {
 		})
 
 		try {
-			await dispatch(createAdventure(data, userID))
+			dispatch(createAdventure(data, userID))
 			setFormData({
 				title: '',
 				description: '',
-				gallery: [],
+				gallery: '',
 				categories: [],
 				location: '',
 			})
 
-			await setTimeout(() => {
-				window.location.reload()
-			}, 1000)
+			// await setTimeout(() => {
+			// 	window.location.reload()
+			// }, 1000)
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
 		}
@@ -116,9 +124,11 @@ const AddAdventure = () => {
 					onSubmit={handleSubmit}
 					className='flex flex-col items-center justify-center w-full transition'
 				>
-					{/* IMAGES */}
+					{/* IMAGE */}
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
-						<DropZone onFilesSelected={handleFilesSelected} />
+						{/* <DropZone onFilesSelected={handleFilesSelected} /> */}
+
+						<CloudinaryUploadImg onUpload={handleUpload} />
 					</div>
 
 					{/* FORM */}

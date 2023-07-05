@@ -89,11 +89,19 @@ export const PruebaAdminProvider = [
 export const user = [
 	{
 		path: '',
+		element: <Adventure />,
+	},
+	{
+		path: 'homebug',
 		element: <Home />,
 	},
 	{
-		path: 'adventure',
-		element: <Adventure />,
+		path: 'create',
+		element: <CreateAdventure />,
+	},
+	{
+		path: 'clients',
+		element: <TableUser />,
 	},
 	{
 		path: 'details/:id',
@@ -120,7 +128,7 @@ export const user = [
 		element: <Tickets />,
 	},
 	{
-		path: 'profile',
+		path: '/profile',
 		element: <SettingsUser />,
 	},
 	{

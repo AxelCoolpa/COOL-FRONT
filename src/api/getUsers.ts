@@ -1,5 +1,35 @@
 import axios from 'axios'
 import { baseURL } from '../baseURL'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
+interface User {
+	_id: string
+	firstName?: string
+	avatar?: string
+	lastname?: string
+	username?: string
+	email: string
+	role?: {
+		roleName?: string
+	}
+}
+
+export const userApi = createApi({
+	reducerPath: 'userAPI',
+	baseQuery: fetchBaseQuery({
+		baseUrl: `${baseURL}`,
+	}),
+	endpoints: (builder) => ({
+		getUsers: builder.query<User[], null>({
+			query: () => 'users',
+		}),
+		getUserById: builder.query<User, { _id: string }>({
+			query: ({ _id }) => `users/${_id}`,
+		}),
+	}),
+})
+
+export const { useGetUsersQuery, useGetUserByIdQuery } = userApi
 
 export const getUsersAPI = async () => {
 	try {

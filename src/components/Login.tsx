@@ -7,6 +7,7 @@ import logo from '../assets/cool.png'
 
 import { updateFormData, loginUser } from '../features/LoginSlice'
 import { toast } from 'react-hot-toast'
+import { RootState } from '../store/Store'
 
 const Login = () => {
 	const dispatch = useDispatch()
@@ -14,9 +15,9 @@ const Login = () => {
 
 	const headingControls = useAnimation()
 
-	const formData = useSelector((state) => state.login.formData)
-	const isLoading = useSelector((state) => state.login.isLoading)
-	const error = useSelector((state) => state.login.error)
+	const formData = useSelector((state: RootState) => state.login.formData)
+	const isLoading = useSelector((state: RootState) => state.login.isLoading)
+	const error = useSelector((state: RootState) => state.login.error)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(updateFormData({ [e.target.name]: e.target.value }))
@@ -26,7 +27,7 @@ const Login = () => {
 		e.preventDefault()
 		try {
 			await dispatch(loginUser(formData))
-
+			localStorage.setItem('user', JSON.stringify(formData))
 			await navigate('/')
 		} catch (error: any) {
 			toast.error(error.message)

@@ -1,10 +1,66 @@
-import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { selectUserById } from '../../features/userByIdSlice'
+import { updateUser, updateUserFormData } from '../../features/updateUserSlice'
 
 import { LuSave } from 'react-icons/lu'
+import DropZone from '../inputs/DropZone'
+import { toast } from 'react-hot-toast'
 
 const SettingsUserCard = () => {
+	const dispatch = useDispatch()
+
+	const { id } = useParams()
+	const userID = id
+
 	const user = useSelector(selectUserById)
+
+	const [formData, setFormData] = useState<updateUserFormData>({
+		username: user.username,
+		email: user.email,
+		avatar: user.avatar,
+		firstName: user.firstName,
+		lastname: user.lastname,
+		DNI: user.DNI,
+		phone: user.phone,
+		location: user.location,
+		// city: user?.city,
+		// address: user?.address,
+		description: user.description,
+	})
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value,
+		}))
+	}
+
+	const handleFilesSelected = (files: File[]) => {
+		const updatedGallery = [files]
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			avatar: updatedGallery,
+		}))
+	}
+
+	const handleUpdate = async (e: React.FormEvent) => {
+		e.preventDefault()
+
+		try {
+			await dispatch(updateUser(formData, userID))
+
+			await setTimeout(() => {
+				window.location.reload()
+			}, 500)
+		} catch (error: any) {
+			toast.error('Error al enviar el formulario', error)
+			console.log(error.message)
+		}
+	}
 
 	return (
 		<>
@@ -12,16 +68,13 @@ const SettingsUserCard = () => {
 				<div className='rounded-t bg-white mb-0 px-6 py-6'>
 					<div className='text-center flex justify-between'>
 						<h6 className='text-blueGray-700 text-xl font-bold'>My account</h6>
-						{/* <button className='flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'>
-							<LuSave size={18} />
-							Save
-						</button> */}
 					</div>
 				</div>
 				<div className='flex-auto px-4 lg:px-10 py-10 pt-0'>
-					<form>
+					<form onSubmit={handleUpdate}>
 						<h6 className='text-sm mt-3 mb-6 font-bold uppercase'>User Information</h6>
 						<div className='flex flex-wrap'>
+							{/* USERNAME */}
 							<div className='w-full lg:w-6/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
@@ -31,27 +84,37 @@ const SettingsUserCard = () => {
 										Username
 									</label>
 									<input
-										type='text'
 										className='border-0 px-3 py-3  rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+										id='username'
+										name='username'
+										value={formData?.username}
+										onChange={handleChange}
 										placeholder={user?.username}
 									/>
 								</div>
 							</div>
+							{/* EMAIL */}
 							<div className='w-full lg:w-6/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
 										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
 										htmlFor='grid-password'
 									>
-										Email address
+										Email
 									</label>
 									<input
 										type='email'
-										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+										id='email'
+										name='email'
+										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 placeholder:text-black'
 										placeholder={user?.email}
+										readOnly
+										value={user.email}
+										onChange={handleChange}
 									/>
 								</div>
 							</div>
+							{/* FIRSTNAME */}
 							<div className='w-full lg:w-6/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
@@ -61,12 +124,16 @@ const SettingsUserCard = () => {
 										First Name
 									</label>
 									<input
-										type='text'
+										id='firstName'
+										name='firstName'
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='Lucky'
+										placeholder={user?.firstName || 'First Name'}
+										value={formData?.firstName}
+										onChange={handleChange}
 									/>
 								</div>
 							</div>
+							{/* LASTNAME */}
 							<div className='w-full lg:w-6/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
@@ -76,13 +143,17 @@ const SettingsUserCard = () => {
 										Last Name
 									</label>
 									<input
-										type='text'
+										id='lastname'
+										name='lastname'
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='Jesse'
+										placeholder={user?.lastname || 'Last Name'}
+										value={formData?.lastname}
+										onChange={handleChange}
 									/>
 								</div>
 							</div>
-							<div className='w-full lg:w-6/12 p-4'>
+							{/* AVATAR */}
+							<div className='w-full p-4'>
 								<div className='relative w-full mb-3'>
 									<label
 										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
@@ -90,7 +161,11 @@ const SettingsUserCard = () => {
 									>
 										Profile Image
 									</label>
-									<input type='file' className='py-3' />
+
+									<DropZone
+										onFilesSelected={handleFilesSelected}
+										text='Drag & drop the file here, or click to select the file'
+									/>
 								</div>
 							</div>
 						</div>
@@ -101,6 +176,7 @@ const SettingsUserCard = () => {
 							Contact Information
 						</h6>
 						<div className='flex flex-wrap'>
+							{/* PHONE */}
 							<div className='w-full lg:w-6/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
@@ -110,13 +186,36 @@ const SettingsUserCard = () => {
 										Phone
 									</label>
 									<input
-										type='text'
+										id='phone'
+										name='phone'
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='+12 365 478 9000'
+										placeholder={user?.phone || '+12 365 478 9000'}
+										value={formData?.phone}
+										onChange={handleChange}
 									/>
 								</div>
 							</div>
+							{/* DNI */}
 							<div className='w-full lg:w-6/12 p-4'>
+								<div className='relative w-full mb-3'>
+									<label
+										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
+										htmlFor='grid-password'
+									>
+										DNI
+									</label>
+									<input
+										id='DNI'
+										name='DNI'
+										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
+										placeholder={user?.DNI || '12345678'}
+										value={formData?.DNI}
+										onChange={handleChange}
+									/>
+								</div>
+							</div>
+							{/* ADDRESS */}
+							{/* <div className='w-full p-4'>
 								<div className='relative w-full mb-3'>
 									<label
 										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
@@ -125,28 +224,18 @@ const SettingsUserCard = () => {
 										Address
 									</label>
 									<input
-										type='text'
+										id='address'
+										name='address'
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09'
+										placeholder={
+											user?.address || 'Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09'
+										}
+										onChange={handleChange}
 									/>
 								</div>
-							</div>
-							<div className='w-full lg:w-4/12 p-4'>
-								<div className='relative w-full mb-3'>
-									<label
-										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
-										htmlFor='grid-password'
-									>
-										City
-									</label>
-									<input
-										type='email'
-										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='New York'
-									/>
-								</div>
-							</div>
-							<div className='w-full lg:w-4/12 p-4'>
+							</div> */}
+							{/* COUNTRY */}
+							<div className='w-full lg:w-6/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
 										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
@@ -155,27 +244,34 @@ const SettingsUserCard = () => {
 										Country
 									</label>
 									<input
-										type='text'
+										id='location'
+										name='location'
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='United States'
+										placeholder={user?.location || 'United States'}
+										value={formData.location}
+										onChange={handleChange}
 									/>
 								</div>
 							</div>
-							<div className='w-full lg:w-4/12 p-4'>
+							{/* CITY */}
+							{/* <div className='w-full lg:w-4/12 p-4'>
 								<div className='relative w-full mb-3'>
 									<label
 										className='block uppercase text-blueGray-600 text-xs font-bold mb-2'
 										htmlFor='grid-password'
 									>
-										Postal Code
+										City
 									</label>
 									<input
-										type='text'
+										id='city'
+										name='city'
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='Postal Code'
+										placeholder={user?.city || 'New York'}
+										value={formData?.city}
+										onChange={handleChange}
 									/>
 								</div>
-							</div>
+							</div> */}
 						</div>
 
 						<hr className='mt-6 border-b-1 border-blueGray-300' />
@@ -183,6 +279,7 @@ const SettingsUserCard = () => {
 						<h6 className='text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase'>
 							About Me
 						</h6>
+						{/* DESCRIPTION */}
 						<div className='flex flex-wrap'>
 							<div className='w-full lg:w-12/12 p-4'>
 								<div className='relative w-full mb-3'>
@@ -192,15 +289,22 @@ const SettingsUserCard = () => {
 									>
 										About me
 									</label>
-									<textarea
+									<input
+										id='description'
+										name='description'
 										className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'
-										placeholder='A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source.'
-									></textarea>
+										placeholder={user?.description || 'Tell us about yourself'}
+										value={formData.description}
+										onChange={handleChange}
+									></input>
 								</div>
 							</div>
 						</div>
 						<div className='flex justify-end mt-6'>
-							<button className='flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'>
+							<button
+								type='submit'
+								className='flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'
+							>
 								<LuSave size={18} />
 								Save
 							</button>

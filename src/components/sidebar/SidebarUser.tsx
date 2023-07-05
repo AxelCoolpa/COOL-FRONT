@@ -16,6 +16,7 @@ import { GiWavyItinerary } from 'react-icons/gi'
 import { RiCarFill } from 'react-icons/ri'
 import { CgInfinity } from 'react-icons/cg'
 import { GoHome } from 'react-icons/go'
+import { GrSafariOption } from 'react-icons/gr'
 
 export default function SidebarUser() {
 	const navigate = useNavigate()
@@ -100,7 +101,7 @@ export default function SidebarUser() {
 										to=''
 										className='flex items-center   font-semibold gap-2'
 									>
-										<GoHome size={18} className='font-bold text-OrangeCooL' />
+										<GoHome size={20} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Home
 										</p>
@@ -108,12 +109,12 @@ export default function SidebarUser() {
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
 								<Link
-										to='clients'
+										to='adventures'
 										className='flex items-center   font-semibold gap-2'
 									>
-									<GiWavyItinerary size={20} className='font-bold text-OrangeCooL' />
+									<GrSafariOption size={20} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
-											Itinerary
+											Adventures
 										</p>
 									</Link>
 								</li>

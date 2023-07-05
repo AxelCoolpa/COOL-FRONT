@@ -1,20 +1,62 @@
 import React, { useState } from 'react'
 import { MdSearch } from "react-icons/md";
 import { StepProps } from './InitialSteps'; 
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
-const StepThree: React.FC<StepProps> = ({handleStepClick ,next , previous}) => {
+const StepThree: React.FC<StepProps> = ({handleStepClick ,next , previous , formData}) => {
   const [searchValue, setSearchValue] = useState('');
   const [mapUrl, setMapUrl] = useState('');
+ 
 
-  const handleSearch = (e :React.FormEvent) => {
+
+  const handleSearch = async (e :React.FormEvent) => {
     e.preventDefault()
-    // Genera la URL de búsqueda del mapa utilizando el valor del input de búsqueda
-    const url = `https://www.google.com/maps/embed?pb=${encodeURIComponent(searchValue)}`;
-    setMapUrl(url);
+    
+   // Genera la URL de búsqueda del mapa utilizando el valor del input de búsqueda
+   const apiKey = 'AIzaSyAwRA7j_Pu_T8dD6J1GGzf7nIdGq2z9c0c'; 
+   try {
+    // Realiza la solicitud a la API de Geocodificación
+    const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      params: {
+        address: searchValue,
+        key: apiKey,
+      },
+    });
+
+    // Obtiene los resultados de la búsqueda
+    const results = response.data.results;
+  
+    // Genera la URL de búsqueda del mapa utilizando la primera ubicación encontrada
+    if (results.length > 0) {
+     formData.companyAddress = results[0].formatted_address
+      const location = results[0].geometry.location;
+      const url = `https://maps.google.com/maps?q=${location.lat},${location.lng}&output=embed`;
+      setMapUrl(url);
+    }
+    else{
+      toast('Warning ! The address entered is incorrect', {
+        icon: '⚠️',
+        style: {
+          background: '#ff9800',
+          color: '#fff',
+        },
+      });
+    }
+  } catch (error) {
+    console.error('Error en la solicitud a la API de Geocodificación:', error);
+  }
   }
   const handleNext = () => {
-    next && next()
-    handleStepClick && handleStepClick(2)
+    if(!formData.companyAddress){
+     
+      toast.error('¡The address entered could not be located, please enter the address again!');
+    }
+    else{
+      
+      next && next()
+      handleStepClick && handleStepClick(2)
+    }
   }
   const handlePrevious = () => {
      previous && previous()
@@ -61,6 +103,7 @@ const StepThree: React.FC<StepProps> = ({handleStepClick ,next , previous}) => {
         <button className='bg-white text-black px-6 border rounded-[5px] h-[40px]' onClick={handlePrevious}>Previous</button>
         <button className='bg-OrangeCooL text-white px-6 border  rounded-[5px] h-[40px]'onClick={handleNext}>Next</button>
       </div>
+     
     </div>
   )
 }

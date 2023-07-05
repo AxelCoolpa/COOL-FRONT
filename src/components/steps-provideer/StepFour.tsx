@@ -3,26 +3,36 @@ import { StepProps } from './InitialSteps'
 
 interface DetailBusiness {
    service: string
-   shares: string
-   value: string
-   companyName: string
+    companyName: string
    description:string
-   inc: string
+  
 }
 
-const StepFour: React.FC<StepProps> = ({next , previous , handleStepClick}) => {
+const StepFour: React.FC<StepProps> = ({next , previous , handleStepClick ,formData}) => {
     const [formBusiness , setFormBusiness] = useState<DetailBusiness>({
         service: "",
-        shares: "",
-        value: "",
         companyName: "",
         description:"",
-        inc: "",
+       
     })
+
+  let services : string[] = []
+
+  if(formData.relatedChannel === "Travel"){
+    services = ["tours" ,"place of activity" ,"tour guide","night activity","eco tourism","agro tourism" ,"tourist attraction" ,"experience"] 
+  }
+  else if(formData.relatedChannel === "Accomodation"){
+    services =["hotel","cottage" ,"resort" ,"camping area" ,"house"]
+  }
+  else if(formData.relatedChannel === "Logistics"){
+     services = ["urban transport","yacht","cruise","ferri","airline"]
+  }
     const handleNext = () => {
 
-        if(formBusiness.companyName && formBusiness.description && formBusiness.shares && formBusiness.service && formBusiness.inc && formBusiness.inc ){
-
+        if(formBusiness.companyName && formBusiness.description  && formBusiness.service  ){
+             formData.descriptionBusiness = formBusiness.description
+             formData.companyName = formBusiness.companyName
+             formData.serviceType = formBusiness.service
             next && next()
          handleStepClick && handleStepClick(3)
            console.log(formBusiness)
@@ -32,32 +42,23 @@ const StepFour: React.FC<StepProps> = ({next , previous , handleStepClick}) => {
         }
       }
       const handlePrevious = () => {
-        setFormBusiness({service: "",
-        shares: "",
-        value: "",
-        companyName: "",
+        setFormBusiness({
+        service: "",
+       companyName: "",
         description:"",
-        inc: "",})
+       })
          previous && previous()
          handleStepClick && handleStepClick(1)
       }
 
       const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        if(name === "value" || name === "shares"){
         
-            setFormBusiness((prevFormData) => ({
-                    ...prevFormData,
-                    [name]:/^[0-9]+$/.test(value) ? value : "",
-                  }));
-         }
-        else{
-
-            setFormBusiness((prevFormData) => ({
+     setFormBusiness((prevFormData) => ({
               ...prevFormData,
               [name]: value,
             }));
-        }
+        
       };
 
       const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -91,28 +92,21 @@ const StepFour: React.FC<StepProps> = ({next , previous , handleStepClick}) => {
                 <span className="block mb-4">Details about you business corporation and shares</span>
                 <div className='w-1/2'>
                     <form>
-                        <div className="mb-4">
-                            <select className="w-full border border-gray-400 rounded p-2 mb-6" value={formBusiness.service} name="service" onChange={handleSelect}>
+                       <div className="mb-3">
+                            <select className="w-full border border-gray-400 rounded p-2 mb-4" value={formBusiness.service} name="service" onChange={handleSelect}>
                                 <option value="">Type of service</option>
-                                <option value="uno">uno</option>
-                                <option value="dos">dos</option>
-                                <option value="tres">tres</option>
+                                {
+                                 services.map((service,i) => 
+                                    <option key={i} value={service} >{service}</option>
+                                 )
+                                }
                                 {/* Opciones del select */}
                             </select>
-                            <div className="flex mb-4">
-                            <input className="w-[50%] border border-gray-400 rounded p-2 mb-3 mr-2 " value={formBusiness.shares} name="shares" type="text" placeholder="Number of shares"  onChange={handleChange}/>
-                            <input className="w-[50%] border border-gray-400 rounded p-2 mb-3 " value={formBusiness.value} name="value" type="text" placeholder="$ per value" onChange={handleChange}/>
-                            </div>
+                            
                         </div>
                         <div className="flex mb-6">
-                            <input className="w-[70%] border border-gray-400 rounded p-2 mr-2" value={formBusiness.companyName} name="companyName" type="text" placeholder="Company name" onChange={handleChange}/>
-                            <select className="w-[30%] border border-gray-400 rounded p-2" value={formBusiness.inc} name="inc" onChange={handleSelect}>
-                                <option value="">Inc.</option>
-                                <option value="uno">uno</option>
-                                <option value="dos">dos</option>
-                                <option value="tres">tres</option>
-                                {/* Opciones del select */}
-                            </select>
+                            <input className="w-full border border-gray-400 rounded p-2 " value={formBusiness.companyName} name="companyName" type="text" placeholder="Company name" onChange={handleChange}/>
+                           
                         </div>
                         <textarea className="w-full border border-gray-400 rounded p-2 mb-4 h-[120px]" value={formBusiness.description} name="description" placeholder="Business description..." onChange={handleTextArea}></textarea>
                     </form>

@@ -1,35 +1,43 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import { IoCloseOutline } from 'react-icons/io5';
 import { StepProps } from './InitialSteps'; 
+import { useDispatch ,useSelector } from 'react-redux';
+import {registerProvider} from "../../features/providerRegister"
+import { selectUsers } from '../../features/usersSlice'
+import { useCurrentUser } from '../../hooks/useCurrentUser';
 
-interface Campo {
+interface Form {
     nombre: string;
     apellido: string;
 }
 
-const StepFive: React.FC<StepProps> = ({previous ,skip, handleStepClick}) => {
-    const [campos, setCampos] = useState<Campo[]>([{ nombre: '', apellido: '' }]);
-
+const StepFive: React.FC<StepProps> = ({previous ,skip, handleStepClick , formData}) => {
+    const [form, setForm] = useState<Form[]>([{ nombre: '', apellido: '' }]);
+    const dispatch = useDispatch();
+const {currentUserId} = useCurrentUser()
+   
+  console.log(currentUserId)
     const agregarCampos = () => {
-        setCampos([...campos, { nombre: '', apellido: '' }]);
+        setForm([...form, { nombre: '', apellido: '' }]);
     };
 
     const eliminarCampos = (index: number) => {
-        if (campos.length > 1) {
-            const nuevosCampos = [...campos];
+        if (form.length > 1) {
+            const nuevosCampos = [...form];
             nuevosCampos.splice(index, 1);
-            setCampos(nuevosCampos);
+            setForm(nuevosCampos);
         }
     };
 
     const handleInputChange = (
         index: number,
-        campo: keyof Campo,
+        campo: keyof Form,
         value: string
     ) => {
-        const nuevosCampos = [...campos];
+        const nuevosCampos = [...form];
         nuevosCampos[index][campo] = value;
-        setCampos(nuevosCampos);
+        setForm(nuevosCampos);
+       
     };
 
    
@@ -40,6 +48,17 @@ const StepFive: React.FC<StepProps> = ({previous ,skip, handleStepClick}) => {
       const handleSkip = () => {
          skip && skip()
         handleStepClick && handleStepClick(1)
+      }
+
+      const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        const stringData : string = form.map(el => `${el.nombre} ${el.apellido}`).join(',')
+        console.log(stringData)
+        formData.companyRepresentative = stringData
+         
+        console.log(formData)
+        
+        dispatch(registerProvider(formData,currentUserId))
       }
 
     return (
@@ -54,7 +73,7 @@ const StepFive: React.FC<StepProps> = ({previous ,skip, handleStepClick}) => {
           <h1 className='font-bold text-lg '>Board of Agents</h1>
                 <span className="block mb-4">Details about your company agents, include all of your directors name here</span>
             <div className='w-1/2'>
-                {campos.map((campo, index) => (
+                {form.map((campo, index) => (
                     <div className="flex flex-row gap-2" key={index}>
                         <input
                             type="text"
@@ -92,7 +111,7 @@ const StepFive: React.FC<StepProps> = ({previous ,skip, handleStepClick}) => {
                 <button className='bg-white text-black px-6 border rounded-[5px] h-[40px]' onClick={handlePrevious}>Previous</button>
                 <div className='ml-4 '>
                 <button className='bg-white text-black px-6 border rounded-[5px] h-[40px] mr-2' onClick={handleSkip}>Skip</button>
-                <button className='bg-OrangeCooL text-white px-6 border  rounded-[5px] h-[40px]'>Next</button>
+                <button type="submit" className='bg-OrangeCooL text-white px-6 border  rounded-[5px] h-[40px]' onClick={handleSubmit}>Create Account</button>
                 </div>
             </div>
          </div>

@@ -6,19 +6,7 @@ import StepFour from './StepFour';
 import StepFive from './StepFIve';
 import GreenSidebar from '../SideProvider/GreenSidebar';
 import StepSidebar from '../SideProvider/StepSidebar';
-
-
-interface FormProvider {
-  companyName: string,
-  companyAddress: string,
-  companyPhone: string,
-  companyEmail: string,
-  companyRepresentative: string,
-  relatedChannel:string,
-  descriptionBusiness:string,
-  isRegistered:boolean,
-  
-}
+import { FormProvider } from '../../features/providerRegister';
 
 export type StepProps = {
   next?: () => void;
@@ -42,6 +30,7 @@ const StepByStepComponent: React.FC = () => {
    companyRepresentative:"",
    relatedChannel:"",
    descriptionBusiness:"",
+   serviceType:"",
    isRegistered:false,
   });
   
@@ -88,7 +77,8 @@ const StepByStepComponent: React.FC = () => {
     companyRepresentative:"",
     relatedChannel:"",
     descriptionBusiness:"",
-    isRegistered:false})
+    serviceType:"",
+    isRegistered:true})
   }
   
   const handleStepClick = (stepIndex: number) => {

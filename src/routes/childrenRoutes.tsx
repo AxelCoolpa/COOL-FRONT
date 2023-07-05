@@ -27,6 +27,7 @@ import AdminTableUser from '../pages/Admin/AdminTableUser'
 import AdminProfile from '../pages/Admin/AdminProfile'
 import Settings from '../pages/Admin/Settings'
 import PruebaHome from '../pages/ProvUser/pruebaHome'
+import HomeUser from '../pages/User/HomeUser'
 
 export const admin = [
 	{
@@ -89,7 +90,31 @@ export const PruebaAdminProvider = [
 export const user = [
 	{
 		path: '',
+		element: <HomeUser />,
+	},
+	{
+		path: 'adventures',
 		element: <Adventure />,
+	},
+	{
+		path: 'packages',
+		element: <Packages />,
+	},
+	{
+		path: 'transport',
+		element: <Transport />,
+	},
+	{
+		path: 'accomodation',
+		element: <Accomodation />,
+	},
+	{
+		path: 'tickets',
+		element: <Tickets />,
+	},
+	{
+		path: 'maps',
+		element: <Maps />,
 	},
 	{
 		path: 'homebug',
@@ -100,32 +125,8 @@ export const user = [
 		element: <CreateAdventure />,
 	},
 	{
-		path: 'clients',
-		element: <TableUser />,
-	},
-	{
 		path: 'details/:id',
 		element: <Detail />,
-	},
-	{
-		path: 'accomodation',
-		element: <Accomodation />,
-	},
-	{
-		path: 'transport',
-		element: <Transport />,
-	},
-	{
-		path: 'maps',
-		element: <Maps />,
-	},
-	{
-		path: 'packages',
-		element: <Packages />,
-	},
-	{
-		path: 'tickets',
-		element: <Tickets />,
 	},
 	{
 		path: '/profile',

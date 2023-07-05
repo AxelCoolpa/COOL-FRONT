@@ -1,8 +1,6 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-
-import { selectUsers } from '../../features/usersSlice'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
@@ -14,16 +12,20 @@ import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
 import { logout } from '../../features/LoginSlice'
-import { RootState } from '../../store/Store'
 import { useGetUsersQuery } from '../../api/getUsers'
 
 const Navbar: React.FC = () => {
-	const user = useSelector(selectUsers)
-
-	const formData = useSelector((state: RootState) => state.login.formData);
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-	const location = useLocation()
+
+	const localUser = JSON.parse(localStorage.getItem('user') || '{}')
+
+	const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
+
+	const currentUser = data?.find((user) => user.email === localUser.email)
+
+	if (isLoading || isFetching) return <p>Loading...</p>
+	if (error) return <p>Error.</p>
 
 	const notifications = true
 
@@ -237,10 +239,10 @@ const Navbar: React.FC = () => {
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {formData?.email}
+														👋 Hey, {currentUser?.email}
 													</p>
 													<p className='text-sm pl-6 cursor-default'>
-														{formData?.role?.rolename}
+														{currentUser?.role?.roleName}
 													</p>
 												</div>
 											</div>
@@ -284,9 +286,9 @@ const Navbar: React.FC = () => {
 								/>
 								<div className='hidden xl:flex flex-col justify-center'>
 									<label className='2xl:text-lg font-semibold'>
-										{formData?.email}
+										{currentUser?.firstName}
 									</label>
-									<span className='text-xs'>{formData?.email}</span>
+									<span className='text-xs'>{currentUser?.role?.roleName}</span>
 								</div>
 								<div className=''>
 									<select

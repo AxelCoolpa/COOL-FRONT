@@ -6,7 +6,7 @@ import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
 import { BsArrowBarUp, BsDot } from 'react-icons/bs'
 
-import AvatarImg from '../../assets/Avatar.jpg'
+import AvatarPlaceholderImg from '../../assets/AvatarPlaceholder.jpg'
 
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
@@ -150,7 +150,9 @@ const Navbar: React.FC = () => {
 									<div className='flex w-[350px] flex-col gap-2 rounded-[20px] bg-white p-4 shadow-CooL'>
 										<div
 											style={{
-												backgroundImage: `url(${AvatarImg})`,
+												backgroundImage: `url(${
+													currentUser?.avatar || AvatarPlaceholderImg
+												})`,
 												backgroundRepeat: 'no-repeat',
 												backgroundSize: 'cover',
 											}}
@@ -198,7 +200,9 @@ const Navbar: React.FC = () => {
 									<div className='flex w-[350px] flex-col gap-2 rounded-[20px] bg-white p-4 shadow-CooL'>
 										<div
 											style={{
-												backgroundImage: `url(${AvatarImg})`,
+												backgroundImage: `url(${
+													currentUser?.avatar || AvatarPlaceholderImg
+												})`,
 												backgroundRepeat: 'no-repeat',
 												backgroundSize: 'cover',
 											}}
@@ -233,7 +237,12 @@ const Navbar: React.FC = () => {
 						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
 							<div className='flex items-center gap-3 xl:gap-6'>
 								<Dropdown
-									button={<Avatar avatar={AvatarImg} wh={12} />}
+									button={
+										<Avatar
+											avatar={currentUser?.avatar || AvatarPlaceholderImg}
+											wh={12}
+										/>
+									}
 									children={
 										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>

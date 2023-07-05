@@ -32,7 +32,7 @@ const ProfileUserSection = () => {
 	}
 
 	return (
-		<div className='flex flex-col gap-10 mt-0 md:mt-10'>
+		<div className='flex flex-col gap-10 mt-0 md:my-10'>
 			<h1 className='text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold py-5 text-center tracking-tighter'>
 				Your profile
 			</h1>

@@ -1,8 +1,6 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-
-import { selectUsers } from '../../features/usersSlice'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
@@ -14,23 +12,17 @@ import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
 import { logout } from '../../features/LoginSlice'
-import { RootState } from '../../store/Store'
 import { useGetUsersQuery } from '../../api/getUsers'
 
 const Navbar: React.FC = () => {
-	const user = useSelector(selectUsers)
-	//const userProvider = user[1]
-	const formData = useSelector((state: RootState) => state.login.formData)
-	console.log(formData)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const localUser = JSON.parse(localStorage.getItem('user') || '{}')
-	console.log(localUser)
 
 	const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
 
 	const currentUser = data?.find((user) => user.email === localUser.email)
-
-	console.log(currentUser)
 
 	if (isLoading || isFetching) return <p>Loading...</p>
 	if (error) return <p>Error.</p>

@@ -4,14 +4,21 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 interface User {
 	_id: string
-	firstName?: string
-	avatar?: string
-	lastname?: string
-	username?: string
 	email: string
+	username?: string
+	avatar?: string
+	firstName?: string
+	lastname?: string
 	role?: {
 		roleName?: string
 	}
+	DNI: string
+	phone: string
+	location: string
+	description: string
+
+	favorites: []
+	destinations: []
 }
 
 export const userApi = createApi({

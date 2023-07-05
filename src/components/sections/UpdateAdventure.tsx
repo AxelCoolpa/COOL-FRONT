@@ -191,12 +191,7 @@ const UpdateAdventure = () => {
 					{/* BUTTONS */}
 					<div className='flex flex-col lg:flex-row items-center justify-evenly gap-4 lg:gap-20 mx-auto py-10 w-full'>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button
-								label='Back'
-								card
-								outline
-								onClick={() => navigate('/PRUEBAprovider')}
-							/>
+							<Button label='Back' card outline onClick={() => navigate('/admindash')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
 							<Button label='Save' card />

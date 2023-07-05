@@ -1,15 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+
+import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 import { toast } from 'react-hot-toast'
 
 import { categories } from '../categories/categories'
-import {
-	createAdventure,
-	createAdventureFormData,
-} from '../../features/createAdventureSlice'
-import { selectUsers } from '../../features/usersSlice'
+
+import { createActiviy, createActiviyFormData } from '../../features/createActivitySlice'
 
 import DropZone from '../inputs/DropZone'
 import ActivityForm from '../forms/ActivityForm'
@@ -19,13 +18,14 @@ import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 
+import { createAdventure } from '../../features/createAdventureSlice'
+
 const AddAdventure = () => {
 	const dispatch = useDispatch()
 
-	const users = useSelector(selectUsers)
-	const userID = users[1]?._id
+	const { currentUserId } = useCurrentUser()
 
-	const [formData, setFormData] = useState<createAdventureFormData>({
+	const [formData, setFormData] = useState<createActiviyFormData>({
 		title: '',
 		description: '',
 		individualPrice: '',
@@ -33,10 +33,10 @@ const AddAdventure = () => {
 		gallery: [],
 		categories: [],
 		location: '',
-		activities: [],
-		starterPack: [],
-		startTime: [],
-		endTime: [],
+		activities: '',
+		starterPack: '',
+		startTime: '',
+		endTime: '',
 	})
 
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,9 +55,6 @@ const AddAdventure = () => {
 			}))
 		}
 	}
-
-	// formData.categories = checkboxValues
-	// console.log(formData.categories)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
@@ -129,7 +126,7 @@ const AddAdventure = () => {
 		})
 
 		try {
-			await dispatch(createAdventure(data, userID))
+			await dispatch(createAdventure(data, currentUserId))
 			setFormData({
 				title: '',
 				description: '',
@@ -138,15 +135,11 @@ const AddAdventure = () => {
 				gallery: [],
 				categories: [],
 				location: '',
-				activities: [],
-				starterPack: [],
-				startTime: [],
-				endTime: [],
+				activities: '',
+				starterPack: '',
+				startTime: '',
+				endTime: '',
 			})
-
-			await setTimeout(() => {
-				window.location.reload()
-			}, 1000)
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
 		}

@@ -21,7 +21,7 @@ const ProfileUser = () => {
 	return (
 		<>
 			<a
-				className='hidden md:flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 my-5 w-fit rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150'
+				className='hidden md:flex items-center gap-1 font-bold uppercase text-xs px-4 py-2 my-5 w-fit rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 md:mt-12 ease-linear transition-all duration-150'
 				href='/profile'
 			>
 				<IoIosArrowBack size={18} />

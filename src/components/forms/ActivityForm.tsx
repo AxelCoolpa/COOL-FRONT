@@ -6,13 +6,13 @@ import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { LuCalendarCheck } from 'react-icons/lu'
 import { RxActivityLog } from 'react-icons/rx'
 
-import { createAdventureFormData } from '../../features/createAdventureSlice'
+import { createActiviyFormData } from '../../features/createActivitySlice'
 
 import Input from '../inputs/Input'
 
 interface ActivityFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	form: createAdventureFormData
+	form: createActiviyFormData
 	id?: string
 }
 
@@ -106,7 +106,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form, id }) =
 								<label>Start Time</label>
 							</div>
 							<Input
-								placeholder='Start Time'
+								type='datetime-local'
 								id='startTime'
 								name='startTime'
 								handleChange={handleChange}
@@ -119,7 +119,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form, id }) =
 								<label>End Time</label>
 							</div>
 							<Input
-								placeholder='End Time'
+								type='datetime-local'
 								id='endTime'
 								name='endTime'
 								handleChange={handleChange}

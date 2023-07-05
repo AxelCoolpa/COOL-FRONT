@@ -13,10 +13,10 @@ export interface createActiviyFormData {
 	groupPrice: string
 	gallery: []
 
-	activities: string[]
-	starterPack: string[]
-	startTime: string[]
-	endTime: string[]
+	activities: string
+	starterPack: string
+	startTime: string
+	endTime: string
 
 	rating?: number[]
 	reviews?: string[]

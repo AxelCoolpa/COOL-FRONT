@@ -60,7 +60,7 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 						<HeartButton size={25} />
 					</div>
 					<img
-						src={data?.galleryImage}
+						src={data?.galleryImage || data?.gallery[0]}
 						alt={data?.title}
 						className='h-full w-full object-cover'
 					/>

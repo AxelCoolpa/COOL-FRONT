@@ -5,8 +5,6 @@ import { deleteAdventure } from '../../features/deleteAdventureSlice'
 
 import { useLocation, useNavigate } from 'react-router'
 import { motion, useAnimation } from 'framer-motion'
-import { AiFillStar } from 'react-icons/ai'
-import { BsDot } from 'react-icons/bs'
 
 import { EnumData } from '../../types'
 
@@ -26,11 +24,6 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const location = useLocation()
-
-	const averageRating = data?.rating
-		.reduce((a, b) => a + b / data?.rating.length, 0)
-		.toString()
-		.slice(0, 3)
 
 	const onDelete = async () => {
 		await dispatch(deleteAdventure(data?._id))
@@ -60,7 +53,7 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 			<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
 				<div className='relative'>
 					<img
-						src={data?.gallery[0]}
+						src={data?.galleryImage}
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>
@@ -144,41 +137,8 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 					className='flex items-center justify-between px-3 pt-4 cursor-pointer'
 				>
 					<h4 className='text-base font-semibold'>{data?.title}</h4>
-					{averageRating > 0 && (
-						<div className='flex items-center gap-1'>
-							<AiFillStar size={18} color='#faaf00' />
-							<span className='text-sm font-medium'>{averageRating}</span>
-						</div>
-					)}
 				</div>
-				{data?.activities || data?.starterPack || data?.startTime || data?.endTime ? (
-					<ul className='flex flex-col justify-center px-3 py-4 text-xs gap-1 text-[#00000080]'>
-						{data?.activities && (
-							<li>
-								<div className='flex items-center gap-1'>
-									<BsDot size={20} />
-									{data?.activities}
-								</div>
-							</li>
-						)}
-						{data?.starterPack && (
-							<li>
-								<div className='flex items-center gap-1'>
-									<BsDot size={20} />
-									{data?.starterPack}
-								</div>
-							</li>
-						)}
-						{data?.startTime && (
-							<li>
-								<div className='flex items-center gap-1'>
-									<BsDot size={20} />
-									{data?.startTime} {data?.endTime ? `to ${data?.endTime}` : null}
-								</div>
-							</li>
-						)}
-					</ul>
-				) : null}
+
 				<div className='flex justify-center text-white font-bold text-lg py-2'>
 					<button
 						onClick={() => alert('Call to Action Aquí')}

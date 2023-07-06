@@ -1,8 +1,8 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import { selectUsers } from '../../features/usersSlice'
+import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
@@ -13,13 +13,11 @@ import AvatarImg from '../../assets/Avatar.jpg'
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
 import Avatar from '../Avatar'
-import { loginStart, logout } from '../../features/LoginSlice'
-import { RootState } from '../../store/Store'
+import { logout } from '../../features/LoginSlice'
 
 const Navbar: React.FC = () => {
-	const user = useSelector(selectUsers)
-	const userProvider = user[1]
-	const formData = useSelector((state: RootState) => state.login.formData)
+	const { currentUser } = useCurrentUser()
+
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -230,16 +228,16 @@ const Navbar: React.FC = () => {
 						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
 							<div className='flex items-center gap-3 xl:gap-6'>
 								<Dropdown
-									button={<Avatar avatar={AvatarImg} wh={12} />}
+									button={<Avatar avatar={currentUser?.avatar} wh={12} />}
 									children={
 										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {formData?.email}
+														👋 Hey, {currentUser?.email}
 													</p>
 													<p className='text-sm pl-6 cursor-default'>
-														{formData?.username}
+														{currentUser?.username}
 													</p>
 												</div>
 											</div>
@@ -283,8 +281,10 @@ const Navbar: React.FC = () => {
 									classNames={'py-2 top-8 -left-[180px] w-max'}
 								/>
 								<div className='hidden xl:flex flex-col justify-center'>
-									<label className='2xl:text-lg font-semibold'>{formData?.email}</label>
-									<span className='text-xs'>{formData?.email}</span>
+									<label className='2xl:text-lg font-semibold'>
+										{currentUser?.firstName}
+									</label>
+									<span className='text-xs'>{currentUser?.role?.roleName}</span>
 								</div>
 								<div className=''>
 									<select

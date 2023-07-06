@@ -18,7 +18,7 @@ interface ActivityFormProps {
 
 const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form }) => {
 	return (
-		<div className='col-span-5 flex flex-col items-center gap-12 transition'>
+		<div className='flex flex-col items-center gap-12 transition'>
 			<div className='flex flex-col lg:flex-row gap-8 lg:gap-32'>
 				<div className='flex items-center gap-2'>
 					<div className='relative w-80 xl:w-[278px] 2xl:w-96'>

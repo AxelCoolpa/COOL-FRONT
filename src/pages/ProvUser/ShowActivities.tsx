@@ -63,24 +63,13 @@ const ShowActivities: React.FC = () => {
 						</h6>
 					</div>
 
-					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
+					{/* <div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{/* <Swiper
-              loop={true}
-              spaceBetween={10}
-              navigation={true}
-              modules={[Navigation, Thumbs]}
-              grabCursor={true}
-              className="product-images-slider"
-            >
-              <SwiperSlide> */}
 							{validDestinations.map((destination) => (
 								<ListingCard key={destination._id} data={destination} />
 							))}
-							{/* </SwiperSlide>
-            </Swiper> */}
 						</GridColumns>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>

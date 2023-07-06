@@ -7,13 +7,14 @@ import { toast } from 'react-hot-toast'
 export interface createActiviyFormData {
 	title: string
 	description: string
-	categories: string[]
 	location: string
+	galleryImage: []
+	videoLink: string
+	category: string[]
 	individualPrice: string
 	groupPrice: string
-	gallery: []
+	idDestination: string
 
-	activities: string
 	starterPack: string
 	startTime: string
 	endTime: string
@@ -68,6 +69,6 @@ export const createActiviy =
 			toast.success('Activity created successfully')
 		} catch (error: any) {
 			dispatch(createActiviyFailure(error.message))
-			toast.error('Something went wrong')
+			toast.error(error.message)
 		}
 	}

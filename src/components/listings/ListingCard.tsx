@@ -60,7 +60,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 			<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
 				<div className='relative'>
 					<img
-						src={data?.galleryImage}
+						src={data?.galleryImage || data?.gallery[0]}
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>

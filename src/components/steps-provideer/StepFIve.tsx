@@ -5,6 +5,7 @@ import { useDispatch ,useSelector } from 'react-redux';
 import {registerProvider} from "../../features/providerRegister"
 import { selectUsers } from '../../features/usersSlice'
 import { useCurrentUser } from '../../hooks/useCurrentUser';
+import { useNavigate } from 'react-router-dom';
 
 interface Form {
     nombre: string;
@@ -12,6 +13,7 @@ interface Form {
 }
 
 const StepFive: React.FC<StepProps> = ({previous ,skip, handleStepClick , formData}) => {
+    const navigate = useNavigate()
     const [form, setForm] = useState<Form[]>([{ nombre: '', apellido: '' }]);
     const dispatch = useDispatch();
 const {currentUserId} = useCurrentUser()
@@ -59,6 +61,7 @@ const {currentUserId} = useCurrentUser()
         console.log(formData)
         
         dispatch(registerProvider(formData,currentUserId))
+        navigate('/provider')
       }
 
     return (

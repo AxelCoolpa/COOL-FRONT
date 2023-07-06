@@ -2,8 +2,13 @@ import React from "react";
 
 // components
 import CardStats from "../cards/CardStats";
+import { useDestinations } from "../../hooks/useDestination";
+import { useAllUsers } from "../../hooks/useAllUsers";
 
 const HeaderStats: React.FC = () => {
+  const { destinos } = useDestinations()
+  const { allUsers } = useAllUsers()
+
   return (
     <>
       {/* Header */}
@@ -14,8 +19,8 @@ const HeaderStats: React.FC = () => {
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="Clients"
-                  statTitle="1584"
+                  statSubtitle="destinos creados"
+                  statTitle={`${destinos?.length}`}
                   statArrow="up"
                   statPercent="42.6"
                   statPercentColor="text-emerald-500"
@@ -23,8 +28,8 @@ const HeaderStats: React.FC = () => {
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="Operators"
-                  statTitle="148"
+                  statSubtitle="Usuarios creados"
+                  statTitle={`${allUsers?.length}`}
                   statArrow="down"
                   statPercent="06.8"
                   statPercentColor="text-red-500"

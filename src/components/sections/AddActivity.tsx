@@ -37,9 +37,8 @@ const AddAdventure = () => {
 
 	const { currentUserId } = useCurrentUser()
 	const destinationsList = useSelector(selectDestinations)
-	console.log(destinationsList)
 
-	// const [destinations, setDestinations] = useState<Destination[]>([])
+	const [destinations, setDestinations] = useState<Destination[]>([])
 	const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
 
 	const [formData, setFormData] = useState<createActivityFormData>({
@@ -56,8 +55,6 @@ const AddAdventure = () => {
 		endTime: '',
 		idDestination: '',
 	})
-
-	console.log(formData.idDestination)
 
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
@@ -88,9 +85,11 @@ const AddAdventure = () => {
 		setSelectedDestination(selectedOption)
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			idDestination: selectedOption._id,
+			idDestination: selectedOption?._id,
 		}))
 	}
+
+	console.log(formData.idDestination)
 
 	const handleFilesSelected = (files: File[]) => {
 		const updatedGallery = [...formData.galleryImage, ...files]
@@ -177,9 +176,9 @@ const AddAdventure = () => {
 		}
 	}
 
-	// useEffect(() => {
-	// 	setDestinations(destinationsList)
-	// }, [destinationsList])
+	useEffect(() => {
+		setDestinations(destinationsList)
+	}, [destinationsList])
 
 	return (
 		<Container>
@@ -196,16 +195,29 @@ const AddAdventure = () => {
 					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						Select destination
 					</h3>
-					<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
 						<Select
-							options={destinationsList}
-							value={selectedDestination?._id}
+							options={destinations}
+							value={selectedDestination}
 							onChange={handleDestinationChange}
-							// formatOptionLabel={}
-							placeholder=''
+							placeholder='Select destination'
+							isClearable
+							formatOptionLabel={(option: any) => (
+								<div className='flex flex-row items-center gap-3'>
+									<div>
+										<span className='text-neutral-500'>{option.title}</span>
+									</div>
+								</div>
+							)}
+							classNames={{
+								control: () => 'p-3 border-2',
+								input: () => 'text-lg',
+								option: () => 'text-lg',
+							}}
 							styles={{
 								control: (provided: any) => ({
 									...provided,
+									width: '100%',
 									height: '20px',
 									minHeight: '60px',
 									borderRadius: '10px',
@@ -216,6 +228,15 @@ const AddAdventure = () => {
 									alignItems: 'center',
 								}),
 							}}
+							theme={(theme) => ({
+								...theme,
+								borderRadius: 6,
+								colors: {
+									...theme.colors,
+									primary: 'white',
+									primary25: '#ce452a60',
+								},
+							})}
 						/>
 					</div>
 

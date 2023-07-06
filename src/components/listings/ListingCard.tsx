@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-
-import { deleteAdventure } from '../../features/deleteAdventureSlice'
-
 import { useLocation, useNavigate } from 'react-router'
+
+import { deleteActivity } from '../../features/deleteActivitySlice'
+
 import { motion, useAnimation } from 'framer-motion'
-import { AiFillStar } from 'react-icons/ai'
+
 import { BsDot } from 'react-icons/bs'
 
 import { EnumData } from '../../types'
@@ -15,7 +15,6 @@ import HeartButton from '../buttons/HeartButton'
 import MoreOptionsButton from '../buttons/MoreOptionsButon'
 import EditButon from '../buttons/EditButton'
 import DeleteButton from '../buttons/DeleteButton'
-import { toast } from 'react-hot-toast'
 
 interface ListingCardProps {
 	data: EnumData | undefined
@@ -27,13 +26,10 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 	const dispatch = useDispatch()
 	const location = useLocation()
 
-	// const averageRating = data?.rating
-	// 	.reduce((a, b) => a + b / data?.rating.length, 0)
-	// 	.toString()
-	// 	.slice(0, 3)
+	const activityID = data?._id
 
 	const onDelete = async () => {
-		await dispatch(deleteAdventure(data?._id))
+		await dispatch(deleteActivity(activityID))
 
 		setTimeout(() => {
 			window.location.reload()
@@ -64,7 +60,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>
-						{location.pathname === '/admindash' || location.pathname === '/provider' ? (
+						{location.pathname === '/provider' ? (
 							<Dropdown
 								button={<MoreOptionsButton />}
 								children={
@@ -77,57 +73,25 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 										<div className='mt-3 mx-4 flex flex-col gap-5'>
 											<div className='h-px w-full bg-gray-200' />
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-												{location.pathname === '/admindash' ? (
-													<div className='flex gap-5 items-center '>
-														<EditButon
-															onClick={() => navigate(`/admindash/update/${data?._id}`)}
-														/>
-														<p
-															onClick={() => navigate(`/admindash/update/${data?._id}`)}
-															className='cursor-pointer'
-														>
-															Edit destination
-														</p>
-													</div>
-												) : (
-													<div className='flex gap-5 items-center '>
-														<EditButon
-															onClick={() => navigate(`/provider/update/${data?._id}`)}
-														/>
-														<p
-															onClick={() => navigate(`/provider/update/${data?._id}`)}
-															className='cursor-pointer'
-														>
-															Edit activity
-														</p>
-													</div>
-												)}
+												<div className='flex gap-5 items-center '>
+													<EditButon
+														onClick={() => navigate(`/provider/update/${data?._id}`)}
+													/>
+													<p
+														onClick={() => navigate(`/provider/update/${data?._id}`)}
+														className='cursor-pointer'
+													>
+														Edit activity
+													</p>
+												</div>
 											</div>
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-												{location.pathname === '/admindash' ? (
-													<div className='flex gap-5 items-center '>
-														<DeleteButton onClick={onDelete} />
-														<p onClick={onDelete} className='cursor-pointer'>
-															Delete destination
-														</p>
-													</div>
-												) : (
-													<div className='flex gap-5 items-center '>
-														<DeleteButton
-															onClick={() =>
-																toast.error('Error al eliminar la actividad')
-															}
-														/>
-														<p
-															onClick={() =>
-																toast.error('Error al eliminar la actividad')
-															}
-															className='cursor-pointer'
-														>
-															Delete activity
-														</p>
-													</div>
-												)}
+												<div className='flex gap-5 items-center '>
+													<DeleteButton onClick={onDelete} />
+													<p onClick={onDelete} className='cursor-pointer'>
+														Delete activity
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -151,16 +115,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 						</div>
 					)} */}
 				</div>
-				{data?.activities || data?.starterPack || data?.startTime || data?.endTime ? (
+				{data?.starterPack || data?.startTime || data?.endTime ? (
 					<ul className='flex flex-col justify-center px-3 py-4 text-xs gap-1 text-[#00000080]'>
-						{data?.activities && (
-							<li>
-								<div className='flex items-center gap-1'>
-									<BsDot size={20} />
-									{data?.activities}
-								</div>
-							</li>
-						)}
 						{data?.starterPack && (
 							<li>
 								<div className='flex items-center gap-1'>

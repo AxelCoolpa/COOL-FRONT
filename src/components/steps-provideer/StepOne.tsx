@@ -12,6 +12,7 @@ interface Country {
  
 
 const StepOne: React.FC<StepProps>= ({next ,handleSetForm ,formData}) => {
+  const [email , setEmail] = useState('')
   const [countries, setCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -60,10 +61,13 @@ const StepOne: React.FC<StepProps>= ({next ,handleSetForm ,formData}) => {
    }
   }
 
-const handleEmail = (e:React.ChangeEvent<HTMLInputElement>) => {
-   formData.companyEmail = e.target.value
-   handleSetForm(formData)
-}
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setEmail(value);
+  
+    const updatedFormData = { ...formData, companyEmail: value };
+    handleSetForm(updatedFormData);
+  };
 
 const handleNext = () =>{
    if(formData.companyPhone.length && formData.companyEmail.length){
@@ -110,7 +114,7 @@ const handleNext = () =>{
         <div className="max-w-sm mx-auto flex-col justify-start">
       <form>
           <div className="mb-4">
-            <input id="email" name="email" placeholder='Email' value={formData.companyEmail} className='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500  placeholder-gray-500 placeholder-opacity-75 font-poppy' onChange={handleEmail}/>
+            <input id="email" name="email" placeholder='Email' value={email} className='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500  placeholder-gray-500 placeholder-opacity-75 font-poppy' onChange={handleEmail}/>
           </div>
           <div className="mb-4">
 

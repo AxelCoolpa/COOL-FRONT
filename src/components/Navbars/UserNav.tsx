@@ -38,22 +38,11 @@ const Navbar: React.FC = () => {
 								src={Cool}
 								alt='Cool-LOGO'
 								className='absolute hidden md:flex md:left-4 w-28 cursor-pointer ease-in-out transition'
-								onClick={() => navigate('/PRUEBAprovider')}
+								onClick={() => navigate('/')}
 							/>
 						</div>
-						{/* Actual Page */}
-						{/* <span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							<a className='text-sm text-navy-700 hover:underline' href='/PRUEBAprovider'>
-								Pages
-								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
-							</a>
-							<Link className='text-sm capitalize text-navy-700 hover:underline' to='#'>
-								{location.pathname.split('/')[1]}
-								{location.pathname.split('/').length > 2 &&
-									` / ` + location.pathname.split('/')[2]}
-							</Link>
-						</span> */}
 					</div>
+
 					{/* Form */}
 					<div className='flex items-center justify-center gap-4'>
 						<form className='md:flex hidden pl-10 flex-row flex-wrap items-center mr-3'>

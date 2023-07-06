@@ -64,8 +64,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>
-						{location.pathname === '/PRUEBAprovider' ||
-						location.pathname === '/provider' ? (
+						{location.pathname === '/admindash' || location.pathname === '/provider' ? (
 							<Dropdown
 								button={<MoreOptionsButton />}
 								children={
@@ -78,17 +77,13 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 										<div className='mt-3 mx-4 flex flex-col gap-5'>
 											<div className='h-px w-full bg-gray-200' />
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-												{location.pathname === '/PRUEBAprovider' ? (
+												{location.pathname === '/admindash' ? (
 													<div className='flex gap-5 items-center '>
 														<EditButon
-															onClick={() =>
-																navigate(`/PRUEBAprovider/update/${data?._id}`)
-															}
+															onClick={() => navigate(`/admindash/update/${data?._id}`)}
 														/>
 														<p
-															onClick={() =>
-																navigate(`/PRUEBAprovider/update/${data?._id}`)
-															}
+															onClick={() => navigate(`/admindash/update/${data?._id}`)}
 															className='cursor-pointer'
 														>
 															Edit destination
@@ -109,7 +104,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 												)}
 											</div>
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-												{location.pathname === '/PRUEBAprovider' ? (
+												{location.pathname === '/admindash' ? (
 													<div className='flex gap-5 items-center '>
 														<DeleteButton onClick={onDelete} />
 														<p onClick={onDelete} className='cursor-pointer'>

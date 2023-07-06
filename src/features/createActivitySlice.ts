@@ -4,7 +4,7 @@ import { createActivityAPI } from '../api/createActivityAPI'
 
 import { toast } from 'react-hot-toast'
 
-export interface createActiviyFormData {
+export interface createActivityFormData {
 	title: string
 	description: string
 	location: string
@@ -23,52 +23,52 @@ export interface createActiviyFormData {
 	reviews?: string[]
 }
 
-interface createActiviyState {
+interface createActivityState {
 	isLoading: boolean
 	error: string | null
 }
 
-const initialState: createActiviyState = {
+const initialState: createActivityState = {
 	isLoading: false,
 	error: null,
 }
 
-const createActiviySlice = createSlice({
-	name: 'createActiviy',
+const createActivitySlice = createSlice({
+	name: 'createActivity',
 	initialState,
 	reducers: {
-		createActiviyStart: (state) => {
+		createActivityStart: (state) => {
 			state.isLoading = true
 			state.error = null
 		},
-		createActiviySuccess: (state) => {
+		createActivitySuccess: (state) => {
 			state.isLoading = false
 		},
-		createActiviyFailure: (state, action: PayloadAction<string>) => {
+		createActivityFailure: (state, action: PayloadAction<string>) => {
 			state.isLoading = false
 			state.error = action.payload
 		},
 	},
 })
 
-export const { createActiviyStart, createActiviySuccess, createActiviyFailure } =
-	createActiviySlice.actions
+export const { createActivityStart, createActivitySuccess, createActivityFailure } =
+	createActivitySlice.actions
 
-export default createActiviySlice.reducer
+export default createActivitySlice.reducer
 
-export const createActiviy =
-	(formData: createActiviyFormData, providerID: string): AppThunk =>
+export const createActivity =
+	(formData: createActivityFormData, providerID: string): AppThunk =>
 	async (dispatch) => {
 		try {
-			dispatch(createActiviyStart())
+			dispatch(createActivityStart())
 
 			// Simulate an asynchronous API call
 			await createActivityAPI(formData, providerID)
 
-			dispatch(createActiviySuccess())
+			dispatch(createActivitySuccess())
 			toast.success('Activity created successfully')
 		} catch (error: any) {
-			dispatch(createActiviyFailure(error.message))
+			dispatch(createActivityFailure(error.message))
 			toast.error(error.message)
 		}
 	}

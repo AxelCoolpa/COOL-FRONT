@@ -1,14 +1,13 @@
 import React from 'react'
 
-// import { BiKey } from 'react-icons/bi'
 import { CgInfo } from 'react-icons/cg'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
+import { MdOutlineTitle } from 'react-icons/md'
+import { TbFileDescription } from 'react-icons/tb'
 
 import { createAdventureFormData } from '../../features/createAdventureSlice'
 
 import Input from '../inputs/Input'
-import { MdOutlineTitle } from 'react-icons/md'
-import { TbFileDescription } from 'react-icons/tb'
 
 interface AddAdventureFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -51,27 +50,6 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({ handleChange, form }) 
 					</div>
 				</div>
 			</div>
-
-			{/* <div className='flex flex-col items-center justify-center gap-10 w-full'>
-				<div className='flex flex-col items-center justify-center gap-10 w-full'>
-					<div className='flex flex-col items-center justify-center lg:flex-row gap-8 w-full'>
-						<div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<MdOutlineTitle size={25} />
-								<label>----</label>
-							</div>
-							<Input placeholder='----' />
-						</div>
-						<div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<HiOutlineLocationMarker size={25} />
-								<label>----</label>
-							</div>
-							<Input placeholder='----' />
-						</div>
-					</div>
-				</div>
-			</div> */}
 
 			<div className='flex flex-col gap-10 w-full h-full'>
 				<div className='flex items-center gap-5 text-[#686868]'>

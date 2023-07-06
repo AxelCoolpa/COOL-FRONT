@@ -4,6 +4,7 @@ import { CgInfo } from 'react-icons/cg'
 import { FiPackage } from 'react-icons/fi'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { LuCalendarCheck } from 'react-icons/lu'
+import { MdOutlineTitle } from 'react-icons/md'
 import { RxActivityLog } from 'react-icons/rx'
 
 import { createActiviyFormData } from '../../features/createActivitySlice'
@@ -13,17 +14,16 @@ import Input from '../inputs/Input'
 interface ActivityFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	form: createActiviyFormData
-	id?: string
 }
 
-const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form, id }) => {
+const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form }) => {
 	return (
 		<div className='col-span-5 flex flex-col items-center gap-12 transition'>
 			<div className='flex flex-col lg:flex-row gap-8 lg:gap-32'>
 				<div className='flex items-center gap-2'>
 					<div className='relative w-80 xl:w-[278px] 2xl:w-96'>
 						<Input
-							placeholder='Price adventure indivial'
+							placeholder='Price activity indivial'
 							id='individualPrice'
 							name='individualPrice'
 							handleChange={handleChange}
@@ -36,7 +36,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form, id }) =
 				</div>
 				<div className='w-80 xl:w-[278px] 2xl:w-96'>
 					<Input
-						placeholder='Price adventure groups'
+						placeholder='Price activity groups'
 						id='groupPrice'
 						name='groupPrice'
 						handleChange={handleChange}
@@ -48,11 +48,12 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form, id }) =
 				<div className='flex flex-col items-center gap-10'>
 					<div className='flex flex-col lg:flex-row gap-8'>
 						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
-							<label className='text-OrangeCooL'>
-								Adventure ID #<span className='text-xs'>{id}</span>
-							</label>
+							<div className='flex items-center gap-5 text-[#686868]'>
+								<MdOutlineTitle size={25} />
+								<label>Activity</label>
+							</div>
 							<Input
-								placeholder='Title adventure'
+								placeholder='Title activity'
 								id='title'
 								name='title'
 								handleChange={handleChange}
@@ -75,14 +76,14 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form, id }) =
 						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<RxActivityLog size={20} />
-								<label>Activities</label>
+								<label>Video Link</label>
 							</div>
 							<Input
-								placeholder='Activities'
-								id='activities'
-								name='activities'
+								placeholder='Video URL'
+								id='videoLink'
+								name='videoLink'
 								handleChange={handleChange}
-								value={form?.activities}
+								value={form?.videoLink}
 							/>
 						</div>
 					</div>
@@ -134,9 +135,9 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form, id }) =
 					label='Adventure description'
 					id='description'
 					name='description'
-					sizeH={36}
 					handleChange={handleChange}
 					value={form?.description}
+					sizeH={44}
 				/>
 			</div>
 		</div>

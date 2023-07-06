@@ -11,8 +11,6 @@ const CloudinaryUploadImg: React.FC<CloudinaryUploadProps> = ({ onUpload }) => {
 	const [imageSelected, setImageSelected] = useState('')
 	const [image, setImage] = useState('')
 
-	console.log(image)
-
 	const uploadImage = () => {
 		const formData = new FormData()
 		formData.append('file', imageSelected)

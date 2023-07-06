@@ -10,29 +10,27 @@ import {
 	createAdventure,
 	createAdventureFormData,
 } from '../../features/createAdventureSlice'
-import { selectUsers } from '../../features/usersSlice'
 
-// import DropZone from '../inputs/DropZone'
 import AdventureForm from '../forms/AdventureForm'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import CloudinaryUploadImg from '../cloudinary/ImageUpload'
+import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 const AddAdventure = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const users = useSelector(selectUsers)
-	const userID = users[1]?._id
+	const { currentUserId } = useCurrentUser()
 
 	const [formData, setFormData] = useState<createAdventureFormData>({
 		title: '',
 		description: '',
-		gallery: '',
+		galleryImage: '',
 		categories: [],
-		location: '',
+		// location: '',
 	})
 
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,27 +58,19 @@ const AddAdventure = () => {
 		}))
 	}
 
-	// const handleFilesSelected = (files: File[]) => {
-	// 	const updatedGallery = [...formData.gallery, ...files]
-	// 	setFormData((prevFormData) => ({
-	// 		...prevFormData,
-	// 		gallery: updatedGallery,
-	// 	}))
-	// }
-
 	const handleUpload = (picture: any) => {
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			gallery: picture,
+			galleryImage: picture,
 		}))
 	}
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 
-		const { title, description, gallery, categories, location } = formData
+		const { title, description, galleryImage, categories, location } = formData
 
-		if (!title || !description || !gallery || !categories || !location) {
+		if (!title || !description || !galleryImage || !categories || !location) {
 			toast.error('Por favor, complete todos los campos')
 			return
 		}
@@ -88,10 +78,10 @@ const AddAdventure = () => {
 		const data = new FormData()
 		data.append('title', title)
 		data.append('description', description)
-		data.append('location', location)
+		// data.append('location', location)
 
-		for (let i = 0; i < formData.gallery.length; i++) {
-			data.append('gallery', formData.gallery[i])
+		for (let i = 0; i < formData.galleryImage.length; i++) {
+			data.append('galleryImage', formData.galleryImage[i])
 		}
 
 		formData.categories.forEach((category) => {
@@ -99,18 +89,19 @@ const AddAdventure = () => {
 		})
 
 		try {
-			dispatch(createAdventure(data, userID))
+			dispatch(createAdventure(formData, currentUserId))
 			setFormData({
 				title: '',
 				description: '',
-				gallery: '',
+				galleryImage: '',
 				categories: [],
-				location: '',
+				// location: '',
 			})
 
 			// await setTimeout(() => {
 			// 	window.location.reload()
 			// }, 1000)
+			console.log(formData)
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
 		}
@@ -126,8 +117,6 @@ const AddAdventure = () => {
 				>
 					{/* IMAGE */}
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
-						{/* <DropZone onFilesSelected={handleFilesSelected} /> */}
-
 						<CloudinaryUploadImg onUpload={handleUpload} />
 					</div>
 
@@ -182,7 +171,7 @@ const AddAdventure = () => {
 							<Button label='Back' card outline onClick={() => navigate('/admindash')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Create' card />
+							<Button label='Create' card type='submit' />
 						</div>
 					</div>
 				</form>

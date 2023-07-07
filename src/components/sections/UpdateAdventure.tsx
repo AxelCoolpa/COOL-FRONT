@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { categories } from '../categories/categories'
 
-import { selectUsers } from '../../features/usersSlice'
+import { useCurrentUser } from '../../hooks/useCurrentUser'
 import {
 	destinationById,
 	selectDestinationById,
@@ -15,12 +15,12 @@ import {
 	updateAdventure,
 } from '../../features/updateAdventureSlice'
 
-import DropZone from '../inputs/DropZone'
 import AdventureForm from '../forms/AdventureForm'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
+import CloudinaryUploadImg from '../cloudinary/ImageUpload'
 
 const UpdateAdventure = () => {
 	const dispatch = useDispatch()
@@ -29,38 +29,32 @@ const UpdateAdventure = () => {
 	const { id } = useParams()
 	const destinationID = id
 
-	const users = useSelector(selectUsers)
-	const userID = users[1]?._id
+	const { currentUserId } = useCurrentUser()
+	const userID = currentUserId
 
 	const destination = useSelector(selectDestinationById)
 
 	const [formData, setFormData] = useState<updateAdventureFormData>({
-		title: destination?.title,
-		description: destination?.description,
-		individualPrice: destination?.individualPrice,
-		groupPrice: destination?.groupPrice,
-		gallery: destination?.gallery,
-		categories: destination?.categories,
-		location: destination?.location,
+		title: '',
+		description: '',
+		galleryImage: '',
+		categories: [],
+		location: '',
 	})
-
-	const [checkboxValues, setCheckboxValues] = useState([])
 
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
-			setCheckboxValues([...checkboxValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: [...formData.categories, value],
+				categories: [...formData?.categories, value],
 			}))
 		} else {
-			setCheckboxValues(checkboxValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: formData.categories.filter((val) => val !== value),
+				categories: formData?.categories.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -73,18 +67,17 @@ const UpdateAdventure = () => {
 		}))
 	}
 
-	const handleFilesSelected = (files: File[]) => {
-		const updatedGallery = [...formData.gallery, ...files]
+	const handleUpload = (picture: any) => {
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			gallery: updatedGallery,
+			galleryImage: picture,
 		}))
 	}
 
 	const handleUpdate = async (e: React.FormEvent) => {
 		e.preventDefault()
 
-		const { title, description, individualPrice, groupPrice, location } = formData
+		const { title, description, galleryImage, categories, location } = formData
 
 		// if (
 		// 	!title ||
@@ -107,15 +100,10 @@ const UpdateAdventure = () => {
 		const data = new FormData()
 		data.append('title', title)
 		data.append('description', description)
-		data.append('individualPrice', individualPrice)
-		data.append('groupPrice', groupPrice)
+		data.append('galleryImage', galleryImage)
 		data.append('location', location)
 
-		for (let i = 0; i < formData.gallery.length; i++) {
-			data.append('gallery', formData.gallery[i])
-		}
-
-		formData.categories.forEach((category) => {
+		formData?.categories.forEach((category) => {
 			data.append('categories', category)
 		})
 
@@ -128,7 +116,24 @@ const UpdateAdventure = () => {
 
 	useEffect(() => {
 		dispatch(destinationById(destinationID))
-	}, [destinationID, dispatch])
+
+		// setFormData((prevFormData) => ({
+		// 	...prevFormData,
+		// 	title: destination?.title,
+		// 	description: destination?.description,
+		// 	galleryImage: destination?.galleryImage,
+		// 	categories: destination?.categories,
+		// 	location: destination?.location,
+		// }))
+	}, [
+		destinationID,
+		dispatch,
+		// destination?.title,
+		// destination?.description,
+		// destination?.galleryImage,
+		// destination?.categories,
+		// destination?.location,
+	])
 
 	return (
 		<Container>
@@ -138,14 +143,18 @@ const UpdateAdventure = () => {
 					onSubmit={handleUpdate}
 					className='flex flex-col items-center justify-center w-full transition'
 				>
-					{/* IMAGES */}
+					{/* IMAGE */}
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
-						<DropZone onFilesSelected={handleFilesSelected} />
+						<CloudinaryUploadImg onUpload={handleUpload} />
 					</div>
 
 					{/* FORM */}
 					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
-						<AdventureForm handleChange={handleChange} form={formData} />
+						<AdventureForm
+							handleChange={handleChange}
+							updateForm={formData}
+							data={destination}
+						/>
 					</div>
 
 					{/* CATEGORIES */}
@@ -171,19 +180,7 @@ const UpdateAdventure = () => {
 					{/* MAP */}
 					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						<h3 className='text-2xl font-semibold'>Adventure location</h3>
-						<div className='flex md:hidden flex-col items-center py-10'>
-							<Map w={300} h={250} />
-						</div>
-						<div className='hidden md:flex lg:hidden flex-col items-center py-10'>
-							<Map w={450} h={350} />
-						</div>
-						<div className='hidden lg:flex xl:hidden flex-col items-center py-10'>
-							<Map w={650} h={400} />
-						</div>
-						<div className='hidden xl:flex 2xl:hidden flex-col items-center py-10'>
-							<Map w={800} h={450} />
-						</div>
-						<div className='hidden 2xl:flex flex-col items-center py-10'>
+						<div className='flex flex-col items-center py-10'>
 							<Map />
 						</div>
 					</div>

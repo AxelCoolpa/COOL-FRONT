@@ -4,104 +4,133 @@ import { CgInfo } from 'react-icons/cg'
 import { FiPackage } from 'react-icons/fi'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { LuCalendarCheck } from 'react-icons/lu'
-import { MdOutlineTitle } from 'react-icons/md'
+import { MdAttachMoney, MdOutlineTitle } from 'react-icons/md'
 import { RxActivityLog } from 'react-icons/rx'
+import { TbFileDescription, TbMoneybag } from 'react-icons/tb'
 
-import { createActiviyFormData } from '../../features/createActivitySlice'
+import { createActivityFormData } from '../../features/createActivitySlice'
+import { updateActivityFormData } from '../../features/updateActivitySlice'
 
 import Input from '../inputs/Input'
 
 interface ActivityFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	form: createActiviyFormData
+	form?: createActivityFormData
+	updateForm?: updateActivityFormData
+	data?: {
+		title?: string
+		description?: string
+		location?: string
+		videoLink?: string
+		individualPrice?: string
+		groupPrice?: string
+
+		starterPack?: string
+		startTime?: string
+		endTime?: string
+	}
 }
 
-const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form }) => {
+const ActivityForm: React.FC<ActivityFormProps> = ({
+	handleChange,
+	form,
+	updateForm,
+	data,
+}) => {
 	return (
-		<div className='flex flex-col items-center gap-12 transition'>
-			<div className='flex flex-col lg:flex-row gap-8 lg:gap-32'>
-				<div className='flex items-center gap-2'>
-					<div className='relative w-80 xl:w-[278px] 2xl:w-96'>
+		<div className='flex flex-col items-center justify-center gap-12 transition w-full'>
+			<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
+				<div className='flex flex-col gap-10 w-full'>
+					<div className='flex items-center gap-5 text-[#686868]'>
+						<MdAttachMoney size={25} />
+						<label>Individual Price</label>
+					</div>
+					<div className='relative w-full'>
 						<Input
-							placeholder='Price activity indivial'
+							placeholder={data?.individualPrice || 'Price activity indivial'}
 							id='individualPrice'
 							name='individualPrice'
 							handleChange={handleChange}
-							value={form?.individualPrice}
+							value={updateForm?.individualPrice || form?.individualPrice}
 						/>
-						<div className='absolute -right-16 top-2'>
+						<div className='absolute right-2 top-1 z-20'>
 							<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />
 						</div>
 					</div>
 				</div>
-				<div className='w-80 xl:w-[278px] 2xl:w-96'>
+				<div className='flex flex-col gap-10 w-full'>
+					<div className='flex items-center gap-5 text-[#686868]'>
+						<TbMoneybag size={25} />
+						<label>Group price</label>
+					</div>
 					<Input
-						placeholder='Price activity groups'
+						placeholder={data?.groupPrice || 'Price activity groups'}
 						id='groupPrice'
 						name='groupPrice'
 						handleChange={handleChange}
-						value={form?.groupPrice}
+						value={updateForm?.groupPrice || form?.groupPrice}
 					/>
 				</div>
 			</div>
-			<div className='flex flex-col items-center 2xl:flex-row gap-10'>
-				<div className='flex flex-col items-center gap-10'>
-					<div className='flex flex-col lg:flex-row gap-8'>
-						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+
+			<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
+				<div className='flex flex-col items-center justify-center gap-12 transition w-full'>
+					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
+						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<MdOutlineTitle size={25} />
 								<label>Activity</label>
 							</div>
 							<Input
-								placeholder='Title activity'
+								placeholder={data?.title || 'Title activity'}
 								id='title'
 								name='title'
 								handleChange={handleChange}
-								value={form?.title}
+								value={updateForm?.title || form?.title}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<HiOutlineLocationMarker size={25} />
 								<label>Which is the location?</label>
 							</div>
 							<Input
-								placeholder='Location'
+								placeholder={data?.location || 'Location'}
 								id='location'
 								name='location'
 								handleChange={handleChange}
-								value={form?.location}
+								value={updateForm?.location || form?.location}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<RxActivityLog size={20} />
 								<label>Video Link</label>
 							</div>
 							<Input
-								placeholder='Video URL'
+								placeholder={data?.videoLink || 'Video URL'}
 								id='videoLink'
 								name='videoLink'
 								handleChange={handleChange}
-								value={form?.videoLink}
+								value={updateForm?.videoLink || form?.videoLink}
 							/>
 						</div>
 					</div>
-					<div className='flex flex-col lg:flex-row gap-8'>
-						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
+						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<FiPackage size={25} />
 								<label>Starter Pack</label>
 							</div>
 							<Input
-								placeholder='Starter Pack'
+								placeholder={data?.starterPack || 'Starter Pack'}
 								id='starterPack'
 								name='starterPack'
 								handleChange={handleChange}
-								value={form?.starterPack}
+								value={updateForm?.starterPack || form?.starterPack}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<LuCalendarCheck size={25} />
 								<label>Start Time</label>
@@ -111,10 +140,10 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form }) => {
 								id='startTime'
 								name='startTime'
 								handleChange={handleChange}
-								value={form?.startTime}
+								value={updateForm?.startTime || form?.startTime}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 w-80 lg:w-60 xl:w-52 2xl:w-[278px]'>
+						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<LuCalendarCheck size={25} />
 								<label>End Time</label>
@@ -124,19 +153,27 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ handleChange, form }) => {
 								id='endTime'
 								name='endTime'
 								handleChange={handleChange}
-								value={form?.endTime}
+								value={updateForm?.endTime || form?.endTime}
 							/>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className='w-full xl:w-[688px] 2xl:w-[896px]'>
+
+			<div className='flex flex-col gap-10 w-full h-full'>
+				<div className='flex items-center gap-5 text-[#686868]'>
+					<TbFileDescription size={25} />
+					<label>Description</label>
+				</div>
+				{data?.description ? <p className='text-zinc-500'>{data?.description}</p> : null}
 				<Input
-					label='Adventure description'
+					label={
+						data?.description ? 'Update Adventure description' : 'Adventure description'
+					}
 					id='description'
 					name='description'
 					handleChange={handleChange}
-					value={form?.description}
+					value={updateForm?.description || form?.description}
 					sizeH={44}
 				/>
 			</div>

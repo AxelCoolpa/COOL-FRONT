@@ -1,9 +1,9 @@
 import HomeMainSection from '../../components/sections/HomeMainSection'
-import { Card, CardHeader, CardBody, Switch, Typography } from "@material-tailwind/react";
-import PruebaBookingBar from "../../components/pruebaBookingBar";
-import DestinationCard from "../../components/listings/DestinationCard";
-import ListingCardnew from "../../components/listings/ListingCard";
-import { useDispatch, useSelector } from "react-redux";
+import { Card, CardHeader, CardBody, Switch, Typography } from '@material-tailwind/react'
+import PruebaBookingBar from '../../components/pruebaBookingBar'
+import DestinationCard from '../../components/listings/DestinationCard'
+import ListingCardnew from '../../components/listings/ListingCard'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchDestinationsStart,
   selectDestinations,
@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import HeaderSection from "../../components/sections/HeaderSection";
 import Loading from "../../components/loadings/Loading";
 import { useDestinations } from '../../hooks/useDestination';
-
 
 const Home = () => {
 	const { destinos } = useDestinations()
@@ -34,11 +33,12 @@ const Home = () => {
 	/* useEffect(() => {
 		dispatch(fetchDestinationsStart());
 }, [dispatch]); */
-/* 
+	/* 
 const validDestinations = destinations.filter(
 	(destination) => destination !== undefined && destination !== null
 )
  */
+
 const filteredDestinations = destino?.filter((destination) => {
 	if (checkboxValues.length === 0) {
 		console.log("ninguna seleccionada");
@@ -48,21 +48,19 @@ const filteredDestinations = destino?.filter((destination) => {
 		  destination.categories.includes(category)
 		  );
 		}
-	});
+	})
 
-	/* const discover = destinos?[Math.floor(Math.random() * destinations.length)] */
-	
-	return(
+	const discover = filteredDestinations[Math.floor(Math.random() * destinations.length)]
+
+	return (
 		<>
-		<div className='mt-12 gap-3 lg:mx-3'>
-		{/* <HeaderSection
-				title='THE PLACE OF YOUR DREAMS'
-				subtitle='Explore the best destinations in the world'
-				image={destino.[0]} />
+			<div className='mt-12 gap-3 lg:mx-3'>
+				<HeaderSection
+					title='THE PLACE OF YOUR DREAMS'
+					subtitle='Explore the best destinations in the world'
+					image={discover?.galleryImage}
+				/>
 
-
-				
- */}
       <Card className="mt-12 gap-3 lg:mx-3">
         <Card>
           <CardBody>
@@ -73,7 +71,7 @@ const filteredDestinations = destino?.filter((destination) => {
                     <DestinationCard key={destination._id} data={destination} />
                   ))}
                 </div>
-				)}
+            )}
             </div>
           </CardBody>
         </Card>

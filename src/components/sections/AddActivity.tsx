@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import Select, { components } from 'react-select'
+import Select from 'react-select'
 
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 
@@ -23,7 +23,7 @@ import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 
-interface Destination {
+export interface Destination {
 	_id: string
 	title: string
 	description: string
@@ -188,7 +188,7 @@ const AddAdventure = () => {
 					onSubmit={handleSubmit}
 					className='flex flex-col items-center justify-center w-full transition'
 				>
-					<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
 
@@ -272,19 +272,7 @@ const AddAdventure = () => {
 					{/* MAP */}
 					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						<h3 className='text-2xl font-semibold'>Adventure location</h3>
-						<div className='flex md:hidden flex-col items-center py-10'>
-							<Map w={300} h={250} />
-						</div>
-						<div className='hidden md:flex lg:hidden flex-col items-center py-10'>
-							<Map w={450} h={350} />
-						</div>
-						<div className='hidden lg:flex xl:hidden flex-col items-center py-10'>
-							<Map w={650} h={400} />
-						</div>
-						<div className='hidden xl:flex 2xl:hidden flex-col items-center py-10'>
-							<Map w={800} h={450} />
-						</div>
-						<div className='hidden 2xl:flex flex-col items-center py-10'>
+						<div className='flex flex-col items-center py-10'>
 							<Map />
 						</div>
 					</div>

@@ -8,7 +8,7 @@ export interface createAdventureFormData {
 	description: string
 	galleryImage: string
 	categories: string[]
-	// location: string
+	location: string
 }
 
 interface createAdventureState {

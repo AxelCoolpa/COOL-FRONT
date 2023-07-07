@@ -30,7 +30,7 @@ const AddAdventure = () => {
 		description: '',
 		galleryImage: '',
 		categories: [],
-		// location: '',
+		location: '',
 	})
 
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,11 +78,8 @@ const AddAdventure = () => {
 		const data = new FormData()
 		data.append('title', title)
 		data.append('description', description)
-		// data.append('location', location)
-
-		for (let i = 0; i < formData.galleryImage.length; i++) {
-			data.append('galleryImage', formData.galleryImage[i])
-		}
+		data.append('galleryImage', galleryImage)
+		data.append('location', location)
 
 		formData.categories.forEach((category) => {
 			data.append('categories', category)
@@ -95,13 +92,8 @@ const AddAdventure = () => {
 				description: '',
 				galleryImage: '',
 				categories: [],
-				// location: '',
+				location: '',
 			})
-
-			// await setTimeout(() => {
-			// 	window.location.reload()
-			// }, 1000)
-			console.log(formData)
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
 		}
@@ -148,19 +140,7 @@ const AddAdventure = () => {
 					{/* MAP */}
 					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						<h3 className='text-2xl font-semibold'>Adventure location</h3>
-						<div className='flex md:hidden flex-col items-center py-10'>
-							<Map w={300} h={250} />
-						</div>
-						<div className='hidden md:flex lg:hidden flex-col items-center py-10'>
-							<Map w={450} h={350} />
-						</div>
-						<div className='hidden lg:flex xl:hidden flex-col items-center py-10'>
-							<Map w={650} h={400} />
-						</div>
-						<div className='hidden xl:flex 2xl:hidden flex-col items-center py-10'>
-							<Map w={800} h={450} />
-						</div>
-						<div className='hidden 2xl:flex flex-col items-center py-10'>
+						<div className='flex flex-col items-center py-10'>
 							<Map />
 						</div>
 					</div>

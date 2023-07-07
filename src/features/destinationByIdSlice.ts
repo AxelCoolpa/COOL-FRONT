@@ -3,21 +3,11 @@ import { getDestinationById } from '../api/getDestinationById'
 import { AppDispatch, RootState } from '../store/Store'
 
 interface DestinationById {
-	_id: string
 	title: string
 	description: string
-	gallery: Array<string>
-	individualPrice: string
-	groupPrice: string
-	categories: Array<string>
+	galleryImage: string
+	categories: string[]
 	location: string
-	activities: string[]
-	starterPack: string[]
-	startTime: string[]
-	endTime: string[]
-
-	rating?: Array<number>
-	reviews?: Array<string>
 }
 
 interface DestinationByIdState {

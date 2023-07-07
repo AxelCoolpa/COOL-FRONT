@@ -1,8 +1,8 @@
 import React from 'react'
-import { EnumData } from '../../types'
+import { EnumActivity } from '../../types'
 
 interface DetailHeaderProps {
-	listing: EnumData | undefined
+	listing: EnumActivity | undefined
 }
 
 const DetailHeader: React.FC<DetailHeaderProps> = ({ listing }) => {

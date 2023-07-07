@@ -61,7 +61,7 @@ const DiscoverMainSection = () => {
 				id={destino?._id}
 				name={destino?.title}
 				favorite
-				price={destino?.location}
+				price={discover?.individualPrice}
 				image={discover?.galleryImage}
 			/>
 			<div className='px-5 pt-28'>

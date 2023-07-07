@@ -13,9 +13,12 @@ import { Navigation, Thumbs } from 'swiper'
 
 import GridColumns from '../../components/sections/GridColumns'
 import ListingCard from '../../components/listings/ListingCard'
+import { selectActivities } from '../../features/activitiesSlice'
 
 const ShowActivities: React.FC = () => {
-	const destinations = useSelector(selectDestinations)
+	const activities = useSelector(selectActivities)
+	console.log(activities)
+
 	const loading = useSelector(selectLoading)
 	const error = useSelector(selectError)
 	const navigate = useNavigate()
@@ -27,14 +30,18 @@ const ShowActivities: React.FC = () => {
 		return <div>Error al cargar actividades: {error} </div>
 	}
 
-	const validDestinations = destinations.filter(
-		(destination) => destination !== undefined && destination !== null
+	const enabledActitivities = activities.filter(
+		(activity) => activity.itDeleted === false
+	)
+
+	const disabledActitivities = activities.filter(
+		(activity) => activity.itDeleted === true
 	)
 
 	return (
 		<>
-			<div className='flex flex-wrap'>
-				<div className='rounded-t bg-white mb-0 px-6 py-6'>
+			<div className=''>
+				<div className='flex flex-col rounded-t bg-white mb-0 px-6 py-6'>
 					<div className='text-center flex justify-between pt-3 mt-3 mb-3 pb-3'>
 						<h6 className='text-gray-600 text-md uppercase font-bold'>
 							Active activities
@@ -49,8 +56,8 @@ const ShowActivities: React.FC = () => {
 
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{validDestinations.map((destination) => (
-								<ListingCard key={destination._id} data={destination} />
+							{enabledActitivities.map((activity) => (
+								<ListingCard key={activity._id} data={activity} />
 							))}
 						</GridColumns>
 					</div>
@@ -63,13 +70,13 @@ const ShowActivities: React.FC = () => {
 						</h6>
 					</div>
 
-					{/* <div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
+					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{validDestinations.map((destination) => (
-								<ListingCard key={destination._id} data={destination} />
+							{disabledActitivities.map((activity) => (
+								<ListingCard key={activity._id} data={activity} />
 							))}
 						</GridColumns>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		</>

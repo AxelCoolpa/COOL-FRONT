@@ -5,18 +5,19 @@ import { updateActivityAPI } from '../api/updateActivityAPI'
 import { toast } from 'react-hot-toast'
 
 export interface updateActivityFormData {
-	title: string
-	description: string
-	categories: string[]
-	location: string
-	individualPrice: string
-	groupPrice: string
-	gallery: []
+	title?: string
+	description?: string
+	location?: string
+	galleryImage?: []
+	videoLink?: string
+	category?: string[]
+	individualPrice?: string
+	groupPrice?: string
+	idDestination?: string
 
-	activities: string[]
-	starterPack: string[]
-	startTime: string[]
-	endTime: string[]
+	starterPack?: string
+	startTime?: string
+	endTime?: string
 
 	rating?: number[]
 	reviews?: string[]

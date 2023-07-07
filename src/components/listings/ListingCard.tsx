@@ -8,7 +8,7 @@ import { motion, useAnimation } from 'framer-motion'
 
 import { BsDot } from 'react-icons/bs'
 
-import { EnumData } from '../../types'
+import { EnumActivity } from '../../types'
 
 import Dropdown from '../dropdown/index'
 import HeartButton from '../buttons/HeartButton'
@@ -17,7 +17,7 @@ import EditButon from '../buttons/EditButton'
 import DeleteButton from '../buttons/DeleteButton'
 
 interface ListingCardProps {
-	data: EnumData | undefined
+	data: EnumActivity | undefined
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
@@ -56,11 +56,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>
-						{location.pathname === '/provider' ? // <Dropdown
-						// 	button={<MoreOptionsButton />}
-						// 	children={
-						// 		<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
-						// 			<div className='mt-3 ml-4'>
+						{location.pathname === '/provider' ? // 			<div className='mt-3 ml-4'> // 		<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'> // 	children={ // 	button={<MoreOptionsButton />} // <Dropdown
 						// 				<div className='flex flex-col gap-2'>
 						// 					<p className='text-sm font-bold cursor-default'>Options</p>
 						// 				</div>

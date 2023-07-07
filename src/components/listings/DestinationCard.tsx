@@ -6,7 +6,7 @@ import { deleteAdventure } from '../../features/deleteAdventureSlice'
 import { useLocation, useNavigate } from 'react-router'
 import { motion, useAnimation } from 'framer-motion'
 
-import { EnumData } from '../../types'
+import { EnumDestination } from '../../types'
 
 import Dropdown from '../dropdown/index'
 import HeartButton from '../buttons/HeartButton'
@@ -23,7 +23,7 @@ import {
 } from '@material-tailwind/react'
 
 interface ListingCardProps {
-	data: EnumData | undefined
+	data: EnumDestination | undefined
 }
 
 const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
@@ -101,7 +101,7 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 				</div>
 				<CardHeader floated={false} color='gray' className='mx-0 mt-0 mb-4 h-64 xl:h-40'>
 					<img
-						src={data?.galleryImage || data?.gallery[0]}
+						src={data?.galleryImage}
 						alt={data?.title}
 						className='h-full w-full object-cover'
 					/>

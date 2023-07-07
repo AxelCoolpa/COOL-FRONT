@@ -67,7 +67,7 @@ const filteredDestinations = destinations.filter((destination) => {
 		<HeaderSection
 				title='THE PLACE OF YOUR DREAMS'
 				subtitle='Explore the best destinations in the world'
-				image={discover?.gallery[0]}
+				image={discover?.galleryImage}
 				/>
 
       <Card className="mt-12 gap-3 lg:mx-3">

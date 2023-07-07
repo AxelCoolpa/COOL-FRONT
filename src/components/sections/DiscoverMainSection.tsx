@@ -59,7 +59,7 @@ const DiscoverMainSection = () => {
 				rate={discover?.rating}
 				favorite
 				price={discover?.individualPrice}
-				image={discover?.gallery[0]}
+				image={discover?.galleryImage}
 			/>
 			<div className='px-5 pt-28'>
 				<h3 className='text-2xl font-semibold'>Categories</h3>

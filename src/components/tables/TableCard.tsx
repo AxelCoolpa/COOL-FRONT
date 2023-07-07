@@ -1,12 +1,12 @@
 import React from 'react';
-import { useGetUsersQuery } from '../../api/getUsers';
+import { useDestinations } from '../../hooks/useDestination';
 
 
 const TableCard: React.FC = ({ }) => {
-  const { data, error, isLoading, isFetching } = useGetUsersQuery(null)
-  
-	if (isLoading || isFetching) return <p>Loading...</p>
-  if (error) return <p>Error.</p>
+  const { destinos } = useDestinations() 
+  const destino = destinos?.map((dest) => dest); 
+	/* if (isLoading || isFetching) return <p>Loading...</p>
+  if (error) return <p>Error.</p> */
   return (
     <div
   className={`relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded
@@ -17,7 +17,7 @@ const TableCard: React.FC = ({ }) => {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-blueGray-700">
-                Clients
+                ADVENTURES
               </h3>
             </div>
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
@@ -34,17 +34,17 @@ const TableCard: React.FC = ({ }) => {
     <table className="items-center w-full bg-transparent border-collapse">
       <thead className="bg-gray-100">
         <tr>
+          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">TITLE</th>
+          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">LOCATION</th>
           <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">ID</th>
-          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">Username</th>
-          <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700">Email</th>
         </tr>
       </thead>
       <tbody className="bg-white divide-y divide-gray-200">
-        {data?.map((data) => (
+        {destino?.map((data) => (
           <tr key={data._id}>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data.title}</td>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data.location}</td>
             <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data._id}</td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data.username}</td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">{data.email}</td>
           </tr>
         ))}
       </tbody>

@@ -28,13 +28,13 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 
 	const activityID = data?._id
 
-	const onDelete = async () => {
+	/* const onDelete = async () => {
 		await dispatch(deleteActivity(activityID))
 
 		setTimeout(() => {
 			window.location.reload()
 		}, 1000)
-	}
+	} */
 
 	useEffect(() => {
 		const startAnimation = async () => {
@@ -56,7 +56,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 			<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
 				<div className='relative'>
 					<img
-						src={data?.galleryImage || data?.gallery[0]}
+						src={data?.galleryImage || data?.galleryImage}
 						className='object-cover w-full h-[200px] rounded-t-xl'
 					/>
 					<div className='absolute top-3 right-3'>
@@ -86,12 +86,12 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 												</div>
 											</div>
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-												<div className='flex gap-5 items-center '>
+												{/* <div className='flex gap-5 items-center '>
 													<DeleteButton onClick={onDelete} />
 													<p onClick={onDelete} className='cursor-pointer'>
 														Delete activity
 													</p>
-												</div>
+												</div> */}
 											</div>
 										</div>
 									</div>
@@ -115,7 +115,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 						</div>
 					)} */}
 				</div>
-				{data?.starterPack || data?.startTime || data?.endTime ? (
+				{/* {data?.starterPack || data?.startTime || data?.endTime ? (
 					<ul className='flex flex-col justify-center px-3 py-4 text-xs gap-1 text-[#00000080]'>
 						{data?.starterPack && (
 							<li>
@@ -134,13 +134,13 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 							</li>
 						)}
 					</ul>
-				) : null}
+				) : null} */}
 				<div className='flex justify-center text-white font-bold text-lg py-2'>
 					<button
 						onClick={() => alert('Call to Action Aquí')}
 						className='bg-GreenCooL w-full mx-6 rounded-lg py-1 hover:bg-opacity-90'
 					>
-						{data?.individualPrice}$
+						{data?.location}
 					</button>
 				</div>
 			</div>

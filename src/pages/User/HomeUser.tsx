@@ -15,6 +15,7 @@ import { useDestinations } from '../../hooks/useDestination'
 const HomeUser = () => {
 	const { destinos } = useDestinations()
 	const destino = destinos?.map((dest) => dest);
+	
 	const destinations = useSelector(selectDestinations)
 	const discover = destinations[Math.floor(Math.random() * destinations.length)]
 	const [checkboxValues, setCheckboxValues] = useState([])
@@ -85,6 +86,11 @@ const HomeUser = () => {
 					</div>
 				)}
 			</div>
+					<div className='pt-10 px-8 grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 gap-11'>
+						{destino?.map((listing) => (
+							<ListingCard key={listing._id} data={listing} />
+						))}
+					</div>
 		</div>
 		</div>
 	)

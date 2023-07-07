@@ -1,24 +1,28 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { getDestinations } from '../api/getDestinations'
 import { AppDispatch, RootState } from '../store/Store'
+import { getActivities } from '../api/getActivities'
 
 interface Activities {
 	_id: string
 	title: string
 	description: string
-	gallery: Array<string>
+	location: string
+	galleryImage: []
+	videoLink: string
+	category: string[]
 	individualPrice: string
 	groupPrice: string
-	categories: Array<string>
-	location: string
+	idDestination: string
 
-	activities: string[]
-	starterPack: string[]
-	startTime: string[]
-	endTime: string[]
+	starterPack: string
+	startTime: string
+	endTime: string
 
-	rating: Array<number>
-	reviews: Array<string>
+	rating?: number[]
+	reviews?: string[]
+
+	itDeleted?: boolean
 }
 
 interface ActivitiesState {
@@ -60,7 +64,7 @@ export const activities = () => {
 	return async (dispatch: AppDispatch) => {
 		try {
 			dispatch(activitiesStart())
-			const activities = await getDestinations()
+			const activities = await getActivities()
 			dispatch(activitiesSuccess(activities))
 		} catch (error) {
 			if (error instanceof Error) {

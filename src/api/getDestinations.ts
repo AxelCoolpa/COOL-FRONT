@@ -7,19 +7,15 @@ interface Destination {
 	_id: string
 	title: string
 	description: string
-	galleryImage: string
-	individualPrice: string
-	groupPrice: string
+
 	categories: Array<string>
 	location: string
+	activities: Array<string>
+	galleryImage: string
 
-	videoLink: string
-	starterPack: string
-	startTime: string
-	endTime: string
-
-	rating: Array<number>
-	reviews: Array<string>
+	itDelete: boolean
+	createAt: string
+	updateAt: string
 }
 
 

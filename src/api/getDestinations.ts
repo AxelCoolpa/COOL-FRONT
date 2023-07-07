@@ -1,5 +1,40 @@
 import axios from 'axios'
 import { baseURL } from '../baseURL'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+
+
+interface Destination {
+	_id: string
+	title: string
+	description: string
+
+	categories: Array<string>
+	location: string
+	activities: Array<string>
+	galleryImage: string
+
+	itDelete: boolean
+	createAt: string
+	updateAt: string
+}
+
+
+export const destinationApi = createApi({
+	reducerPath: 'destinationAPI',
+	baseQuery: fetchBaseQuery({
+		baseUrl: `${baseURL}`,
+	}),
+	endpoints: (builder) => ({
+		getDest: builder.query<Destination[], null>({
+			query: () => 'destinations',
+		}),
+		getDestById: builder.query<Destination, { _id: string }>({
+			query: ({ _id }) => `destinarions/${_id}`,
+		}),
+	}),
+})
+
+export const { useGetDestByIdQuery, useGetDestQuery } = destinationApi
 
 export const getDestinations = async () => {
 	try {

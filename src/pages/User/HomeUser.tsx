@@ -10,8 +10,11 @@ import { categories } from '../../components/categories/categories'
 import HeaderSection from '../../components/sections/HeaderSection'
 import ListingCard from '../../components/listings/ListingCard'
 import CategoryInput from '../../components/inputs/CategoryInput'
+import { useDestinations } from '../../hooks/useDestination'
 
 const HomeUser = () => {
+	const { destinos } = useDestinations()
+	const destino = destinos?.map((dest) => dest);
 	const destinations = useSelector(selectDestinations)
 	const discover = destinations[Math.floor(Math.random() * destinations.length)]
 	const [checkboxValues, setCheckboxValues] = useState([])
@@ -50,11 +53,11 @@ const HomeUser = () => {
 	return (
 		<div className='mt-12 gap-3 lg:mx-3'>
 		<div className='flex flex-col w-full'>
-			<HeaderSection
+			{/* <HeaderSection
 				title='THE PLACE OF YOUR DREAMS'
 				subtitle='Explore the best destinations in the world'
 				image={discover?.gallery[0]}
-				/>
+				/> */}
 			<div className='px-5 pt-28'>
 				{/* <h3 className='text-2xl font-semibold'>Categories</h3>
 				<div className='flex flex-row items-center justify-between pt-5'>
@@ -76,7 +79,7 @@ const HomeUser = () => {
 			<div className='px-5 pt-10'>
 				{!loading && !error && (
 					<div className='pt-10 px-8 grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 gap-11'>
-						{filteredDestinations.map((listing) => (
+						{destino?.map((listing) => (
 							<ListingCard key={listing._id} data={listing} />
 						))}
 					</div>

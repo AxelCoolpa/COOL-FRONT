@@ -31,18 +31,22 @@ const Home = () => {
   const destino = destinos?.map((dest) => dest);
   const { allActivities } = useAllActivities();
   const activities = destinos?.map((dest) => dest.activities);
-	console.log(activities)
-  
-	let activitiesArray = []
-	
-	if (activities) {
-		activities?.forEach((activities) => {
-			activities.forEach((activity) => {
+  console.log(activities);
 
-				activitiesArray.push({ title: activity.title, _id: activity._id, description: activity.description, location: activity.location, galleryImage: activity.galleryImage })
+  let activitiesArray = [];
 
-			});
-		})
+  if (activities) {
+    activities?.forEach((activities) => {
+      activities.forEach((activity) => {
+        activitiesArray.push({
+          title: activity.title,
+          _id: activity._id,
+          description: activity.description,
+          location: activity.location,
+          galleryImage: activity.galleryImage,
+        });
+      });
+    });
   }
 
   const [checkboxValues, setCheckboxValues] = useState([]);
@@ -76,14 +80,13 @@ const discover = destinos?[Math.floor(Math.random() * destinations.length)]
     }
   });
 
-
   return (
     <>
       <div className="mt-12 gap-3 lg:mx-3">
         {/* <HeaderSection
 				title='THE PLACE OF YOUR DREAMS'
 				subtitle='Explore the best destinations in the world'
-				image={discover?.} />	
+				image={destino[0]} />	
  */}
         <Card className="mt-12 gap-3 lg:mx-3">
           <Card>
@@ -105,16 +108,13 @@ const discover = destinos?[Math.floor(Math.random() * destinations.length)]
           <Card>
             <CardBody>
               <div>
-			   {
-				activitiesArray &&
-				activitiesArray?.map((i) => (
-					<ActivityCard
-					key={i._id}
-					data={i}
-				  />
-				))
-			   }
-					 
+                <div className="flex px-5">
+                  <div className=" grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 min-[1540px]:grid-cols-5 min-[1640px]:grid-cols-6 gap-1">
+                    {activitiesArray?.map((i) => (
+                      <ActivityCard key={i._id} data={i} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </CardBody>
           </Card>

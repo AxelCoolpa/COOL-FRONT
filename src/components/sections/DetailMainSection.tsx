@@ -11,10 +11,10 @@ import Gallery from '../details/Gallery'
 import Map from '../Map'
 
 const DetailMainSection = () => {
-	const { id } = useParams()
+	const { _id } = useParams()
 	const destinations = useSelector(selectDestinations)
 
-	const listing = destinations.find((item) => item._id === id)
+	const listing = destinations.find((item) => item._id === _id)
 
 	return (
 		<div className='max-w-screen-2xl mx-auto md:mt-12'>

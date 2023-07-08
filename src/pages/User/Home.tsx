@@ -83,12 +83,12 @@ const discover = destinos?[Math.floor(Math.random() * destinations.length)]
   return (
     <>
       <div className="mt-12 gap-3 lg:mx-3">
-        {/* <HeaderSection
+        <HeaderSection
 				title='THE PLACE OF YOUR DREAMS'
 				subtitle='Explore the best destinations in the world'
-				image={destino[0]} />	
- */}
-        <Card className="mt-12 gap-3 lg:mx-3">
+				image={activitiesArray?.galeryImage} />	
+
+        <Card className="mt-20 gap-3 lg:mx-3">
           <Card>
             <CardBody>
               <div className="flex px-5">

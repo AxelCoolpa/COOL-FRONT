@@ -10,9 +10,7 @@ export const createAdventureAPI = async (
 	const URL = `${baseURL}/destination/${userID}/create`
 
 	try {
-		const response = await axios.post(URL, formData, {
-			headers: { 'Content-Type': 'multipart/form-data' },
-		})
+		const response = await axios.post(URL, formData)
 		// Aquí puedes realizar el manejo de la respuesta de la API
 		// por ejemplo, validar la respuesta o extraer datos relevantes
 		// y retornar cualquier resultado necesario

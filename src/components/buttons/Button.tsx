@@ -11,6 +11,7 @@ interface ButtonProps {
 	small?: boolean
 	icon?: IconType
 	w?: number
+	type?: string
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,12 +23,13 @@ const Button: React.FC<ButtonProps> = ({
 	small,
 	icon: Icon,
 	w,
+	type,
 }) => {
 	return (
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			type='submit'
+			type={type}
 			className={`
         relative
         disabled:opacity-70

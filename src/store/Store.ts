@@ -20,6 +20,7 @@ import updateUserSlice from '../features/updateUserSlice'
 import rooms from '../features/rooms'
 import { userApi } from '../api/getUsers'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
+import { destinationApi } from '../api/getDestinations'
 
 
 export const store = configureStore({
@@ -33,6 +34,7 @@ export const store = configureStore({
 		userById: userByIdSlice,
 		updateUser: updateUserSlice,
 		[userApi.reducerPath]: userApi.reducer,
+		[destinationApi.reducerPath]: destinationApi.reducer,
 		//* Destinations
 		destination: destinationSlice,
 		destinationById: destinationsByIdSlice,
@@ -52,7 +54,7 @@ export const store = configureStore({
 	}, 
 	// middleware para solicitar datos asincronos del backend
 	middleware: (getDefaultMiddleware) => 
-		getDefaultMiddleware().concat([userApi.middleware])
+		getDefaultMiddleware().concat([userApi.middleware], [destinationApi.middleware])
 })
 
 //para ejecutar actions dentro del store

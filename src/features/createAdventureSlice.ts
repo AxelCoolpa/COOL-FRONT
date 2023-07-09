@@ -6,12 +6,9 @@ import { toast } from 'react-hot-toast'
 export interface createAdventureFormData {
 	title: string
 	description: string
+	galleryImage: string
 	categories: string[]
 	location: string
-	gallery: string
-
-	rating?: number[]
-	reviews?: string[]
 }
 
 interface createAdventureState {

@@ -1,6 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Select from 'react-select'
 
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 
@@ -8,35 +10,50 @@ import { toast } from 'react-hot-toast'
 
 import { categories } from '../categories/categories'
 
-import { createActiviy, createActiviyFormData } from '../../features/createActivitySlice'
+import { selectDestinations } from '../../features/destinationSlice'
+import {
+	createActivity,
+	createActivityFormData,
+} from '../../features/createActivitySlice'
 
 import DropZone from '../inputs/DropZone'
 import ActivityForm from '../forms/ActivityForm'
-import ProviderCard from '../listings/ProviderCard'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 
-import { createAdventure } from '../../features/createAdventureSlice'
+export interface Destination {
+	_id: string
+	title: string
+	description: string
+	categories: string[]
+	location: string
+}
 
 const AddAdventure = () => {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const { currentUserId } = useCurrentUser()
+	const destinationsList = useSelector(selectDestinations)
 
-	const [formData, setFormData] = useState<createActiviyFormData>({
+	const [destinations, setDestinations] = useState<Destination[]>([])
+	const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
+
+	const [formData, setFormData] = useState<createActivityFormData>({
 		title: '',
 		description: '',
+		location: '',
+		galleryImage: [],
+		videoLink: '',
+		category: [],
 		individualPrice: '',
 		groupPrice: '',
-		gallery: [],
-		categories: [],
-		location: '',
-		activities: '',
 		starterPack: '',
 		startTime: '',
 		endTime: '',
+		idDestination: '',
 	})
 
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,12 +63,12 @@ const AddAdventure = () => {
 		if (isChecked) {
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: [...formData.categories, value],
+				category: [...formData.category, value],
 			}))
 		} else {
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: formData.categories.filter((val) => val !== value),
+				category: formData.category.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -64,11 +81,21 @@ const AddAdventure = () => {
 		}))
 	}
 
-	const handleFilesSelected = (files: File[]) => {
-		const updatedGallery = [...formData.gallery, ...files]
+	const handleDestinationChange = (selectedOption: any) => {
+		setSelectedDestination(selectedOption)
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			gallery: updatedGallery,
+			idDestination: selectedOption?._id,
+		}))
+	}
+
+	console.log(formData.idDestination)
+
+	const handleFilesSelected = (files: File[]) => {
+		const updatedGallery = [...formData.galleryImage, ...files]
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			galleryImage: updatedGallery,
 		}))
 	}
 
@@ -76,28 +103,30 @@ const AddAdventure = () => {
 		e.preventDefault()
 
 		const {
+			idDestination,
 			title,
 			description,
 			individualPrice,
 			groupPrice,
-			gallery,
-			categories,
+			galleryImage,
+			category,
 			location,
-			activities,
+			videoLink,
 			starterPack,
 			startTime,
 			endTime,
 		} = formData
 
 		if (
+			!idDestination ||
 			!title ||
 			!description ||
 			!individualPrice ||
 			!groupPrice ||
-			!gallery ||
-			!categories ||
+			!galleryImage ||
+			!category ||
 			!location ||
-			!activities ||
+			!videoLink ||
 			!starterPack ||
 			!startTime ||
 			!endTime
@@ -112,79 +141,149 @@ const AddAdventure = () => {
 		data.append('individualPrice', individualPrice)
 		data.append('groupPrice', groupPrice)
 		data.append('location', location)
-		data.append('activities', activities)
+		data.append('videoLink', videoLink)
 		data.append('starterPack', starterPack)
 		data.append('startTime', startTime)
 		data.append('endTime', endTime)
+		data.append('idDestination', idDestination)
 
-		for (let i = 0; i < formData.gallery.length; i++) {
-			data.append('gallery', formData.gallery[i])
+		for (let i = 0; i < formData.galleryImage.length; i++) {
+			data.append('galleryImage', formData.galleryImage[i])
 		}
 
-		formData.categories.forEach((category) => {
-			data.append('categories', category)
+		formData.category.forEach((category) => {
+			data.append('category', category)
 		})
 
 		try {
-			await dispatch(createAdventure(data, currentUserId))
+			await dispatch(createActivity(data, currentUserId))
 			setFormData({
 				title: '',
 				description: '',
 				individualPrice: '',
 				groupPrice: '',
-				gallery: [],
-				categories: [],
+				galleryImage: [],
+				category: [],
 				location: '',
-				activities: '',
+				videoLink: '',
 				starterPack: '',
 				startTime: '',
 				endTime: '',
+				idDestination: '',
 			})
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
 		}
 	}
 
+	useEffect(() => {
+		setDestinations(destinationsList)
+	}, [destinationsList])
+
 	return (
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
 				<h2 className='text-[32px] font-medium'>Add adventure</h2>
-				<form onSubmit={handleSubmit}>
-					<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+				<form
+					onSubmit={handleSubmit}
+					className='flex flex-col items-center justify-center w-full transition'
+				>
+					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
-					<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
+
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Select destination
+					</h3>
+					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
+						<Select
+							options={destinations}
+							value={selectedDestination}
+							onChange={handleDestinationChange}
+							placeholder='Select destination'
+							isClearable
+							formatOptionLabel={(option: any) => (
+								<div className='flex flex-row items-center gap-3'>
+									<div>
+										<span className='text-neutral-500'>{option.title}</span>
+									</div>
+								</div>
+							)}
+							classNames={{
+								control: () => 'p-3 border-2',
+								input: () => 'text-lg',
+								option: () => 'text-lg',
+							}}
+							styles={{
+								control: (provided: any) => ({
+									...provided,
+									width: '100%',
+									height: '20px',
+									minHeight: '60px',
+									borderRadius: '10px',
+								}),
+								singleValue: (provided: any) => ({
+									...provided,
+									display: 'flex',
+									alignItems: 'center',
+								}),
+							}}
+							theme={(theme) => ({
+								...theme,
+								borderRadius: 6,
+								colors: {
+									...theme.colors,
+									primary: 'white',
+									primary25: '#ce452a60',
+								},
+							})}
+						/>
+					</div>
+
+					{/* FORM */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Activity Info
+					</h3>
+
+					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
 						<ActivityForm handleChange={handleChange} form={formData} />
-						<div className='xl:col-span-2 flex xl:scale-[80%] min-[1440px]:scale-100'>
-							<ProviderCard />
+					</div>
+
+					{/* CATEGORIES */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Category adventure
+					</h3>
+
+					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+						{categories.map((item) => (
+							<ul key={item.label}>
+								<CategoryInput
+									handleChange={handleCheckboxChange}
+									label={item.label}
+									icon={item.icon}
+									id={item.label}
+									name={item.label}
+									value={item.label}
+								/>
+							</ul>
+						))}
+					</div>
+
+					{/* MAP */}
+					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						<h3 className='text-2xl font-semibold'>Adventure location</h3>
+						<div className='flex flex-col items-center py-10'>
+							<Map />
 						</div>
 					</div>
 
-					<h3 className='text-2xl font-semibold py-8'>Category adventure</h3>
-
-					<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pb-14'>
-						<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center'>
-							{categories.map((item) => (
-								<ul key={item.label}>
-									<CategoryInput
-										handleChange={handleCheckboxChange}
-										label={item.label}
-										icon={item.icon}
-										id={item.label}
-										name={item.label}
-										value={item.label}
-									/>
-								</ul>
-							))}
+					{/* BUTTONS */}
+					<div className='flex flex-col lg:flex-row items-center justify-evenly gap-4 lg:gap-20 mx-auto py-10 w-full'>
+						<div className='w-full lg:w-2/5 xl:w-2/6'>
+							<Button label='Back' card outline onClick={() => navigate('/admindash')} />
 						</div>
-						<div className='xl:col-span-2'>
-							<h3 className='text-2xl font-semibold'>Adventure location</h3>
-							<div className='flex flex-col items-center py-10'>
-								<Map w={400} h={260} />
-							</div>
-							<div className='mx-auto w-full lg:w-2/5 xl:w-full'>
-								<Button label='Ready' card />
-							</div>
+						<div className='w-full lg:w-2/5 xl:w-2/6'>
+							<Button label='Create' card type='submit' />
 						</div>
 					</div>
 				</form>

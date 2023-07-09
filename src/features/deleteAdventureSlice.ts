@@ -46,8 +46,7 @@ export const deleteAdventure =
 
 			dispatch(deleteAdventureSuccess())
 			toast.success('Destination was successfully deleted')
-		} 
-		catch (error: any) {
+		} catch (error: any) {
 			dispatch(deleteAdventureFailure(error.message))
 			toast.error('Something went wrong')
 		}

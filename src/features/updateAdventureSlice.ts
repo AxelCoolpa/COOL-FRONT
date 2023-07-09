@@ -4,16 +4,11 @@ import { updateAdventureAPI } from '../api/updateAdventureAPI'
 
 import { toast } from 'react-hot-toast'
 export interface updateAdventureFormData {
-	title: string
-	description: string
-	categories: string[]
-	location: string
-	individualPrice: string
-	groupPrice: string
-	gallery: []
-
-	rating?: number[]
-	reviews?: string[]
+	title?: string
+	description?: string
+	galleryImage?: string
+	categories?: string[]
+	location?: string
 }
 
 interface updateAdventureState {

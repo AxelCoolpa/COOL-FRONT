@@ -6,16 +6,16 @@ interface Destination {
 	_id: string
 	title: string
 	description: string
-	gallery: Array<string>
+	galleryImage: string
 	individualPrice: string
 	groupPrice: string
 	categories: Array<string>
 	location: string
 
-	activities: string[]
-	starterPack: string[]
-	startTime: string[]
-	endTime: string[]
+	videoLink: string
+	starterPack: string
+	startTime: string
+	endTime: string
 
 	rating: Array<number>
 	reviews: Array<string>

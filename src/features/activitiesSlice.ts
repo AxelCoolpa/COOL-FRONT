@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { getDestinations } from '../api/getDestinations'
 import { AppDispatch, RootState } from '../store/Store'
+import { filterActivitiesAPI } from '../api/filterActivitiesAPI'
 
 interface Activities {
 	_id: string
@@ -19,6 +20,14 @@ interface Activities {
 
 	rating: Array<number>
 	reviews: Array<string>
+}
+
+
+export interface FilterForm {
+	location: string,
+	startDate: string,
+	endDate: string,
+	maxPeople: string
 }
 
 interface ActivitiesState {
@@ -61,6 +70,20 @@ export const activities = () => {
 		try {
 			dispatch(activitiesStart())
 			const activities = await getDestinations()
+			dispatch(activitiesSuccess(activities))
+		} catch (error) {
+			if (error instanceof Error) {
+				dispatch(activitiesFailure(error.message))
+			}
+		}
+	}
+}
+
+export const filterActivities = (formData : FilterForm) => {
+	return async (dispatch: AppDispatch) => {
+		try {
+			dispatch(activitiesStart())
+			const activities = await filterActivitiesAPI(formData)
 			dispatch(activitiesSuccess(activities))
 		} catch (error) {
 			if (error instanceof Error) {

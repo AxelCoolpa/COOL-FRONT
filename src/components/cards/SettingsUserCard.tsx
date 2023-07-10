@@ -30,7 +30,6 @@ const SettingsUserCard = () => {
 		// address: user?.address,
 		description: user.description,
 	})
-	console.log(formData)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target

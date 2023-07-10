@@ -1,15 +1,21 @@
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { userById } from '../../features/userByIdSlice'
 
+import { RiDeleteBin5Line } from 'react-icons/ri'
+import { IoIosArrowBack } from 'react-icons/io'
+
 import ProfileUserCard from '../../components/cards/ProfileUserCard'
 import SettingsUserCard from '../../components/cards/SettingsUserCard'
-import { useParams } from 'react-router-dom'
-import { IoIosArrowBack } from 'react-icons/io'
+import ProfileButton from '../../components/buttons/ProfileButton'
+import useDeleteModal from '../../hooks/useDeleteModal'
+import DeleteModal from '../../components/modals/DeleteModal'
 
 const ProfileUser = () => {
 	const dispatch = useDispatch()
+	const deleteModal = useDeleteModal()
 
 	const { id } = useParams()
 	const userID = id
@@ -35,6 +41,15 @@ const ProfileUser = () => {
 					<ProfileUserCard />
 				</div>
 			</div>
+			<div className='text-sm lg:text-base xl:text-lg my-10'>
+				<ProfileButton
+					label='Delete Account'
+					icon={RiDeleteBin5Line}
+					onClick={deleteModal.onOpen}
+					labelClassName='text-red-500'
+				/>
+			</div>
+			<DeleteModal />
 		</>
 	)
 }

@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
 			{/* Navbar */}
 			<nav className='absolute hidden w-full md:fixed top-0 left-0 z-40 md:flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-5 backdrop-blur-xl'>
 				<div className='w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4'>
-					<div className='hidden md:flex justify-between items-center gap-36'>
+					<div className='hidden md:flex justify-between items-center gap-32'>
 						<div className='flex items-center'>
 							<img
 								src={Cool}
@@ -44,16 +44,18 @@ const Navbar: React.FC = () => {
 							/>
 						</div>
 						{/* Actual Page */}
-						<span className='text-sm hidden lg:inline-block font-semibold cursor-default'>
-							<a className='text-sm text-navy-700 hover:underline' href='/provider'>
+						<span className='text-xs hidden min-[1080px]:inline-block font-semibold cursor-default'>
+							<a className='text-navy-700 hover:underline' href='/provider'>
 								Pages
-								<span className='mx-1 text-sm text-navy-700 hover:text-navy-700'>/</span>
+								<span className='mx-1 text-navy-700 hover:text-navy-700'>/</span>
 							</a>
-							<Link className='text-sm capitalize text-navy-700 hover:underline' to='#'>
+							<label className='capitalize text-navy-700 hover:underline'>
 								{location.pathname.split('/')[1]}
 								{location.pathname.split('/').length > 2 &&
 									` / ` + location.pathname.split('/')[2]}
-							</Link>
+								{location.pathname.split('/').length > 3 &&
+									` / ` + location.pathname.split('/')[3]}
+							</label>
 						</span>
 					</div>
 					{/* Form */}
@@ -66,12 +68,12 @@ const Navbar: React.FC = () => {
 								<input
 									type='search'
 									placeholder='Search'
-									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full xl:w-[350px] 2xl:w-[400px] pl-5 pr-12 active:border-none bborder-none focus:border-none'
+									className='px-3 py-3 relative rounded-[20px] text-sm shadow-CooL w-full pl-5 pr-12 active:border-none bborder-none focus:border-none'
 								/>
 							</div>
 						</form>
 
-						<div className='flex gap-9'>
+						<div className='flex gap-4 lg:gap-8'>
 							{/* start Notification */}
 
 							<Dropdown
@@ -224,7 +226,7 @@ const Navbar: React.FC = () => {
 								animation='origin-[75%_0%] md:origin-top-right transition-all duration-300 ease-in-out'
 							/>
 						</div>
-						<hr className='w-12 rotate-90 hidden xl:block' />
+						<hr className='w-12 rotate-90' />
 						{/* User */}
 						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
 							<div className='flex items-center gap-3 xl:gap-6'>

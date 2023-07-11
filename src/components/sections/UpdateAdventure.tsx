@@ -21,6 +21,7 @@ import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import CloudinaryUploadImg from '../cloudinary/ImageUpload'
+import { toast } from 'react-hot-toast'
 
 const UpdateAdventure = () => {
 	const dispatch = useDispatch()
@@ -79,23 +80,17 @@ const UpdateAdventure = () => {
 
 		const { title, description, galleryImage, categories, location } = formData
 
-		// if (
-		// 	!title ||
-		// 	!description ||
-		// 	!individualPrice ||
-		// 	!groupPrice ||
-		// 	!location
-		// ) {
-		// 	console.log('Por favor, complete todos los campos')
-		// 	console.log({
-		// 		title,
-		// 		description,
-		// 		individualPrice,
-		// 		groupPrice,
-		// 		location,
-		// 	})
-		// 	return
-		// }
+		if (!title || !description || !galleryImage || !categories || !location) {
+			toast.error('Por favor, complete todos los campos')
+			console.log({
+				title,
+				description,
+				galleryImage,
+				categories,
+				location,
+			})
+			return
+		}
 
 		const data = new FormData()
 		data.append('title', title)
@@ -109,31 +104,14 @@ const UpdateAdventure = () => {
 
 		try {
 			await dispatch(updateAdventure(data, userID, destinationID))
-		} catch (error) {
-			console.log('Error al enviar el formulario:', error)
+		} catch (error: any) {
+			toast.error('Error al enviar el formulario:', error)
 		}
 	}
 
 	useEffect(() => {
 		dispatch(destinationById(destinationID))
-
-		// setFormData((prevFormData) => ({
-		// 	...prevFormData,
-		// 	title: destination?.title,
-		// 	description: destination?.description,
-		// 	galleryImage: destination?.galleryImage,
-		// 	categories: destination?.categories,
-		// 	location: destination?.location,
-		// }))
-	}, [
-		destinationID,
-		dispatch,
-		// destination?.title,
-		// destination?.description,
-		// destination?.galleryImage,
-		// destination?.categories,
-		// destination?.location,
-	])
+	}, [destinationID, dispatch])
 
 	return (
 		<Container>

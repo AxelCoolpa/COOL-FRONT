@@ -1,13 +1,31 @@
 import { useCallback, useEffect, useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
+import Button from '../buttons/Button'
 
 interface ModalProps {
 	isOpen: boolean
 	onClose: () => void
+	onSubmit?: () => void
 	title?: string
 	body?: React.ReactElement
+	footer?: React.ReactElement
+	actionLabel?: string
+	disabled?: boolean
+	secondaryAction?: () => void
+	secondaryActionLabel?: string
 }
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, body }) => {
+const Modal: React.FC<ModalProps> = ({
+	isOpen,
+	onClose,
+	onSubmit,
+	title,
+	body,
+	footer,
+	actionLabel,
+	disabled,
+	secondaryAction,
+	secondaryActionLabel,
+}) => {
 	const [showModal, setShowModal] = useState(isOpen)
 
 	useEffect(() => {
@@ -21,6 +39,24 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, body }) => {
 		}, 300)
 	}, [onClose])
 
+	const handleSubmit = useCallback(() => {
+		if (disabled) {
+			return
+		}
+
+		if (onSubmit) {
+			onSubmit()
+		}
+	}, [disabled, onSubmit])
+
+	const handleSecondaryAction = useCallback(() => {
+		if (disabled || !secondaryAction) {
+			return
+		}
+
+		secondaryAction()
+	}, [disabled, secondaryAction])
+
 	if (!isOpen) {
 		return null
 	}
@@ -28,7 +64,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, body }) => {
 	return (
 		<>
 			<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70'>
-				<div className='relative w-9/12 m-auto'>
+				<div
+					onClick={handleClose}
+					className='absolute top-0 left-0 w-screen h-full -z-10 cursor-pointer'
+				></div>
+				<div className='relative w-full p-2 md:p-5 lg:w-11/12 lg:px-0 xl:w-10/12 m-auto'>
 					{/* CONTENT */}
 					<div
 						className={`
@@ -52,11 +92,28 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, body }) => {
 							</div>
 							{/* BODY */}
 							<div className='relative p-6 flex-auto'>{body}</div>
+							{/* FOOTER */}
+							<div className='flex flex-col gap-2 p-6'>
+								<div className='flex flex-row items-center gap-4 w-full'>
+									{secondaryAction && secondaryActionLabel && (
+										<Button
+											outline
+											disabled={disabled}
+											label={secondaryActionLabel}
+											onClick={handleSecondaryAction}
+										/>
+									)}
+									{onSubmit && actionLabel && (
+										<Button
+											disabled={disabled}
+											label={actionLabel}
+											onClick={handleSubmit}
+										/>
+									)}
+								</div>
+								{footer}
+							</div>
 						</div>
-						<div
-							onClick={handleClose}
-							className='absolute top-0 left-0 -ml-40 w-screen h-full -z-10'
-						></div>
 					</div>
 				</div>
 			</div>

@@ -2,22 +2,21 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-// import Select from 'react-select'
+import { toast } from 'react-hot-toast'
+
+import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 import { categories } from '../categories/categories'
 
-import { useCurrentUser } from '../../hooks/useCurrentUser'
 // import { selectDestinations } from '../../features/destinationSlice'
 // import { Destination } from './AddActivity'
-import {
-	destinationById,
-	selectDestinationById,
-} from '../../features/destinationByIdSlice'
+import { activityById, selectActivityById } from '../../features/activityByIdSlice'
 import {
 	updateActivity,
 	updateActivityFormData,
 } from '../../features/updateActivitySlice'
 
+// import Select from 'react-select'
 import DropZone from '../inputs/DropZone'
 import ActivityForm from '../forms/ActivityForm'
 import CategoryInput from '../inputs/CategoryInput'
@@ -34,7 +33,7 @@ const UpdateActivity = () => {
 
 	const { currentUserId } = useCurrentUser()
 
-	const activity = useSelector(selectDestinationById)
+	const activity = useSelector(selectActivityById)
 
 	// const destinationsList = useSelector(selectDestinations)
 	// const [destinations, setDestinations] = useState<Destination[]>([])
@@ -66,13 +65,13 @@ const UpdateActivity = () => {
 			setCheckboxValues([...checkboxValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: [...formData?.category, value],
+				category: [...formData?.category, value],
 			}))
 		} else {
 			setCheckboxValues(checkboxValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: formData?.category.filter((val) => val !== value),
+				category: formData?.category.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -135,7 +134,7 @@ const UpdateActivity = () => {
 			!startTime ||
 			!endTime
 		) {
-			console.log('Por favor, complete todos los campos')
+			toast.error('Por favor, complete todos los campos')
 			console.log({
 				title,
 				description,
@@ -162,13 +161,12 @@ const UpdateActivity = () => {
 		data.append('starterPack', starterPack)
 		data.append('startTime', startTime)
 		data.append('endTime', endTime)
-		// data.append('idDestination', idDestination)
 
-		for (let i = 0; i < formData.galleryImage.length; i++) {
-			data.append('galleryImage', formData.galleryImage[i])
+		for (let i = 0; i < galleryImage.length; i++) {
+			data.append('galleryImage', galleryImage[i])
 		}
 
-		formData.category.forEach((category) => {
+		category.forEach((category) => {
 			data.append('category', category)
 		})
 
@@ -187,13 +185,13 @@ const UpdateActivity = () => {
 				startTime: '',
 				endTime: '',
 			})
-		} catch (error) {
-			console.log('Error al enviar el formulario:', error)
+		} catch (error: any) {
+			toast.error('Error al enviar el formulario:', error)
 		}
 	}
 
 	useEffect(() => {
-		dispatch(destinationById(activityID))
+		dispatch(activityById(activityID))
 	}, [activityID, dispatch])
 
 	return (

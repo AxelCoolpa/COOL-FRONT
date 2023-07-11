@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { CgInfo } from 'react-icons/cg'
-import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { MdOutlineTitle } from 'react-icons/md'
 import { TbFileDescription } from 'react-icons/tb'
 
@@ -42,24 +40,6 @@ const AdventureForm: React.FC<AddAdventureFormProps> = ({
 						handleChange={handleChange}
 						value={updateForm?.title || form?.title}
 					/>
-				</div>
-				<div className='flex flex-col gap-10 w-full'>
-					<div className='flex items-center gap-5 text-[#686868]'>
-						<HiOutlineLocationMarker size={25} />
-						<label>Which is the location?</label>
-					</div>
-					<div className='relative w-full'>
-						<Input
-							placeholder={data?.location || 'Location'}
-							id='location'
-							name='location'
-							handleChange={handleChange}
-							value={updateForm?.location || form?.location}
-						/>
-						<div className='absolute right-2 top-1 z-20'>
-							<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />
-						</div>
-					</div>
 				</div>
 			</div>
 

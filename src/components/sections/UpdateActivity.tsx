@@ -23,6 +23,10 @@ import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
+import axios from 'axios'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
+import Input from '../inputs/Input'
+import { FiSearch } from 'react-icons/fi'
 
 const UpdateActivity = () => {
 	const dispatch = useDispatch()
@@ -190,6 +194,46 @@ const UpdateActivity = () => {
 		}
 	}
 
+	const [searchValue, setSearchValue] = useState('')
+	const [mapUrl, setMapUrl] = useState('')
+
+	const handleSearch = async (e: React.FormEvent) => {
+		e.preventDefault()
+
+		// Genera la URL de búsqueda del mapa utilizando el valor del input de búsqueda
+		const apiKey = 'AIzaSyAwRA7j_Pu_T8dD6J1GGzf7nIdGq2z9c0c'
+		try {
+			// Realiza la solicitud a la API de Geocodificación
+			const response = await axios('https://maps.googleapis.com/maps/api/geocode/json', {
+				params: {
+					address: searchValue,
+					key: apiKey,
+				},
+			})
+
+			// Obtiene los resultados de la búsqueda
+			const results = response.data.results
+
+			// Genera la URL de búsqueda del mapa utilizando la primera ubicación encontrada
+			if (results.length > 0) {
+				formData.location = results[0].formatted_address
+				const location = results[0].geometry.location
+				const url = `https://maps.google.com/maps?q=${location.lat},${location.lng}&output=embed`
+				setMapUrl(url)
+			} else {
+				toast('Warning ! The address entered is incorrect', {
+					icon: '⚠️',
+					style: {
+						background: '#ff9800',
+						color: '#fff',
+					},
+				})
+			}
+		} catch (error) {
+			console.error('Error en la solicitud a la API de Geocodificación:', error)
+		}
+	}
+
 	useEffect(() => {
 		dispatch(activityById(activityID))
 	}, [activityID, dispatch])
@@ -198,70 +242,10 @@ const UpdateActivity = () => {
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
 				<h2 className='text-[32px] font-medium'>Update activity</h2>
-				<form
-					onSubmit={handleUpdate}
-					className='flex flex-col items-center justify-center w-full transition'
-				>
+				<div className='flex flex-col items-center justify-center w-full transition'>
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
-
-					{/* <div className='flex items-center justify-between mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						<h3 className='text-2xl font-semibold'>Select destination</h3>
-						<Button
-							label={enabled === true ? 'Disabled' : 'Enabled'}
-							onClick={handleEnabledSelect}
-							w={10}
-							outline
-							small
-						/>
-					</div>
-					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
-						<Select
-							options={destinations}
-							value={selectedDestination}
-							onChange={handleDestinationChange}
-							isDisabled={enabled}
-							placeholder='Change destination'
-							defaultValue={selectedDestination}
-							isClearable
-							formatOptionLabel={(option: any) => (
-								<div className='flex flex-row items-center gap-3'>
-									<div>
-										<span className='text-neutral-500'>{option.title}</span>
-									</div>
-								</div>
-							)}
-							classNames={{
-								control: () => 'p-3 border-2',
-								input: () => 'text-lg',
-								option: () => 'text-lg',
-							}}
-							styles={{
-								control: (provided: any) => ({
-									...provided,
-									width: '100%',
-									height: '20px',
-									minHeight: '60px',
-									borderRadius: '10px',
-								}),
-								singleValue: (provided: any) => ({
-									...provided,
-									display: 'flex',
-									alignItems: 'center',
-								}),
-							}}
-							theme={(theme) => ({
-								...theme,
-								borderRadius: 6,
-								colors: {
-									...theme.colors,
-									primary: 'white',
-									primary25: '#ce452a60',
-								},
-							})}
-						/>
-					</div> */}
 
 					{/* FORM */}
 					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
@@ -297,10 +281,30 @@ const UpdateActivity = () => {
 					</div>
 
 					{/* MAP */}
-					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						<h3 className='text-2xl font-semibold'>Adventure location</h3>
+					<div className='mx-auto py-5 w-full xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						<h3 className='text-2xl font-semibold'>Add location on map</h3>
+						<form onSubmit={handleSearch} className='py-5 xl:py-8'>
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<HiOutlineLocationMarker size={25} />
+									<label>Which is the location?</label>
+								</div>
+								<Input
+									type='search'
+									placeholder='Search your location'
+									id='location'
+									name='location'
+									handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+										setSearchValue(e.target.value)
+									}
+									value={searchValue}
+									secondaryIcon={FiSearch}
+									secondaryIconColor='OrangeCooL'
+								/>
+							</div>
+						</form>
 						<div className='flex flex-col items-center py-10'>
-							<Map />
+							<Map mapURL={mapUrl} />
 						</div>
 					</div>
 
@@ -310,10 +314,10 @@ const UpdateActivity = () => {
 							<Button label='Back' card outline onClick={() => navigate('/provider')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Save' card type='submit' />
+							<Button label='Save' card onClick={handleUpdate} />
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</Container>
 	)

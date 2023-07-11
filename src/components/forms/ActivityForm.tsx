@@ -2,7 +2,6 @@ import React from 'react'
 
 import { CgInfo } from 'react-icons/cg'
 import { FiPackage } from 'react-icons/fi'
-import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { LuCalendarCheck } from 'react-icons/lu'
 import { MdAttachMoney, MdOutlineTitle } from 'react-icons/md'
 import { RxActivityLog } from 'react-icons/rx'
@@ -87,19 +86,6 @@ const ActivityForm: React.FC<ActivityFormProps> = ({
 								name='title'
 								handleChange={handleChange}
 								value={updateForm?.title || form?.title}
-							/>
-						</div>
-						<div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<HiOutlineLocationMarker size={25} />
-								<label>Which is the location?</label>
-							</div>
-							<Input
-								placeholder={data?.location || 'Location'}
-								id='location'
-								name='location'
-								handleChange={handleChange}
-								value={updateForm?.location || form?.location}
 							/>
 						</div>
 						<div className='flex flex-col gap-10 w-full'>

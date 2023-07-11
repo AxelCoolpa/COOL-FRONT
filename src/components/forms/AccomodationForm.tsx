@@ -12,6 +12,7 @@ import { createActivityFormData } from '../../features/createActivitySlice'
 import { updateActivityFormData } from '../../features/updateActivitySlice'
 
 import Input from '../inputs/Input'
+import Dropdown from '../dropdown'
 
 interface AccomodationFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -53,9 +54,6 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 							handleChange={handleChange}
 							value={updateForm?.individualPrice || form?.individualPrice}
 						/>
-						<div className='absolute right-2 top-1 z-20'>
-							<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />
-						</div>
 					</div>
 				</div>
 				<div className='flex flex-col gap-10 w-full'>
@@ -89,19 +87,7 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 								value={updateForm?.title || form?.title}
 							/>
 						</div>
-						<div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<HiOutlineLocationMarker size={25} />
-								<label>Which is the location?</label>
-							</div>
-							<Input
-								placeholder={data?.location || 'Location'}
-								id='location'
-								name='location'
-								handleChange={handleChange}
-								value={updateForm?.location || form?.location}
-							/>
-						</div>
+
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<RxActivityLog size={20} />
@@ -117,19 +103,6 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 						</div>
 					</div>
 					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
-						{/* <div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<FiPackage size={25} />
-								<label>Starter Pack</label>
-							</div>
-							<Input
-								placeholder={data?.starterPack || 'Starter Pack'}
-								id='starterPack'
-								name='starterPack'
-								handleChange={handleChange}
-								value={updateForm?.starterPack || form?.starterPack}
-							/>
-						</div> */}
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<LuCalendarCheck size={25} />

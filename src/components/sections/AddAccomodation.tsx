@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { useCurrentUser } from '../../hooks/useCurrentUser'
+import { useMaps } from '../../hooks/useMaps'
 
 import { toast } from 'react-hot-toast'
+import { FiSearch } from 'react-icons/fi'
 
 import { categories } from '../categories/categories'
+import { amenitiesCategories } from '../categories/amenitiesCategories'
 
 import AccomodationForm from '../forms/AccomodationForm'
 import CategoryInput from '../inputs/CategoryInput'
@@ -14,7 +17,7 @@ import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import DropZone from '../inputs/DropZone'
-import { amenitiesCategories } from '../categories/amenitiesCategories'
+import Input from '../inputs/Input'
 
 const AddAccomodation = () => {
 	const dispatch = useDispatch()
@@ -157,14 +160,13 @@ const AddAccomodation = () => {
 		}
 	}
 
+	const { handleSearch, mapUrl, searchValue, setSearchValue } = useMaps(formData)
+
 	return (
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
 				<h2 className='text-[32px] font-medium'>Add Accomodation</h2>
-				<form
-					onSubmit={handleSubmit}
-					className='flex flex-col items-center justify-center w-full transition'
-				>
+				<div className='flex flex-col items-center justify-center w-full transition'>
 					{/* IMAGE */}
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<DropZone onFilesSelected={handleFilesSelected} />
@@ -217,10 +219,24 @@ const AddAccomodation = () => {
 					</div>
 
 					{/* MAP */}
-					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						<h3 className='text-2xl font-semibold'>Adventure location</h3>
+					<div className='mx-auto py-5 w-full xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						<h3 className='text-2xl font-semibold'>Add location on map</h3>
+						<form onSubmit={handleSearch} className='py-5 xl:py-8'>
+							<Input
+								type='search'
+								placeholder='Search your location'
+								id='location'
+								name='location'
+								handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+									setSearchValue(e.target.value)
+								}
+								value={searchValue}
+								secondaryIcon={FiSearch}
+								secondaryIconColor='OrangeCooL'
+							/>
+						</form>
 						<div className='flex flex-col items-center py-10'>
-							<Map />
+							<Map mapURL={mapUrl} />
 						</div>
 					</div>
 
@@ -230,10 +246,10 @@ const AddAccomodation = () => {
 							<Button label='Back' card outline onClick={() => navigate('/admindash')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Create' card type='submit' />
+							<Button label='Create' card onClick={handleSubmit} />
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</Container>
 	)

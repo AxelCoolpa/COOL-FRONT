@@ -1,9 +1,14 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { toast } from 'react-hot-toast'
+
 import { categories } from '../categories/categories'
+
+import { HiOutlineLocationMarker } from 'react-icons/hi'
+import { FiSearch } from 'react-icons/fi'
 
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 import {
@@ -21,7 +26,7 @@ import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import CloudinaryUploadImg from '../cloudinary/ImageUpload'
-import { toast } from 'react-hot-toast'
+import Input from '../inputs/Input'
 
 const UpdateAdventure = () => {
 	const dispatch = useDispatch()
@@ -109,6 +114,46 @@ const UpdateAdventure = () => {
 		}
 	}
 
+	const [searchValue, setSearchValue] = useState('')
+	const [mapUrl, setMapUrl] = useState('')
+
+	const handleSearch = async (e: React.FormEvent) => {
+		e.preventDefault()
+
+		// Genera la URL de búsqueda del mapa utilizando el valor del input de búsqueda
+		const apiKey = 'AIzaSyAwRA7j_Pu_T8dD6J1GGzf7nIdGq2z9c0c'
+		try {
+			// Realiza la solicitud a la API de Geocodificación
+			const response = await axios('https://maps.googleapis.com/maps/api/geocode/json', {
+				params: {
+					address: searchValue,
+					key: apiKey,
+				},
+			})
+
+			// Obtiene los resultados de la búsqueda
+			const results = response.data.results
+
+			// Genera la URL de búsqueda del mapa utilizando la primera ubicación encontrada
+			if (results.length > 0) {
+				formData.location = results[0].formatted_address
+				const location = results[0].geometry.location
+				const url = `https://maps.google.com/maps?q=${location.lat},${location.lng}&output=embed`
+				setMapUrl(url)
+			} else {
+				toast('Warning ! The address entered is incorrect', {
+					icon: '⚠️',
+					style: {
+						background: '#ff9800',
+						color: '#fff',
+					},
+				})
+			}
+		} catch (error) {
+			console.error('Error en la solicitud a la API de Geocodificación:', error)
+		}
+	}
+
 	useEffect(() => {
 		dispatch(destinationById(destinationID))
 	}, [destinationID, dispatch])
@@ -117,10 +162,7 @@ const UpdateAdventure = () => {
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
 				<h2 className='text-[32px] font-medium'>Update adventure</h2>
-				<form
-					onSubmit={handleUpdate}
-					className='flex flex-col items-center justify-center w-full transition'
-				>
+				<div className='flex flex-col items-center justify-center w-full transition'>
 					{/* IMAGE */}
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<CloudinaryUploadImg onUpload={handleUpload} />
@@ -156,10 +198,30 @@ const UpdateAdventure = () => {
 					</div>
 
 					{/* MAP */}
-					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						<h3 className='text-2xl font-semibold'>Adventure location</h3>
+					<div className='mx-auto py-5 w-full xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						<h3 className='text-2xl font-semibold'>Add location on map</h3>
+						<form onSubmit={handleSearch} className='py-5 xl:py-8'>
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<HiOutlineLocationMarker size={25} />
+									<label>Which is the location?</label>
+								</div>
+								<Input
+									type='search'
+									placeholder='Search your location'
+									id='location'
+									name='location'
+									handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+										setSearchValue(e.target.value)
+									}
+									value={searchValue}
+									secondaryIcon={FiSearch}
+									secondaryIconColor='OrangeCooL'
+								/>
+							</div>
+						</form>
 						<div className='flex flex-col items-center py-10'>
-							<Map />
+							<Map mapURL={mapUrl} />
 						</div>
 					</div>
 
@@ -169,10 +231,10 @@ const UpdateAdventure = () => {
 							<Button label='Back' card outline onClick={() => navigate('/admindash')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Save' card />
+							<Button label='Save' card onClick={handleUpdate} />
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</Container>
 	)

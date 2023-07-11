@@ -83,7 +83,13 @@ const ShowActivities: React.FC = () => {
 				<div className='rounded-t bg-white mb-0 px-6 py-6'>
 					<div className='text-center flex justify-between pt-3 mt-3 mb-3 pb-3'>
 						<h6 className='text-gray-600 text-md uppercase font-bold'>
-							Inactive activities
+							{currentUser?.profileProvider?.relatedChannel === 'Travel'
+								? 'Inactive activities'
+								: currentUser?.profileProvider?.relatedChannel === 'Accomodation'
+								? 'Inactive rooms'
+								: currentUser?.profileProvider?.relatedChannel === 'Logistics'
+								? 'Inactive services'
+								: null}
 						</h6>
 					</div>
 

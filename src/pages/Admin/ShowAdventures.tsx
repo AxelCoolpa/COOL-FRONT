@@ -27,10 +27,13 @@ const ShowAdventures: React.FC = () => {
 		return <div>Error al cargar destinos: {error} </div>
 	}
 
-	const validDestinations = destinations.filter(
-		(destination) => destination !== undefined && destination !== null
+	const enabledDestinations = destinations.filter(
+		(destination) => destination.itDeleted === false
 	)
 
+	const disabledDestinations = destinations.filter(
+		(destination) => destination.itDeleted === true
+	)
 	return (
 		<>
 			<div className='flex flex-wrap'>
@@ -49,7 +52,7 @@ const ShowAdventures: React.FC = () => {
 
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{validDestinations.map((destination) => (
+							{enabledDestinations.map((destination) => (
 								<DestinationCard key={destination._id} data={destination} />
 							))}
 						</GridColumns>
@@ -65,20 +68,9 @@ const ShowAdventures: React.FC = () => {
 
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{/* <Swiper
-              loop={true}
-              spaceBetween={10}
-              navigation={true}
-              modules={[Navigation, Thumbs]}
-              grabCursor={true}
-              className="product-images-slider"
-            >
-              <SwiperSlide> */}
-							{validDestinations.map((destination) => (
+							{disabledDestinations.map((destination) => (
 								<DestinationCard key={destination._id} data={destination} />
 							))}
-							{/* </SwiperSlide>
-            </Swiper> */}
 						</GridColumns>
 					</div>
 				</div>

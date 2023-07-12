@@ -4,7 +4,6 @@ import { selectUserById } from '../../features/userByIdSlice'
 
 const ProfileUserCard = () => {
 	const user = useSelector(selectUserById)
-	console.log(user)
 
 	return (
 		<>

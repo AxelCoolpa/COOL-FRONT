@@ -15,6 +15,8 @@ export interface EnumActivity {
 
 	rating?: Array<number>
 	reviews?: Array<string>
+
+	itDeleted?: boolean
 }
 
 export interface EnumDestination {
@@ -24,6 +26,8 @@ export interface EnumDestination {
 	galleryImage: string
 	category: Array<string>
 	location: string
+
+	itDeleted?: boolean
 }
 
 export interface Room {

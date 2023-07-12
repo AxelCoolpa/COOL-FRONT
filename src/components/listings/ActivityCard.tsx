@@ -6,13 +6,15 @@ import { deleteAdventure } from '../../features/deleteAdventureSlice'
 import { useLocation, useNavigate } from 'react-router'
 import { motion, useAnimation } from 'framer-motion'
 
-import { EnumData } from '../../types'
+import { EnumActivity } from '../../types'
 
 import Dropdown from '../dropdown/index'
 import HeartButton from '../buttons/HeartButton'
 import MoreOptionsButton from '../buttons/MoreOptionsButon'
 import EditButon from '../buttons/EditButton'
+import DisableButton from '../buttons/DisableButton'
 import DeleteButton from '../buttons/DeleteButton'
+import EnableButton from '../buttons/EnableButton'
 import {
 	Button,
 	Card,
@@ -23,7 +25,7 @@ import {
 } from '@material-tailwind/react'
 
 interface ListingCardProps {
-	data: EnumData | undefined
+	data: EnumActivity | undefined
 }
 
 const ActivityCard: React.FC<ListingCardProps> = ({ data }) => {
@@ -57,7 +59,7 @@ const ActivityCard: React.FC<ListingCardProps> = ({ data }) => {
 		>
 			<Card className='mx-3 my-4' color='transparent' shadow={false}>
 				<div className='absolute top-3 right-3 text-black'>
-					{location.pathname === '/admindash' ? (
+					{location.pathname === '/provider' ? (
 						<Dropdown
 							button={<MoreOptionsButton />}
 							children={
@@ -69,27 +71,43 @@ const ActivityCard: React.FC<ListingCardProps> = ({ data }) => {
 									</div>
 									<div className='mt-3 mx-4 flex flex-col gap-5'>
 										<div className='h-px w-full bg-gray-200' />
-										<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-											<div className='flex gap-5 items-center '>
-												<EditButon
-													onClick={() => navigate(`/admindash/update/${data?._id}`)}
-												/>
-												<p
-													onClick={() => navigate(`/admindash/update/${data?._id}`)}
-													className='cursor-pointer'
-												>
-													Edit destination
-												</p>
+										{data?.itDeleted === false ? (
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
+												<div className='flex gap-5 items-center '>
+													<EditButon
+														onClick={() => navigate(`/provider/update/${data?._id}`)}
+													/>
+													<p
+														onClick={() => navigate(`/provider/update/${data?._id}`)}
+														className='cursor-pointer'
+													>
+														Edit Activity
+													</p>
+												</div>
 											</div>
-										</div>
-										<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-											<div className='flex gap-5 items-center '>
-												<DeleteButton onClick={onDelete} />
-												<p onClick={onDelete} className='cursor-pointer'>
-													Delete destination
-												</p>
+										) : (
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
+												<div className='flex gap-5 items-center '>
+													<EnableButton />
+													<p className='cursor-pointer'>Enable Activity</p>
+												</div>
 											</div>
-										</div>
+										)}
+										{data?.itDeleted === false ? (
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
+												<div className='flex gap-5 items-center '>
+													<DisableButton onClick={onDelete} />
+													<p onClick={onDelete} className='cursor-pointer'>
+														Disable Activity
+													</p>
+												</div>
+											</div>
+										) : (
+											<div className='flex gap-5 items-center '>
+												<DeleteButton />
+												<p className='cursor-pointer'>Delete Activity</p>
+											</div>
+										)}
 									</div>
 								</div>
 							}

@@ -1,4 +1,4 @@
-import { FiEdit } from 'react-icons/fi'
+import { TbEdit } from 'react-icons/tb'
 
 interface Props {
 	onClick: () => void
@@ -11,7 +11,7 @@ const EditButon: React.FC<Props> = ({ onClick, size }) => {
 			onClick={onClick}
 			className='relative hover:opacity-80 transition cursor-pointer z-10'
 		>
-			<FiEdit size={size || 30} />
+			<TbEdit size={size || 30} />
 		</div>
 	)
 }

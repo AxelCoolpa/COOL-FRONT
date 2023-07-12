@@ -7,18 +7,10 @@ interface Destination {
 	title: string
 	description: string
 	galleryImage: string
-	individualPrice: string
-	groupPrice: string
-	categories: Array<string>
+	category: string[]
 	location: string
 
-	videoLink: string
-	starterPack: string
-	startTime: string
-	endTime: string
-
-	rating: Array<number>
-	reviews: Array<string>
+	itDeleted?: boolean
 }
 
 interface DestinationState {

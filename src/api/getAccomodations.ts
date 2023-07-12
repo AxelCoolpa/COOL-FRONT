@@ -24,7 +24,7 @@ export const accomodationsApi = createApi({
 	}),
 	endpoints: (builder) => ({
 		getAcco: builder.query<Accomodation[], null>({
-			query: () => 'accomodations',
+			query: () => 'accomodation',
 		}),
 		getAccoById: builder.query<Accomodation, { _id: string }>({
 			query: ({ _id }) => `accomodation/${_id}`,
@@ -36,7 +36,7 @@ export const { useGetAccoByIdQuery, useGetAccoQuery } = accomodationsApi
 
 export const getAccomodations = async () => {
 	try {
-		const response = await axios.get(`${baseURL}/accomodations`)
+		const response = await axios.get(`${baseURL}/accomodation`)
 		return response.data // Puedes ajustar esto según la estructura de la respuesta de la API
 	} catch (error: any) {
 		throw new Error(error.message)

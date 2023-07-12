@@ -11,6 +11,11 @@ import { FiSearch } from 'react-icons/fi'
 import { categories } from '../categories/categories'
 import { amenitiesCategories } from '../categories/amenitiesCategories'
 
+import {
+	createAccomodation,
+	createAccomodationFormData,
+} from '../../features/createAccomodationSlice'
+
 import AccomodationForm from '../forms/AccomodationForm'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
@@ -25,18 +30,23 @@ const AddAccomodation = () => {
 
 	const { currentUserId } = useCurrentUser()
 
-	const [formData, setFormData] = useState({
-		title: '',
+	const [formData, setFormData] = useState<createAccomodationFormData>({
+		name: '',
 		description: '',
-		location: '',
-		galleryImage: [],
+		roomsCount: 1,
+		bedsCount: 1,
+		maxOccupancy: 1,
+		bathroomsCount: 1,
 		amenities: [],
-		category: [],
-		individualPrice: '',
-		groupPrice: '',
-		startTime: '',
-		endTime: '',
+		location: '',
+		zone: [],
+		images: [],
+		startDate: '',
+		endDate: '',
+		price: 0,
 	})
+
+	console.log(formData)
 
 	const handleCheckboxZoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
@@ -45,12 +55,12 @@ const AddAccomodation = () => {
 		if (isChecked) {
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				category: [...formData.category, value],
+				zone: [...formData.zone, value],
 			}))
 		} else {
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				category: formData.category.filter((val) => val !== value),
+				zone: formData.zone.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -81,10 +91,10 @@ const AddAccomodation = () => {
 	}
 
 	const handleFilesSelected = (files: File[]) => {
-		const updatedGallery = [...formData.galleryImage, ...files]
+		const updatedGallery = [...formData.images, ...files]
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			galleryImage: updatedGallery,
+			images: updatedGallery,
 		}))
 	}
 
@@ -92,68 +102,80 @@ const AddAccomodation = () => {
 		e.preventDefault()
 
 		const {
-			title,
+			name,
 			description,
-			individualPrice,
-			groupPrice,
-			galleryImage,
+			roomsCount,
+			bedsCount,
+			maxOccupancy,
+			bathroomsCount,
 			amenities,
-			category,
 			location,
-			startTime,
-			endTime,
+			zone,
+			images,
+			startDate,
+			endDate,
+			price,
 		} = formData
 
 		if (
-			!title ||
+			!name ||
 			!description ||
-			!individualPrice ||
-			!groupPrice ||
-			!galleryImage ||
-			!category ||
-			!location ||
+			!roomsCount ||
+			!bedsCount ||
+			!maxOccupancy ||
+			!bathroomsCount ||
 			!amenities ||
-			!startTime ||
-			!endTime
+			!location ||
+			!zone ||
+			!images ||
+			!startDate ||
+			!endDate ||
+			!price
 		) {
 			toast.error('Por favor, complete todos los campos')
 			return
 		}
 
 		const data = new FormData()
-		data.append('title', title)
+		data.append('name', name)
 		data.append('description', description)
-		data.append('individualPrice', individualPrice)
-		data.append('groupPrice', groupPrice)
+		data.append('roomsCount', roomsCount)
+		data.append('bedsCount', bedsCount)
+		data.append('maxOccupancy', maxOccupancy)
+		data.append('bathroomsCount', bathroomsCount)
 		data.append('location', location)
-		data.append('startTime', startTime)
-		data.append('endTime', endTime)
+		data.append('startDate', startDate)
+		data.append('endDate', endDate)
+		data.append('price', price)
 
-		for (let i = 0; i < formData.galleryImage.length; i++) {
-			data.append('galleryImage', formData.galleryImage[i])
+		for (let i = 0; i < formData.images.length; i++) {
+			data.append('images', formData.images[i])
 		}
 
 		formData.amenities.forEach((amenity) => {
 			data.append('amenities', amenity)
 		})
 
-		formData.category.forEach((category) => {
-			data.append('category', category)
+		formData.zone.forEach((zone) => {
+			data.append('zone', zone)
 		})
 
 		try {
 			dispatch(createAccomodation(formData, currentUserId))
 			setFormData({
-				title: '',
+				name: '',
 				description: '',
-				location: '',
-				galleryImage: [],
+				roomsCount: 0,
+				bedsCount: 0,
+				maxOccupancy: 0,
+				bathroomsCount: 0,
 				amenities: [],
-				category: [],
-				individualPrice: '',
-				groupPrice: '',
-				startTime: '',
-				endTime: '',
+				location: '',
+				zone: [],
+				images: [],
+				startDate: '',
+				endDate: '',
+				price: 0,
 			})
 		} catch (error: any) {
 			toast.error('Error al enviar el formulario:', error)

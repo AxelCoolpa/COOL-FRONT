@@ -8,11 +8,8 @@ import {
 	selectLoading,
 } from '../../features/destinationSlice'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Thumbs } from 'swiper'
-
 import GridColumns from '../../components/sections/GridColumns'
-import DestinationCard from '../../components/listings/DestinationCard'
+import MainCard from '../../components/listings/Card'
 
 const ShowAdventures: React.FC = () => {
 	const destinations = useSelector(selectDestinations)
@@ -53,7 +50,7 @@ const ShowAdventures: React.FC = () => {
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
 							{enabledDestinations.map((destination) => (
-								<DestinationCard key={destination._id} data={destination} />
+								<MainCard key={destination._id} data={destination} />
 							))}
 						</GridColumns>
 					</div>
@@ -69,7 +66,7 @@ const ShowAdventures: React.FC = () => {
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
 							{disabledDestinations.map((destination) => (
-								<DestinationCard key={destination._id} data={destination} />
+								<MainCard key={destination._id} data={destination} />
 							))}
 						</GridColumns>
 					</div>

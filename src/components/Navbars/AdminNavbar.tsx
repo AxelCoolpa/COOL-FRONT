@@ -284,7 +284,7 @@ const Navbar: React.FC = () => {
 									<label className='2xl:text-lg font-semibold'>
 										{currentUser?.firstName}
 									</label>
-									<span className='text-xs'>{currentUser?.role?.roleName}</span>
+									<span className='text-xs'>#{currentUser?.role?.roleName}</span>
 								</div>
 								<div className=''>
 									<select

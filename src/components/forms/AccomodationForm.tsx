@@ -2,6 +2,7 @@ import React from 'react'
 
 import { CgInfo } from 'react-icons/cg'
 import { FiPackage } from 'react-icons/fi'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { LuCalendarCheck } from 'react-icons/lu'
 import { MdAttachMoney, MdOutlineTitle } from 'react-icons/md'
 import { RxActivityLog } from 'react-icons/rx'
@@ -11,11 +12,12 @@ import { createActivityFormData } from '../../features/createActivitySlice'
 import { updateActivityFormData } from '../../features/updateActivitySlice'
 
 import Input from '../inputs/Input'
+import Dropdown from '../dropdown'
 
-interface ActivityFormProps {
+interface AccomodationFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	form?: createActivityFormData
-	updateForm?: updateActivityFormData
+	// form?: createAccomodationFormData
+	// updateForm?: updateAccomodationFormData
 	data?: {
 		title?: string
 		description?: string
@@ -30,7 +32,7 @@ interface ActivityFormProps {
 	}
 }
 
-const ActivityForm: React.FC<ActivityFormProps> = ({
+const AccomodationForm: React.FC<AccomodationFormProps> = ({
 	handleChange,
 	form,
 	updateForm,
@@ -42,7 +44,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({
 				<div className='flex flex-col gap-10 w-full'>
 					<div className='flex items-center gap-5 text-[#686868]'>
 						<MdAttachMoney size={25} />
-						<label>Individual Price</label>
+						<label>Price per night</label>
 					</div>
 					<div className='relative w-full'>
 						<Input
@@ -52,15 +54,12 @@ const ActivityForm: React.FC<ActivityFormProps> = ({
 							handleChange={handleChange}
 							value={updateForm?.individualPrice || form?.individualPrice}
 						/>
-						<div className='absolute right-2 top-1 z-20'>
-							<CgInfo size={50} color='#FFBC39' style={{ cursor: 'pointer' }} />
-						</div>
 					</div>
 				</div>
 				<div className='flex flex-col gap-10 w-full'>
 					<div className='flex items-center gap-5 text-[#686868]'>
 						<TbMoneybag size={25} />
-						<label>Group price</label>
+						<label>Price per week</label>
 					</div>
 					<Input
 						placeholder={data?.groupPrice || 'Price activity groups'}
@@ -78,7 +77,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<MdOutlineTitle size={25} />
-								<label>Activity</label>
+								<label>Accomodation</label>
 							</div>
 							<Input
 								placeholder={data?.title || 'Title activity'}
@@ -88,6 +87,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({
 								value={updateForm?.title || form?.title}
 							/>
 						</div>
+
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<RxActivityLog size={20} />
@@ -103,19 +103,6 @@ const ActivityForm: React.FC<ActivityFormProps> = ({
 						</div>
 					</div>
 					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
-						<div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<FiPackage size={25} />
-								<label>Starter Pack</label>
-							</div>
-							<Input
-								placeholder={data?.starterPack || 'Starter Pack'}
-								id='starterPack'
-								name='starterPack'
-								handleChange={handleChange}
-								value={updateForm?.starterPack || form?.starterPack}
-							/>
-						</div>
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
 								<LuCalendarCheck size={25} />
@@ -167,4 +154,4 @@ const ActivityForm: React.FC<ActivityFormProps> = ({
 	)
 }
 
-export default ActivityForm
+export default AccomodationForm

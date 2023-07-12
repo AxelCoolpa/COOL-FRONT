@@ -72,6 +72,6 @@ export const activityById = (activityID: string) => {
 	}
 }
 
-export const selectDestinationById = (state: RootState) => state.activityById.activity
+export const selectActivityById = (state: RootState) => state.activityById.activity
 export const selectLoading = (state: RootState) => state.activityById.loading
 export const selectError = (state: RootState) => state.activityById.error

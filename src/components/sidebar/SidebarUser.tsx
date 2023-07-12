@@ -6,17 +6,16 @@ import styles from '../../styles/Global'
 import Cool from '../../assets/cool.png'
 
 import { BiMenu } from 'react-icons/bi'
-import { BsFillGrid1X2Fill, BsTicketPerforated } from 'react-icons/bs'
-import { FaBed, FaMapMarkerAlt, FaUser } from 'react-icons/fa'
+import { BsTicketPerforated } from 'react-icons/bs'
+import { FaBed, FaMapMarkerAlt } from 'react-icons/fa'
 import { FiSearch } from 'react-icons/fi'
-
-import UserDropdown from '../dropdown/UserDropdown'
-import Dropdown from '../dropdown/Dropdown'
-import { GiWavyItinerary } from 'react-icons/gi'
 import { RiCarFill } from 'react-icons/ri'
 import { CgInfinity } from 'react-icons/cg'
 import { GoHome } from 'react-icons/go'
 import { GrSafariOption } from 'react-icons/gr'
+
+import UserDropdown from '../dropdown/UserDropdown'
+import Dropdown from '../dropdown/Dropdown'
 
 export default function SidebarUser() {
 	const navigate = useNavigate()
@@ -97,10 +96,7 @@ export default function SidebarUser() {
 						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
 							<ul className='space-y-4'>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-								<Link
-										to=''
-										className='flex items-center   font-semibold gap-2'
-									>
+									<Link to='' className='flex items-center   font-semibold gap-2'>
 										<GoHome size={20} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Home
@@ -108,21 +104,18 @@ export default function SidebarUser() {
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-								<Link
+									<Link
 										to='adventures'
 										className='flex items-center   font-semibold gap-2'
 									>
-									<GrSafariOption size={20} className='font-bold text-OrangeCooL' />
+										<GrSafariOption size={20} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Adventures
 										</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-								<Link
-										to='packages'
-										className='flex items-center   font-semibold gap-2'
-									>
+									<Link to='packages' className='flex items-center   font-semibold gap-2'>
 										<CgInfinity size={22} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Packages
@@ -130,7 +123,7 @@ export default function SidebarUser() {
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-								<Link
+									<Link
 										to='transport'
 										className='flex items-center   font-semibold gap-2'
 									>
@@ -141,7 +134,7 @@ export default function SidebarUser() {
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-								<Link
+									<Link
 										to='accomodation'
 										className='flex items-center   font-semibold gap-2'
 									>
@@ -152,10 +145,7 @@ export default function SidebarUser() {
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-								<Link
-										to='tickets'
-										className='flex items-center   font-semibold gap-2'
-									>
+									<Link to='tickets' className='flex items-center   font-semibold gap-2'>
 										<BsTicketPerforated size={22} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Tickets
@@ -164,7 +154,7 @@ export default function SidebarUser() {
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
 									<a href='maps' className='flex items-center font-semibold gap-2'>
-									<FaMapMarkerAlt size={26} className='font-bold text-OrangeCooL' />
+										<FaMapMarkerAlt size={26} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Maps</p>
 									</a>
 								</li>

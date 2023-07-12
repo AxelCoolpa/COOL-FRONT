@@ -18,6 +18,7 @@ export interface createAccomodationFormData {
 	startDate: string
 	endDate: string
 	price: number
+	idDestination: string
 }
 
 interface createAccomodationState {

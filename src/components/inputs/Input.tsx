@@ -4,14 +4,14 @@ interface InputProps {
 	id?: string
 	label?: string
 	name?: string
-	placeholder?: string
+	placeholder?: any
 	type?: string
 	disabled?: boolean
 	required?: boolean
 	errors?: boolean
 	sizeH?: number
 	handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-	value?: string
+	value?: any
 	icon?: IconType
 	secondaryIcon?: IconType
 	secondaryIconColor?: string

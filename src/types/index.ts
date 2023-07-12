@@ -30,8 +30,8 @@ export interface EnumDestination {
 	itDeleted?: boolean
 }
 
-export interface Room {
-	id: string
+export interface EnumRoom {
+	_id: string
 	name: string
 	description: string
 	roomsCount: number
@@ -40,10 +40,11 @@ export interface Room {
 	bathroomsCount: number
 	amenities: string[]
 	location: string
-	category: 'Beach' | 'Forest' | 'Mountain' | 'Island' | 'Village' | 'Modern' | 'Cruice'
-	zone: string
+	zone: string[]
 	images: string[]
 	startDate: string
 	endDate: string
 	price: number
+
+	itDeleted?: boolean
 }

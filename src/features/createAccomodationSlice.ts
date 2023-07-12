@@ -70,6 +70,6 @@ export const createAccomodation =
 			toast.success('Accomodation created successfully')
 		} catch (error: any) {
 			dispatch(createAccomodationFailure(error.message))
-			toast.error(error.message)
+			toast.error('Something went wrong')
 		}
 	}

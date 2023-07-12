@@ -17,6 +17,8 @@ import CreateActivity from '../pages/ProvUser/CreateActivity'
 import UpdateActivity from '../pages/ProvUser/UpdateActivity'
 import ProfileProvider from '../pages/ProvUser/Profile'
 import TableUser from '../pages/ProvUser/TableUser'
+import CreateAccomodation from '../pages/ProvUser/CreateAccomodation'
+import CreateLogistic from '../pages/ProvUser/CreateLogistic'
 
 //* ADMIN
 import Dashboard from '../pages/Admin/Dashboard'
@@ -27,7 +29,6 @@ import AdminTableUser from '../pages/Admin/AdminTableUser'
 import AdminProfile from '../pages/Admin/AdminProfile'
 import Settings from '../pages/Admin/Settings'
 import PruebaHome from '../pages/ProvUser/pruebaHome'
-import HomeUser from '../pages/User/HomeUser'
 
 export const admin = [
 	{
@@ -45,8 +46,16 @@ export const provider = [
 		element: <ShowActivities />,
 	},
 	{
-		path: 'create',
+		path: 'create/activity',
 		element: <CreateActivity />,
+	},
+	{
+		path: 'create/accomodation',
+		element: <CreateAccomodation />,
+	},
+	{
+		path: 'create/logistic',
+		element: <CreateLogistic />,
 	},
 	{
 		path: 'update/:id',

@@ -14,6 +14,7 @@ interface InputProps {
 	value?: string
 	icon?: IconType
 	secondaryIcon?: IconType
+	secondaryIconColor?: string
 	booking?: boolean
 }
 
@@ -30,6 +31,7 @@ const Input: React.FC<InputProps> = ({
 	value,
 	icon: Icon,
 	secondaryIcon: SecondaryIcon,
+	secondaryIconColor,
 	booking,
 }) => {
 	return (
@@ -43,8 +45,7 @@ const Input: React.FC<InputProps> = ({
 				value={value}
 				className={`
           peer
-          p-4
-					min-[1440px]:p-4
+          py-4
           font-light
           bg-white
           border-2
@@ -59,6 +60,7 @@ const Input: React.FC<InputProps> = ({
           ${errors ? 'border-red-700' : 'border-neutral-300'}
           ${errors ? 'focus:border-red-700' : 'focus:border-black'}
 					${Icon ? 'pl-14' : ''}
+					${SecondaryIcon ? 'pr-14 pl-4' : 'px-4'}
         `}
 				onChange={handleChange}
 			/>
@@ -94,7 +96,7 @@ const Input: React.FC<InputProps> = ({
 			{SecondaryIcon && (
 				<SecondaryIcon
 					size={28}
-					className='absolute right-4 top-4 flex items-center justify-center '
+					className={`absolute right-4 top-4 flex items-center justify-center text-${secondaryIconColor}`}
 				/>
 			)}
 		</div>

@@ -24,7 +24,19 @@ const Home: React.FC = () => {
   if (error) { return <div>Error al cargar destinos: {error} </div> }
   const randomDestination = destinos ? destinos[Math.floor(Math.random() * destinos.length)] : null;
   let activitiesArray: any[] = [];
+  const [filteredActivities, serFilteredActivities] = useState(activitiesArray)
   
+  /* const handleSearch = (filters) => {
+    const filtered = activitiesArray.filter((activity) => {
+      const { location, startDate, endDate, peoples } = filters
+      if (location && activity.location !== location) {
+        return false;
+      }
+      return true;
+    })
+    setFilteredActivities(filtered);
+  } */
+
   if (activities) {
     activities?.forEach((activities) => {
       if (Array.isArray(activities)) {

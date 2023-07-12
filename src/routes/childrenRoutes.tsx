@@ -116,10 +116,10 @@ export const user = [
 		path: 'maps',
 		element: <Maps />,
 	},
-	{
+	/* {
 		path: 'homebug',
 		element: <HomeUser />,
-	},
+	}, */
 	{
 		path: 'create',
 		element: <CreateAdventure />,

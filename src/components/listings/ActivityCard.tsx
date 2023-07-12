@@ -6,7 +6,7 @@ import { deleteAdventure } from '../../features/deleteAdventureSlice'
 import { useLocation, useNavigate } from 'react-router'
 import { motion, useAnimation } from 'framer-motion'
 
-import { EnumDestination } from '../../types'
+import { EnumData } from '../../types'
 
 import Dropdown from '../dropdown/index'
 import HeartButton from '../buttons/HeartButton'
@@ -23,10 +23,10 @@ import {
 } from '@material-tailwind/react'
 
 interface ListingCardProps {
-	data: EnumDestination | undefined
+	data: EnumData | undefined
 }
 
-const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
+const ActivityCard: React.FC<ListingCardProps> = ({ data }) => {
 	const headingControls = useAnimation()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
@@ -101,7 +101,7 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 				</div>
 				<CardHeader floated={false} color='gray' className='mx-0 mt-0 mb-4 h-64 xl:h-40'>
 					<img
-						src={data?.galleryImage}
+						src={data?.galleryImage || data?.galleryImage[0]}
 						alt={data?.title}
 						className='h-full w-full object-cover'
 					/>
@@ -130,4 +130,4 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 	)
 }
 
-export default ListingCardnew
+export default ActivityCard

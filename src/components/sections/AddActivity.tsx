@@ -1,8 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Select, { components } from "react-select";
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Select from 'react-select'
 
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 
@@ -23,25 +23,23 @@ import Map from "../Map";
 import Button from "../buttons/Button";
 import Container from "../containers/Container";
 
-interface Destination {
-  _id: string;
-  title: string;
-  description: string;
-  categories: string[];
-  location: string;
+export interface Destination {
+	_id: string
+	title: string
+	description: string
+	categories: string[]
+	location: string
 }
 
 const AddAdventure = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { currentUserId } = useCurrentUser();
-  const destinationsList = useSelector(selectDestinations);
-  console.log(destinationsList);
+	const { currentUserId } = useCurrentUser()
+	const destinationsList = useSelector(selectDestinations)
 
-  // const [destinations, setDestinations] = useState<Destination[]>([])
-  const [selectedDestination, setSelectedDestination] =
-    useState<Destination | null>(null);
+	const [destinations, setDestinations] = useState<Destination[]>([])
+	const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
 
   const [formData, setFormData] = useState<createActivityFormData>({
     title: "",
@@ -58,11 +56,9 @@ const AddAdventure = () => {
     idDestination: "",
   });
 
-  console.log(formData.idDestination);
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const isChecked = e.target.checked;
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
 
     if (isChecked) {
       setFormData((prevFormData) => ({
@@ -85,21 +81,23 @@ const AddAdventure = () => {
     }));
   };
 
-  const handleDestinationChange = (selectedOption: any) => {
-    setSelectedDestination(selectedOption);
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      idDestination: selectedOption?.value,
-    }));
-  };
+	const handleDestinationChange = (selectedOption: any) => {
+		setSelectedDestination(selectedOption)
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			idDestination: selectedOption?._id,
+		}))
+	}
 
-  const handleFilesSelected = (files: File[]) => {
-    const updatedGallery = [...formData.galleryImage, ...files];
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      galleryImage: updatedGallery,
-    }));
-  };
+	console.log(formData.idDestination)
+
+	const handleFilesSelected = (files: File[]) => {
+		const updatedGallery = [...formData.galleryImage, ...files]
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			galleryImage: updatedGallery,
+		}))
+	}
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,35 +176,69 @@ const AddAdventure = () => {
     }
   };
 
-  // useEffect(() => {
-  // 	setDestinations(destinationsList)
-  // }, [destinationsList])
+	useEffect(() => {
+		setDestinations(destinationsList)
+	}, [destinationsList])
 
-  const renderOptions = () => {
-	return destinationsList.map((destination) => ({
-	  value: destination._id,
-	  label: destination.title,
-	}));
-  };
-  
-  const formatOptionLabel = (option: any) => (
-	<div>
-	  <span>{option.title}</span>
-	  <span className="text-gray-500"> ({option.location})</span>
-	</div>
-  );
+	return (
+		<Container>
+			<div className='flex flex-col md:items-center xl:items-start pt-14'>
+				<h2 className='text-[32px] font-medium'>Add adventure</h2>
+				<form
+					onSubmit={handleSubmit}
+					className='flex flex-col items-center justify-center w-full transition'
+				>
+					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
+						<DropZone onFilesSelected={handleFilesSelected} />
+					</div>
 
-  return (
-    <Container>
-      <div className="flex flex-col md:items-center xl:items-start pt-14">
-        <h2 className="text-[32px] font-medium">Add adventure</h2>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-center justify-center w-full transition"
-        >
-          <div className="mx-auto py-5 xl:w-4/5 2xl:w-5/6">
-            <DropZone onFilesSelected={handleFilesSelected} />
-          </div>
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Select destination
+					</h3>
+					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
+						<Select
+							options={destinations}
+							value={selectedDestination}
+							onChange={handleDestinationChange}
+							placeholder='Select destination'
+							isClearable
+							formatOptionLabel={(option: any) => (
+								<div className='flex flex-row items-center gap-3'>
+									<div>
+										<span className='text-neutral-500'>{option.title}</span>
+									</div>
+								</div>
+							)}
+							classNames={{
+								control: () => 'p-3 border-2',
+								input: () => 'text-lg',
+								option: () => 'text-lg',
+							}}
+							styles={{
+								control: (provided: any) => ({
+									...provided,
+									width: '100%',
+									height: '20px',
+									minHeight: '60px',
+									borderRadius: '10px',
+								}),
+								singleValue: (provided: any) => ({
+									...provided,
+									display: 'flex',
+									alignItems: 'center',
+								}),
+							}}
+							theme={(theme) => ({
+								...theme,
+								borderRadius: 6,
+								colors: {
+									...theme.colors,
+									primary: 'white',
+									primary25: '#ce452a60',
+								},
+							})}
+						/>
+					</div>
 
           <h3 className="text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6">
             Select destination
@@ -249,20 +281,13 @@ const AddAdventure = () => {
             Category adventure
           </h3>
 
-          <div className="flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6">
-            {categories.map((item) => (
-              <ul key={item.label}>
-                <CategoryInput
-                  handleChange={handleCheckboxChange}
-                  label={item.label}
-                  icon={item.icon}
-                  id={item.label}
-                  name={item.label}
-                  value={item.label}
-                />
-              </ul>
-            ))}
-          </div>
+					{/* MAP */}
+					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						<h3 className='text-2xl font-semibold'>Adventure location</h3>
+						<div className='flex flex-col items-center py-10'>
+							<Map />
+						</div>
+					</div>
 
           {/* MAP */}
           <div className="mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6">

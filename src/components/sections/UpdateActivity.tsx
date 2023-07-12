@@ -1,23 +1,25 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+// import Select from 'react-select'
 
 import { categories } from '../categories/categories'
 
-import { selectUsers } from '../../features/usersSlice'
+import { useCurrentUser } from '../../hooks/useCurrentUser'
+// import { selectDestinations } from '../../features/destinationSlice'
+// import { Destination } from './AddActivity'
 import {
 	destinationById,
 	selectDestinationById,
 } from '../../features/destinationByIdSlice'
 import {
-	updateAdventureFormData,
-	updateAdventure,
-} from '../../features/updateAdventureSlice'
+	updateActivity,
+	updateActivityFormData,
+} from '../../features/updateActivitySlice'
 
 import DropZone from '../inputs/DropZone'
 import ActivityForm from '../forms/ActivityForm'
-import ProviderCard from '../listings/ProviderCard'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
@@ -25,27 +27,33 @@ import Container from '../containers/Container'
 
 const UpdateActivity = () => {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const { id } = useParams()
-	const destinationID = id
+	const activityID = id
 
-	const users = useSelector(selectUsers)
-	const userID = users[1]?._id
+	const { currentUserId } = useCurrentUser()
 
-	const destination = useSelector(selectDestinationById)
+	const activity = useSelector(selectDestinationById)
 
-	const [formData, setFormData] = useState<updateAdventureFormData>({
-		title: destination?.title,
-		description: destination?.description,
-		individualPrice: destination?.individualPrice,
-		groupPrice: destination?.groupPrice,
-		gallery: destination?.gallery,
-		categories: destination?.categories,
-		location: destination?.location,
-		activities: destination?.activities,
-		starterPack: destination?.starterPack,
-		startTime: destination?.startTime,
-		endTime: destination?.endTime,
+	// const destinationsList = useSelector(selectDestinations)
+	// const [destinations, setDestinations] = useState<Destination[]>([])
+	// const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
+	// const [enabled, setEnabled] = useState(true)
+
+	const [formData, setFormData] = useState<updateActivityFormData>({
+		title: '',
+		description: '',
+		location: '',
+		galleryImage: [],
+		videoLink: '',
+		category: [],
+		individualPrice: '',
+		groupPrice: '',
+		starterPack: '',
+		startTime: '',
+		endTime: '',
+		// idDestination: ''
 	})
 
 	const [checkboxValues, setCheckboxValues] = useState([])
@@ -58,19 +66,16 @@ const UpdateActivity = () => {
 			setCheckboxValues([...checkboxValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: [...formData.categories, value],
+				categories: [...formData?.category, value],
 			}))
 		} else {
 			setCheckboxValues(checkboxValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				categories: formData.categories.filter((val) => val !== value),
+				categories: formData?.category.filter((val) => val !== value),
 			}))
 		}
 	}
-
-	// formData.categories = checkboxValues
-	// console.log(formData.categories)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
@@ -80,11 +85,23 @@ const UpdateActivity = () => {
 		}))
 	}
 
+	// const handleEnabledSelect = () => {
+	// 	setEnabled(!enabled)
+	// }
+
+	// const handleDestinationChange = (selectedOption: any) => {
+	// 	setSelectedDestination(selectedOption)
+	// 	setFormData((prevFormData) => ({
+	// 		...prevFormData,
+	// 		idDestination: selectedOption?._id,
+	// 	}))
+	// }
+
 	const handleFilesSelected = (files: File[]) => {
-		const updatedGallery = [...formData.gallery, ...files]
+		const updatedGallery = [...formData.galleryImage, ...files]
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			gallery: updatedGallery,
+			galleryImage: updatedGallery,
 		}))
 	}
 
@@ -96,10 +113,10 @@ const UpdateActivity = () => {
 			description,
 			individualPrice,
 			groupPrice,
-			gallery,
-			categories,
+			galleryImage,
+			category,
 			location,
-			activities,
+			videoLink,
 			starterPack,
 			startTime,
 			endTime,
@@ -110,10 +127,10 @@ const UpdateActivity = () => {
 			!description ||
 			!individualPrice ||
 			!groupPrice ||
-			!gallery ||
-			!categories ||
+			!galleryImage ||
+			!category ||
 			!location ||
-			!activities ||
+			!videoLink ||
 			!starterPack ||
 			!startTime ||
 			!endTime
@@ -124,10 +141,10 @@ const UpdateActivity = () => {
 				description,
 				individualPrice,
 				groupPrice,
-				gallery,
-				categories,
+				galleryImage,
+				category,
 				location,
-				activities,
+				videoLink,
 				starterPack,
 				startTime,
 				endTime,
@@ -141,33 +158,34 @@ const UpdateActivity = () => {
 		data.append('individualPrice', individualPrice)
 		data.append('groupPrice', groupPrice)
 		data.append('location', location)
-		data.append('activities', activities)
+		data.append('videoLink', videoLink)
 		data.append('starterPack', starterPack)
 		data.append('startTime', startTime)
 		data.append('endTime', endTime)
+		// data.append('idDestination', idDestination)
 
-		for (let i = 0; i < formData.gallery.length; i++) {
-			data.append('gallery', formData.gallery[i])
+		for (let i = 0; i < formData.galleryImage.length; i++) {
+			data.append('galleryImage', formData.galleryImage[i])
 		}
 
-		formData.categories.forEach((category) => {
-			data.append('categories', category)
+		formData.category.forEach((category) => {
+			data.append('category', category)
 		})
 
 		try {
-			await dispatch(updateAdventure(data, userID))
+			await dispatch(updateActivity(data, currentUserId, activityID))
 			setFormData({
 				title: '',
 				description: '',
 				individualPrice: '',
 				groupPrice: '',
-				gallery: [],
-				categories: [],
+				galleryImage: [],
+				category: [],
 				location: '',
-				activities: [],
-				starterPack: [],
-				startTime: [],
-				endTime: [],
+				videoLink: '',
+				starterPack: '',
+				startTime: '',
+				endTime: '',
 			})
 		} catch (error) {
 			console.log('Error al enviar el formulario:', error)
@@ -175,53 +193,126 @@ const UpdateActivity = () => {
 	}
 
 	useEffect(() => {
-		dispatch(destinationById(destinationID))
-	}, [destinationID, dispatch])
+		dispatch(destinationById(activityID))
+	}, [activityID, dispatch])
 
 	return (
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
-				<h2 className='text-[32px] font-medium'>Update adventure</h2>
-				<form onSubmit={handleUpdate}>
-					<div className='mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+				<h2 className='text-[32px] font-medium'>Update activity</h2>
+				<form
+					onSubmit={handleUpdate}
+					className='flex flex-col items-center justify-center w-full transition'
+				>
+					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
-					<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pt-16'>
+
+					{/* <div className='flex items-center justify-between mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						<h3 className='text-2xl font-semibold'>Select destination</h3>
+						<Button
+							label={enabled === true ? 'Disabled' : 'Enabled'}
+							onClick={handleEnabledSelect}
+							w={10}
+							outline
+							small
+						/>
+					</div>
+					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
+						<Select
+							options={destinations}
+							value={selectedDestination}
+							onChange={handleDestinationChange}
+							isDisabled={enabled}
+							placeholder='Change destination'
+							defaultValue={selectedDestination}
+							isClearable
+							formatOptionLabel={(option: any) => (
+								<div className='flex flex-row items-center gap-3'>
+									<div>
+										<span className='text-neutral-500'>{option.title}</span>
+									</div>
+								</div>
+							)}
+							classNames={{
+								control: () => 'p-3 border-2',
+								input: () => 'text-lg',
+								option: () => 'text-lg',
+							}}
+							styles={{
+								control: (provided: any) => ({
+									...provided,
+									width: '100%',
+									height: '20px',
+									minHeight: '60px',
+									borderRadius: '10px',
+								}),
+								singleValue: (provided: any) => ({
+									...provided,
+									display: 'flex',
+									alignItems: 'center',
+								}),
+							}}
+							theme={(theme) => ({
+								...theme,
+								borderRadius: 6,
+								colors: {
+									...theme.colors,
+									primary: 'white',
+									primary25: '#ce452a60',
+								},
+							})}
+						/>
+					</div> */}
+
+					{/* FORM */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Activity Info
+					</h3>
+
+					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
 						<ActivityForm
 							handleChange={handleChange}
-							form={formData}
-							id={destination._id}
+							updateForm={formData}
+							data={activity}
 						/>
-						<div className='xl:col-span-2 flex xl:scale-[80%] min-[1440px]:scale-100'>
-							<ProviderCard />
+					</div>
+
+					{/* CATEGORIES */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Category adventure
+					</h3>
+
+					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+						{categories.map((item) => (
+							<ul key={item.label}>
+								<CategoryInput
+									handleChange={handleCheckboxChange}
+									label={item.label}
+									icon={item.icon}
+									id={item.label}
+									name={item.label}
+									value={item.label}
+								/>
+							</ul>
+						))}
+					</div>
+
+					{/* MAP */}
+					<div className='mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						<h3 className='text-2xl font-semibold'>Adventure location</h3>
+						<div className='flex flex-col items-center py-10'>
+							<Map />
 						</div>
 					</div>
 
-					<h3 className='text-2xl font-semibold py-8'>Category adventure</h3>
-
-					<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 pb-14'>
-						<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center'>
-							{categories.map((item) => (
-								<ul key={item.label}>
-									<CategoryInput
-										handleChange={handleCheckboxChange}
-										label={item.label}
-										icon={item.icon}
-										id={item.label}
-										name={item.label}
-										value={item.label}
-									/>
-								</ul>
-							))}
+					{/* BUTTONS */}
+					<div className='flex flex-col lg:flex-row items-center justify-evenly gap-4 lg:gap-20 mx-auto py-10 w-full'>
+						<div className='w-full lg:w-2/5 xl:w-2/6'>
+							<Button label='Back' card outline onClick={() => navigate('/provider')} />
 						</div>
-						<div className='xl:col-span-2'>
-							<h3 className='text-2xl font-semibold'>Adventure location</h3>
-							<div className='flex flex-col items-center py-10'>
-								<Map w={400} h={260} />
-							</div>
-							<div className='mx-auto w-full lg:w-2/5 xl:w-full'>
-								<Button label='Save' card />
-							</div>
+						<div className='w-full lg:w-2/5 xl:w-2/6'>
+							<Button label='Save' card type='submit' />
 						</div>
 					</div>
 				</form>

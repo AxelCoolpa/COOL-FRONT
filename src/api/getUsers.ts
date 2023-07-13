@@ -28,10 +28,11 @@ interface User {
 		companyRepresentative?: string
 		companyPhone?: string
 		companyEmail?: string
-		relatedChannel?: string //'Accomodation'
+		relatedChannel?: string
 		descriptionBusiness?: string
 		companyAddress?: string
 		isRegistered?: boolean
+		serviceType?: string
 		isAuthenticated?: boolean
 		itDeleted?: boolean
 	}

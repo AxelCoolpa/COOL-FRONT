@@ -1,34 +1,29 @@
 import React from 'react'
 
-import { CgInfo } from 'react-icons/cg'
-import { FiPackage } from 'react-icons/fi'
-import { HiOutlineLocationMarker } from 'react-icons/hi'
-import { LuCalendarCheck } from 'react-icons/lu'
-import { MdAttachMoney, MdOutlineTitle } from 'react-icons/md'
-import { RxActivityLog } from 'react-icons/rx'
-import { TbFileDescription, TbMoneybag } from 'react-icons/tb'
+import { GrRestroom } from 'react-icons/gr'
+import { MdAttachMoney, MdOutlineFamilyRestroom, MdRoomService } from 'react-icons/md'
+import { RiHotelLine } from 'react-icons/ri'
+import { TbBed, TbCalendarCheck, TbCalendarX, TbFileDescription } from 'react-icons/tb'
 
-import { createActivityFormData } from '../../features/createActivitySlice'
-import { updateActivityFormData } from '../../features/updateActivitySlice'
+import { createAccomodationFormData } from '../../features/createAccomodationSlice'
+import { updateAccomodationFormData } from '../../features/updateAccomodationSlice'
 
 import Input from '../inputs/Input'
-import Dropdown from '../dropdown'
 
 interface AccomodationFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	// form?: createAccomodationFormData
-	// updateForm?: updateAccomodationFormData
+	form?: createAccomodationFormData
+	updateForm?: updateAccomodationFormData
 	data?: {
-		title?: string
+		name?: string
+		price?: number
+		roomsCount?: number
+		bedsCount?: number
+		maxOccupancy?: number
+		bathroomsCount?: number
+		startDate?: string
+		endDate?: string
 		description?: string
-		location?: string
-		videoLink?: string
-		individualPrice?: string
-		groupPrice?: string
-
-		starterPack?: string
-		startTime?: string
-		endTime?: string
 	}
 }
 
@@ -43,30 +38,29 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 			<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
 				<div className='flex flex-col gap-10 w-full'>
 					<div className='flex items-center gap-5 text-[#686868]'>
-						<MdAttachMoney size={25} />
-						<label>Price per night</label>
+						<RiHotelLine size={25} />
+						<label>Property</label>
 					</div>
-					<div className='relative w-full'>
-						<Input
-							placeholder={data?.individualPrice || 'Price activity indivial'}
-							id='individualPrice'
-							name='individualPrice'
-							handleChange={handleChange}
-							value={updateForm?.individualPrice || form?.individualPrice}
-						/>
-					</div>
+					<Input
+						placeholder={data?.name || 'Property name'}
+						id='name'
+						name='name'
+						handleChange={handleChange}
+						value={updateForm?.name || form?.name}
+					/>
 				</div>
 				<div className='flex flex-col gap-10 w-full'>
 					<div className='flex items-center gap-5 text-[#686868]'>
-						<TbMoneybag size={25} />
-						<label>Price per week</label>
+						<MdAttachMoney size={25} />
+						<label>Price</label>
 					</div>
 					<Input
-						placeholder={data?.groupPrice || 'Price activity groups'}
-						id='groupPrice'
-						name='groupPrice'
+						type='number'
+						placeholder={data?.price || 'Accomodation price'}
+						id='price'
+						name='price'
 						handleChange={handleChange}
-						value={updateForm?.groupPrice || form?.groupPrice}
+						value={updateForm?.price || form?.price}
 					/>
 				</div>
 			</div>
@@ -76,57 +70,91 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
-								<MdOutlineTitle size={25} />
-								<label>Accomodation</label>
+								<MdRoomService size={25} />
+								<label>Rooms Count</label>
 							</div>
 							<Input
-								placeholder={data?.title || 'Title activity'}
-								id='title'
-								name='title'
+								type='number'
+								placeholder={data?.roomsCount || 'Rooms count'}
+								id='roomsCount'
+								name='roomsCount'
 								handleChange={handleChange}
-								value={updateForm?.title || form?.title}
+								value={updateForm?.roomsCount || form?.roomsCount}
 							/>
 						</div>
 
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
-								<RxActivityLog size={20} />
-								<label>Video Link</label>
+								<TbBed size={20} />
+								<label>Beds Count</label>
 							</div>
 							<Input
-								placeholder={data?.videoLink || 'Video URL'}
-								id='videoLink'
-								name='videoLink'
+								type='number'
+								placeholder={data?.bedsCount || 'Beds count'}
+								id='bedsCount'
+								name='bedsCount'
 								handleChange={handleChange}
-								value={updateForm?.videoLink || form?.videoLink}
+								value={updateForm?.bedsCount || form?.bedsCount}
 							/>
 						</div>
 					</div>
 					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
-								<LuCalendarCheck size={25} />
-								<label>Start Time</label>
+								<MdOutlineFamilyRestroom size={25} />
+								<label>Max Occupancy</label>
+							</div>
+							<Input
+								type='number'
+								placeholder={data?.maxOccupancy || 'Max occupancy'}
+								id='maxOccupancy'
+								name='maxOccupancy'
+								handleChange={handleChange}
+								value={updateForm?.maxOccupancy || form?.maxOccupancy}
+							/>
+						</div>
+
+						<div className='flex flex-col gap-10 w-full'>
+							<div className='flex items-center gap-5 text-[#686868]'>
+								<GrRestroom size={20} />
+								<label>Bathrooms Count</label>
+							</div>
+							<Input
+								type='number'
+								placeholder={data?.bathroomsCount || 'Bathrooms count'}
+								id='bathroomsCount'
+								name='bathroomsCount'
+								handleChange={handleChange}
+								value={updateForm?.bathroomsCount || form?.bathroomsCount}
+							/>
+						</div>
+					</div>
+
+					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
+						<div className='flex flex-col gap-10 w-full'>
+							<div className='flex items-center gap-5 text-[#686868]'>
+								<TbCalendarCheck size={25} />
+								<label>Start Date</label>
 							</div>
 							<Input
 								type='datetime-local'
-								id='startTime'
-								name='startTime'
+								id='startDate'
+								name='startDate'
 								handleChange={handleChange}
-								value={updateForm?.startTime || form?.startTime}
+								value={updateForm?.startDate || form?.startDate}
 							/>
 						</div>
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
-								<LuCalendarCheck size={25} />
-								<label>End Time</label>
+								<TbCalendarX size={25} />
+								<label>End Date</label>
 							</div>
 							<Input
 								type='datetime-local'
-								id='endTime'
-								name='endTime'
+								id='endDate'
+								name='endDate'
 								handleChange={handleChange}
-								value={updateForm?.endTime || form?.endTime}
+								value={updateForm?.endDate || form?.endDate}
 							/>
 						</div>
 					</div>
@@ -141,7 +169,7 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 				{data?.description ? <p className='text-zinc-500'>{data?.description}</p> : null}
 				<Input
 					label={
-						data?.description ? 'Update Adventure description' : 'Adventure description'
+						data?.description ? 'Update Property description' : 'Property description'
 					}
 					id='description'
 					name='description'

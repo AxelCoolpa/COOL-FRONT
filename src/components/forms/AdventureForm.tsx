@@ -15,7 +15,6 @@ interface AddAdventureFormProps {
 	data?: {
 		title: string
 		description: string
-		location: string
 	}
 }
 

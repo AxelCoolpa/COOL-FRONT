@@ -11,6 +11,7 @@ interface User {
 	lastname?: string
 	role?: {
 		roleName?: string
+		typeRole?: string
 	}
 	DNI?: string
 	phone?: string

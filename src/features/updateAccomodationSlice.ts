@@ -10,7 +10,7 @@ export interface updateAccomodationFormData {
 	roomsCount?: number
 	bedsCount?: number
 	maxOccupancy?: number
-	bathroomsCount?: number
+	bathRoomsCount?: number
 	amenities?: string[]
 	location?: string
 	zone?: string[]
@@ -18,6 +18,7 @@ export interface updateAccomodationFormData {
 	startDate?: string
 	endDate?: string
 	price?: number
+	category?: string
 }
 
 interface updateAccomodationState {

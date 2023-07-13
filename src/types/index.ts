@@ -2,7 +2,7 @@ export interface EnumActivity {
 	_id?: string
 	title: string
 	description: string
-	galleryImage: []
+	galleryImage: string[]
 	individualPrice: string
 	groupPrice: string
 	category: Array<string>

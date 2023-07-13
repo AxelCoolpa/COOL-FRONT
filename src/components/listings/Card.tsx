@@ -30,7 +30,7 @@ import {
 } from '@material-tailwind/react'
 
 interface ListingCardProps {
-	data: EnumDestination | EnumActivity | EnumRoom | undefined
+	data: EnumDestination | EnumActivity | undefined
 }
 
 const MainCard: React.FC<ListingCardProps> = ({ data }) => {
@@ -212,7 +212,7 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 				</div>
 				<CardHeader floated={false} color='gray' className='mx-0 mt-0 mb-4 h-64 xl:h-40'>
 					<img
-						src={data?.galleryImage || data?.galleryImage[0] || data?.images[0]}
+						src={data?.galleryImage || data?.images}
 						alt={data?.title || data?.name}
 						className='h-full w-full object-cover'
 					/>

@@ -31,8 +31,10 @@ const AddAccomodation = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const { currentUserId } = useCurrentUser()
+	const { currentUser, currentUserId } = useCurrentUser()
 	const destinationsList = useSelector(selectDestinations)
+
+	console.log(currentUser?.profileProvider)
 
 	const [destinations, setDestinations] = useState<Destination[]>([])
 	const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
@@ -180,22 +182,22 @@ const AddAccomodation = () => {
 
 		try {
 			dispatch(createAccomodation(data, currentUserId))
-			setFormData({
-				name: '',
-				description: '',
-				roomsCount: 0,
-				bedsCount: 0,
-				maxOccupancy: 0,
-				bathroomsCount: 0,
-				amenities: [],
-				location: '',
-				zone: [],
-				images: [],
-				startDate: '',
-				endDate: '',
-				price: 0,
-				idDestination: '',
-			})
+			// setFormData({
+			// 	name: '',
+			// 	description: '',
+			// 	roomsCount: 1,
+			// 	bedsCount: 1,
+			// 	maxOccupancy: 1,
+			// 	bathroomsCount: 1,
+			// 	amenities: [],
+			// 	location: '',
+			// 	zone: '',
+			// 	images: [],
+			// 	startDate: '',
+			// 	endDate: '',
+			// 	price: 0,
+			// 	idDestination: '',
+			// })
 			setSelectedDestination(null)
 			setSearchValue('')
 		} catch (error: any) {

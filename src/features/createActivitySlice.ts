@@ -69,6 +69,6 @@ export const createActivity =
 			toast.success('Activity created successfully')
 		} catch (error: any) {
 			dispatch(createActivityFailure(error.message))
-			toast.error(error.message)
+			toast.error('Something went wrong')
 		}
 	}

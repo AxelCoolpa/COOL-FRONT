@@ -7,18 +7,19 @@ import { useDestinations } from "../../hooks/useDestination";
 import ActivityCard from "../../components/listings/ActivityCard";
 import { Destination } from "../../components/sections/AddActivity";
 import InputSelect from "../../components/inputs/InputSelect";
+import { useAllActivities } from "../../hooks/useActivities";
+import { useGetDestByIdQuery, useGetDestQuery } from "../../api/getDestinations";
 
 const Home: React.FC = () => {
+/*   const { data } = useGetDestByIdQuery({ _id })
+  console.log(data?._id) */
   const { destinos } = useDestinations();
   const activities = destinos?.map((dest) => dest.activities);
-  console.log(activities);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState<string>();
   let activitiesArray: any[] = [];
-  console.log(activitiesArray);
 
-  useEffect(() => {
     if (activities) {
       activities?.forEach((activities) => {
         if (Array.isArray(activities)) {
@@ -36,17 +37,14 @@ const Home: React.FC = () => {
         }
       });
     }
-  }, [activities]);
-
-  const handleSelectChange = (selectedLocation: string) => {
-    setSelectedLocation(selectedLocation);
+    
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLocation(event.target.value);
   };
 
-  const filteredActivities = selectedLocation
-    ? activitiesArray.filter(
-        (activity) => activity.location === selectedLocation
+  const filteredActivities = activitiesArray.filter(
+        (activity) => activity.location.toLowerCase() === selectedLocation?.toLowerCase()
       )
-    : activitiesArray;
 
   if (loading) {
     return <div>Cargando destinos...</div>;
@@ -67,8 +65,14 @@ const Home: React.FC = () => {
           subtitle="Explore the best destinations in the world"
           image={randomDestination?.galleryImage}
         />
-        <InputSelect onSelectChange={handleSelectChange} />
-        <ActivitySection destinations={filteredActivities} />
+        <div>
+        {/* <select value={selectedLocation} onChange={handleSelectChange}>
+          <option value="">All Destinations</option>
+          <option value="AR">Argentina</option>
+          <option value="MX">Mexico</option>
+        </select> */}
+      </div>
+        <ActivitySection destinations={activitiesArray} />
       </div>
     </>
   );
@@ -85,7 +89,7 @@ const ActivitySection: React.FC<{ destinations?: Destination[] }> = ({
             <div className="grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 min-[1540px]:grid-cols-5 min-[1640px]:grid-cols-6 gap-1">
               {destinations?.map((activity) => (
                 <ActivityCard key={activity._id} data={activity} />
-              ))}
+                ))}
             </div>
           </div>
         </div>

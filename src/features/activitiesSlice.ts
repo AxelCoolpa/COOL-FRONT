@@ -88,6 +88,7 @@ export const filterActivities = (formData : FilterForm) => {
 		try {
 			dispatch(activitiesStart())
 			const activities = await filterActivitiesAPI(formData)
+			console.log(activities)
 			dispatch(activitiesSuccess(activities))
 		} catch (error) {
 			if (error instanceof Error) {

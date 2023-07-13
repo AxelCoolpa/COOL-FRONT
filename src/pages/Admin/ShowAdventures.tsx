@@ -8,11 +8,8 @@ import {
 	selectLoading,
 } from '../../features/destinationSlice'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Thumbs } from 'swiper'
-
 import GridColumns from '../../components/sections/GridColumns'
-import DestinationCard from '../../components/listings/DestinationCard'
+import MainCard from '../../components/listings/Card'
 
 const ShowAdventures: React.FC = () => {
 	const destinations = useSelector(selectDestinations)
@@ -27,10 +24,13 @@ const ShowAdventures: React.FC = () => {
 		return <div>Error al cargar destinos: {error} </div>
 	}
 
-	const validDestinations = destinations.filter(
-		(destination) => destination !== undefined && destination !== null
+	const enabledDestinations = destinations.filter(
+		(destination) => destination.itDeleted === false
 	)
 
+	const disabledDestinations = destinations.filter(
+		(destination) => destination.itDeleted === true
+	)
 	return (
 		<>
 			<div className='flex flex-wrap'>
@@ -49,8 +49,8 @@ const ShowAdventures: React.FC = () => {
 
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{validDestinations.map((destination) => (
-								<DestinationCard key={destination._id} data={destination} />
+							{enabledDestinations.map((destination) => (
+								<MainCard key={destination._id} data={destination} />
 							))}
 						</GridColumns>
 					</div>
@@ -65,20 +65,9 @@ const ShowAdventures: React.FC = () => {
 
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{/* <Swiper
-              loop={true}
-              spaceBetween={10}
-              navigation={true}
-              modules={[Navigation, Thumbs]}
-              grabCursor={true}
-              className="product-images-slider"
-            >
-              <SwiperSlide> */}
-							{validDestinations.map((destination) => (
-								<DestinationCard key={destination._id} data={destination} />
+							{disabledDestinations.map((destination) => (
+								<MainCard key={destination._id} data={destination} />
 							))}
-							{/* </SwiperSlide>
-            </Swiper> */}
 						</GridColumns>
 					</div>
 				</div>

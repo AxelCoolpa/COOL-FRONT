@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { getDestinations } from '../api/getDestinations'
 import { AppDispatch, RootState } from '../store/Store'
 import { filterActivitiesAPI } from '../api/filterActivitiesAPI'
 import { getActivities } from '../api/getActivities'

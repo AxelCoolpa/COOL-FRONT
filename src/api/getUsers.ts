@@ -12,13 +12,30 @@ interface User {
 	role?: {
 		roleName?: string
 	}
-	DNI: string
-	phone: string
-	location: string
-	description: string
+	DNI?: string
+	phone?: string
+	location?: string
+	description?: string
 
-	favorites: []
-	destinations: []
+	itDeleted?: boolean
+
+	activities?: []
+	favorites?: []
+
+	profileProvider?: {
+		_id?: string
+		companyName?: string
+		companyRepresentative?: string
+		companyPhone?: string
+		companyEmail?: string
+		relatedChannel?: string
+		descriptionBusiness?: string
+		companyAddress?: string
+		isRegistered?: boolean
+		serviceType?: string
+		isAuthenticated?: boolean
+		itDeleted?: boolean
+	}
 }
 
 export const userApi = createApi({

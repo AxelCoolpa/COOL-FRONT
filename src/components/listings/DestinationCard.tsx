@@ -13,6 +13,7 @@ import HeartButton from '../buttons/HeartButton'
 import MoreOptionsButton from '../buttons/MoreOptionsButon'
 import EditButon from '../buttons/EditButton'
 import DeleteButton from '../buttons/DeleteButton'
+import DisableButton from '../buttons/DisableButton'
 import {
 	Button,
 	Card,
@@ -21,6 +22,7 @@ import {
 	CardHeader,
 	Typography,
 } from '@material-tailwind/react'
+import EnableButton from '../buttons/EnableButton'
 
 interface ListingCardProps {
 	data: EnumDestination | undefined
@@ -69,27 +71,45 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 									</div>
 									<div className='mt-3 mx-4 flex flex-col gap-5'>
 										<div className='h-px w-full bg-gray-200' />
-										<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-											<div className='flex gap-5 items-center '>
-												<EditButon
-													onClick={() => navigate(`/admindash/update/${data?._id}`)}
-												/>
-												<p
-													onClick={() => navigate(`/admindash/update/${data?._id}`)}
-													className='cursor-pointer'
-												>
-													Edit destination
-												</p>
+										{data?.itDeleted === false ? (
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
+												<div className='flex gap-5 items-center '>
+													<EditButon
+														onClick={() => navigate(`/admindash/update/${data?._id}`)}
+													/>
+													<p
+														onClick={() => navigate(`/admindash/update/${data?._id}`)}
+														className='cursor-pointer'
+													>
+														Edit destination
+													</p>
+												</div>
 											</div>
-										</div>
-										<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-											<div className='flex gap-5 items-center '>
-												<DeleteButton onClick={onDelete} />
-												<p onClick={onDelete} className='cursor-pointer'>
-													Delete destination
-												</p>
+										) : (
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
+												<div className='flex gap-5 items-center '>
+													<EnableButton />
+													<p className='cursor-pointer'>Enable destination</p>
+												</div>
 											</div>
-										</div>
+										)}
+										{data?.itDeleted === false ? (
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
+												<div className='flex gap-5 items-center '>
+													<DisableButton onClick={onDelete} />
+													<p onClick={onDelete} className='cursor-pointer'>
+														Disable Activity
+													</p>
+												</div>
+											</div>
+										) : (
+											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
+												<div className='flex gap-5 items-center '>
+													<DeleteButton />
+													<p className='cursor-pointer'>Delete Activity</p>
+												</div>
+											</div>
+										)}
 									</div>
 								</div>
 							}

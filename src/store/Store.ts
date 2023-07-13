@@ -16,12 +16,16 @@ import deleteActivitySlice from '../features/deleteActivitySlice'
 import activitiesSlice from '../features/activitiesSlice'
 import activityByIdSlice from '../features/activityByIdSlice'
 import updateUserSlice from '../features/updateUserSlice'
+import deleteUserSlice from '../features/deleteUserSlice'
 
-import rooms from '../features/rooms'
 import { userApi } from '../api/getUsers'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { destinationApi } from '../api/getDestinations'
-
+import accomodationSlice from '../features/accomodationSlice'
+import accomodationByIdSlice from '../features/accomodationByIdSlice'
+import createAccomodationSlice from '../features/createAccomodationSlice'
+import updateAccomodationSlice from '../features/updateAccomodationSlice'
+import deleteAccomodationSlice from '../features/deleteAccomodationSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -33,6 +37,7 @@ export const store = configureStore({
 		user: usersSlice,
 		userById: userByIdSlice,
 		updateUser: updateUserSlice,
+		deleteUser: deleteUserSlice,
 		[userApi.reducerPath]: userApi.reducer,
 		[destinationApi.reducerPath]: destinationApi.reducer,
 		//* Destinations
@@ -48,17 +53,19 @@ export const store = configureStore({
 		updateActivity: updateActivitySlice,
 		deleteActivity: deleteActivitySlice,
 		//* Accomodation
-		rooms
-
-
-	}, 
+		accomodation: accomodationSlice,
+		accomodationById: accomodationByIdSlice,
+		createAccomodation: createAccomodationSlice,
+		updateAccomodation: updateAccomodationSlice,
+		deleteAccomodation: deleteAccomodationSlice,
+	},
 	// middleware para solicitar datos asincronos del backend
-	middleware: (getDefaultMiddleware) => 
-		getDefaultMiddleware().concat([userApi.middleware], [destinationApi.middleware])
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat([userApi.middleware], [destinationApi.middleware]),
 })
 
 //para ejecutar actions dentro del store
-setupListeners(store.dispatch) 
+setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

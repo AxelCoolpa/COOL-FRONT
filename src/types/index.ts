@@ -37,7 +37,7 @@ export interface EnumRoom {
 	roomsCount: number
 	bedsCount: number
 	maxOccupancy: number
-	bathroomsCount: number
+	bathRoomsCount: number
 	amenities: string[]
 	location: string
 	zone: string[]
@@ -45,6 +45,7 @@ export interface EnumRoom {
 	startDate: string
 	endDate: string
 	price: number
+	category: string
 
 	itDeleted?: boolean
 }

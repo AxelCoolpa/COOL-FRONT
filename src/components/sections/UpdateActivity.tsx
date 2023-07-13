@@ -4,29 +4,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
+import { FiSearch } from 'react-icons/fi'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
+
+import { useMaps } from '../../hooks/useMaps'
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 import { categories } from '../categories/categories'
 
-// import { selectDestinations } from '../../features/destinationSlice'
-// import { Destination } from './AddActivity'
 import { activityById, selectActivityById } from '../../features/activityByIdSlice'
 import {
 	updateActivity,
 	updateActivityFormData,
 } from '../../features/updateActivitySlice'
 
-// import Select from 'react-select'
 import DropZone from '../inputs/DropZone'
 import ActivityForm from '../forms/ActivityForm'
 import CategoryInput from '../inputs/CategoryInput'
 import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
-import axios from 'axios'
-import { HiOutlineLocationMarker } from 'react-icons/hi'
 import Input from '../inputs/Input'
-import { FiSearch } from 'react-icons/fi'
 
 const UpdateActivity = () => {
 	const dispatch = useDispatch()
@@ -38,11 +36,6 @@ const UpdateActivity = () => {
 	const { currentUserId } = useCurrentUser()
 
 	const activity = useSelector(selectActivityById)
-
-	// const destinationsList = useSelector(selectDestinations)
-	// const [destinations, setDestinations] = useState<Destination[]>([])
-	// const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
-	// const [enabled, setEnabled] = useState(true)
 
 	const [formData, setFormData] = useState<updateActivityFormData>({
 		title: '',
@@ -87,18 +80,6 @@ const UpdateActivity = () => {
 			[name]: value,
 		}))
 	}
-
-	// const handleEnabledSelect = () => {
-	// 	setEnabled(!enabled)
-	// }
-
-	// const handleDestinationChange = (selectedOption: any) => {
-	// 	setSelectedDestination(selectedOption)
-	// 	setFormData((prevFormData) => ({
-	// 		...prevFormData,
-	// 		idDestination: selectedOption?._id,
-	// 	}))
-	// }
 
 	const handleFilesSelected = (files: File[]) => {
 		const updatedGallery = [...formData.galleryImage, ...files]
@@ -194,45 +175,7 @@ const UpdateActivity = () => {
 		}
 	}
 
-	const [searchValue, setSearchValue] = useState('')
-	const [mapUrl, setMapUrl] = useState('')
-
-	const handleSearch = async (e: React.FormEvent) => {
-		e.preventDefault()
-
-		// Genera la URL de búsqueda del mapa utilizando el valor del input de búsqueda
-		const apiKey = 'AIzaSyAwRA7j_Pu_T8dD6J1GGzf7nIdGq2z9c0c'
-		try {
-			// Realiza la solicitud a la API de Geocodificación
-			const response = await axios('https://maps.googleapis.com/maps/api/geocode/json', {
-				params: {
-					address: searchValue,
-					key: apiKey,
-				},
-			})
-
-			// Obtiene los resultados de la búsqueda
-			const results = response.data.results
-
-			// Genera la URL de búsqueda del mapa utilizando la primera ubicación encontrada
-			if (results.length > 0) {
-				formData.location = results[0].formatted_address
-				const location = results[0].geometry.location
-				const url = `https://maps.google.com/maps?q=${location.lat},${location.lng}&output=embed`
-				setMapUrl(url)
-			} else {
-				toast('Warning ! The address entered is incorrect', {
-					icon: '⚠️',
-					style: {
-						background: '#ff9800',
-						color: '#fff',
-					},
-				})
-			}
-		} catch (error) {
-			console.error('Error en la solicitud a la API de Geocodificación:', error)
-		}
-	}
+	const { handleSearch, mapUrl, searchValue, setSearchValue } = useMaps(formData)
 
 	useEffect(() => {
 		dispatch(activityById(activityID))

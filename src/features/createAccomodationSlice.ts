@@ -10,7 +10,7 @@ export interface createAccomodationFormData {
 	roomsCount: number
 	bedsCount: number
 	maxOccupancy: number
-	bathroomsCount: number
+	bathRoomsCount: number
 	amenities: string[]
 	location: string
 	zone: string[]
@@ -19,6 +19,7 @@ export interface createAccomodationFormData {
 	endDate: string
 	price: number
 	idDestination: string
+	category: string
 }
 
 interface createAccomodationState {

@@ -1,5 +1,5 @@
 import UpdateActivity from '../../components/sections/UpdateActivity'
-import UpdateRoom from '../../components/sections/UpdateRoom'
+import UpdateAccomodation from '../../components/sections/UpdateAccomodation'
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 const Update = () => {
@@ -13,8 +13,8 @@ const Update = () => {
 			</div>
 		) : currentUser?.profileProvider?.relatedChannel === 'Accomodation' ? (
 			<div>
-				Update Room
-				<UpdateRoom />
+				Update Accomodation
+				<UpdateAccomodation />
 			</div>
 		) : null
 

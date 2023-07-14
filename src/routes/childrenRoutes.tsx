@@ -29,6 +29,7 @@ import AdminTableUser from '../pages/Admin/AdminTableUser'
 import AdminProfile from '../pages/Admin/AdminProfile'
 import Settings from '../pages/Admin/Settings'
 import PruebaHome from '../pages/ProvUser/pruebaHome'
+import PreFilter from '../pages/User/PreFilter'
 
 export const admin = [
 	{
@@ -38,6 +39,12 @@ export const admin = [
 	{
 		path: 'settings',
 		element: <Settings />,
+	},
+]
+export const FilterUser = [
+	{
+		path: '',
+		element: <PreFilter />,
 	},
 ]
 export const provider = [

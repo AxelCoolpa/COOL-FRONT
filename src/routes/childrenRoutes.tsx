@@ -29,7 +29,9 @@ import AdminTableUser from '../pages/Admin/AdminTableUser'
 import AdminProfile from '../pages/Admin/AdminProfile'
 import Settings from '../pages/Admin/Settings'
 import PruebaHome from '../pages/ProvUser/pruebaHome'
-import PreFilter from '../pages/User/PreFilter'
+import PreFilter from '../pages/LoginPreFilter/PreFilter'
+import PreFilterGuests from '../pages/LoginPreFilter/PreFilterGuests'
+import PreFilterDiscover from '../pages/LoginPreFilter/PreFilterDiscover'
 
 export const admin = [
 	{
@@ -45,6 +47,14 @@ export const FilterUser = [
 	{
 		path: '',
 		element: <PreFilter />,
+	},
+	{
+		path: 'guests',
+		element: <PreFilterGuests />,
+	},
+	{
+		path: 'discover',
+		element: <PreFilterDiscover />,
 	},
 ]
 export const provider = [

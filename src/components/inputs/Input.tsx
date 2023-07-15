@@ -56,7 +56,9 @@ const Input: React.FC<InputProps> = ({
           outline-none
           transition
           disabled:opacity-70
+          disabled:border-opacity-70
           disabled:cursor-not-allowed
+          disabled:text-black/70
 					${booking ? 'xl:w-4/5 2xl:w-full' : 'w-full'}
 					${sizeH ? `h-${sizeH}` : ''}
           ${label ? 'pt-6' : 'pt-4'}

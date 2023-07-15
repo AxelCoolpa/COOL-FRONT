@@ -172,22 +172,6 @@ const UpdateRoom = () => {
 
 		try {
 			dispatch(updateAccomodation(data, currentUserId, accomodationID))
-			// setFormData({
-			// 	name: '',
-			// 	description: '',
-			// 	roomsCount: 1,
-			// 	bedsCount: 1,
-			// 	maxOccupancy: 1,
-			// 	bathRoomsCount: 1,
-			// 	amenities: [],
-			// 	location: '',
-			// 	zone: '',
-			// 	images: [],
-			// 	startDate: '',
-			// 	endDate: '',
-			// 	price: 0,
-			// 	idDestination: '',
-			// })
 		} catch (error: any) {
 			toast.error('Error al enviar el formulario:', error)
 		}
@@ -202,7 +186,7 @@ const UpdateRoom = () => {
 	return (
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
-				<h2 className='text-[32px] font-medium'>Add Accomodation</h2>
+				<h2 className='text-[32px] font-medium'>Update Accomodation</h2>
 				<div className='flex flex-col items-center justify-center w-full transition'>
 					{/* IMAGE */}
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>

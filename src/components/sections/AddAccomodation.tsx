@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import Select from 'react-select'
 
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 import { useMaps } from '../../hooks/useMaps'
@@ -11,6 +10,7 @@ import { FiSearch } from 'react-icons/fi'
 
 import { categories } from '../categories/categories'
 import { amenitiesCategories } from '../categories/amenitiesCategories'
+import { accomodationCategories } from '../categories/accomodationCategories'
 
 import {
 	createAccomodation,
@@ -26,7 +26,8 @@ import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import DropZone from '../inputs/DropZone'
 import Input from '../inputs/Input'
-import { accomodationCategories } from '../categories/accomodationCategories'
+import SelectDestination from '../inputs/Select'
+import CategorySingleInput from '../inputs/CategorySingleInput'
 
 const AddAccomodation = () => {
 	const dispatch = useDispatch()
@@ -41,10 +42,10 @@ const AddAccomodation = () => {
 	const [formData, setFormData] = useState<createAccomodationFormData>({
 		name: '',
 		description: '',
-		roomsCount: 0,
-		bedsCount: 0,
-		maxOccupancy: 0,
-		bathRoomsCount: 0,
+		roomsCount: 1,
+		bedsCount: 1,
+		maxOccupancy: 1,
+		bathRoomsCount: 1,
 		amenities: [],
 		location: '',
 		zone: [],
@@ -53,26 +54,22 @@ const AddAccomodation = () => {
 		endDate: '',
 		price: 0,
 		idDestination: '',
-		category: accomodationCategories.map((type) => type.label)[
-			Math.floor(Math.random() * accomodationCategories.length)
-		],
+		category: '',
 	})
 
-	console.log(formData.category)
-
-	const handleCheckboxZoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleCheckboxTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				zone: [...formData.zone, value],
+				category: value,
 			}))
 		} else {
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				zone: formData.zone.filter((val) => val !== value),
+				category: '',
 			}))
 		}
 	}
@@ -90,6 +87,23 @@ const AddAccomodation = () => {
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				amenities: formData.amenities.filter((val) => val !== value),
+			}))
+		}
+	}
+
+	const handleCheckboxZoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
+
+		if (isChecked) {
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				zone: [...formData.zone, value],
+			}))
+		} else {
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				zone: formData.zone.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -117,7 +131,6 @@ const AddAccomodation = () => {
 			images: updatedGallery,
 		}))
 	}
-	console.log(formData)
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
@@ -153,7 +166,8 @@ const AddAccomodation = () => {
 			!images ||
 			!startDate ||
 			!endDate ||
-			!price
+			!price ||
+			!category
 		) {
 			toast.error('Por favor, complete todos los campos')
 			return
@@ -187,25 +201,25 @@ const AddAccomodation = () => {
 
 		try {
 			dispatch(createAccomodation(data, currentUserId))
-			// setFormData({
-			// 	name: '',
-			// 	description: '',
-			// 	roomsCount: 0,
-			// 	bedsCount: 0,
-			// 	maxOccupancy: 0,
-			// 	bathRoomsCount: 0,
-			// 	amenities: [],
-			// 	location: '',
-			// 	zone: '',
-			// 	images: [],
-			// 	startDate: '',
-			// 	endDate: '',
-			// 	price: 0,
-			// 	idDestination: '',
-			//  category: '',
-			// })
-			// setSelectedDestination(null)
-			// setSearchValue('')
+			setFormData({
+				name: '',
+				description: '',
+				roomsCount: 1,
+				bedsCount: 1,
+				maxOccupancy: 1,
+				bathRoomsCount: 1,
+				amenities: [],
+				location: '',
+				zone: [],
+				images: [],
+				startDate: '',
+				endDate: '',
+				price: 0,
+				idDestination: '',
+				category: '',
+			})
+			setSelectedDestination(null)
+			setSearchValue('')
 		} catch (error: any) {
 			toast.error('Error al enviar el formulario:', error)
 		}
@@ -216,6 +230,14 @@ const AddAccomodation = () => {
 	useEffect(() => {
 		setDestinations(destinationsList)
 	}, [destinationsList])
+
+	const formatOptionLabel = (option: any) => (
+		<div className='flex flex-row items-center gap-3'>
+			<div>
+				<span className='text-neutral-500'>{option.title}</span>
+			</div>
+		</div>
+	)
 
 	return (
 		<Container>
@@ -232,48 +254,33 @@ const AddAccomodation = () => {
 						Select destination
 					</h3>
 					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
-						<Select
+						<SelectDestination
 							options={destinations}
 							value={selectedDestination}
 							onChange={handleDestinationChange}
-							placeholder='Select destination'
-							isClearable
-							formatOptionLabel={(option: any) => (
-								<div className='flex flex-row items-center gap-3'>
-									<div>
-										<span className='text-neutral-500'>{option.title}</span>
-									</div>
-								</div>
-							)}
-							classNames={{
-								control: () => 'p-3 border-2',
-								input: () => 'text-lg',
-								option: () => 'text-lg',
-							}}
-							styles={{
-								control: (provided: any) => ({
-									...provided,
-									width: '100%',
-									height: '20px',
-									minHeight: '60px',
-									borderRadius: '10px',
-								}),
-								singleValue: (provided: any) => ({
-									...provided,
-									display: 'flex',
-									alignItems: 'center',
-								}),
-							}}
-							theme={(theme) => ({
-								...theme,
-								borderRadius: 6,
-								colors: {
-									...theme.colors,
-									primary: 'white',
-									primary25: '#ce452a60',
-								},
-							})}
+							formatOptionLabel={formatOptionLabel}
 						/>
+					</div>
+
+					{/* SELECT TYPE */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Select type
+					</h3>
+					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+						{accomodationCategories.map((item) => (
+							<ul key={item.label}>
+								<CategorySingleInput
+									handleChange={handleCheckboxTypeChange}
+									label={item.label}
+									id={item.label}
+									name={item.label}
+									value={item.label}
+									bgColor={item.bgColor}
+									secondaryBorderColor
+									selected={formData.category}
+								/>
+							</ul>
+						))}
 					</div>
 
 					{/* FORM */}
@@ -282,7 +289,6 @@ const AddAccomodation = () => {
 					</div>
 
 					{/* CATEGORIES */}
-
 					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						Amenities
 					</h3>

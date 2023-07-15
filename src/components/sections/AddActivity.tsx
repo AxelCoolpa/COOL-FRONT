@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import Select from 'react-select'
 
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 import { useMaps } from '../../hooks/useMaps'
@@ -26,6 +25,7 @@ import Map from '../Map'
 import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import Input from '../inputs/Input'
+import SelectDestination from '../inputs/Select'
 
 export interface Destination {
 	_id: string
@@ -184,6 +184,14 @@ const AddAdventure = () => {
 		setDestinations(destinationsList)
 	}, [destinationsList])
 
+	const formatOptionLabel = (option: any) => (
+		<div className='flex flex-row items-center gap-3'>
+			<div>
+				<span className='text-neutral-500'>{option.title}</span>
+			</div>
+		</div>
+	)
+
 	return (
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
@@ -197,47 +205,11 @@ const AddAdventure = () => {
 						Select destination
 					</h3>
 					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
-						<Select
+						<SelectDestination
 							options={destinations}
 							value={selectedDestination}
 							onChange={handleDestinationChange}
-							placeholder='Select destination'
-							isClearable
-							formatOptionLabel={(option: any) => (
-								<div className='flex flex-row items-center gap-3'>
-									<div>
-										<span className='text-neutral-500'>{option.title}</span>
-									</div>
-								</div>
-							)}
-							classNames={{
-								control: () => 'p-3 border-2',
-								input: () => 'text-lg',
-								option: () => 'text-lg',
-							}}
-							styles={{
-								control: (provided: any) => ({
-									...provided,
-									width: '100%',
-									height: '20px',
-									minHeight: '60px',
-									borderRadius: '10px',
-								}),
-								singleValue: (provided: any) => ({
-									...provided,
-									display: 'flex',
-									alignItems: 'center',
-								}),
-							}}
-							theme={(theme) => ({
-								...theme,
-								borderRadius: 6,
-								colors: {
-									...theme.colors,
-									primary: 'white',
-									primary25: '#ce452a60',
-								},
-							})}
+							formatOptionLabel={formatOptionLabel}
 						/>
 					</div>
 

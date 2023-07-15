@@ -1,7 +1,12 @@
 import React from 'react'
 
 import { GrRestroom } from 'react-icons/gr'
-import { MdAttachMoney, MdOutlineFamilyRestroom, MdRoomService } from 'react-icons/md'
+import {
+	MdAttachMoney,
+	MdMeetingRoom,
+	MdOutlineFamilyRestroom,
+	MdRoomService,
+} from 'react-icons/md'
 import { RiHotelLine } from 'react-icons/ri'
 import { TbBed, TbCalendarCheck, TbCalendarX, TbFileDescription } from 'react-icons/tb'
 
@@ -24,6 +29,7 @@ interface AccomodationFormProps {
 		startDate?: string
 		endDate?: string
 		description?: string
+		category?: string
 	}
 }
 
@@ -33,13 +39,15 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 	updateForm,
 	data,
 }) => {
+	console.log(form?.category)
+
 	return (
 		<div className='flex flex-col items-center justify-center gap-12 transition w-full'>
 			<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
 				<div className='flex flex-col gap-10 w-full'>
 					<div className='flex items-center gap-5 text-[#686868]'>
 						<RiHotelLine size={25} />
-						<label>Property</label>
+						<label>Property Name</label>
 					</div>
 					<Input
 						placeholder={data?.name || 'Property name'}
@@ -68,20 +76,56 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 			<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
 				<div className='flex flex-col items-center justify-center gap-12 transition w-full'>
 					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
-						<div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<MdRoomService size={25} />
-								<label>Rooms Count</label>
+						{form?.category === 'Cottage' ||
+						data?.category === 'Cottage' ||
+						form?.category === 'House' ||
+						data?.category === 'House' ? (
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<MdMeetingRoom size={25} />
+									<label>Rooms Count</label>
+								</div>
+								<Input
+									type='number'
+									placeholder={data?.roomsCount || 'Rooms count'}
+									id='roomsCount'
+									name='roomsCount'
+									handleChange={handleChange}
+									value={updateForm?.roomsCount || form?.roomsCount}
+								/>
 							</div>
-							<Input
-								type='number'
-								placeholder={data?.roomsCount || 'Rooms count'}
-								id='roomsCount'
-								name='roomsCount'
-								handleChange={handleChange}
-								value={updateForm?.roomsCount || form?.roomsCount}
-							/>
-						</div>
+						) : form?.category === 'Camping Area' || data?.category === 'Camping Area' ? (
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-neutral-300'>
+									<MdMeetingRoom size={25} />
+									<label>Rooms Count | Room Number</label>
+								</div>
+								<Input
+									type='number'
+									placeholder={data?.roomsCount || 'Rooms count'}
+									id='roomsCount'
+									name='roomsCount'
+									disabled
+									handleChange={handleChange}
+									value={updateForm?.roomsCount || form?.roomsCount}
+								/>
+							</div>
+						) : (
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<MdRoomService size={25} />
+									<label>Room Number</label>
+								</div>
+								<Input
+									type='number'
+									placeholder={data?.roomsCount || 'Room Number'}
+									id='roomsCount'
+									name='roomsCount'
+									handleChange={handleChange}
+									value={updateForm?.roomsCount || form?.roomsCount}
+								/>
+							</div>
+						)}
 
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>

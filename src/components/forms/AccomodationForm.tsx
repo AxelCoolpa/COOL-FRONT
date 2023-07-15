@@ -20,7 +20,7 @@ interface AccomodationFormProps {
 		roomsCount?: number
 		bedsCount?: number
 		maxOccupancy?: number
-		bathroomsCount?: number
+		bathRoomsCount?: number
 		startDate?: string
 		endDate?: string
 		description?: string
@@ -121,11 +121,11 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 							</div>
 							<Input
 								type='number'
-								placeholder={data?.bathroomsCount || 'Bathrooms count'}
-								id='bathroomsCount'
-								name='bathroomsCount'
+								placeholder={data?.bathRoomsCount || 'Bathrooms count'}
+								id='bathRoomsCount'
+								name='bathRoomsCount'
 								handleChange={handleChange}
-								value={updateForm?.bathroomsCount || form?.bathroomsCount}
+								value={updateForm?.bathRoomsCount || form?.bathRoomsCount}
 							/>
 						</div>
 					</div>

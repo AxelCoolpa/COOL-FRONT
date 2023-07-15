@@ -1,14 +1,16 @@
+import React from 'react'
 import { IconType } from 'react-icons'
 
 interface CategoryInputProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	icon: IconType
+	icon?: IconType
 	label: string
-	id: string
-	name: string
-	value: string
+	id?: string
+	name?: string
+	value?: string
 	iconColor?: string
 	bgColor?: string
+	secondaryBorderColor?: boolean
 }
 
 const CategoryInput: React.FC<CategoryInputProps> = ({
@@ -20,6 +22,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 	value,
 	bgColor,
 	iconColor,
+	secondaryBorderColor,
 }) => {
 	return (
 		<>
@@ -32,11 +35,35 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 					value={value}
 					className='hidden peer'
 				/>
+
 				<label
 					htmlFor={id}
-					className='flex flex-col items-center justify-center gap-3 w-44 h-44 p-5 border border-[#F3F3F3] hover:border-[#28B446] hover:border-4 rounded-[20px] cursor-pointer peer-checked:border-[#28B446] peer-checked:border-[4px] peer-checked:shadow-xl peer-checked:shadow-black/20'
+					className={`
+						p-5 
+						w-44 
+						flex 
+						gap-3 
+						border 
+						flex-col 
+						items-center 
+						justify-center 
+						hover:border-4 
+						rounded-[20px] 
+						cursor-pointer 
+						border-[#F3F3F3] 
+						peer-checked:shadow-xl 
+						peer-checked:border-[4px] 
+						${secondaryBorderColor ? 'hover:border-OrangeCooL' : 'hover:border-[#28B446]'}
+						${
+							secondaryBorderColor
+								? 'peer-checked:border-OrangeCooL'
+								: 'peer-checked:border-[#28B446]'
+						}
+						peer-checked:shadow-black/20 
+						${!Icon ? 'h-20' : 'h-44'}
+					`}
 				>
-					<Icon size={36} color={iconColor} />
+					{Icon && <Icon size={36} color={iconColor} />}
 
 					<div className='font-semibold'>{label}</div>
 				</label>

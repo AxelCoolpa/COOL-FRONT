@@ -14,7 +14,7 @@ import Notifications from '../pages/User/Notifications'
 //* PROVIDER
 import ShowActivities from '../pages/ProvUser/ShowActivities'
 import CreateActivity from '../pages/ProvUser/CreateActivity'
-import UpdateActivity from '../pages/ProvUser/UpdateActivity'
+import Update from '../pages/ProvUser/Update'
 import ProfileProvider from '../pages/ProvUser/Profile'
 import TableUser from '../pages/ProvUser/TableUser'
 import CreateAccomodation from '../pages/ProvUser/CreateAccomodation'
@@ -29,6 +29,9 @@ import AdminTableUser from '../pages/Admin/AdminTableUser'
 import AdminProfile from '../pages/Admin/AdminProfile'
 import Settings from '../pages/Admin/Settings'
 import PruebaHome from '../pages/ProvUser/pruebaHome'
+import PreFilter from '../pages/LoginPreFilter/PreFilter'
+import PreFilterGuests from '../pages/LoginPreFilter/PreFilterGuests'
+import PreFilterDiscover from '../pages/LoginPreFilter/PreFilterDiscover'
 
 export const admin = [
 	{
@@ -38,6 +41,20 @@ export const admin = [
 	{
 		path: 'settings',
 		element: <Settings />,
+	},
+]
+export const FilterUser = [
+	{
+		path: '',
+		element: <PreFilter />,
+	},
+	{
+		path: 'guests',
+		element: <PreFilterGuests />,
+	},
+	{
+		path: 'discover',
+		element: <PreFilterDiscover />,
 	},
 ]
 export const provider = [
@@ -59,7 +76,7 @@ export const provider = [
 	},
 	{
 		path: 'update/:id',
-		element: <UpdateActivity />,
+		element: <Update />,
 	},
 	{
 		path: 'clients',

@@ -8,8 +8,9 @@ import PrivateRoute from './PrivateRoute'
 import Registerprovideer from '../pages/ProvUser/Register-provideer'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
-import { admin, provider, user, PruebaAdminProvider } from './childrenRoutes'
+import { admin, provider, user, PruebaAdminProvider, FilterUser } from './childrenRoutes'
 import { AdminDash } from '../layouts/AdminDash'
+import FilterUserLayout from '../layouts/FilterUserLayout'
 
 
 export const router = createBrowserRouter([
@@ -67,5 +68,10 @@ export const router = createBrowserRouter([
 	{
 		path: '/register',
 		element: <RegisterPage />,
+	},
+	{
+		path: '/filter',
+		element: <FilterUserLayout />,
+		children: FilterUser
 	},
 ])

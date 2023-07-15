@@ -1,44 +1,44 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Select from 'react-select'
-
-import { useCurrentUser } from '../../hooks/useCurrentUser'
-import { useMaps } from '../../hooks/useMaps'
-
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
+
 import { FiSearch } from 'react-icons/fi'
+
+import { useMaps } from '../../hooks/useMaps'
+import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 import { categories } from '../categories/categories'
 import { amenitiesCategories } from '../categories/amenitiesCategories'
 
 import {
-	createAccomodation,
-	createAccomodationFormData,
-} from '../../features/createAccomodationSlice'
-import { selectDestinations } from '../../features/destinationSlice'
-import { Destination } from './AddActivity'
+	updateAccomodation,
+	updateAccomodationFormData,
+} from '../../features/updateAccomodationSlice'
+import {
+	accomodationById,
+	selectAccomodationById,
+} from '../../features/accomodationByIdSlice'
 
-import AccomodationForm from '../forms/AccomodationForm'
-import CategoryInput from '../inputs/CategoryInput'
-import Map from '../Map'
-import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import DropZone from '../inputs/DropZone'
+import AccomodationForm from '../forms/AccomodationForm'
+import CategoryInput from '../inputs/CategoryInput'
 import Input from '../inputs/Input'
-import { accomodationCategories } from '../categories/accomodationCategories'
+import Map from '../Map'
+import Button from '../buttons/Button'
 
-const AddAccomodation = () => {
+const UpdateRoom = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
+	const { id } = useParams()
+	const accomodationID = id
+
 	const { currentUserId } = useCurrentUser()
-	const destinationsList = useSelector(selectDestinations)
+	const accomodation = useSelector(selectAccomodationById)
 
-	const [destinations, setDestinations] = useState<Destination[]>([])
-	const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
-
-	const [formData, setFormData] = useState<createAccomodationFormData>({
+	const [formData, setFormData] = useState<updateAccomodationFormData>({
 		name: '',
 		description: '',
 		roomsCount: 0,
@@ -52,13 +52,9 @@ const AddAccomodation = () => {
 		startDate: '',
 		endDate: '',
 		price: 0,
-		idDestination: '',
-		category: accomodationCategories.map((type) => type.label)[
-			Math.floor(Math.random() * accomodationCategories.length)
-		],
+		// idDestination: '',
+		category: '',
 	})
-
-	console.log(formData.category)
 
 	const handleCheckboxZoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
@@ -102,14 +98,6 @@ const AddAccomodation = () => {
 		}))
 	}
 
-	const handleDestinationChange = (selectedOption: any) => {
-		setSelectedDestination(selectedOption)
-		setFormData((prevFormData) => ({
-			...prevFormData,
-			idDestination: selectedOption?._id,
-		}))
-	}
-
 	const handleFilesSelected = (files: File[]) => {
 		const updatedGallery = [...formData.images, ...files]
 		setFormData((prevFormData) => ({
@@ -117,7 +105,6 @@ const AddAccomodation = () => {
 			images: updatedGallery,
 		}))
 	}
-	console.log(formData)
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
@@ -136,8 +123,7 @@ const AddAccomodation = () => {
 			startDate,
 			endDate,
 			price,
-			idDestination,
-			category,
+			// idDestination,
 		} = formData
 
 		if (
@@ -170,8 +156,7 @@ const AddAccomodation = () => {
 		data.append('startDate', startDate)
 		data.append('endDate', endDate)
 		data.append('price', price)
-		data.append('idDestination', idDestination)
-		data.append('category', category)
+		// data.append('idDestination', idDestination)
 
 		for (let i = 0; i < formData.images.length; i++) {
 			data.append('images', formData.images[i])
@@ -186,14 +171,14 @@ const AddAccomodation = () => {
 		})
 
 		try {
-			dispatch(createAccomodation(data, currentUserId))
+			dispatch(updateAccomodation(data, currentUserId, accomodationID))
 			// setFormData({
 			// 	name: '',
 			// 	description: '',
-			// 	roomsCount: 0,
-			// 	bedsCount: 0,
-			// 	maxOccupancy: 0,
-			// 	bathRoomsCount: 0,
+			// 	roomsCount: 1,
+			// 	bedsCount: 1,
+			// 	maxOccupancy: 1,
+			// 	bathRoomsCount: 1,
 			// 	amenities: [],
 			// 	location: '',
 			// 	zone: '',
@@ -202,10 +187,7 @@ const AddAccomodation = () => {
 			// 	endDate: '',
 			// 	price: 0,
 			// 	idDestination: '',
-			//  category: '',
 			// })
-			// setSelectedDestination(null)
-			// setSearchValue('')
 		} catch (error: any) {
 			toast.error('Error al enviar el formulario:', error)
 		}
@@ -214,8 +196,8 @@ const AddAccomodation = () => {
 	const { handleSearch, mapUrl, searchValue, setSearchValue } = useMaps(formData)
 
 	useEffect(() => {
-		setDestinations(destinationsList)
-	}, [destinationsList])
+		dispatch(accomodationById(accomodationID))
+	}, [accomodationID, dispatch])
 
 	return (
 		<Container>
@@ -227,62 +209,16 @@ const AddAccomodation = () => {
 						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
 
-					{/* SELECT DESTINATION */}
-					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						Select destination
-					</h3>
-					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
-						<Select
-							options={destinations}
-							value={selectedDestination}
-							onChange={handleDestinationChange}
-							placeholder='Select destination'
-							isClearable
-							formatOptionLabel={(option: any) => (
-								<div className='flex flex-row items-center gap-3'>
-									<div>
-										<span className='text-neutral-500'>{option.title}</span>
-									</div>
-								</div>
-							)}
-							classNames={{
-								control: () => 'p-3 border-2',
-								input: () => 'text-lg',
-								option: () => 'text-lg',
-							}}
-							styles={{
-								control: (provided: any) => ({
-									...provided,
-									width: '100%',
-									height: '20px',
-									minHeight: '60px',
-									borderRadius: '10px',
-								}),
-								singleValue: (provided: any) => ({
-									...provided,
-									display: 'flex',
-									alignItems: 'center',
-								}),
-							}}
-							theme={(theme) => ({
-								...theme,
-								borderRadius: 6,
-								colors: {
-									...theme.colors,
-									primary: 'white',
-									primary25: '#ce452a60',
-								},
-							})}
+					{/* FORM */}
+					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
+						<AccomodationForm
+							handleChange={handleChange}
+							updateForm={formData}
+							data={accomodation}
 						/>
 					</div>
 
-					{/* FORM */}
-					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
-						<AccomodationForm handleChange={handleChange} form={formData} />
-					</div>
-
 					{/* CATEGORIES */}
-
 					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						Amenities
 					</h3>
@@ -351,7 +287,7 @@ const AddAccomodation = () => {
 							<Button label='Back' card outline onClick={() => navigate('/provider')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Create' card onClick={handleSubmit} />
+							<Button label='Save' card onClick={handleSubmit} />
 						</div>
 					</div>
 				</div>
@@ -360,4 +296,4 @@ const AddAccomodation = () => {
 	)
 }
 
-export default AddAccomodation
+export default UpdateRoom

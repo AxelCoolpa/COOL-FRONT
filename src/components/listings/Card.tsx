@@ -30,7 +30,7 @@ import {
 } from '@material-tailwind/react'
 
 interface ListingCardProps {
-	data: EnumDestination | EnumActivity | undefined
+	data?: EnumActivity | EnumRoom | undefined
 }
 
 const MainCard: React.FC<ListingCardProps> = ({ data }) => {
@@ -41,16 +41,12 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 
 	const { currentUser } = useCurrentUser()
 
-	const onDisableProvider = async () => {
-		if (currentUser?.profileProvider?.relatedChannel === 'Travel') {
-			await dispatch(deleteActivity(data?._id))
-		} else if (currentUser?.profileProvider?.relatedChannel === 'Accommodation') {
-			await dispatch(deleteAccomodation(data?._id))
-		}
+	const onDisableActivity = async () => {
+		await dispatch(deleteActivity(data?._id))
 	}
 
-	const onDisableAdventure = async () => {
-		await dispatch(deleteAdventure(data?._id))
+	const onDisableRoom = async () => {
+		await dispatch(deleteAccomodation(data?._id))
 	}
 
 	useEffect(() => {
@@ -121,15 +117,27 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 										{data?.itDeleted === false ? (
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
 												<div className='flex gap-5 items-center '>
-													<DisableButton onClick={onDisableProvider} />
-													<p onClick={onDisableProvider} className='cursor-pointer'>
-														{currentUser?.profileProvider?.relatedChannel === 'Travel'
-															? 'Disable activity'
-															: currentUser?.profileProvider?.relatedChannel ===
-															  'Accomodation'
-															? 'Disable room'
-															: 'Disable service'}
-													</p>
+													{currentUser?.profileProvider?.relatedChannel === 'Travel' ? (
+														<div className='flex gap-5 items-center '>
+															<DisableButton onClick={onDisableActivity} />
+															<p onClick={onDisableActivity} className='cursor-pointer'>
+																Disable activity
+															</p>
+														</div>
+													) : currentUser?.profileProvider?.relatedChannel ===
+													  'Accomodation' ? (
+														<div className='flex gap-5 items-center '>
+															<DisableButton onClick={onDisableRoom} />
+															<p onClick={onDisableRoom} className='cursor-pointer'>
+																Disable room
+															</p>
+														</div>
+													) : (
+														<div className='flex gap-5 items-center '>
+															<DisableButton />
+															<p className='cursor-pointer'>Disable service</p>
+														</div>
+													)}
 												</div>
 											</div>
 										) : (
@@ -150,66 +158,11 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 							}
 							classNames={'py-2 top-4 right-0 w-max'}
 						/>
-					) : location.pathname === '/admindash' ? (
-						<Dropdown
-							button={<MoreOptionsButton />}
-							children={
-								<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
-									<div className='mt-3 ml-4'>
-										<div className='flex flex-col gap-2'>
-											<p className='text-sm font-bold cursor-default'>Options</p>
-										</div>
-									</div>
-									<div className='mt-3 mx-4 flex flex-col gap-5'>
-										<div className='h-px w-full bg-gray-200' />
-										{data?.itDeleted === false ? (
-											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-												<div className='flex gap-5 items-center '>
-													<EditButon
-														onClick={() => navigate(`/admindash/update/${data?._id}`)}
-													/>
-													<p
-														onClick={() => navigate(`/admindash/update/${data?._id}`)}
-														className='cursor-pointer'
-													>
-														Edit destination
-													</p>
-												</div>
-											</div>
-										) : (
-											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-												<div className='flex gap-5 items-center '>
-													<EnableButton />
-													<p className='cursor-pointer'>Enable destination</p>
-												</div>
-											</div>
-										)}
-										{data?.itDeleted === false ? (
-											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-												<div className='flex gap-5 items-center '>
-													<DisableButton onClick={onDisableAdventure} />
-													<p onClick={onDisableAdventure} className='cursor-pointer'>
-														Disable destination
-													</p>
-												</div>
-											</div>
-										) : (
-											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-												<div className='flex gap-5 items-center '>
-													<DeleteButton />
-													<p className='cursor-pointer'>Delete destination</p>
-												</div>
-											</div>
-										)}
-									</div>
-								</div>
-							}
-							classNames={'py-2 top-4 right-0 w-max'}
-						/>
 					) : (
 						<HeartButton size={25} />
 					)}
 				</div>
+
 				<CardHeader floated={false} color='gray' className='mx-0 mt-0 mb-4 h-64 xl:h-40'>
 					<img
 						src={data?.galleryImage || data?.images}

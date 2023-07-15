@@ -16,6 +16,7 @@ interface InputProps {
 	secondaryIcon?: IconType
 	secondaryIconColor?: string
 	booking?: boolean
+	defaultValue?: any
 }
 
 const Input: React.FC<InputProps> = ({
@@ -33,6 +34,7 @@ const Input: React.FC<InputProps> = ({
 	secondaryIcon: SecondaryIcon,
 	secondaryIconColor,
 	booking,
+	defaultValue,
 }) => {
 	return (
 		<div className='w-full relative'>
@@ -43,6 +45,7 @@ const Input: React.FC<InputProps> = ({
 				type={type}
 				name={name}
 				value={value}
+				defaultValue={defaultValue}
 				className={`
           peer
           py-4

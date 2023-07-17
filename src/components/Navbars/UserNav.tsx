@@ -250,7 +250,7 @@ const Navbar: React.FC = () => {
 													Profile
 												</Link>
 												<a
-													href='provider'
+													href='/provider'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}

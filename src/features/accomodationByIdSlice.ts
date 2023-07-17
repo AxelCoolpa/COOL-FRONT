@@ -23,13 +23,13 @@ interface Room {
 }
 
 interface AccomodationByIdState {
-	accomodation: Room[]
+	accomodation: Room | null
 	loading: boolean
 	error: string | null
 }
 
 const initialState: AccomodationByIdState = {
-	accomodation: [],
+	accomodation: null,
 	loading: false,
 	error: null,
 }
@@ -42,7 +42,7 @@ const accomodationByIdSlice = createSlice({
 			state.loading = true
 			state.error = null
 		},
-		accomodationByIdSuccess(state, action: PayloadAction<Room[]>) {
+		accomodationByIdSuccess(state, action: PayloadAction<Room>) {
 			state.accomodation = action.payload
 			state.loading = false
 			state.error = null

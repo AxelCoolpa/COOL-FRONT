@@ -6,29 +6,30 @@ interface ActivityById {
 	_id: string
 	title: string
 	description: string
-	gallery: Array<string>
+	location: string
+	galleryImage: []
+	videoLink: string
+	category: string[]
 	individualPrice: string
 	groupPrice: string
-	categories: Array<string>
-	location: string
+	idDestination: string
 
-	activities: string[]
-	starterPack: string[]
-	startTime: string[]
-	endTime: string[]
+	starterPack: string
+	startTime: string
+	endTime: string
 
-	rating?: Array<number>
-	reviews?: Array<string>
+	rating?: number[]
+	reviews?: string[]
 }
 
 interface ActivityByIdState {
-	activity: ActivityById[]
+	activity: ActivityById | null
 	loading: boolean
 	error: string | null
 }
 
 const initialState: ActivityByIdState = {
-	activity: [],
+	activity: null,
 	loading: false,
 	error: null,
 }
@@ -41,7 +42,7 @@ const activityByIdSlice = createSlice({
 			state.loading = true
 			state.error = null
 		},
-		activityByIdSuccess(state, action: PayloadAction<ActivityById[]>) {
+		activityByIdSuccess(state, action: PayloadAction<ActivityById>) {
 			state.activity = action.payload
 			state.loading = false
 			state.error = null

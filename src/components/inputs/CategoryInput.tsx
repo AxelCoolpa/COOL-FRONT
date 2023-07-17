@@ -11,6 +11,7 @@ interface CategoryInputProps {
 	iconColor?: string
 	bgColor?: string
 	secondaryBorderColor?: boolean
+	checked?: any
 }
 
 const CategoryInput: React.FC<CategoryInputProps> = ({
@@ -23,6 +24,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 	bgColor,
 	iconColor,
 	secondaryBorderColor,
+	checked,
 }) => {
 	return (
 		<>
@@ -34,6 +36,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 					name={name}
 					value={value}
 					className='hidden peer'
+					checked={checked ? checked.includes(label) : null}
 				/>
 
 				<label

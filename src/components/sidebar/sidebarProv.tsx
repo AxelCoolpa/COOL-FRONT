@@ -1,230 +1,197 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Dropdown from '../dropdown/Dropdown'
-import UserDropdown from '../dropdown/UserDropdown'
+/*eslint-disable*/
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate, Link } from 'react-router-dom'
 
-const SidebarProv: React.FC = () => {
-	const [show, setShow] = useState('hidden')
+import styles from '../../styles/Global'
+import Cool from '../../assets/cool.png'
+import AvatarPlaceholderImg from '../../assets/AvatarPlaceholder.jpg'
+
+import { BiMenu } from 'react-icons/bi'
+import { BsFillGrid1X2Fill } from 'react-icons/bs'
+import { FaUser } from 'react-icons/fa'
+import { FiSearch } from 'react-icons/fi'
+import { GrSafariOption } from 'react-icons/gr'
+import { IoMdSettings } from 'react-icons/io'
+import { MdLocationCity } from 'react-icons/md'
+
+import { useCurrentUser } from '../../hooks/useCurrentUser'
+import { logout } from '../../features/LoginSlice'
+
+import Dropdown from '../dropdown/index'
+import Avatar from '../Avatar'
+
+export default function SidebarProv() {
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
+	const { currentUser } = useCurrentUser()
+
+	const handleLogout = () => {
+		dispatch(logout())
+	}
+
+	const [collapseShow, setCollapseShow] = React.useState('hidden')
 
 	return (
 		<>
-			<nav className='md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6'>
-				<div className='md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto'>
+			<nav className={`${styles.nav}`}>
+				<div className='md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap justify-between items-center w-full mx-auto'>
+					{/* Toggler */}
 					<button
 						className='cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent'
 						type='button'
-						onClick={() => setShow('bg-white m-2 py-3 px-6')}
+						onClick={() => setCollapseShow('bg-white m-2 py-3 px-6')}
 					>
-						<i className='fas fa-bars'></i>
+						<BiMenu />
 					</button>
+					{/* Brand */}
+					<div className='md:hidden'>
+						<img
+							src={Cool}
+							alt='Cool-LOGO'
+							className='w-28 cursor-pointer'
+							onClick={() => navigate('/provider')}
+						/>
+					</div>
 
-					<Link
-						className='md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0'
-						to='/proveedor-admin/show-discover'
-					>
-						Go Home
-					</Link>
+					{/* User --- ACTUALIZAR --- User */}
 
-					<ul className='md:hidden items-center flex flex-wrap list-none'>
-						<li className=' relative'>
-							<Dropdown />
-						</li>
-						<li className=' relative'>
-							<UserDropdown />
-						</li>
-					</ul>
-					{/* <issue_comment>username_1: @username_0 I'm not sure what you're asking. Can you */}
+					<div className='md:hidden items-center flex flex-wrap list-none'>
+						{/* PROFILE / SETTINGS */}
+						<Dropdown
+							button={
+								<Avatar avatar={currentUser?.avatar || AvatarPlaceholderImg} wh={12} />
+							}
+							children={
+								<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
+									<div className='mt-3 ml-4'>
+										<div className='flex flex-col gap-2'>
+											<p className='text-sm font-bold cursor-default'>
+												👋 Hey, {currentUser?.firstName}
+											</p>
+										</div>
+									</div>
+									<div className='mt-3 mx-4 flex flex-col'>
+										<div className='h-px w-full bg-gray-200' />
+										<Link
+											to='profile'
+											className={
+												'mt-3 text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+											}
+										>
+											Profile
+										</Link>
+										<a
+											href='/'
+											className={
+												'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+											}
+										>
+											USUARIO FINAL
+										</a>
+										<div className='mt-3 h-px w-full bg-gray-200' />
+										<a
+											href='#'
+											className={
+												'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+											}
+											onClick={(e) => e.preventDefault()}
+										>
+											<button
+												className='mt-1 text-sm font-medium text-red-500 hover:text-red-500'
+												onClick={handleLogout}
+											>
+												Logout
+											</button>
+										</a>
+									</div>
+								</div>
+							}
+							classNames={'py-2 top-8 -left-[180px] w-max'}
+						/>
+					</div>
 
+					{/* Collapse */}
 					<div
 						className={
 							'md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ' +
-							show
+							collapseShow
 						}
 					>
-						<div className='md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200'>
-							<div className='flex flex-wrap'>
-								<div className='w-6/12'>
-									<Link
-										className='md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0'
-										to='/'
-									>
-										Notus React
-									</Link>
-								</div>
-								<div className='w-6/12 flex justify-end'>
-									<button
-										type='button'
-										className='cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent'
-										onClick={() => setShow('hidden')}
-									>
-										<i className='fas fa-times'></i>
-									</button>
-								</div>
-								<form className='mt-6 mb-4 md:hidden'>
-									<div className='mb-3 pt-0'>
-										<input
-											type='text'
-											placeholder='Search'
-											className='px-3 py-2 h-12 border border-solid border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal'
-										/>
-									</div>
-								</form>
-								<hr className='my-4 md:min-w-full' />
-								<h6 className='md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline'>
-									Admin Layout Pages
-								</h6>
-								<ul className='md:flex-col md:min-w-full flex flex-col list-none'>
-									<li className='items-center'>
-										<Link
-											className={
-												'text-xs uppercase py-3 font-bold block ' +
-												(window.location.href.indexOf('/admin/dashboard') !== -1
-													? 'text-lightBlue-500 hover:text-lightBlue-600'
-													: 'text-blueGray-700 hover:text-blueGray-500')
-											}
-											to='/admin/dashboard'
-										>
-											<i
-												className={
-													'fas fa-tv mr-2 text-sm ' +
-													(window.location.href.indexOf('/admin/dashboard') !== -1
-														? 'opacity-75'
-														: 'text-blueGray-300')
-												}
-											></i>{' '}
-											Dashboard
-										</Link>
-									</li>
-
-									<li className='items-center'>
-										<Link
-											className={
-												'text-xs uppercase py-3 font-bold block ' +
-												(window.location.href.indexOf('/admin/settings') !== -1
-													? 'text-lightBlue-500 hover:text-lightBlue-600'
-													: 'text-blueGray-700 hover:text-blueGray-500')
-											}
-											to='/admin/settings'
-										>
-											<i
-												className={
-													'fas fa-tools mr-2 text-sm ' +
-													(window.location.href.indexOf('/admin/settings') !== -1
-														? 'opacity-75'
-														: 'text-blueGray-300')
-												}
-											></i>{' '}
-											Settings
-										</Link>
-									</li>
-
-									<li className='items-center'>
-										<Link
-											className={
-												'text-xs uppercase py-3 font-bold block ' +
-												(window.location.href.indexOf('/admin/tables') !== -1
-													? 'text-lightBlue-500 hover:text-lightBlue-600'
-													: 'text-blueGray-700 hover:text-blueGray-500')
-											}
-											to='/admin/tables'
-										>
-											<i
-												className={
-													'fas fa-table mr-2 text-sm ' +
-													(window.location.href.indexOf('/admin/tables') !== -1
-														? 'opacity-75'
-														: 'text-blueGray-300')
-												}
-											></i>{' '}
-											Tables
-										</Link>
-									</li>
-
-									<li className='items-center'>
-										<Link
-											className={
-												'text-xs uppercase py-3 font-bold block ' +
-												(window.location.href.indexOf('/admin/maps') !== -1
-													? 'text-lightBlue-500 hover:text-lightBlue-600'
-													: 'text-blueGray-700 hover:text-blueGray-500')
-											}
-											to='/admin/maps'
-										>
-											<i
-												className={
-													'fas fa-map-marked mr-2 text-sm ' +
-													(window.location.href.indexOf('/admin/maps') !== -1
-														? 'opacity-75'
-														: 'text-blueGray-300')
-												}
-											></i>{' '}
-											Maps
-										</Link>
-									</li>
-								</ul>
-
-								<hr className='my-4 md:min-w-full' />
-								{/* Heading */}
-								<h6 className='md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline'>
-									Auth Layout Pages
-								</h6>
-
-								<ul className='md:flex-col md:min-w-full flex flex-col list-none md:mb-4'>
-									<li className='items-center'>
-										<Link
-											className='text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block'
-											to='/auth/login'
-										>
-											<i className='fas fa-fingerprint text-blueGray-400 mr-2 text-sm'></i>{' '}
-											Login
-										</Link>
-									</li>
-
-									<li className='items-center'>
-										<Link
-											className='text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block'
-											to='/auth/register'
-										>
-											<i className='fas fa-clipboard-list text-blueGray-300 mr-2 text-sm'></i>{' '}
-											Register
-										</Link>
-									</li>
-								</ul>
-
-								<hr className='my-4 md:min-w-full' />
-								{/* Heading */}
-								<h6 className='md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline'>
-									No Layout Pages
-								</h6>
-
-								<ul className='md:flex-col md:min-w-full flex flex-col list-none md:mb-4'>
-									<li className='items-center'>
-										<Link
-											className='text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block'
-											to='/landing'
-										>
-											<i className='fas fa-newspaper text-blueGray-400 mr-2 text-sm'></i>{' '}
-											Landing Page
-										</Link>
-									</li>
-
-									<li className='items-center'>
-										<Link
-											className='text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block'
-											to='/profile'
-										>
-											<i className='fas fa-user-circle text-blueGray-400 mr-2 text-sm'></i>{' '}
-											Profile Page
-										</Link>
-									</li>
-								</ul>
+						{/* Collapse header */}
+						<div className='md:min-w-md md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200'>
+							<div className='w-6/12 flex relative'>
+								<button
+									type='button'
+									className='cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent'
+									onClick={() => setCollapseShow('hidden')}
+								>
+									<BiMenu />
+								</button>
 							</div>
 						</div>
+
+						{/* Search */}
+						<form className='mt-6 mb-4 md:hidden'>
+							<div className='relative flex w-full flex-wrap items-stretch'>
+								<span className='z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3'>
+									<FiSearch className='text-blueGray-300 text-xl' />
+								</span>
+								<input
+									type='text'
+									placeholder='Search...'
+									className='border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10'
+								/>
+							</div>
+						</form>
+
+						{/* Divider */}
+						<hr className='mt-8 md:min-w-full' />
+
+						{/* Heading */}
+						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
+							<ul className='space-y-4'>
+								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
+									<Link to='' className='flex items-center   font-semibold gap-2'>
+										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
+											Adventures
+										</p>
+									</Link>
+								</li>
+								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
+									<Link to='clients' className='flex items-center font-semibold gap-2'>
+										<FaUser size={20} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3'>Clients</p>
+									</Link>
+								</li>
+								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
+									<Link to='#' className='flex items-center font-semibold gap-2'>
+										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3'>Packages</p>
+									</Link>
+								</li>
+								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
+									<Link to='' className='flex items-center font-semibold gap-2'>
+										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3'>Destino</p>
+									</Link>
+								</li>
+								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
+									<Link to='create' className='flex items-center font-semibold gap-2'>
+										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
+										<p className='flex-grow ml-3 xl:ml-3'>Create</p>
+									</Link>
+								</li>
+							</ul>
+						</nav>
+
+						{/* Divider */}
+						<hr className='my-4 md:min-w-full' />
 					</div>
 				</div>
 			</nav>
 		</>
 	)
 }
-
-export default SidebarProv

@@ -60,19 +60,23 @@ const AddAdventure = () => {
 		idDestination: '',
 	})
 
+	const [checkboxValues, setCheckboxValues] = useState([])
+
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
+			setCheckboxValues([...checkboxValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				category: [...formData.category, value],
+				category: [...formData?.category, value],
 			}))
 		} else {
+			setCheckboxValues(checkboxValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				category: formData.category.filter((val) => val !== value),
+				category: formData?.category.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -133,7 +137,7 @@ const AddAdventure = () => {
 			!startTime ||
 			!endTime
 		) {
-			toast.error('Por favor, complete todos los campos')
+			toast.error('Please complete all fields')
 			return
 		}
 
@@ -174,7 +178,7 @@ const AddAdventure = () => {
 				idDestination: '',
 			})
 		} catch (error) {
-			console.log('Error al enviar el formulario:', error)
+			toast.error('Error while sending the form')
 		}
 	}
 
@@ -195,7 +199,7 @@ const AddAdventure = () => {
 	return (
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
-				<h2 className='text-[32px] font-medium'>Add adventure</h2>
+				<h2 className='text-[32px] font-medium'>Add activity</h2>
 				<div className='flex flex-col items-center justify-center w-full transition'>
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<DropZone onFilesSelected={handleFilesSelected} />
@@ -224,7 +228,7 @@ const AddAdventure = () => {
 
 					{/* CATEGORIES */}
 					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						Category adventure
+						Activity Category
 					</h3>
 
 					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
@@ -237,6 +241,7 @@ const AddAdventure = () => {
 									id={item.label}
 									name={item.label}
 									value={item.label}
+									checked={checkboxValues}
 								/>
 							</ul>
 						))}

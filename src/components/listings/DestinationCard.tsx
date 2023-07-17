@@ -134,17 +134,6 @@ const DestinationCard: React.FC<ListingCardProps> = ({ data }) => {
 						{data?.title}
 					</Typography>
 				</CardBody>
-				<CardFooter className='mt-3 flex items-center justify-between py-0 px-1'>
-					<a>
-						<Button
-							onClick={() => navigate(`/details/${data?._id}`)}
-							variant='outlined'
-							size='sm'
-						>
-							view
-						</Button>
-					</a>
-				</CardFooter>
 			</Card>
 		</motion.div>
 	)

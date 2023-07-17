@@ -6,7 +6,9 @@ import { useCurrentUser } from '../../hooks/useCurrentUser'
 import { useMaps } from '../../hooks/useMaps'
 
 import { toast } from 'react-hot-toast'
+
 import { FiSearch } from 'react-icons/fi'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
 
 import { categories } from '../categories/categories'
 import { amenitiesCategories } from '../categories/amenitiesCategories'
@@ -42,10 +44,10 @@ const AddAccomodation = () => {
 	const [formData, setFormData] = useState<createAccomodationFormData>({
 		name: '',
 		description: '',
-		roomsCount: 1,
-		bedsCount: 1,
-		maxOccupancy: 1,
-		bathRoomsCount: 1,
+		roomsCount: 0,
+		bedsCount: 0,
+		maxOccupancy: 0,
+		bathRoomsCount: 0,
 		amenities: [],
 		location: '',
 		zone: [],
@@ -57,16 +59,20 @@ const AddAccomodation = () => {
 		category: '',
 	})
 
+	const [checkboxTypeValues, setCheckboxTypeValues] = useState('')
+
 	const handleCheckboxTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
+			setCheckboxTypeValues(value)
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				category: value,
 			}))
 		} else {
+			setCheckboxTypeValues('')
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				category: '',
@@ -74,16 +80,20 @@ const AddAccomodation = () => {
 		}
 	}
 
+	const [checkboxAmenitiesValues, setCheckboxAmenitiesValues] = useState([])
+
 	const handleCheckboxAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
+			setCheckboxAmenitiesValues([...checkboxAmenitiesValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				amenities: [...formData.amenities, value],
 			}))
 		} else {
+			setCheckboxAmenitiesValues(checkboxAmenitiesValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				amenities: formData.amenities.filter((val) => val !== value),
@@ -91,16 +101,20 @@ const AddAccomodation = () => {
 		}
 	}
 
+	const [checkboxZoneValues, setCheckboxZoneValues] = useState([])
+
 	const handleCheckboxZoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
+			setCheckboxZoneValues([...checkboxZoneValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				zone: [...formData.zone, value],
 			}))
 		} else {
+			setCheckboxZoneValues(checkboxZoneValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				zone: formData.zone.filter((val) => val !== value),
@@ -169,7 +183,7 @@ const AddAccomodation = () => {
 			!price ||
 			!category
 		) {
-			toast.error('Por favor, complete todos los campos')
+			toast.error('Please complete all fields')
 			return
 		}
 
@@ -204,10 +218,10 @@ const AddAccomodation = () => {
 			setFormData({
 				name: '',
 				description: '',
-				roomsCount: 1,
-				bedsCount: 1,
-				maxOccupancy: 1,
-				bathRoomsCount: 1,
+				roomsCount: 0,
+				bedsCount: 0,
+				maxOccupancy: 0,
+				bathRoomsCount: 0,
 				amenities: [],
 				location: '',
 				zone: [],
@@ -221,7 +235,7 @@ const AddAccomodation = () => {
 			setSelectedDestination(null)
 			setSearchValue('')
 		} catch (error: any) {
-			toast.error('Error al enviar el formulario:', error)
+			toast.error('Error while sending the form')
 		}
 	}
 
@@ -277,13 +291,17 @@ const AddAccomodation = () => {
 									value={item.label}
 									bgColor={item.bgColor}
 									secondaryBorderColor
-									selected={formData.category}
+									selected={checkboxTypeValues}
 								/>
 							</ul>
 						))}
 					</div>
 
 					{/* FORM */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Accomodation Info
+					</h3>
+
 					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
 						<AccomodationForm handleChange={handleChange} form={formData} />
 					</div>
@@ -305,13 +323,14 @@ const AddAccomodation = () => {
 									value={item.label}
 									bgColor={item.bgColor}
 									iconColor={item.iconColor}
+									checked={checkboxAmenitiesValues}
 								/>
 							</ul>
 						))}
 					</div>
 
 					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						Accomodation Zone
+						Zone
 					</h3>
 
 					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
@@ -324,6 +343,7 @@ const AddAccomodation = () => {
 									id={item.label}
 									name={item.label}
 									value={item.label}
+									checked={checkboxZoneValues}
 								/>
 							</ul>
 						))}
@@ -333,18 +353,24 @@ const AddAccomodation = () => {
 					<div className='mx-auto py-5 w-full xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						<h3 className='text-2xl font-semibold'>Add location on map</h3>
 						<form onSubmit={handleSearch} className='py-5 xl:py-8'>
-							<Input
-								type='search'
-								placeholder='Search your location'
-								id='location'
-								name='location'
-								handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-									setSearchValue(e.target.value)
-								}
-								value={searchValue}
-								secondaryIcon={FiSearch}
-								secondaryIconColor='OrangeCooL'
-							/>
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<HiOutlineLocationMarker size={25} />
+									<label>Which is the location?</label>
+								</div>
+								<Input
+									type='search'
+									placeholder='Search your location'
+									id='location'
+									name='location'
+									handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+										setSearchValue(e.target.value)
+									}
+									value={searchValue}
+									secondaryIcon={FiSearch}
+									secondaryIconColor='OrangeCooL'
+								/>
+							</div>
 						</form>
 						<div className='flex flex-col items-center py-10'>
 							<Map mapURL={mapUrl} />

@@ -8,10 +8,9 @@ import { motion, useAnimation } from 'framer-motion'
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 import { deleteActivity } from '../../features/deleteActivitySlice'
-import { deleteAdventure } from '../../features/deleteAdventureSlice'
 import { deleteAccomodation } from '../../features/deleteAccomodationSlice'
 
-import { EnumActivity, EnumDestination, EnumRoom } from '../../types'
+import { EnumActivity, EnumRoom } from '../../types'
 
 import Dropdown from '../dropdown/index'
 import HeartButton from '../buttons/HeartButton'
@@ -164,11 +163,19 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 				</div>
 
 				<CardHeader floated={false} color='gray' className='mx-0 mt-0 mb-4 h-64 xl:h-40'>
-					<img
-						src={data?.galleryImage || data?.images}
-						alt={data?.title || data?.name}
-						className='h-full w-full object-cover'
-					/>
+					{data?.galleryImage ? (
+						<img
+							src={data?.galleryImage || data?.galleryImage[0]}
+							alt={data?.title}
+							className='h-full w-full object-cover'
+						/>
+					) : (
+						<img
+							src={data?.images || data?.images[0]}
+							alt={data?.name}
+							className='h-full w-full object-cover'
+						/>
+					)}
 				</CardHeader>
 				<CardBody className='py-0 px-1'>
 					<Typography variant='small' className='font-normal text-blue-gray-500'>
@@ -179,15 +186,25 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 					</Typography>
 				</CardBody>
 				<CardFooter className='mt-3 flex items-center justify-between py-0 px-1'>
-					<a>
+					{data?.title ? (
 						<Button
-							onClick={() => navigate(`/details/${data?._id}`)}
+							onClick={() => navigate(`/details/activity/${data?._id}`)}
 							variant='outlined'
 							size='sm'
 						>
 							view
 						</Button>
-					</a>
+					) : (
+						data?.name && (
+							<Button
+								onClick={() => navigate(`/details/accomodation/${data?._id}`)}
+								variant='outlined'
+								size='sm'
+							>
+								view
+							</Button>
+						)
+					)}
 				</CardFooter>
 			</Card>
 		</motion.div>

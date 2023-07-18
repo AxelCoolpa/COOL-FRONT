@@ -8,11 +8,13 @@ import UserNav from '../components/Navbars/UserNav'
 import SidebarUser from '../components/sidebar/SidebarUser'
 import DashContainer2 from '../components/sections/dashContainer2'
 import { accomodation } from '../features/accomodationSlice'
+import { activities } from '../features/activitiesSlice'
 
 export const User = () => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(fetchDestinations())
+		dispatch(activities())
 		dispatch(fetchUsers())
 		dispatch(accomodation())
 	}, [])

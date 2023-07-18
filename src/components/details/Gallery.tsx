@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { EnumActivity } from '../../types'
+import { EnumActivity, EnumRoom } from '../../types'
 
 import GalleryModal from '../modals/GalleryModal'
 import useGalleryModal from '../../hooks/useGalleryModal'
@@ -11,7 +11,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
 interface GalleryProps {
-	listing: EnumActivity | undefined
+	listing: EnumActivity | EnumRoom | undefined
 }
 
 const Gallery: React.FC<GalleryProps> = ({ listing }) => {

@@ -151,7 +151,7 @@ export const user = [
 		element: <CreateAdventure />,
 	},
 	{
-		path: 'details/:id',
+		path: 'details/:type/:id',
 		element: <Detail />,
 	},
 	{

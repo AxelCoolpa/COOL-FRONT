@@ -16,6 +16,7 @@ export interface EnumActivity {
 	rating?: Array<number>
 	reviews?: Array<string>
 
+	providerId?: string
 	itDeleted?: boolean
 }
 
@@ -47,5 +48,6 @@ export interface EnumRoom {
 	price: number
 	category: string
 
+	providerId?: string
 	itDeleted?: boolean
 }

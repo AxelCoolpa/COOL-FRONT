@@ -9,7 +9,7 @@ import {
 } from '../../features/destinationSlice'
 
 import GridColumns from '../../components/sections/GridColumns'
-import MainCard from '../../components/listings/Card'
+import DestinationCard from '../../components/listings/DestinationCard'
 
 const ShowAdventures: React.FC = () => {
 	const destinations = useSelector(selectDestinations)
@@ -50,7 +50,7 @@ const ShowAdventures: React.FC = () => {
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
 							{enabledDestinations.map((destination) => (
-								<MainCard key={destination._id} data={destination} />
+								<DestinationCard key={destination._id} data={destination} />
 							))}
 						</GridColumns>
 					</div>
@@ -66,7 +66,7 @@ const ShowAdventures: React.FC = () => {
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
 							{disabledDestinations.map((destination) => (
-								<MainCard key={destination._id} data={destination} />
+								<DestinationCard key={destination._id} data={destination} />
 							))}
 						</GridColumns>
 					</div>

@@ -14,7 +14,7 @@ import Notifications from '../pages/User/Notifications'
 //* PROVIDER
 import ShowActivities from '../pages/ProvUser/ShowActivities'
 import CreateActivity from '../pages/ProvUser/CreateActivity'
-import UpdateActivity from '../pages/ProvUser/UpdateActivity'
+import Update from '../pages/ProvUser/Update'
 import ProfileProvider from '../pages/ProvUser/Profile'
 import TableUser from '../pages/ProvUser/TableUser'
 import CreateAccomodation from '../pages/ProvUser/CreateAccomodation'
@@ -77,7 +77,7 @@ export const provider = [
 	},
 	{
 		path: 'update/:id',
-		element: <UpdateActivity />,
+		element: <Update />,
 	},
 	{
 		path: 'clients',
@@ -152,7 +152,7 @@ export const user = [
 		element: <CreateAdventure />,
 	},
 	{
-		path: 'details/:id',
+		path: 'details/:type/:id',
 		element: <Detail />,
 	},
 	{

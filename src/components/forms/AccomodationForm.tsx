@@ -1,7 +1,13 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react'
 
 import { GrRestroom } from 'react-icons/gr'
-import { MdAttachMoney, MdOutlineFamilyRestroom, MdRoomService } from 'react-icons/md'
+import {
+	MdAttachMoney,
+	MdMeetingRoom,
+	MdOutlineFamilyRestroom,
+	MdRoomService,
+} from 'react-icons/md'
 import { RiHotelLine } from 'react-icons/ri'
 import { TbBed, TbCalendarCheck, TbCalendarX, TbFileDescription } from 'react-icons/tb'
 
@@ -9,29 +15,18 @@ import { createAccomodationFormData } from '../../features/createAccomodationSli
 import { updateAccomodationFormData } from '../../features/updateAccomodationSlice'
 
 import Input from '../inputs/Input'
+import Textarea from '../inputs/Textarea'
 
 interface AccomodationFormProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	form?: createAccomodationFormData
 	updateForm?: updateAccomodationFormData
-	data?: {
-		name?: string
-		price?: number
-		roomsCount?: number
-		bedsCount?: number
-		maxOccupancy?: number
-		bathroomsCount?: number
-		startDate?: string
-		endDate?: string
-		description?: string
-	}
 }
 
 const AccomodationForm: React.FC<AccomodationFormProps> = ({
 	handleChange,
 	form,
 	updateForm,
-	data,
 }) => {
 	return (
 		<div className='flex flex-col items-center justify-center gap-12 transition w-full'>
@@ -41,13 +36,23 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 						<RiHotelLine size={25} />
 						<label>Property</label>
 					</div>
-					<Input
-						placeholder={data?.name || 'Property name'}
-						id='name'
-						name='name'
-						handleChange={handleChange}
-						value={updateForm?.name || form?.name}
-					/>
+					{form ? (
+						<Input
+							placeholder={'Property name'}
+							id='name'
+							name='name'
+							handleChange={handleChange}
+							value={form?.name}
+						/>
+					) : (
+						<Input
+							placeholder={'Update Property name'}
+							id='name'
+							name='name'
+							handleChange={handleChange}
+							value={updateForm?.name}
+						/>
+					)}
 				</div>
 				<div className='flex flex-col gap-10 w-full'>
 					<div className='flex items-center gap-5 text-[#686868]'>
@@ -56,7 +61,7 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 					</div>
 					<Input
 						type='number'
-						placeholder={data?.price || 'Accomodation price'}
+						placeholder={updateForm ? 'Update Update Price' : 'Update Price'}
 						id='price'
 						name='price'
 						handleChange={handleChange}
@@ -68,20 +73,57 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 			<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
 				<div className='flex flex-col items-center justify-center gap-12 transition w-full'>
 					<div className='w-full flex flex-col items-center justify-center lg:flex-row gap-8'>
-						<div className='flex flex-col gap-10 w-full'>
-							<div className='flex items-center gap-5 text-[#686868]'>
-								<MdRoomService size={25} />
-								<label>Rooms Count</label>
+						{form?.category === 'Cottage' ||
+						updateForm?.category === 'Cottage' ||
+						form?.category === 'House' ||
+						updateForm?.category === 'House' ? (
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<MdMeetingRoom size={25} />
+									<label>Rooms Count</label>
+								</div>
+								<Input
+									type='number'
+									placeholder={updateForm ? 'Update Rooms Count' : 'Room Count'}
+									id='roomsCount'
+									name='roomsCount'
+									handleChange={handleChange}
+									value={updateForm?.roomsCount || form?.roomsCount}
+								/>
 							</div>
-							<Input
-								type='number'
-								placeholder={data?.roomsCount || 'Rooms count'}
-								id='roomsCount'
-								name='roomsCount'
-								handleChange={handleChange}
-								value={updateForm?.roomsCount || form?.roomsCount}
-							/>
-						</div>
+						) : form?.category === 'Camping Area' ||
+						  updateForm?.category === 'Camping Area' ? (
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-neutral-300'>
+									<MdMeetingRoom size={25} />
+									<label>Rooms Count | Room Number</label>
+								</div>
+								<Input
+									type='number'
+									placeholder={updateForm ? 'Update Rooms Count' : 'Room Count'}
+									id='roomsCount'
+									name='roomsCount'
+									disabled
+									handleChange={handleChange}
+									value={updateForm?.roomsCount || form?.roomsCount}
+								/>
+							</div>
+						) : (
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<MdRoomService size={25} />
+									<label>Room Number</label>
+								</div>
+								<Input
+									type='number'
+									placeholder={updateForm ? 'Update Room Number' : 'Room Number'}
+									id='roomsCount'
+									name='roomsCount'
+									handleChange={handleChange}
+									value={updateForm?.roomsCount || form?.roomsCount}
+								/>
+							</div>
+						)}
 
 						<div className='flex flex-col gap-10 w-full'>
 							<div className='flex items-center gap-5 text-[#686868]'>
@@ -90,7 +132,7 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 							</div>
 							<Input
 								type='number'
-								placeholder={data?.bedsCount || 'Beds count'}
+								placeholder={updateForm ? 'Update Beds Count' : 'Beds Count'}
 								id='bedsCount'
 								name='bedsCount'
 								handleChange={handleChange}
@@ -106,7 +148,7 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 							</div>
 							<Input
 								type='number'
-								placeholder={data?.maxOccupancy || 'Max occupancy'}
+								placeholder={updateForm ? 'Update Max occupancy' : 'Max occupancy'}
 								id='maxOccupancy'
 								name='maxOccupancy'
 								handleChange={handleChange}
@@ -121,11 +163,11 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 							</div>
 							<Input
 								type='number'
-								placeholder={data?.bathroomsCount || 'Bathrooms count'}
-								id='bathroomsCount'
-								name='bathroomsCount'
+								placeholder={updateForm ? 'Update Bathrooms count' : 'Bathrooms count'}
+								id='bathRoomsCount'
+								name='bathRoomsCount'
 								handleChange={handleChange}
-								value={updateForm?.bathroomsCount || form?.bathroomsCount}
+								value={updateForm?.bathRoomsCount || form?.bathRoomsCount}
 							/>
 						</div>
 					</div>
@@ -166,17 +208,23 @@ const AccomodationForm: React.FC<AccomodationFormProps> = ({
 					<TbFileDescription size={25} />
 					<label>Description</label>
 				</div>
-				{data?.description ? <p className='text-zinc-500'>{data?.description}</p> : null}
-				<Input
-					label={
-						data?.description ? 'Update Property description' : 'Property description'
-					}
-					id='description'
-					name='description'
-					handleChange={handleChange}
-					value={updateForm?.description || form?.description}
-					sizeH={44}
-				/>
+				{form ? (
+					<Textarea
+						placeholder={'Accomodation description'}
+						id='description'
+						name='description'
+						handleChange={handleChange}
+						value={form?.description}
+					/>
+				) : (
+					<Textarea
+						placeholder={'Update description'}
+						id='description'
+						name='description'
+						handleChange={handleChange}
+						value={updateForm?.description}
+					/>
+				)}
 			</div>
 		</div>
 	)

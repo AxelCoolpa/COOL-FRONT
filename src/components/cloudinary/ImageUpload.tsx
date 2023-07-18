@@ -5,9 +5,10 @@ import { IoMdClose } from 'react-icons/io'
 
 interface CloudinaryUploadProps {
 	onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+	img?: string
 }
 
-const CloudinaryUploadImg: React.FC<CloudinaryUploadProps> = ({ onUpload }) => {
+const CloudinaryUploadImg: React.FC<CloudinaryUploadProps> = ({ onUpload, img }) => {
 	const [imageSelected, setImageSelected] = useState('')
 	const [image, setImage] = useState('')
 
@@ -39,21 +40,22 @@ const CloudinaryUploadImg: React.FC<CloudinaryUploadProps> = ({ onUpload }) => {
 			>
 				<div className='relative flex flex-col items-center justify-center w-full h-64 pt-5 pb-6 text-gray-500'>
 					<TbPhotoPlus size={54} />
-					{image && (
-						<div className='absolute inset-0 flex items-center justify-center'>
-							<button
-								onClick={handleClearImg}
-								className='m-2 border-0 hover:opacity-70 transition absolute right-2 top-0 bg-white/60 text-black rounded-full z-10'
-							>
-								<IoMdClose size={30} />
-							</button>
-							<img
-								alt='Upload'
-								src={image}
-								className='rounded-lg object-cover h-[252px] w-full'
-							/>
-						</div>
-					)}
+					{image ||
+						(img && (
+							<div className='absolute inset-0 flex items-center justify-center'>
+								<button
+									onClick={handleClearImg}
+									className='m-2 border-0 hover:opacity-70 transition absolute right-2 top-0 bg-white/60 text-black rounded-full z-10'
+								>
+									<IoMdClose size={30} />
+								</button>
+								<img
+									alt='Upload'
+									src={image || img}
+									className='rounded-lg object-cover h-[252px] w-full'
+								/>
+							</div>
+						))}
 					<p className='my-2 text-sm text-gray-500 dark:text-gray-400'>
 						<span className='font-semibold'>Click to select image</span>
 					</p>

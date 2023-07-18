@@ -1,9 +1,11 @@
 /*eslint-disable*/
 import React from 'react'
-import {  useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { useNavigate, Link } from 'react-router-dom'
+
 import styles from '../../styles/Global'
 import Cool from '../../assets/cool.png'
+import AvatarPlaceholderImg from '../../assets/AvatarPlaceholder.jpg'
 
 import { BiMenu } from 'react-icons/bi'
 import { BsFillGrid1X2Fill } from 'react-icons/bs'
@@ -13,11 +15,21 @@ import { GrSafariOption } from 'react-icons/gr'
 import { IoMdSettings } from 'react-icons/io'
 import { MdLocationCity } from 'react-icons/md'
 
-import UserDropdown from '../dropdown/UserDropdown'
-import Dropdown from '../dropdown/Dropdown'
+import { useCurrentUser } from '../../hooks/useCurrentUser'
+import { logout } from '../../features/LoginSlice'
 
-export default function SidebarProvider() {
+import Dropdown from '../dropdown/index'
+import Avatar from '../Avatar'
+
+export default function SidebarAdmin() {
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
+
+	const { currentUser } = useCurrentUser()
+
+	const handleLogout = () => {
+		dispatch(logout())
+	}
 
 	const [collapseShow, setCollapseShow] = React.useState('hidden')
 
@@ -44,16 +56,61 @@ export default function SidebarProvider() {
 					</div>
 
 					{/* User --- ACTUALIZAR --- User */}
-					
 
-					< ul className='md:hidden items-center flex flex-wrap list-none'>
-						<li className='inline-block relative'>
-							<Dropdown />
-						</li>
-						<li className='inline-block relative'>
-							<UserDropdown />
-						</li>
-					</ul>
+					<div className='md:hidden items-center flex flex-wrap list-none'>
+						{/* PROFILE / SETTINGS */}
+						<Dropdown
+							button={
+								<Avatar avatar={currentUser?.avatar || AvatarPlaceholderImg} wh={12} />
+							}
+							children={
+								<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
+									<div className='mt-3 ml-4'>
+										<div className='flex flex-col gap-2'>
+											<p className='text-sm font-bold cursor-default'>
+												👋 Hey, {currentUser?.firstName}
+											</p>
+										</div>
+									</div>
+									<div className='mt-3 mx-4 flex flex-col'>
+										<div className='h-px w-full bg-gray-200' />
+										<Link
+											to='profile'
+											className={
+												'mt-3 text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+											}
+										>
+											Profile
+										</Link>
+										<a
+											href='/'
+											className={
+												'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+											}
+										>
+											USER
+										</a>
+										<div className='mt-3 h-px w-full bg-gray-200' />
+										<a
+											href='#'
+											className={
+												'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+											}
+											onClick={(e) => e.preventDefault()}
+										>
+											<button
+												className='mt-1 text-sm font-medium text-red-500 hover:text-red-500'
+												onClick={handleLogout}
+											>
+												Logout
+											</button>
+										</a>
+									</div>
+								</div>
+							}
+							classNames={'py-2 top-8 -left-[180px] w-max'}
+						/>
+					</div>
 
 					{/* Collapse */}
 					<div
@@ -96,10 +153,7 @@ export default function SidebarProvider() {
 						<nav className='flex-grow ml-0 xl:ml-0 sm:mt-4'>
 							<ul className='space-y-4'>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<Link
-										to=''
-										className='flex items-center   font-semibold gap-2'
-									>
+									<Link to='' className='flex items-center   font-semibold gap-2'>
 										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
 											Adventures
@@ -107,37 +161,25 @@ export default function SidebarProvider() {
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a]'>
-									<Link
-										to='clients'
-										className='flex items-center font-semibold gap-2'
-									>
+									<Link to='clients' className='flex items-center font-semibold gap-2'>
 										<FaUser size={20} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Clients</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<Link
-										to='#'
-										className='flex items-center font-semibold gap-2'
-									>
+									<Link to='#' className='flex items-center font-semibold gap-2'>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Packages</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<Link
-										to=''
-										className='flex items-center font-semibold gap-2'
-									>
+									<Link to='' className='flex items-center font-semibold gap-2'>
 										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Destino</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<Link
-										to='create'
-										className='flex items-center font-semibold gap-2'
-									>
+									<Link to='create' className='flex items-center font-semibold gap-2'>
 										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Create</p>
 									</Link>

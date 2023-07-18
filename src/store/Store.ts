@@ -1,6 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import registerReducer from '../features/RegisterSlice'
-import counterSlice from '../features/CreatedSlice'
 import LoginSlice from '../features/LoginSlice'
 import authSlice from '../features/authSlice'
 import createAdventureSlice from '../features/createAdventureSlice'
@@ -29,7 +28,6 @@ import deleteAccomodationSlice from '../features/deleteAccomodationSlice'
 
 export const store = configureStore({
 	reducer: {
-		counter: counterSlice,
 		register: registerReducer,
 		login: LoginSlice,
 		auth: authSlice,

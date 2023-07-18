@@ -1,7 +1,7 @@
-import React from 'react'
+import AccomodationSection from '../../components/sections/AccomodationSection'
 
 const Accomodation = () => {
-	return <div>Accomodation</div>
+	return <AccomodationSection />
 }
 
 export default Accomodation

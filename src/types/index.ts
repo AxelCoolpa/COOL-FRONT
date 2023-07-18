@@ -16,6 +16,7 @@ export interface EnumActivity {
 	rating?: Array<number>
 	reviews?: Array<string>
 
+	providerId?: string
 	itDeleted?: boolean
 }
 
@@ -37,7 +38,7 @@ export interface EnumRoom {
 	roomsCount: number
 	bedsCount: number
 	maxOccupancy: number
-	bathroomsCount: number
+	bathRoomsCount: number
 	amenities: string[]
 	location: string
 	zone: string[]
@@ -45,6 +46,8 @@ export interface EnumRoom {
 	startDate: string
 	endDate: string
 	price: number
+	category: string
 
+	providerId?: string
 	itDeleted?: boolean
 }

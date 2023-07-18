@@ -9,7 +9,7 @@ interface Room {
 	roomsCount: number
 	bedsCount: number
 	maxOccupancy: number
-	bathroomsCount: number
+	bathRoomsCount: number
 	amenities: string[]
 	location: string
 	zone: string[]
@@ -17,8 +17,10 @@ interface Room {
 	startDate: string
 	endDate: string
 	price: number
+	category: string
 
-	itDeleted?: boolean
+	providerId: string
+	itDeleted: boolean
 }
 
 interface AccomodationState {

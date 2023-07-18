@@ -10,7 +10,10 @@ import { accomodationCategories } from '../categories/accomodationCategories'
 import CategoryInput from '../inputs/CategoryInput'
 
 const AccomodationSection = () => {
-	const accomodations = useSelector(selectAccomodation)
+	const allAccomodations = useSelector(selectAccomodation)
+	const accomodations = allAccomodations.filter(
+		(accomodation) => accomodation.itDeleted === false
+	)
 
 	const randomAccomodation = accomodations
 		? accomodations[Math.floor(Math.random() * accomodations.length)]

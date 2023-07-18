@@ -13,6 +13,7 @@ interface User {
 		roleName?: string
 		typeRole?: string
 	}
+
 	DNI?: string
 	phone?: string
 	location?: string
@@ -21,6 +22,7 @@ interface User {
 	itDeleted?: boolean
 
 	activities?: []
+	accomodations?: []
 	favorites?: []
 
 	profileProvider?: {

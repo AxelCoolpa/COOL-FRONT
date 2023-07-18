@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
@@ -283,7 +283,9 @@ const Navbar: React.FC = () => {
 									<label className='2xl:text-lg font-semibold'>
 										{currentUser?.firstName}
 									</label>
-									<span className='text-xs'>#{currentUser?.role?.roleName}</span>
+									<span className='text-xs'>
+										#{currentUser?.profileProvider?.relatedChannel}
+									</span>
 								</div>
 								<div className=''>
 									<select

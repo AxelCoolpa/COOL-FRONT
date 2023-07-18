@@ -19,7 +19,8 @@ interface Room {
 	price: number
 	category: string
 
-	itDeleted?: boolean
+	providerId: string
+	itDeleted: boolean
 }
 
 interface AccomodationState {

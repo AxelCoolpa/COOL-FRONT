@@ -61,7 +61,7 @@ const Login = () => {
 						</motion.h2>
 					</div>
 
-					<div className='mb-4'>
+					<div className='mb-6'>
 						<input
 							type='text'
 							id='email'
@@ -74,7 +74,7 @@ const Login = () => {
 						/>
 					</div>
 
-					<div className='mb-4'>
+					<div className='mb-6'>
 						<input
 							type='password'
 							id='password'
@@ -95,7 +95,7 @@ const Login = () => {
 							<div className='flex flex-col items-center'>
 								<button
 									type='submit'
-									className='bg-orange-700 w-[10vw] hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2'
+									className='bg-orange-700 w-full hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2'
 								>
 									Login
 								</button>

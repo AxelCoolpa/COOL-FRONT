@@ -9,17 +9,18 @@ import { selectAccomodation } from '../../features/accomodationSlice'
 
 import GridColumns from '../../components/sections/GridColumns'
 import MainCard from '../../components/listings/Card'
+import Button from '../../components/buttons/Button'
 
 const ShowActivities = () => {
-	const { currentUser } = useCurrentUser()
+	const navigate = useNavigate()
 
-	const activities = useSelector(selectActivities)
-	const rooms = useSelector(selectAccomodation)
-	const logistics = useSelector(selectAccomodation)
+	const { currentUser, currentUserId } = useCurrentUser()
+
+	const allActivities = useSelector(selectActivities)
+	const allRooms = useSelector(selectAccomodation)
 
 	const loading = useSelector(selectLoading)
 	const error = useSelector(selectError)
-	const navigate = useNavigate()
 
 	if (loading) {
 		return <div>Cargando actividades...</div>
@@ -28,25 +29,24 @@ const ShowActivities = () => {
 		return <div>Error al cargar actividades: {error} </div>
 	}
 
+	const currentActivities = allActivities.filter((a) => a.providerId === currentUserId)
+	const currentRooms = allRooms.filter((r) => r.providerId === currentUserId)
+
 	const enabled =
 		currentUser?.profileProvider?.relatedChannel === 'Travel'
-			? activities.filter((activity) => activity.itDeleted === false)
-			: currentUser?.profileProvider?.relatedChannel === 'Accomodation'
-			? rooms.filter((room) => room.itDeleted === false)
-			: logistics.filter((logistic) => logistic.itDeleted === false)
+			? currentActivities.filter((activity) => activity.itDeleted === false)
+			: currentRooms.filter((room) => room.itDeleted === false)
 
 	const disabled =
 		currentUser?.profileProvider?.relatedChannel === 'Travel'
-			? activities.filter((activity) => activity.itDeleted === true)
-			: currentUser?.profileProvider?.relatedChannel === 'Accomodation'
-			? rooms.filter((room) => room.itDeleted === true)
-			: logistics.filter((logistic) => logistic.itDeleted === true)
+			? currentActivities.filter((activity) => activity.itDeleted === true)
+			: currentRooms.filter((room) => room.itDeleted === true)
 
 	return (
 		<>
 			<div className=''>
 				<div className='flex flex-col rounded-t bg-white mb-0 px-6 py-6'>
-					<div className='text-center flex justify-between pt-3 mt-3 mb-3 pb-3'>
+					<div className='relative text-center flex justify-between pt-5 mt-3 mb-3 pb-3'>
 						<h6 className='text-gray-600 text-md uppercase font-bold'>
 							{currentUser?.profileProvider?.relatedChannel === 'Travel'
 								? 'Active activities'
@@ -55,26 +55,29 @@ const ShowActivities = () => {
 								: 'Active services'}
 						</h6>
 						{currentUser?.profileProvider?.relatedChannel === 'Travel' ? (
-							<button
-								className='bg-red-500 text-white active:bg-red-200 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150'
-								onClick={() => navigate('/provider/create/activity')}
-							>
-								Add Activity
-							</button>
+							<div className='absolute right-0 -top-1 xl:-top-2'>
+								<Button
+									label='Add Activity'
+									onClick={() => navigate('/provider/create/activity')}
+									small
+								/>
+							</div>
 						) : currentUser?.profileProvider?.relatedChannel === 'Accomodation' ? (
-							<button
-								className='bg-red-500 text-white active:bg-red-200 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150'
-								onClick={() => navigate('/provider/create/accomodation')}
-							>
-								Add Accomodation
-							</button>
+							<div className='absolute right-0 -top-1 xl:-top-2'>
+								<Button
+									label='Add Accomodation'
+									onClick={() => navigate('/provider/create/accomodation')}
+									small
+								/>
+							</div>
 						) : (
-							<button
-								className='bg-red-500 text-white active:bg-red-200 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150'
-								onClick={() => navigate('/provider/create/logistic')}
-							>
-								Add Logistics
-							</button>
+							<div className='absolute right-0 -top-1 xl:-top-2'>
+								<Button
+									label='Add Logistics'
+									onClick={() => navigate('/provider/create/logistic')}
+									small
+								/>
+							</div>
 						)}
 					</div>
 

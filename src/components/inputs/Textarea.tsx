@@ -10,7 +10,7 @@ interface InputProps {
 	required?: boolean
 	errors?: boolean
 	sizeH?: number
-	handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+	handleChange?: any
 	value?: any
 	icon?: IconType
 	secondaryIcon?: IconType
@@ -19,7 +19,7 @@ interface InputProps {
 	defaultValue?: any
 }
 
-const Input: React.FC<InputProps> = ({
+const Textarea: React.FC<InputProps> = ({
 	id,
 	label,
 	name,
@@ -38,14 +38,14 @@ const Input: React.FC<InputProps> = ({
 }) => {
 	return (
 		<div className='w-full relative'>
-			<input
+			<textarea
 				id={id}
 				disabled={disabled}
 				placeholder={placeholder || ' '}
-				type={type}
 				name={name}
 				value={value}
 				defaultValue={defaultValue}
+				rows={6}
 				className={`
           peer
           py-4
@@ -88,8 +88,7 @@ const Input: React.FC<InputProps> = ({
           left-4
           peer-placeholder-shown:scale-100
           peer-placeholder-shown:translate-y-0
-          peer-focus:scale-75
-          peer-focus:-translate-y-4
+          peer-focus:hidden
           ${errors ? 'text-red-700' : 'text-zinc-400'}
 					${Icon ? 'pl-10' : ''}
         `}
@@ -108,4 +107,4 @@ const Input: React.FC<InputProps> = ({
 	)
 }
 
-export default Input
+export default Textarea

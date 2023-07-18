@@ -1,47 +1,49 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { useCurrentUser } from '../../hooks/useCurrentUser'
-import { useMaps } from '../../hooks/useMaps'
-
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
+import { CgInfo } from 'react-icons/cg'
 import { FiSearch } from 'react-icons/fi'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 
+import { useMaps } from '../../hooks/useMaps'
+import { useCurrentUser } from '../../hooks/useCurrentUser'
+
 import { categories } from '../categories/categories'
 import { amenitiesCategories } from '../categories/amenitiesCategories'
-import { accomodationCategories } from '../categories/accomodationCategories'
 
 import {
-	createAccomodation,
-	createAccomodationFormData,
-} from '../../features/createAccomodationSlice'
-import { selectDestinations } from '../../features/destinationSlice'
-import { Destination } from './AddActivity'
+	updateAccomodation,
+	updateAccomodationFormData,
+} from '../../features/updateAccomodationSlice'
+import {
+	accomodationById,
+	selectAccomodationById,
+} from '../../features/accomodationByIdSlice'
 
-import AccomodationForm from '../forms/AccomodationForm'
-import CategoryInput from '../inputs/CategoryInput'
-import Map from '../Map'
-import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import DropZone from '../inputs/DropZone'
+import AccomodationForm from '../forms/AccomodationForm'
+import CategoryInput from '../inputs/CategoryInput'
 import Input from '../inputs/Input'
-import SelectDestination from '../inputs/Select'
+import Map from '../Map'
+import Button from '../buttons/Button'
+import Dropdown from '../dropdown'
 import CategorySingleInput from '../inputs/CategorySingleInput'
+import { accomodationCategories } from '../categories/accomodationCategories'
 
-const AddAccomodation = () => {
+const UpdateRoom = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
+	const { id } = useParams()
+	const accomodationID = id
+
 	const { currentUserId } = useCurrentUser()
-	const destinationsList = useSelector(selectDestinations)
+	const accomodation = useSelector(selectAccomodationById)
 
-	const [destinations, setDestinations] = useState<Destination[]>([])
-	const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
-
-	const [formData, setFormData] = useState<createAccomodationFormData>({
+	const [formData, setFormData] = useState<updateAccomodationFormData>({
 		name: '',
 		description: '',
 		roomsCount: 0,
@@ -55,7 +57,6 @@ const AddAccomodation = () => {
 		startDate: '',
 		endDate: '',
 		price: 0,
-		idDestination: '',
 		category: '',
 	})
 
@@ -76,27 +77,6 @@ const AddAccomodation = () => {
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				category: '',
-			}))
-		}
-	}
-
-	const [checkboxAmenitiesValues, setCheckboxAmenitiesValues] = useState([])
-
-	const handleCheckboxAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value
-		const isChecked = e.target.checked
-
-		if (isChecked) {
-			setCheckboxAmenitiesValues([...checkboxAmenitiesValues, value])
-			setFormData((prevFormData) => ({
-				...prevFormData,
-				amenities: [...formData.amenities, value],
-			}))
-		} else {
-			setCheckboxAmenitiesValues(checkboxAmenitiesValues.filter((val) => val !== value))
-			setFormData((prevFormData) => ({
-				...prevFormData,
-				amenities: formData.amenities.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -122,19 +102,32 @@ const AddAccomodation = () => {
 		}
 	}
 
+	const [checkboxAmenitiesValues, setCheckboxAmenitiesValues] = useState([])
+
+	const handleCheckboxAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
+
+		if (isChecked) {
+			setCheckboxAmenitiesValues([...checkboxAmenitiesValues, value])
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				amenities: [...formData.amenities, value],
+			}))
+		} else {
+			setCheckboxAmenitiesValues(checkboxAmenitiesValues.filter((val) => val !== value))
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				amenities: formData.amenities.filter((val) => val !== value),
+			}))
+		}
+	}
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			[name]: value,
-		}))
-	}
-
-	const handleDestinationChange = (selectedOption: any) => {
-		setSelectedDestination(selectedOption)
-		setFormData((prevFormData) => ({
-			...prevFormData,
-			idDestination: selectedOption?._id,
 		}))
 	}
 
@@ -163,7 +156,6 @@ const AddAccomodation = () => {
 			startDate,
 			endDate,
 			price,
-			idDestination,
 			category,
 		} = formData
 
@@ -198,7 +190,6 @@ const AddAccomodation = () => {
 		data.append('startDate', startDate)
 		data.append('endDate', endDate)
 		data.append('price', price)
-		data.append('idDestination', idDestination)
 		data.append('category', category)
 
 		for (let i = 0; i < formData.images.length; i++) {
@@ -214,26 +205,7 @@ const AddAccomodation = () => {
 		})
 
 		try {
-			dispatch(createAccomodation(data, currentUserId))
-			setFormData({
-				name: '',
-				description: '',
-				roomsCount: 0,
-				bedsCount: 0,
-				maxOccupancy: 0,
-				bathRoomsCount: 0,
-				amenities: [],
-				location: '',
-				zone: [],
-				images: [],
-				startDate: '',
-				endDate: '',
-				price: 0,
-				idDestination: '',
-				category: '',
-			})
-			setSelectedDestination(null)
-			setSearchValue('')
+			dispatch(updateAccomodation(data, currentUserId, accomodationID))
 		} catch (error: any) {
 			toast.error('Error while sending the form')
 		}
@@ -241,39 +213,75 @@ const AddAccomodation = () => {
 
 	const { handleSearch, mapUrl, searchValue, setSearchValue } = useMaps(formData)
 
-	useEffect(() => {
-		setDestinations(destinationsList)
-	}, [destinationsList])
+	const [editing, setEditing] = useState(false)
 
-	const formatOptionLabel = (option: any) => (
-		<div className='flex flex-row items-center gap-3'>
-			<div>
-				<span className='text-neutral-500'>{option.title}</span>
-			</div>
-		</div>
-	)
+	const handleToggleEdit = () => {
+		setEditing(!editing)
+
+		if (!editing) {
+			setFormData({
+				name: accomodation?.name,
+				description: accomodation?.description,
+				roomsCount: accomodation?.roomsCount,
+				bedsCount: accomodation?.bedsCount,
+				maxOccupancy: accomodation?.maxOccupancy,
+				bathRoomsCount: accomodation?.bathRoomsCount,
+				amenities: accomodation?.amenities,
+				location: accomodation?.location,
+				zone: accomodation?.zone,
+				images: accomodation?.images,
+				startDate: accomodation?.startDate,
+				endDate: accomodation?.endDate,
+				price: accomodation?.price,
+				category: accomodation?.category,
+			})
+			setCheckboxTypeValues(accomodation?.category)
+			setCheckboxAmenitiesValues(accomodation?.amenities)
+			setCheckboxZoneValues(accomodation?.zone)
+			setSearchValue(accomodation?.location)
+		}
+	}
+
+	console.log(formData)
+
+	useEffect(() => {
+		dispatch(accomodationById(accomodationID))
+	}, [accomodationID, dispatch])
 
 	return (
 		<Container>
 			<div className='flex flex-col md:items-center xl:items-start pt-14'>
-				<h2 className='text-[32px] font-medium'>Add Accomodation</h2>
+				<h2 className='text-[32px] font-medium'>Update Accomodation</h2>
 				<div className='flex flex-col items-center justify-center w-full transition'>
+					{/* LOAD INFORMATION */}
+					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
+						{!editing ? (
+							<div className=' flex items-center justify-between gap-4'>
+								<Button label='Load information' onClick={handleToggleEdit} />
+								<div className='pt-4'>
+									<Dropdown
+										button={
+											<CgInfo size={60} color='#FFBC39' style={{ cursor: 'pointer' }} />
+										}
+										children={
+											<div className='flex w-[350px] flex-col gap-2 rounded-[20px] bg-white p-4 shadow-CooL'>
+												<p className='px-full linear flex cursor-pointer items-center justify-center rounded-xl py-[11px] font-bold transition duration-200'>
+													If you want to update any current field of the accomodation
+													click the above button to load the information.
+												</p>
+											</div>
+										}
+										classNames={'py-2 top-8 -left-[310px] md:-left-[310px] w-max'}
+										animation='origin-[75%_0%] md:origin-top-right transition-all duration-300 ease-in-out'
+									/>
+								</div>
+							</div>
+						) : null}
+					</div>
+
 					{/* IMAGE */}
 					<div className='mx-auto py-5 xl:py-8 w-full xl:w-4/5 2xl:w-5/6'>
 						<DropZone onFilesSelected={handleFilesSelected} />
-					</div>
-
-					{/* SELECT DESTINATION */}
-					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						Select destination
-					</h3>
-					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
-						<SelectDestination
-							options={destinations}
-							value={selectedDestination}
-							onChange={handleDestinationChange}
-							formatOptionLabel={formatOptionLabel}
-						/>
 					</div>
 
 					{/* SELECT TYPE */}
@@ -303,7 +311,7 @@ const AddAccomodation = () => {
 					</h3>
 
 					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
-						<AccomodationForm handleChange={handleChange} form={formData} />
+						<AccomodationForm handleChange={handleChange} updateForm={formData} />
 					</div>
 
 					{/* CATEGORIES */}
@@ -383,7 +391,7 @@ const AddAccomodation = () => {
 							<Button label='Back' card outline onClick={() => navigate('/provider')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Create' card onClick={handleSubmit} />
+							<Button label='Save' card onClick={handleSubmit} />
 						</div>
 					</div>
 				</div>
@@ -392,4 +400,4 @@ const AddAccomodation = () => {
 	)
 }
 
-export default AddAccomodation
+export default UpdateRoom

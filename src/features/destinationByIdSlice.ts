@@ -11,13 +11,13 @@ interface DestinationById {
 }
 
 interface DestinationByIdState {
-	destination: DestinationById[]
+	destination: DestinationById | null
 	loading: boolean
 	error: string | null
 }
 
 const initialState: DestinationByIdState = {
-	destination: [],
+	destination: null,
 	loading: false,
 	error: null,
 }
@@ -30,7 +30,7 @@ const destinationByIdSlice = createSlice({
 			state.loading = true
 			state.error = null
 		},
-		destinationByIdSuccess(state, action: PayloadAction<DestinationById[]>) {
+		destinationByIdSuccess(state, action: PayloadAction<DestinationById>) {
 			state.destination = action.payload
 			state.loading = false
 			state.error = null

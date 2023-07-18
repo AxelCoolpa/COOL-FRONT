@@ -1,20 +1,20 @@
 import React from 'react'
 import { IconType } from 'react-icons'
 
-interface CategoryInputProps {
+interface CategorySingleInputProps {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	icon?: IconType
 	label: string
-	id?: string
-	name?: string
-	value?: string
+	id: string
+	name: string
+	value: string
 	iconColor?: string
 	bgColor?: string
 	secondaryBorderColor?: boolean
-	checked?: any
+	selected: string
 }
 
-const CategoryInput: React.FC<CategoryInputProps> = ({
+const CategorySingleInput: React.FC<CategorySingleInputProps> = ({
 	icon: Icon,
 	label,
 	handleChange,
@@ -24,7 +24,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 	bgColor,
 	iconColor,
 	secondaryBorderColor,
-	checked,
+	selected,
 }) => {
 	return (
 		<>
@@ -36,7 +36,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 					name={name}
 					value={value}
 					className='hidden peer'
-					checked={checked ? checked.includes(label) : null}
+					checked={selected === value}
 				/>
 
 				<label
@@ -75,4 +75,4 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 	)
 }
 
-export default CategoryInput
+export default CategorySingleInput

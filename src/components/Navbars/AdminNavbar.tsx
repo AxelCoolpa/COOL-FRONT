@@ -8,7 +8,7 @@ import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
 import { BsArrowBarUp, BsDot } from 'react-icons/bs'
 
-import AvatarImg from '../../assets/Avatar.jpg'
+import AvatarImg from '../../assets/AvatarPlaceholder.jpg'
 
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
@@ -228,37 +228,33 @@ const Navbar: React.FC = () => {
 						<ul className='relative flex-col md:flex-row list-none items-center hidden md:flex'>
 							<div className='flex items-center gap-3 xl:gap-6'>
 								<Dropdown
-									button={<Avatar avatar={currentUser?.avatar} wh={12} />}
+									button={<Avatar avatar={currentUser?.avatar || AvatarImg} wh={12} />}
 									children={
 										<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
 											<div className='mt-3 ml-4'>
 												<div className='flex flex-col gap-2'>
 													<p className='text-sm font-bold cursor-default'>
-														👋 Hey, {currentUser?.email}
-													</p>
-													<p className='text-sm pl-6 cursor-default'>
-														{currentUser?.username}
+														👋 Hey, {currentUser?.firstName}
 													</p>
 												</div>
 											</div>
 											<div className='mt-3 mx-4 flex flex-col'>
 												<div className='h-px w-full bg-gray-200' />
 												<a
-													href='/admindash/profile'
+													href='/profile'
 													className={
-														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
+														'mt-3 text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
 												>
 													Profile
 												</a>
 												<a
-													href='#'
+													href='/'
 													className={
 														'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
 													}
-													onClick={(e) => e.preventDefault()}
 												>
-													Something else here
+													USER
 												</a>
 												<div className='mt-3 h-px w-full bg-gray-200' />
 												<a
@@ -284,7 +280,6 @@ const Navbar: React.FC = () => {
 									<label className='2xl:text-lg font-semibold'>
 										{currentUser?.firstName}
 									</label>
-									<span className='text-xs'>#{currentUser?.role?.roleName}</span>
 								</div>
 								<div className=''>
 									<select

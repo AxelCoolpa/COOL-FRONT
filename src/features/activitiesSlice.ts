@@ -22,6 +22,7 @@ interface Activities {
 	rating?: number[]
 	reviews?: string[]
 
+	providerId?: string
 	itDeleted?: boolean
 }
 

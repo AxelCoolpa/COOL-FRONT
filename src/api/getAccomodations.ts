@@ -4,14 +4,22 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
 interface Accomodation {
 	_id: string
-	title: string
+	name: string
 	description: string
-
-	categories: Array<string>
+	roomsCount: number
+	bedsCount: number
+	maxOccupancy: number
+	bathRoomsCount: number
+	amenities: string[]
 	location: string
-	activities: Array<string>
-	galleryImage: string
+	zone: string[]
+	images: string[]
+	startDate: string
+	endDate: string
+	price: number
+	category: string
 
+	providerId: string
 	itDelete: boolean
 	createAt: string
 	updateAt: string

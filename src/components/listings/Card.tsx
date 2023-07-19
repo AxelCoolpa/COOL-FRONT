@@ -164,14 +164,28 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 
 				<CardHeader floated={false} color='gray' className='mx-0 mt-0 mb-4 h-64 xl:h-40'>
 					{data?.galleryImage ? (
-						<img
-							src={data?.galleryImage || data?.galleryImage[0]}
+						data.galleryImage.length > 0 && (
+							<img
+								src={data?.galleryImage[0]}
+								alt={data?.title}
+								className='h-full w-full object-cover'
+							/>
+						)
+					) : <img
+							src={data?.galleryImage}
 							alt={data?.title}
 							className='h-full w-full object-cover'
-						/>
+					  /> ? (
+						data?.images.length > 0 && (
+							<img
+								src={data?.images[0]}
+								alt={data?.name}
+								className='h-full w-full object-cover'
+							/>
+						)
 					) : (
 						<img
-							src={data?.images || data?.images[0]}
+							src={data?.images}
 							alt={data?.name}
 							className='h-full w-full object-cover'
 						/>

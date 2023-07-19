@@ -2,7 +2,7 @@ export interface EnumActivity {
 	_id?: string
 	title: string
 	description: string
-	galleryImage: string[]
+	galleryImage: string | string[]
 	individualPrice: string
 	groupPrice: string
 	category: Array<string>
@@ -42,7 +42,7 @@ export interface EnumRoom {
 	amenities: string[]
 	location: string
 	zone: string[]
-	images: string[]
+	images: string | string[]
 	startDate: string
 	endDate: string
 	price: number

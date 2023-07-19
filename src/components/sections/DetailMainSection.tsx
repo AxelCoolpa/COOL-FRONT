@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react'
 import { EnumActivity, EnumRoom } from '../../types'
 
@@ -15,7 +16,7 @@ interface DetailProps {
 const DetailMainSection: React.FC<DetailProps> = ({ listing }) => {
 	return (
 		<div className='max-w-screen-2xl mx-auto md:mt-12 w-full'>
-			<DetailHeader listing={listing} />
+			<DetailHeader listing={listing?.images || listing?.galleryImage} />
 			<div className='grid grid-cols-1 xl:grid-cols-7 md:gap-10 py-16'>
 				<DetailInfo
 					name={listing?.title || listing?.name}
@@ -32,16 +33,34 @@ const DetailMainSection: React.FC<DetailProps> = ({ listing }) => {
 				</div>
 			</div>
 			<hr className='w-full xl:w-4/6 2xl:w-3/6  mx-2 m-10' />
-			{listing?.galleryImage?.length > 2 && (
-				<div className='grid grid-cols-1 xl:grid-cols-9 md:gap-10 py-0 xl:py-10'>
-					<div className='xl:col-span-7'>
-						<Gallery listing={listing} />
-					</div>
-				</div>
-			)}
-			{listing?.galleryImage > 2 && (
-				<hr className='w-full xl:w-4/6 2xl:w-3/6 mx-2 m-10' />
-			)}
+			{listing?.galleryImage
+				? listing?.galleryImage.length > 2 && (
+						<div className='grid grid-cols-1 xl:grid-cols-9 md:gap-10 py-0 xl:py-10'>
+							<div className='xl:col-span-7'>
+								<Gallery listing={listing?.galleryImage} />
+							</div>
+						</div>
+				  )
+				: listing?.images
+				? listing?.images.length > 2 && (
+						<div className='grid grid-cols-1 xl:grid-cols-9 md:gap-10 py-0 xl:py-10'>
+							<div className='xl:col-span-7'>
+								<Gallery listing={listing?.images} />
+							</div>
+						</div>
+				  )
+				: null}
+
+			{listing?.galleryImage
+				? listing?.galleryImage.length > 2 && (
+						<hr className='w-full xl:w-4/6 2xl:w-3/6 mx-2 m-10' />
+				  )
+				: listing?.images
+				? listing?.images.length > 2 && (
+						<hr className='w-full xl:w-4/6 2xl:w-3/6 mx-2 m-10' />
+				  )
+				: null}
+
 			<div className='flex flex-col py-10 gap-10'>
 				<h3 className='text-3xl font-bold'>Maps</h3>
 				<Map />

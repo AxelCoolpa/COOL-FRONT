@@ -1,18 +1,19 @@
 import { useSelector } from 'react-redux'
 import { useDestinations } from '../../hooks/useDestination'
+
 import { selectError, selectLoading } from '../../features/destinationSlice'
-import HeaderSection from '../../components/sections/HeaderSection'
+
 import { Card, CardBody } from '@material-tailwind/react'
-import ActivityCard from '../../components/listings/ActivityCard'
+
 import { Destination } from '../../components/sections/AddActivity'
+
+import HeaderSection from '../../components/sections/HeaderSection'
 import MainCard from '../../components/listings/Card'
 
 const Discover = () => {
 	const { destinos } = useDestinations()
-	console.log(destinos)
 
 	const activities = destinos?.map((dest) => dest.activities)
-	console.log(activities)
 	const loading = useSelector(selectLoading)
 	const error = useSelector(selectError)
 	if (loading) {

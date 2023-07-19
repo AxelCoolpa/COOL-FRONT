@@ -19,6 +19,7 @@ interface Room {
 	price: number
 	category: string
 
+	providerId?: string
 	itDeleted?: boolean
 }
 

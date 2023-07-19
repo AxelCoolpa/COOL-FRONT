@@ -11,6 +11,7 @@ import {
   registerFailure,
 } from "../features/RegisterSlice";
 import { RootState } from "../store/Store";
+import { Link } from "react-router-dom";
 
 export interface RegisterFormData {
   username: string;
@@ -74,7 +75,7 @@ const Register = (): JSX.Element => {
       confirmPassword: "",
     });
 
-    navigate("/login");
+    navigate("../filter");
   };
 
   useEffect(() => {
@@ -169,14 +170,17 @@ const Register = (): JSX.Element => {
             />
           </div>
 
-          <div className="flex flex-col items-center">
+            
+          <div className="flex flex-col">
+            
             <button
               type="submit"
-              className="bg-orange-700 w-[10vw] hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
+              className="bg-orange-700 w-full hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
               disabled={isLoading}
-            >
+              >
               {isLoading ? "Registering..." : "Register"}
             </button>
+              
 
             <span className="border-t border-gray-300 w-full text-center my-2">
               {" "}

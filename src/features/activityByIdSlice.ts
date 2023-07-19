@@ -20,6 +20,9 @@ interface ActivityById {
 
 	rating?: number[]
 	reviews?: string[]
+
+	providerId?: string
+	itDeleted?: boolean
 }
 
 interface ActivityByIdState {

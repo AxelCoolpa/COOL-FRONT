@@ -9,6 +9,7 @@ interface Props {
 const PreFilterSection: React.FC<Props> = ({ children }) => {
 	return (
 		<div className='grid grid-cols-2'>
+			
 			<section className='col-span-1 flex justify-center left-2'>
 				<div
 					style={{ backgroundImage: `url(${LoginImage})` }}

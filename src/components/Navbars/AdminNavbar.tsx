@@ -8,7 +8,7 @@ import { FiBell, FiHeart, FiSearch } from 'react-icons/fi'
 import { TbMessage } from 'react-icons/tb'
 import { BsArrowBarUp, BsDot } from 'react-icons/bs'
 
-import AvatarImg from '../../assets/Avatar.jpg'
+import AvatarImg from '../../assets/AvatarPlaceholder.jpg'
 
 import Cool from '../../assets/cool.png'
 import Dropdown from '../dropdown/index'
@@ -280,7 +280,6 @@ const Navbar: React.FC = () => {
 									<label className='2xl:text-lg font-semibold'>
 										{currentUser?.firstName}
 									</label>
-									<span className='text-xs'>#{currentUser?.role?.roleName}</span>
 								</div>
 								<div className=''>
 									<select

@@ -5,6 +5,7 @@ import HeaderSection from '../../components/sections/HeaderSection'
 import { Card, CardBody } from '@material-tailwind/react'
 import ActivityCard from '../../components/listings/ActivityCard'
 import { Destination } from '../../components/sections/AddActivity'
+import MainCard from '../../components/listings/Card'
 
 const Discover = () => {
 	const { destinos } = useDestinations()
@@ -71,7 +72,7 @@ const ActivitySection: React.FC<{ destinations?: Destination[] }> = ({
 					<div className='flex px-5'>
 						<div className='grid grid-cols-1 min-[950px]:grid-cols-2 min-[1200px]:grid-cols-3 min-[1440px]:grid-cols-4 min-[1540px]:grid-cols-5 min-[1640px]:grid-cols-6 gap-1'>
 							{destinations?.map((activity) => (
-								<ActivityCard key={activity._id} data={activity} />
+								<MainCard key={activity._id} data={activity} />
 							))}
 						</div>
 					</div>

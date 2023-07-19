@@ -32,6 +32,7 @@ import PruebaHome from '../pages/ProvUser/pruebaHome'
 import PreFilter from '../pages/LoginPreFilter/PreFilter'
 import PreFilterGuests from '../pages/LoginPreFilter/PreFilterGuests'
 import PreFilterDiscover from '../pages/LoginPreFilter/PreFilterDiscover'
+import BookingBarFilter from '../pages/User/BookingBarFilter'
 
 export const admin = [
 	{
@@ -142,10 +143,10 @@ export const user = [
 		path: 'maps',
 		element: <Maps />,
 	},
-	/* {
-		path: 'homebug',
-		element: <HomeUser />,
-	}, */
+	{
+		path: 'search',
+		element: <BookingBarFilter />,
+	},
 	{
 		path: 'create',
 		element: <CreateAdventure />,

@@ -1,6 +1,7 @@
 import Input from './inputs/Input'
 
-const BookingBar = () => {
+const BookingBar: React.FC = () => {
+	
 	return (
 		<div className='absolute hidden xl:flex justify-between items-center w-11/12 p-5 bg-white shadow-black/30 shadow-lg -bottom-16 rounded-lg px-10'>
 			<div className='flex flex-col  justify-center gap-2'>

@@ -11,15 +11,29 @@ import "slick-carousel/slick/slick-theme.css";
 import ListingCardnew from "../../components/listings/ListingCardnew";
 import { useDestinations } from "../../hooks/useDestination";
 import { Card, CardBody } from "@material-tailwind/react";
+import { useAllActivities } from "../../hooks/useActivities";
+import { activities } from "../../features/activitiesSlice";
+
+interface Country {
+  _id: string;
+  title: string;
+}
 
 const BookingBarFilter: React.FC = () => {
+  const { activitiesArray } = useAllActivities();
   const { destinos } = useDestinations();
+  const title = destinos?.map((dest) => dest.title);
+  const destino = destinos?.map((dest) => dest);
   const activities = destinos?.map((dest) => dest.activities);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>();
+  console.log(selectedCountry);
   const [formData, setFormData] = useState<{ category: string[] }>({
     category: [],
   });
+  //console.log("todos los activities", activitiesArray);
 
-  let activitiesArray: any[] = [];
+  /* let activitiesArray: any[] = [];
+  console.log(destino);
 
   if (activities) {
     activities?.forEach((activities) => {
@@ -37,23 +51,64 @@ const BookingBarFilter: React.FC = () => {
         });
       }
     });
-  }
+  } */
 
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = event.target.value;
+    console.log("se selecciono: ", selectedId);
+    const selectedCountry =
+      destinos?.find((c) => c?._id === selectedId) || null;
+    const activitiesSelected = selectedCountry?.activities;
+    //console.log('resultado: ',activitiesSelected)
+    setSelectedCountry(activitiesSelected);
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        category: [...formData.category, value],
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        category: formData.category.filter((val) => val !== value),
+      }));
+    }
+  };
+
+  //settings del slider
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
+
+  //estilos
   const isSmallScreen = useMediaQuery("(max-width: 600px)");
   const headerStyle: React.CSSProperties = {
     padding: "20px",
     textAlign: "center",
-    fontSize: "2em",
-    marginTop: "3vw",
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: "1vw",
+    marginBottom: '1.5vw'
   };
   const containerStyle: React.CSSProperties = {
     display: "grid",
     gridTemplateColumns: isSmallScreen ? "1fr" : "1fr 1fr",
     gap: "20px",
     margin: "20px",
+    marginTop: '1vw'
   };
   const gridStyle: React.CSSProperties = {
-    marginTop: "3vw",
+    marginTop: "4vw",
     marginLeft: "3vw",
     border: " 1px solid rgba(0, 0, 0, 0.1)",
     borderRadius: "10px",
@@ -64,7 +119,7 @@ const BookingBarFilter: React.FC = () => {
     justifyContent: "space-between",
     width: "29vw",
   };
-  
+
   const gridInput: React.CSSProperties = {
     marginTop: "1.5vw",
     marginLeft: "3vw",
@@ -90,7 +145,7 @@ const BookingBarFilter: React.FC = () => {
     width: "34vw",
   };
   const gridStyleTable: React.CSSProperties = {
-    marginBottom: "1vw",
+    marginTop: "1vw",
     marginLeft: "-4vw",
     border: " 1px solid rgba(0, 0, 0, 0.1)",
     borderRadius: "10px",
@@ -108,32 +163,6 @@ const BookingBarFilter: React.FC = () => {
   const container: React.CSSProperties = {
     marginBottom: "3vw",
   };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const isChecked = e.target.checked;
-
-    if (isChecked) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        category: [...formData.category, value],
-      }));
-    } else {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        category: formData.category.filter((val) => val !== value),
-      }));
-    }
-  };
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-  };
-
   return (
     <>
       <div style={headerStyle}>
@@ -146,7 +175,35 @@ const BookingBarFilter: React.FC = () => {
         >
           Search
         </h1>
-        <BookingBar />
+        <div className="absolute hidden xl:flex justify-between items-center w-11/12 p-5 bg-white shadow-black/10 shadow-lg -bottom-16 rounded-lg px-10">
+            <div className="flex flex-col  justify-center gap-2">
+              <span className="font-bold">Location</span>
+			  <select onChange={handleSelectChange}>
+              {destinos?.map((country) => (
+                <option key={country._id} value={country._id}>
+                  {country.title}
+                </option>
+              ))}
+            </select>
+            </div>
+            <div className="flex flex-col  justify-center gap-2">
+              <span className="font-bold">Start date</span>
+				<input type="date" />
+            </div>
+            <div className="flex flex-col  justify-center gap-2">
+              <span className="font-bold">Ending date</span>
+				<input type="date" />
+            </div>
+            <div className="flex flex-col  justify-center  gap-2">
+              <span className="font-bold">Peoples</span>
+				<input type="number" />
+            </div>
+            <div className="bg-[#CE452A] hover:bg-[#CE451b] shadow-md hover:shadow-lg w-[147px] gap-2 text-white rounded-lg text-center cursor-pointer">
+              <button className="font-bold p-4 " onClick={() => alert("Search")}>
+                Search
+              </button>
+            </div>
+          </div>
       </div>
       <div style={containerStyle}>
         <div>
@@ -194,6 +251,8 @@ const BookingBarFilter: React.FC = () => {
               </Slider>
             </div>
           </div>
+
+
           <div style={gridInput}>
             <Typography
               style={{
@@ -202,34 +261,48 @@ const BookingBarFilter: React.FC = () => {
             >
               Select Province
             </Typography>
-            <Select type="select">
-              <option selected hidden>
-                Choose a province
-              </option>
-            </Select>
+
+            <select onChange={handleSelectChange}>
+              {destinos?.map((country) => (
+                <option key={country._id} value={country._id}>
+                  {country.title}
+                </option>
+              ))}
+            </select>
           </div>
+
         </div>
         <div>
-          <Card>
-            <CardBody>
-              <div>
-_                    <table>
-                      <tbody>
-                        {activitiesArray?.map((activity) => (
-                          <tr style={gridStyleTable}>
+          
+
+
+              <div
+                style={{
+                  marginTop: "3vw",
+                  marginRight: "3vw",
+                }}
+              >
+                <table>
+                  <tbody>
+                    {selectedCountry
+                      ? selectedCountry.map((activity) => (
+                          <tr style={gridStyleTable} key={activity._id}>
                             <td>
-                              <ListingCardnew
-                                key={activity._id}
-                                data={activity}
-                              />
+                              <ListingCardnew data={activity} />
+                            </td>
+                          </tr>
+                        ))
+                      : activitiesArray.map((activity) => (
+                          <tr style={gridStyleTable} key={activity._id}>
+                            <td>
+                              <ListingCardnew data={activity} />
                             </td>
                           </tr>
                         ))}
-                      </tbody>
-                    </table>
-_              </div>
-            </CardBody>
-          </Card>
+                  </tbody>
+                </table>
+              </div>
+            
         </div>
       </div>
     </>

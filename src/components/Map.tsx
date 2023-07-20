@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface MapProps {
-	mapURL?: string
+	mapURL?: string | undefined
+	
 }
 
 const Map: React.FC<MapProps> = ({ mapURL }) => {
+	
 	return (
 		<iframe
 			src={

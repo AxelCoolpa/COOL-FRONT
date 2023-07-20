@@ -18,7 +18,7 @@ const Detail = () => {
 	const room = useSelector(selectAccomodationById)
 
 	const listing = location.pathname.includes('activity') ? activity : room
-
+console.log(room)
 	useEffect(() => {
 		try {
 			location.pathname.includes('activity') && dispatch(activityById(id))

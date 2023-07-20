@@ -54,3 +54,4 @@ export const getDestinations = async () => {
 		throw new Error(error.message)
 	}
 }
+

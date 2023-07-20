@@ -86,7 +86,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 					)}
 				</div>
 
-				<BookingBar />
+				{/* <BookingBar /> */}
 			</div>
 
 			<div className='flex w-full xl:hidden'>

@@ -45,10 +45,13 @@ const Navbar: React.FC = () => {
 
 					{/* Form */}
 					<div className='flex items-center justify-center gap-4'>
+						
+						<Link to={'search'}>
 						<form className='md:flex hidden pl-10 flex-row flex-wrap items-center mr-3'>
 							<div className='relative flex w-full flex-wrap'>
 								<span className='z-10 absolute right-5 py-3'>
 									<FiSearch className='text-OrangeCooL text-xl' />
+									
 								</span>
 								<input
 									type='search'
@@ -57,6 +60,7 @@ const Navbar: React.FC = () => {
 								/>
 							</div>
 						</form>
+						</Link>
 
 						<div className='flex gap-9'>
 							{/* START NOTOFICATIONS*/}

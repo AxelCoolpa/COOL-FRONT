@@ -202,6 +202,7 @@ const MainCard: React.FC<ListingCardProps> = ({ data }) => {
 				<CardFooter className='mt-3 flex items-center justify-between py-0 px-1'>
 					{data?.title ? (
 						<Button
+							className='shadow-md hover:shadow-lg'
 							onClick={() => navigate(`/details/activity/${data?._id}`)}
 							variant='outlined'
 							size='sm'

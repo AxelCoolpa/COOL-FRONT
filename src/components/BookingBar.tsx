@@ -3,7 +3,7 @@ import Input from './inputs/Input'
 import { FilterForm, filterActivities } from '../features/activitiesSlice';
 import { useDispatch } from 'react-redux';
 
-const BookingBar = () => {
+const BookingBar: React.FC = () => {
 	const dispatch = useDispatch();
 	const [formData, setFormData] = useState<FilterForm>({
 		location: '',

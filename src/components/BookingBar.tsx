@@ -4,10 +4,14 @@ import { FilterForm, filterActivities } from '../features/activitiesSlice';
 import { useDispatch } from 'react-redux';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const BookingBar: React.FC = () => {
 	
 =======
 const BookingBar = () => {
+=======
+const BookingBar: React.FC = () => {
+>>>>>>> cfc78ebecf08c16f9248985f07ef641d94adf2c7
 	const dispatch = useDispatch();
 	const [formData, setFormData] = useState<FilterForm>({
 		location: '',
@@ -29,7 +33,10 @@ const BookingBar = () => {
 		dispatch(filterActivities(formData))
 	}
 
+<<<<<<< HEAD
 >>>>>>> 664fe01d25ad83f60ec1f2e34eb256f41b9f2306
+=======
+>>>>>>> cfc78ebecf08c16f9248985f07ef641d94adf2c7
 	return (
 		<div className='absolute hidden xl:flex justify-between items-center w-11/12 p-5 bg-white shadow-black/30 shadow-lg -bottom-16 rounded-lg px-10'>
 			<form onSubmit={handleSearch} className="flex flex-col xl:flex-row">

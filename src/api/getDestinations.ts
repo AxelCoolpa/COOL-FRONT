@@ -40,7 +40,7 @@ export const destinationApi = createApi({
 		}),
 		
 	}),
-})
+}) 	
 
 
 export const { useGetDestByIdQuery, useGetDestQuery } = destinationApi
@@ -49,7 +49,7 @@ export const { useGetDestByIdQuery, useGetDestQuery } = destinationApi
 export const getDestinations = async () => {
 	try {
 		const response = await axios.get(`${baseURL}/destinations`)
-		return response.data // Puedes ajustar esto según la estructura de la respuesta de la API
+		return response.data 
 	} catch (error: any) {
 		throw new Error(error.message)
 	}

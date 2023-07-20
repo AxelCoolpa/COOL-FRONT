@@ -19,6 +19,8 @@ interface DestinationState {
 	error: string | null
 }
 
+
+
 const initialState: DestinationState = {
 	destinations: [],
 	loading: false,
@@ -64,6 +66,8 @@ export const fetchDestinations = () => {
 		}
 	}
 }
+
+
 
 export const selectDestinations = (state: RootState) => state.destination.destinations
 export const selectLoading = (state: RootState) => state.destination.loading

@@ -14,7 +14,7 @@ const AccomodationSection = () => {
 	const accomodations = allAccomodations.filter(
 		(accomodation) => accomodation.itDeleted === false
 	)
-
+console.log(accomodations)
 	const randomAccomodation = accomodations
 		? accomodations[Math.floor(Math.random() * accomodations.length)]
 		: null

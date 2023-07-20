@@ -3,7 +3,6 @@ import { MdSearch } from "react-icons/md";
 import { StepProps } from './InitialSteps'; 
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-
 const StepThree: React.FC<StepProps> = ({handleStepClick ,next , previous , formData}) => {
   const [searchValue, setSearchValue] = useState('');
   const [mapUrl, setMapUrl] = useState('');

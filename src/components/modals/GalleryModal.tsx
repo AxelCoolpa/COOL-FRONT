@@ -9,7 +9,7 @@ import useGalleryModal from '../../hooks/useGalleryModal'
 import '../../styles/Global.css'
 
 interface GalleryModalProps {
-	gallery: Array<string> | undefined
+	gallery: string[] | undefined
 }
 
 const GalleryModal: React.FC<GalleryModalProps> = ({ gallery }) => {

@@ -50,64 +50,58 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
     justifyContent: "space-between",
     position: "relative", // Agregar posición relativa
   };
-  const imageStyle: React.CSSProperties = {
-    borderRadius: "10px",
-  };
+  
   const imageContainerStyle: React.CSSProperties = {
     margin: "-1vw",
     borderRadius: "10px",
-    display: 'flex',
-    position: 'relative',
-    width: "30%",
+    display: "flex",
+    position: "relative",
+    width: "30%"
   };
-  const gridStyleRight: React.CSSProperties = {
+  /* const gridStyleRight: React.CSSProperties = {
     flexDirection: "column",
-    top: "1px", 
+    top: "1px",
     left: "2vw",
     position: "relative",
-    marginRight: '3vw'
-  };
-  const heartStyle: React.CSSProperties = {
-    top: "-10px", // Ajustar posición desde la parte superior
-    right: "-10px", // Ajustar posición desde la parte derecha
-    display: "grid",
-    position: "absolute",
-    justifyContent: "space-between",
-  };
-  const priceStyle: React.CSSProperties = {
-    bottom: "-15px", // Ajustar posición desde la parte superior
-    right: "1px", // Ajustar posición desde la parte derecha
-    display: "grid",
-    position: "absolute",
-    justifyContent: "space-between",
-    display: "grid",
-    gridTemplateColumns: isSmallScreen ? "1fr" : "1fr 1fr",
-    margin: "5px",
-    justifyContent: 'space-between'
-  };
-
-  const imageStyle: React.CSSProperties = {
-    margin: '0',
-    borderRadius: '10px',
-    width: '40%'
-  };
-  const gridStyle: React.CSSProperties = {
-    width: "20vw",
-  };
+    marginRight: "3vw",
+  }; */
   const gridStyleRight: React.CSSProperties = {
     marginTop: "-1vw",
     marginRight: "0",
     flexDirection: "column",
     justifyContent: "space-between",
-    position: 'relative',
+    position: "relative",
     width: "34vw",
-  };
+  }
   const heartStyle: React.CSSProperties = {
-    marginRight: '1px',
-    marginTop: '1px',
-    display: "flex",
-    position: 'relative'
+    top: "-15px", // Ajustar posición desde la parte superior
+    right: "-15px", // Ajustar posición desde la parte derecha
+    display: "grid",
+    position: "absolute",
+    justifyContent: "space-between",
   };
+  const priceStyle: React.CSSProperties = {
+    bottom: "-25px", // Ajustar posición desde la parte superior
+    right: "-20px", // Ajustar posición desde la parte derecha
+    display: "flex",
+    position: "absolute",
+    justifyContent: "space-between",
+    gridTemplateColumns: isSmallScreen ? "1fr" : "1fr 1fr",
+    margin: "10px",
+  };
+
+  const imageStyle: React.CSSProperties = {
+    borderRadius: "10px",
+  };
+  const gridStyle: React.CSSProperties = {
+    width: "20vw",
+  };
+  /* const heartStyle: React.CSSProperties = {
+    marginRight: "1px",
+    marginTop: "1px",
+    display: "flex",
+    position: "relative",
+  }; */
 
   return (
     <motion.div
@@ -116,62 +110,33 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
       exit={{ y: -10, opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div style={containerStyle} >
+      <div style={containerStyle}>
         <div style={imageContainerStyle}>
           <img src={data?.galleryImage} style={imageStyle} />
         </div>
 
-
         <div style={gridStyleRight}>
-          <div
-            onClick={() => navigate(`/details/${data?._id}`)}
-      <div style={containerStyle}>
-        <div style={gridStyle}>
-          <img
-            src={data?.galleryImage}
-            style={imageStyle}
-          />
-        </div>
-
-        <div style={gridStyleRight}>
-          <div style={heartStyle}>
-            <HeartButton size={25} />
-          </div>
-          <div
-            onClick={() => navigate(`/details/${data?._id}`)}
-            className="grid items-center justify-between px-3 pt-4 cursor-pointer"
-          >
-            <h4 className="grid justify-between text-base font-semibold">
+            <h4 className="grid justify-between text-base ml-5 mt-3 font-semibold">
               {data?.title}
             </h4>
+          <div className="ml-5">
+            <ShortText text={data?.description} maxLength={60} />
           </div>
-
-        <div>
-          <ShortText text={data?.description} maxLength={60}/>
         </div>
-          </div>
-        
+
         <div style={heartStyle}>
           <HeartButton size={25} />
         </div>
 
         <div style={priceStyle}>
-        <Button
-							className='shadow-md hover:shadow-lg'
-							onClick={() => navigate(`/details/activity/${data?._id}`)}
-							variant='outlined'
-							size='sm'
-						>
-							view
-						</Button>
-          <div className="grid justify-between text-white font-bold text-lg py-2">
-            <button
-              onClick={() => alert("Call to Action Aquí")}
-              className="bg-GreenCooL w-full mx-6 rounded-lg py-1 hover:bg-opacity-90"
-            >
-              {data?.individualPrice}$
-            </button>
-          </div>
+          <Button
+            className="shadow-md hover:shadow-lg"
+            onClick={() => navigate(`/details/activity/${data?._id}`)}
+            variant="outlined"
+            size="sm"
+          >
+            view
+          </Button>
         </div>
       </div>
     </motion.div>

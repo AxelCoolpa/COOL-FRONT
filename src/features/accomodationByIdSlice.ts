@@ -65,6 +65,7 @@ export const accomodationById = (accomodationID: string) => {
 		try {
 			dispatch(accomodationByIdStart())
 			const accomodationById = await getAccomodationById(accomodationID)
+			console.log(accomodationID)
 			dispatch(accomodationByIdSuccess(accomodationById))
 		} catch (error) {
 			if (error instanceof Error) {

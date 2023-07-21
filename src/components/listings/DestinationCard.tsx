@@ -28,7 +28,7 @@ interface ListingCardProps {
 	data: EnumDestination | undefined
 }
 
-const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
+const DestinationCard: React.FC<ListingCardProps> = ({ data }) => {
 	const headingControls = useAnimation()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
@@ -98,7 +98,7 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 												<div className='flex gap-5 items-center '>
 													<DisableButton onClick={onDelete} />
 													<p onClick={onDelete} className='cursor-pointer'>
-														Disable Activity
+														Disable destination
 													</p>
 												</div>
 											</div>
@@ -106,7 +106,7 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
 												<div className='flex gap-5 items-center '>
 													<DeleteButton />
-													<p className='cursor-pointer'>Delete Activity</p>
+													<p className='cursor-pointer'>Delete destination</p>
 												</div>
 											</div>
 										)}
@@ -134,20 +134,9 @@ const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
 						{data?.title}
 					</Typography>
 				</CardBody>
-				<CardFooter className='mt-3 flex items-center justify-between py-0 px-1'>
-					<a>
-						<Button
-							onClick={() => navigate(`/details/${data?._id}`)}
-							variant='outlined'
-							size='sm'
-						>
-							view
-						</Button>
-					</a>
-				</CardFooter>
 			</Card>
 		</motion.div>
 	)
 }
 
-export default ListingCardnew
+export default DestinationCard

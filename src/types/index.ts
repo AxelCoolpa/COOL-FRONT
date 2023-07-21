@@ -2,7 +2,7 @@ export interface EnumActivity {
 	_id?: string
 	title: string
 	description: string
-	galleryImage: []
+	galleryImage: string | string[]
 	individualPrice: string
 	groupPrice: string
 	category: Array<string>
@@ -16,6 +16,7 @@ export interface EnumActivity {
 	rating?: Array<number>
 	reviews?: Array<string>
 
+	providerId?: string
 	itDeleted?: boolean
 }
 
@@ -30,20 +31,23 @@ export interface EnumDestination {
 	itDeleted?: boolean
 }
 
-export interface Room {
-	id: string
+export interface EnumRoom {
+	_id: string
 	name: string
 	description: string
 	roomsCount: number
 	bedsCount: number
 	maxOccupancy: number
-	bathroomsCount: number
+	bathRoomsCount: number
 	amenities: string[]
 	location: string
-	category: 'Beach' | 'Forest' | 'Mountain' | 'Island' | 'Village' | 'Modern' | 'Cruice'
-	zone: string
-	images: string[]
+	zone: string[]
+	images: string | string[]
 	startDate: string
 	endDate: string
 	price: number
+	category: string
+
+	providerId?: string
+	itDeleted?: boolean
 }

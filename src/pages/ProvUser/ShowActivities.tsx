@@ -1,22 +1,26 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectError, selectLoading } from '../../features/destinationSlice'
 
-import GridColumns from '../../components/sections/GridColumns'
-import ListingCard from '../../components/listings/ListingCard'
-import { selectActivities } from '../../features/activitiesSlice'
 import { useCurrentUser } from '../../hooks/useCurrentUser'
-import ActivityCard from '../../components/listings/ActivityCard'
 
-const ShowActivities: React.FC = () => {
-	const activities = useSelector(selectActivities)
+import { selectActivities } from '../../features/activitiesSlice'
+import { selectAccomodation } from '../../features/accomodationSlice'
 
-	const { currentUser } = useCurrentUser()
+import GridColumns from '../../components/sections/GridColumns'
+import MainCard from '../../components/listings/Card'
+import Button from '../../components/buttons/Button'
+
+const ShowActivities = () => {
+	const navigate = useNavigate()
+
+	const { currentUser, currentUserId } = useCurrentUser()
+
+	const allActivities = useSelector(selectActivities)
+	const allRooms = useSelector(selectAccomodation)
 
 	const loading = useSelector(selectLoading)
 	const error = useSelector(selectError)
-	const navigate = useNavigate()
 
 	if (loading) {
 		return <div>Cargando actividades...</div>
@@ -25,56 +29,62 @@ const ShowActivities: React.FC = () => {
 		return <div>Error al cargar actividades: {error} </div>
 	}
 
-	const enabledActitivities = activities.filter(
-		(activity) => activity.itDeleted === false
-	)
+	const currentActivities = allActivities.filter((a) => a.providerId === currentUserId)
+	const currentRooms = allRooms.filter((r) => r.providerId === currentUserId)
 
-	const disabledActitivities = activities.filter(
-		(activity) => activity.itDeleted === true
-	)
+	const enabled =
+		currentUser?.profileProvider?.relatedChannel === 'Travel'
+			? currentActivities.filter((activity) => activity.itDeleted === false)
+			: currentRooms.filter((room) => room.itDeleted === false)
+
+	const disabled =
+		currentUser?.profileProvider?.relatedChannel === 'Travel'
+			? currentActivities.filter((activity) => activity.itDeleted === true)
+			: currentRooms.filter((room) => room.itDeleted === true)
 
 	return (
 		<>
 			<div className=''>
 				<div className='flex flex-col rounded-t bg-white mb-0 px-6 py-6'>
-					<div className='text-center flex justify-between pt-3 mt-3 mb-3 pb-3'>
+					<div className='relative text-center flex justify-between pt-5 mt-3 mb-3 pb-3'>
 						<h6 className='text-gray-600 text-md uppercase font-bold'>
 							{currentUser?.profileProvider?.relatedChannel === 'Travel'
 								? 'Active activities'
 								: currentUser?.profileProvider?.relatedChannel === 'Accomodation'
 								? 'Active rooms'
-								: currentUser?.profileProvider?.relatedChannel === 'Logistics'
-								? 'Active services'
-								: null}
+								: 'Active services'}
 						</h6>
 						{currentUser?.profileProvider?.relatedChannel === 'Travel' ? (
-							<button
-								className='bg-red-500 text-white active:bg-red-200 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150'
-								onClick={() => navigate('/provider/create/activity')}
-							>
-								Add Activity
-							</button>
+							<div className='absolute right-0 -top-1 xl:-top-2'>
+								<Button
+									label='Add Activity'
+									onClick={() => navigate('/provider/create/activity')}
+									small
+								/>
+							</div>
 						) : currentUser?.profileProvider?.relatedChannel === 'Accomodation' ? (
-							<button
-								className='bg-red-500 text-white active:bg-red-200 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150'
-								onClick={() => navigate('/provider/create/accomodation')}
-							>
-								Add Accomodation
-							</button>
-						) : currentUser?.profileProvider?.relatedChannel === 'Logistics' ? (
-							<button
-								className='bg-red-500 text-white active:bg-red-200 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150'
-								onClick={() => navigate('/provider/create/logistic')}
-							>
-								Add Logistics
-							</button>
-						) : null}
+							<div className='absolute right-0 -top-1 xl:-top-2'>
+								<Button
+									label='Add Accomodation'
+									onClick={() => navigate('/provider/create/accomodation')}
+									small
+								/>
+							</div>
+						) : (
+							<div className='absolute right-0 -top-1 xl:-top-2'>
+								<Button
+									label='Add Logistics'
+									onClick={() => navigate('/provider/create/logistic')}
+									small
+								/>
+							</div>
+						)}
 					</div>
 
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{enabledActitivities.map((activity) => (
-								<ActivityCard key={activity._id} data={activity} />
+							{enabled.map((item) => (
+								<MainCard key={item._id} data={item} />
 							))}
 						</GridColumns>
 					</div>
@@ -87,16 +97,14 @@ const ShowActivities: React.FC = () => {
 								? 'Inactive activities'
 								: currentUser?.profileProvider?.relatedChannel === 'Accomodation'
 								? 'Inactive rooms'
-								: currentUser?.profileProvider?.relatedChannel === 'Logistics'
-								? 'Inactive services'
-								: null}
+								: 'Inactive services'}
 						</h6>
 					</div>
 
 					<div className='flex-auto px-3 lg:px-0 py-10 pt-0'>
 						<GridColumns>
-							{disabledActitivities.map((activity) => (
-								<ListingCard key={activity._id} data={activity} />
+							{disabled.map((item) => (
+								<MainCard key={item._id} data={item} />
 							))}
 						</GridColumns>
 					</div>

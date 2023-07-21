@@ -8,9 +8,6 @@ import {
 	selectLoading,
 } from '../../features/destinationSlice'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Thumbs } from 'swiper'
-
 import GridColumns from '../../components/sections/GridColumns'
 import DestinationCard from '../../components/listings/DestinationCard'
 

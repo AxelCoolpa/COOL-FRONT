@@ -10,6 +10,7 @@ import headerImg from '../../assets/headerImg.jpg'
 import HeartButton from '../buttons/HeartButton'
 import BookingBar from '../BookingBar'
 import Input from '../inputs/Input'
+//import InputIA from '../InputIA/InputIA'
 
 interface HeaderSectioonProps {
 	id?: string
@@ -86,7 +87,7 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 					)}
 				</div>
 
-				<BookingBar />
+				{/* <BookingBar /> */}
 			</div>
 
 			<div className='flex w-full xl:hidden'>
@@ -97,6 +98,8 @@ const HeaderSection: React.FC<HeaderSectioonProps> = ({
 					handleChange={() => alert('Incluir aqui la funcionalidad')}
 				/>
 			</div>
+
+			
 		</div>
 	)
 }

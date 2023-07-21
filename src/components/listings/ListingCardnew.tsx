@@ -1,155 +1,146 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import { deleteAdventure } from '../../features/deleteAdventureSlice'
+import { deleteAdventure } from "../../features/deleteAdventureSlice";
 
-import { useLocation, useNavigate } from 'react-router'
-import { motion, useAnimation } from 'framer-motion'
+import { useLocation, useNavigate } from "react-router";
+import { motion, useAnimation } from "framer-motion";
 
-import { EnumData } from '../../types'
+import { EnumData } from "../../types";
 
-import Dropdown from '../dropdown/index'
-import HeartButton from '../buttons/HeartButton'
-import MoreOptionsButton from '../buttons/MoreOptionsButon'
-import EditButon from '../buttons/EditButton'
-import DeleteButton from '../buttons/DeleteButton'
-import { toast } from 'react-hot-toast'
+import HeartButton from "../buttons/HeartButton";
+import { useMediaQuery } from "@mui/material";
+
+import ShortText from "../bookingbarfilter/ShortText";
+import { Button } from "@material-tailwind/react";
 
 interface ListingCardProps {
-	data: EnumData | undefined
+  data: EnumData | undefined;
 }
 
 const ListingCardnew: React.FC<ListingCardProps> = ({ data }) => {
-	const headingControls = useAnimation()
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
-	const location = useLocation()
+  const headingControls = useAnimation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-	const onDelete = async () => {
-		await dispatch(deleteAdventure(data?._id))
+  const onDelete = async () => {
+    await dispatch(deleteAdventure(data?._id));
 
-		setTimeout(() => {
-			window.location.reload()
-		}, 1000)
-	}
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
 
-	useEffect(() => {
-		const startAnimation = async () => {
-			await headingControls.start({
-				x: 0,
-				transition: { duration: 0.4, delay: 0.5 },
-			})
-		}
-		startAnimation()
-	}, [headingControls])
+  useEffect(() => {
+    const startAnimation = async () => {
+      await headingControls.start({
+        x: 0,
+        transition: { duration: 0.4, delay: 0.5 },
+      });
+    };
+    startAnimation();
+  }, [headingControls]);
+  const isSmallScreen = useMediaQuery("(max-width: 600px)");
 
-	return (
-		<motion.div
-			initial={{ y: 10, opacity: 0 }}
-			animate={{ y: 0, opacity: 2 }}
-			exit={{ y: -10, opacity: 0 }}
-			transition={{ duration: 0.4 }}
-		>
-			<div className='bg-[#f7f8f9] col-span-1 group rounded-xl pb-4 drop-shadow'>
-				<div className='relative'>
-					<img
-						src={data?.galleryImage}
-						className='object-cover w-full h-[200px] rounded-t-xl'
-					/>
-					<div className='absolute top-3 right-3'>
-						{location.pathname === '/admindash' || location.pathname === '/provider' ? (
-							<Dropdown
-								button={<MoreOptionsButton />}
-								children={
-									<div className='flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl'>
-										<div className='mt-3 ml-4'>
-											<div className='flex flex-col gap-2'>
-												<p className='text-sm font-bold cursor-default'>Options</p>
-											</div>
-										</div>
-										<div className='mt-3 mx-4 flex flex-col gap-5'>
-											<div className='h-px w-full bg-gray-200' />
-											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap'>
-												{location.pathname === '/admindash' ? (
-													<div className='flex gap-5 items-center '>
-														<EditButon
-															onClick={() => navigate(`/admindash/update/${data?._id}`)}
-														/>
-														<p
-															onClick={() => navigate(`/admindash/update/${data?._id}`)}
-															className='cursor-pointer'
-														>
-															Edit destination
-														</p>
-													</div>
-												) : (
-													<div className='flex gap-5 items-center '>
-														<EditButon
-															onClick={() => navigate(`/provider/update/${data?._id}`)}
-														/>
-														<p
-															onClick={() => navigate(`/provider/update/${data?._id}`)}
-															className='cursor-pointer'
-														>
-															Edit activity
-														</p>
-													</div>
-												)}
-											</div>
-											<div className='text-sm py-2 px-4 font-normal block w-full whitespace-nowrap text-blueGray-700'>
-												{location.pathname === '/admindash' ? (
-													<div className='flex gap-5 items-center '>
-														<DeleteButton onClick={onDelete} />
-														<p onClick={onDelete} className='cursor-pointer'>
-															Delete destination
-														</p>
-													</div>
-												) : (
-													<div className='flex gap-5 items-center '>
-														<DeleteButton
-															onClick={() =>
-																toast.error('Error al eliminar la actividad')
-															}
-														/>
-														<p
-															onClick={() =>
-																toast.error('Error al eliminar la actividad')
-															}
-															className='cursor-pointer'
-														>
-															Delete activity
-														</p>
-													</div>
-												)}
-											</div>
-										</div>
-									</div>
-								}
-								classNames={'py-2 top-4 right-0 w-max'}
-							/>
-						) : (
-							<HeartButton size={25} />
-						)}
-					</div>
-				</div>
-				<div
-					onClick={() => navigate(`/details/${data?._id}`)}
-					className='flex items-center justify-between px-3 pt-4 cursor-pointer'
-				>
-					<h4 className='text-base font-semibold'>{data?.title}</h4>
-				</div>
+  const containerStyle: React.CSSProperties = {
+    display: "flex",
+    gridTemplateColumns: isSmallScreen ? "1fr" : "1fr 1fr",
+    margin: "1px",
+    justifyContent: "space-between",
+    position: "relative", // Agregar posición relativa
+  };
+  
+  const imageContainerStyle: React.CSSProperties = {
+    margin: "-1vw",
+    borderRadius: "10px",
+    display: "flex",
+    position: "relative",
+    width: "30%"
+  };
+  /* const gridStyleRight: React.CSSProperties = {
+    flexDirection: "column",
+    top: "1px",
+    left: "2vw",
+    position: "relative",
+    marginRight: "3vw",
+  }; */
+  const gridStyleRight: React.CSSProperties = {
+    marginTop: "-1vw",
+    marginRight: "0",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    position: "relative",
+    width: "34vw",
+  }
+  const heartStyle: React.CSSProperties = {
+    top: "-15px", // Ajustar posición desde la parte superior
+    right: "-15px", // Ajustar posición desde la parte derecha
+    display: "grid",
+    position: "absolute",
+    justifyContent: "space-between",
+  };
+  const priceStyle: React.CSSProperties = {
+    bottom: "-25px", // Ajustar posición desde la parte superior
+    right: "-20px", // Ajustar posición desde la parte derecha
+    display: "flex",
+    position: "absolute",
+    justifyContent: "space-between",
+    gridTemplateColumns: isSmallScreen ? "1fr" : "1fr 1fr",
+    margin: "10px",
+  };
 
-				<div className='flex justify-center text-white font-bold text-lg py-2'>
-					<button
-						onClick={() => alert('Call to Action Aquí')}
-						className='bg-GreenCooL w-full mx-6 rounded-lg py-1 hover:bg-opacity-90'
-					>
-						{data?.individualPrice}$
-					</button>
-				</div>
-			</div>
-		</motion.div>
-	)
-}
+  const imageStyle: React.CSSProperties = {
+    borderRadius: "10px",
+  };
+  const gridStyle: React.CSSProperties = {
+    width: "20vw",
+  };
+  /* const heartStyle: React.CSSProperties = {
+    marginRight: "1px",
+    marginTop: "1px",
+    display: "flex",
+    position: "relative",
+  }; */
 
-export default ListingCardnew
+  return (
+    <motion.div
+      initial={{ y: 10, opacity: 0 }}
+      animate={{ y: 0, opacity: 2 }}
+      exit={{ y: -10, opacity: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      <div style={containerStyle}>
+        <div style={imageContainerStyle}>
+          <img src={data?.galleryImage} style={imageStyle} />
+        </div>
+
+        <div style={gridStyleRight}>
+            <h4 className="grid justify-between text-base ml-5 mt-3 font-semibold">
+              {data?.title}
+            </h4>
+          <div className="ml-5">
+            <ShortText text={data?.description} maxLength={60} />
+          </div>
+        </div>
+
+        <div style={heartStyle}>
+          <HeartButton size={25} />
+        </div>
+
+        <div style={priceStyle}>
+          <Button
+            className="shadow-md hover:shadow-lg"
+            onClick={() => navigate(`/details/activity/${data?._id}`)}
+            variant="outlined"
+            size="sm"
+          >
+            view
+          </Button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default ListingCardnew;

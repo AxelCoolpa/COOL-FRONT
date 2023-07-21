@@ -5,14 +5,16 @@ import { useEffect } from 'react'
 import { fetchDestinations } from '../features/destinationSlice'
 import { useDispatch } from 'react-redux'
 import { fetchUsers } from '../features/usersSlice'
-import SidebarProvider from '../components/sidebar/SidebarProvider'
+import SidebarProvider from '../components/sidebar/sidebarProv'
 import { activities } from '../features/activitiesSlice'
+import { accomodation } from '../features/accomodationSlice'
 
 export const Provider = () => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(fetchDestinations())
 		dispatch(activities())
+		dispatch(accomodation())
 		dispatch(fetchUsers())
 	}, [dispatch])
 	return (

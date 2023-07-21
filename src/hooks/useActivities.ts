@@ -4,11 +4,26 @@ export const useAllActivities = () => {
     const { data } = useGetDestQuery(null)
     const allActivities = data?.map((i)=>i.activities)
 
-    const activities = allActivities?.map((i)=>i)
-    const activity = activities?.map((i) => i.forEach((a)=>{
-        return a
-    }))
-    return { activity, allActivities }
+    let activitiesArray: any[] = [];
+
+  if (allActivities) {
+    allActivities?.forEach((activities) => {
+      if (Array.isArray(activities)) {
+        activities.forEach((activity) => {
+          if (typeof activity === "object" && activity !== null) {
+            activitiesArray.push({
+              title: activity.title,
+              _id: activity._id,
+              description: activity.description,
+              location: activity.location,
+              galleryImage: activity.galleryImage,
+            });
+          }
+        });
+      }
+    });
+  }
+    return { activitiesArray }
 /* 
     if (allActivities) {
         allActivities?.forEach((activities) => {

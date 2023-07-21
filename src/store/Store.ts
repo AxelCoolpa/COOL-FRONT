@@ -1,6 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import registerReducer from '../features/RegisterSlice'
-import counterSlice from '../features/CreatedSlice'
 import LoginSlice from '../features/LoginSlice'
 import authSlice from '../features/authSlice'
 import createAdventureSlice from '../features/createAdventureSlice'
@@ -18,14 +17,17 @@ import activityByIdSlice from '../features/activityByIdSlice'
 import updateUserSlice from '../features/updateUserSlice'
 import deleteUserSlice from '../features/deleteUserSlice'
 
-import rooms from '../features/rooms'
 import { userApi } from '../api/getUsers'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { destinationApi } from '../api/getDestinations'
+import accomodationSlice from '../features/accomodationSlice'
+import accomodationByIdSlice from '../features/accomodationByIdSlice'
+import createAccomodationSlice from '../features/createAccomodationSlice'
+import updateAccomodationSlice from '../features/updateAccomodationSlice'
+import deleteAccomodationSlice from '../features/deleteAccomodationSlice'
 
 export const store = configureStore({
 	reducer: {
-		counter: counterSlice,
 		register: registerReducer,
 		login: LoginSlice,
 		auth: authSlice,
@@ -49,7 +51,11 @@ export const store = configureStore({
 		updateActivity: updateActivitySlice,
 		deleteActivity: deleteActivitySlice,
 		//* Accomodation
-		rooms,
+		accomodation: accomodationSlice,
+		accomodationById: accomodationByIdSlice,
+		createAccomodation: createAccomodationSlice,
+		updateAccomodation: updateAccomodationSlice,
+		deleteAccomodation: deleteAccomodationSlice,
 	},
 	// middleware para solicitar datos asincronos del backend
 	middleware: (getDefaultMiddleware) =>

@@ -4,18 +4,19 @@ interface InputProps {
 	id?: string
 	label?: string
 	name?: string
-	placeholder?: string
+	placeholder?: any
 	type?: string
 	disabled?: boolean
 	required?: boolean
 	errors?: boolean
 	sizeH?: number
 	handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-	value?: string
+	value?: any
 	icon?: IconType
 	secondaryIcon?: IconType
 	secondaryIconColor?: string
 	booking?: boolean
+	defaultValue?: any
 }
 
 const Input: React.FC<InputProps> = ({
@@ -33,6 +34,7 @@ const Input: React.FC<InputProps> = ({
 	secondaryIcon: SecondaryIcon,
 	secondaryIconColor,
 	booking,
+	defaultValue,
 }) => {
 	return (
 		<div className='w-full relative'>
@@ -43,6 +45,7 @@ const Input: React.FC<InputProps> = ({
 				type={type}
 				name={name}
 				value={value}
+				defaultValue={defaultValue}
 				className={`
           peer
           py-4
@@ -53,7 +56,9 @@ const Input: React.FC<InputProps> = ({
           outline-none
           transition
           disabled:opacity-70
+          disabled:border-opacity-70
           disabled:cursor-not-allowed
+          disabled:text-black/70
 					${booking ? 'xl:w-4/5 2xl:w-full' : 'w-full'}
 					${sizeH ? `h-${sizeH}` : ''}
           ${label ? 'pt-6' : 'pt-4'}

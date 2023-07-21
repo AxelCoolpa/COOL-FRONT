@@ -1,15 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 import { useMaps } from '../../hooks/useMaps'
 
 import { toast } from 'react-hot-toast'
+
 import { FiSearch } from 'react-icons/fi'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
 
 import { categories } from '../categories/categories'
 import { amenitiesCategories } from '../categories/amenitiesCategories'
+import { accomodationCategories } from '../categories/accomodationCategories'
+
+import {
+	createAccomodation,
+	createAccomodationFormData,
+} from '../../features/createAccomodationSlice'
+import { selectDestinations } from '../../features/destinationSlice'
+import { Destination } from './AddActivity'
 
 import AccomodationForm from '../forms/AccomodationForm'
 import CategoryInput from '../inputs/CategoryInput'
@@ -18,56 +28,96 @@ import Button from '../buttons/Button'
 import Container from '../containers/Container'
 import DropZone from '../inputs/DropZone'
 import Input from '../inputs/Input'
+import SelectDestination from '../inputs/Select'
+import CategorySingleInput from '../inputs/CategorySingleInput'
 
 const AddAccomodation = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
 	const { currentUserId } = useCurrentUser()
+	const destinationsList = useSelector(selectDestinations)
 
-	const [formData, setFormData] = useState({
-		title: '',
+	const [destinations, setDestinations] = useState<Destination[]>([])
+	const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
+
+	const [formData, setFormData] = useState<createAccomodationFormData>({
+		name: '',
 		description: '',
-		location: '',
-		galleryImage: [],
+		roomsCount: 1,
+		bedsCount: 1,
+		maxOccupancy: 1,
+		bathRoomsCount: 1,
 		amenities: [],
-		category: [],
-		individualPrice: '',
-		groupPrice: '',
-		startTime: '',
-		endTime: '',
+		location: '',
+		zone: [],
+		images: [],
+		startDate: '',
+		endDate: '',
+		price: 0,
+		idDestination: '',
+		category: '',
 	})
 
-	const handleCheckboxZoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const [checkboxTypeValues, setCheckboxTypeValues] = useState('')
+
+	const handleCheckboxTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
+			setCheckboxTypeValues(value)
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				category: [...formData.category, value],
+				category: value,
 			}))
 		} else {
+			setCheckboxTypeValues('')
 			setFormData((prevFormData) => ({
 				...prevFormData,
-				category: formData.category.filter((val) => val !== value),
+				category: '',
 			}))
 		}
 	}
+
+	const [checkboxAmenitiesValues, setCheckboxAmenitiesValues] = useState([])
 
 	const handleCheckboxAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
 		const isChecked = e.target.checked
 
 		if (isChecked) {
+			setCheckboxAmenitiesValues([...checkboxAmenitiesValues, value])
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				amenities: [...formData.amenities, value],
 			}))
 		} else {
+			setCheckboxAmenitiesValues(checkboxAmenitiesValues.filter((val) => val !== value))
 			setFormData((prevFormData) => ({
 				...prevFormData,
 				amenities: formData.amenities.filter((val) => val !== value),
+			}))
+		}
+	}
+
+	const [checkboxZoneValues, setCheckboxZoneValues] = useState([])
+
+	const handleCheckboxZoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value
+		const isChecked = e.target.checked
+
+		if (isChecked) {
+			setCheckboxZoneValues([...checkboxZoneValues, value])
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				zone: [...formData.zone, value],
+			}))
+		} else {
+			setCheckboxZoneValues(checkboxZoneValues.filter((val) => val !== value))
+			setFormData((prevFormData) => ({
+				...prevFormData,
+				zone: formData.zone.filter((val) => val !== value),
 			}))
 		}
 	}
@@ -80,11 +130,19 @@ const AddAccomodation = () => {
 		}))
 	}
 
-	const handleFilesSelected = (files: File[]) => {
-		const updatedGallery = [...formData.galleryImage, ...files]
+	const handleDestinationChange = (selectedOption: any) => {
+		setSelectedDestination(selectedOption)
 		setFormData((prevFormData) => ({
 			...prevFormData,
-			galleryImage: updatedGallery,
+			idDestination: selectedOption?._id,
+		}))
+	}
+
+	const handleFilesSelected = (files: File[]) => {
+		const updatedGallery = [...formData.images, ...files]
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			images: updatedGallery,
 		}))
 	}
 
@@ -92,75 +150,108 @@ const AddAccomodation = () => {
 		e.preventDefault()
 
 		const {
-			title,
+			name,
 			description,
-			individualPrice,
-			groupPrice,
-			galleryImage,
+			roomsCount,
+			bedsCount,
+			maxOccupancy,
+			bathRoomsCount,
 			amenities,
-			category,
 			location,
-			startTime,
-			endTime,
+			zone,
+			images,
+			startDate,
+			endDate,
+			price,
+			idDestination,
+			category,
 		} = formData
 
 		if (
-			!title ||
+			!name ||
 			!description ||
-			!individualPrice ||
-			!groupPrice ||
-			!galleryImage ||
-			!category ||
-			!location ||
+			!roomsCount ||
+			!bedsCount ||
+			!maxOccupancy ||
+			!bathRoomsCount ||
 			!amenities ||
-			!startTime ||
-			!endTime
+			!location ||
+			!zone ||
+			!images ||
+			!startDate ||
+			!endDate ||
+			!price ||
+			!category
 		) {
-			toast.error('Por favor, complete todos los campos')
+			toast.error('Please complete all fields')
 			return
 		}
 
 		const data = new FormData()
-		data.append('title', title)
+		data.append('name', name)
 		data.append('description', description)
-		data.append('individualPrice', individualPrice)
-		data.append('groupPrice', groupPrice)
+		data.append('roomsCount', roomsCount)
+		data.append('bedsCount', bedsCount)
+		data.append('maxOccupancy', maxOccupancy)
+		data.append('bathRoomsCount', bathRoomsCount)
 		data.append('location', location)
-		data.append('startTime', startTime)
-		data.append('endTime', endTime)
+		data.append('startDate', startDate)
+		data.append('endDate', endDate)
+		data.append('price', price)
+		data.append('idDestination', idDestination)
+		data.append('category', category)
 
-		for (let i = 0; i < formData.galleryImage.length; i++) {
-			data.append('galleryImage', formData.galleryImage[i])
+		for (let i = 0; i < formData.images.length; i++) {
+			data.append('images', formData.images[i])
 		}
 
 		formData.amenities.forEach((amenity) => {
 			data.append('amenities', amenity)
 		})
 
-		formData.category.forEach((category) => {
-			data.append('category', category)
+		formData.zone.forEach((zone) => {
+			data.append('zone', zone)
 		})
 
 		try {
-			dispatch(createAccomodation(formData, currentUserId))
+			dispatch(createAccomodation(data, currentUserId))
 			setFormData({
-				title: '',
+				name: '',
 				description: '',
-				location: '',
-				galleryImage: [],
+				roomsCount: 1,
+				bedsCount: 1,
+				maxOccupancy: 1,
+				bathRoomsCount: 1,
 				amenities: [],
-				category: [],
-				individualPrice: '',
-				groupPrice: '',
-				startTime: '',
-				endTime: '',
+				location: '',
+				zone: [],
+				images: [],
+				startDate: '',
+				endDate: '',
+				price: 0,
+				idDestination: '',
+				category: '',
 			})
+			setSelectedDestination(null)
+			setSearchValue('')
 		} catch (error: any) {
-			toast.error('Error al enviar el formulario:', error)
+			toast.error('Error while sending the form')
 		}
 	}
 
 	const { handleSearch, mapUrl, searchValue, setSearchValue } = useMaps(formData)
+
+	useEffect(() => {
+		setDestinations(destinationsList)
+	}, [destinationsList])
+
+	const formatOptionLabel = (option: any) => (
+		<div className='flex flex-row items-center gap-3'>
+			<div>
+				<span className='text-neutral-500'>{option.title}</span>
+			</div>
+		</div>
+	)
 
 	return (
 		<Container>
@@ -172,7 +263,45 @@ const AddAccomodation = () => {
 						<DropZone onFilesSelected={handleFilesSelected} />
 					</div>
 
+					{/* SELECT DESTINATION */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Select destination
+					</h3>
+					<div className='mx-auto py-5 w-full md:4/5 xl:w-4/5 2xl:w-5/6'>
+						<SelectDestination
+							options={destinations}
+							value={selectedDestination}
+							onChange={handleDestinationChange}
+							formatOptionLabel={formatOptionLabel}
+						/>
+					</div>
+
+					{/* SELECT TYPE */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Select type
+					</h3>
+					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
+						{accomodationCategories.map((item) => (
+							<ul key={item.label}>
+								<CategorySingleInput
+									handleChange={handleCheckboxTypeChange}
+									label={item.label}
+									id={item.label}
+									name={item.label}
+									value={item.label}
+									bgColor={item.bgColor}
+									secondaryBorderColor
+									selected={checkboxTypeValues}
+								/>
+							</ul>
+						))}
+					</div>
+
 					{/* FORM */}
+					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
+						Accomodation Info
+					</h3>
+
 					<div className='w-full xl:w-4/5 2xl:w-5/6 flex items-center justify-center md:gap-10 py-5 xl:py-8'>
 						<AccomodationForm handleChange={handleChange} form={formData} />
 					</div>
@@ -194,13 +323,14 @@ const AddAccomodation = () => {
 									value={item.label}
 									bgColor={item.bgColor}
 									iconColor={item.iconColor}
+									checked={checkboxAmenitiesValues}
 								/>
 							</ul>
 						))}
 					</div>
 
 					<h3 className='text-2xl font-semibold mx-auto py-5 xl:py-8 xl:w-4/5 2xl:w-5/6'>
-						Accomodation Zone
+						Zone
 					</h3>
 
 					<div className='flex flex-wrap col-span-5 gap-10 xl:gap-10 2xl:gap-20 items-center justify-center mx-auto py-5 xl:w-4/5 2xl:w-5/6'>
@@ -213,6 +343,7 @@ const AddAccomodation = () => {
 									id={item.label}
 									name={item.label}
 									value={item.label}
+									checked={checkboxZoneValues}
 								/>
 							</ul>
 						))}
@@ -222,18 +353,24 @@ const AddAccomodation = () => {
 					<div className='mx-auto py-5 w-full xl:py-8 xl:w-4/5 2xl:w-5/6'>
 						<h3 className='text-2xl font-semibold'>Add location on map</h3>
 						<form onSubmit={handleSearch} className='py-5 xl:py-8'>
-							<Input
-								type='search'
-								placeholder='Search your location'
-								id='location'
-								name='location'
-								handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-									setSearchValue(e.target.value)
-								}
-								value={searchValue}
-								secondaryIcon={FiSearch}
-								secondaryIconColor='OrangeCooL'
-							/>
+							<div className='flex flex-col gap-10 w-full'>
+								<div className='flex items-center gap-5 text-[#686868]'>
+									<HiOutlineLocationMarker size={25} />
+									<label>Which is the location?</label>
+								</div>
+								<Input
+									type='search'
+									placeholder='Search your location'
+									id='location'
+									name='location'
+									handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+										setSearchValue(e.target.value)
+									}
+									value={searchValue}
+									secondaryIcon={FiSearch}
+									secondaryIconColor='OrangeCooL'
+								/>
+							</div>
 						</form>
 						<div className='flex flex-col items-center py-10'>
 							<Map mapURL={mapUrl} />
@@ -243,7 +380,7 @@ const AddAccomodation = () => {
 					{/* BUTTONS */}
 					<div className='flex flex-col lg:flex-row items-center justify-evenly gap-4 lg:gap-20 mx-auto py-10 w-full'>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
-							<Button label='Back' card outline onClick={() => navigate('/admindash')} />
+							<Button label='Back' card outline onClick={() => navigate('/provider')} />
 						</div>
 						<div className='w-full lg:w-2/5 xl:w-2/6'>
 							<Button label='Create' card onClick={handleSubmit} />

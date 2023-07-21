@@ -15,7 +15,7 @@ const ListenAgent: React.FC<Props> = ({ data }) => {
 	const dispatch = useDispatch()
 
 	const user = useSelector(selectUserById)
-
+	console.log(user)
 	useEffect(() => {
 		dispatch(userById(data))
 	}, [data, dispatch])

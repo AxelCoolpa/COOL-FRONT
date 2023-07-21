@@ -9,7 +9,7 @@ export const ListRooms =[
         bathroomsCount: 1,
         amenities: ['Piscina', 'Wifi', 'Estacionamiento'],
         location: 'Playa del Sol, Costa Rica',
-        category: 'Beach',
+        category: 'Beach',//Sacarlo , informacion redundante que se puede pedir desde el proveedor-registro
         zone: 'Beach',
         images: [
           'https://example.com/images/beach-room-1.jpg',

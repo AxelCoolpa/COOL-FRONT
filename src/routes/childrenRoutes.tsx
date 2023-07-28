@@ -19,6 +19,7 @@ import ProfileProvider from '../pages/ProvUser/Profile'
 import TableUser from '../pages/ProvUser/TableUser'
 import CreateAccomodation from '../pages/ProvUser/CreateAccomodation'
 import CreateLogistic from '../pages/ProvUser/CreateLogistic'
+import PPackages from '../pages/ProvUser/Packages'
 
 //* ADMIN
 import Dashboard from '../pages/Admin/Dashboard'
@@ -86,6 +87,10 @@ export const provider = [
 	{
 		path: 'profile',
 		element: <ProfileProvider />,
+	},
+	{
+		path: 'packages',
+		element: <PPackages />,
 	},
 ]
 export const PruebaAdminProvider = [

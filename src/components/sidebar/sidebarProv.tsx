@@ -156,7 +156,9 @@ export default function SidebarProv() {
 									<Link to='' className='flex items-center   font-semibold gap-2'>
 										<BsFillGrid1X2Fill size={18} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3 hover:text-OrangeCooL cursor-pointer'>
-											Adventures
+											{currentUser?.profileProvider?.relatedChannel === 'Travel'
+												? 'Activities'
+												: 'Rooms'}
 										</p>
 									</Link>
 								</li>
@@ -167,21 +169,21 @@ export default function SidebarProv() {
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<Link to='#' className='flex items-center font-semibold gap-2'>
+									<Link to='packages' className='flex items-center font-semibold gap-2'>
 										<GrSafariOption size={22} className='font-bold text-OrangeCooL' />
 										<p className='flex-grow ml-3 xl:ml-3'>Packages</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4  gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<Link to='' className='flex items-center font-semibold gap-2'>
+									<Link to='#' className='flex items-center font-semibold gap-2'>
 										<MdLocationCity size={24} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>Destino</p>
+										<p className='flex-grow ml-3 xl:ml-3'>Destination</p>
 									</Link>
 								</li>
 								<li className='flex items-center w-fit pt-6 pl-4 gap-2 text-[#808080] hover:text-[#ce452a] '>
-									<Link to='create' className='flex items-center font-semibold gap-2'>
+									<Link to='#' className='flex items-center font-semibold gap-2'>
 										<IoMdSettings size={26} className='font-bold text-OrangeCooL' />
-										<p className='flex-grow ml-3 xl:ml-3'>Create</p>
+										<p className='flex-grow ml-3 xl:ml-3'>Settings</p>
 									</Link>
 								</li>
 							</ul>

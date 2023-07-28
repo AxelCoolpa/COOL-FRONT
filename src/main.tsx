@@ -9,6 +9,6 @@ import ToasterProvider from './providers/ToasterProvider.tsx'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<Provider store={store}>
 		<ToasterProvider />
-		<RouterProvider router={router} />
+		{/* <RouterProvider router={router} /> */}
 	</Provider>
 )

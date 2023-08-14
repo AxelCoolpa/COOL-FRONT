@@ -1,6 +1,4 @@
 import React from 'react'
-import BackgroundImg from '../../assets/playagreed.png'
-import BackgroundWhite from '../../assets/whitegrid.png'
 import LoginImage from '../../assets/loginimage.svg'
 import LoginPexels from '../../assets/lagopexels.jpg'
 
@@ -30,6 +28,8 @@ const HomeFormSection: React.FC<Props> = ({ children }) => {
 				</div>
 			</section>
 		</div>
+
+
 	)
 }
 
